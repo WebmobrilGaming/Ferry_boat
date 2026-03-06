@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class IntroUIManager : MonoBehaviour
 {
@@ -20,13 +21,25 @@ public class IntroUIManager : MonoBehaviour
 
     private void StartGame()
     {
-        introPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
+        introPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
+        {
+            introPanel.SetActive(false);
+
+            mainMenuPanel.SetActive(true);
+            mainMenuPanel.transform.localScale = Vector3.zero;
+            mainMenuPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+        });
     }
 
     private void OpenNewUserPanel()
     {
-        introPanel.SetActive(false);
-        newUserPanel.SetActive(true);
+        introPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
+        {
+            introPanel.SetActive(false);
+
+            newUserPanel.SetActive(true);
+            newUserPanel.transform.localScale = Vector3.zero;
+            newUserPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+        });
     }
 }

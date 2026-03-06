@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -66,17 +67,29 @@ public class SettingsManager : MonoBehaviour
     private void OpenDifficultyPanel()
     {
         settingsContent.SetActive(false);
+
         difficultyPanel.SetActive(true);
+        difficultyPanel.transform.localScale = Vector3.zero;
+        difficultyPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
     }
 
     private void CloseDifficultyPanel()
     {
-        difficultyPanel.SetActive(false);
-        settingsContent.SetActive(true);
+        difficultyPanel.transform.DOScale(0f, 0.2f).OnComplete(() =>
+        {
+            difficultyPanel.SetActive(false);
+            settingsContent.SetActive(true);
+
+            settingsContent.transform.localScale = Vector3.zero;
+            settingsContent.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        });
     }
 
     private void OpenHelpPanel()
     {
         helpPanel.SetActive(true);
+
+        helpPanel.transform.localScale = Vector3.zero;
+        helpPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
     }
 }
