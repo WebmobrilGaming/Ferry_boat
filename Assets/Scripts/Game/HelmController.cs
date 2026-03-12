@@ -3,15 +3,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+public interface IHelem
+{
+    public void Rotate(float zValue);
+}
+
 public class HelmController : MonoBehaviour
 {
-
     Tween rotateTween;
 
     [SerializeField] Quaternion currentRotation;
 
     [Space]
     [SerializeField] bool isRotate = false;
+
+    public IHelem callback;
 
     public void Direct (HelmDirection direction)
     {
@@ -25,54 +31,39 @@ public class HelmController : MonoBehaviour
             case HelmDirection.right:
                 rotateTween = transform
                                .DOLocalRotate(new Vector3(0, 0, 360), 2f, RotateMode.FastBeyond360)
-                               .OnStart(() => { Debug.Log("Start the rotation !!!"); })
                                .SetRelative()
-                               .SetEase(Ease.Linear)
-                               .OnUpdate(() => 
+                               .OnUpdate(() =>
                                {
-                                   Debug.Log("Roatation is enabled !!!");
+                                   if (callback == null) return;
 
-                                   //if (!isRotate)
-                                   //{
-                                   //    currentRotation = transform.rotation;
 
-                                   //    rotateTween.Kill();
-                                   //    rotateTween = null;
+                                   float helmZ = transform.localEulerAngles.z;
 
-                                   //    transform.DORotateQuaternion(currentRotation, 0.3f)
-                                   //             .SetEase(Ease.OutQuad);
+                                   if (helmZ > 180)
+                                       helmZ -= 360;
 
-                                   //    return;
-                                   //}
-
-                                   
+                                   callback.Rotate(helmZ);
                                })
+                               .SetEase(Ease.Linear)
                                .SetLoops(-1);
                 break;
 
-           case HelmDirection.left:
+            case HelmDirection.left:
                 rotateTween = transform
                              .DOLocalRotate(new Vector3(0, 0, -360), 2f, RotateMode.FastBeyond360)
                              .SetRelative()
-                             .SetEase(Ease.Linear)
                              .OnUpdate(() =>
-                                {
-                                    Debug.Log("Roatation is enabled !!!");
+                              {
+                                  if (callback == null) return;
 
-                                    //if (!isRotate)
-                                    //{
-                                    //    currentRotation = transform.rotation;
+                                  float helmZ = transform.localEulerAngles.z;
 
-                                    //    rotateTween.Kill();
-                                    //    rotateTween = null;
+                                  if (helmZ > 180)
+                                      helmZ -= 360;
 
-                                    //    transform.DORotateQuaternion(currentRotation, 0.3f)
-                                    //            .SetEase(Ease.OutQuad);
-                                    //    return;
-                                    //}
-
-                                   
-                                })
+                                  callback.Rotate(helmZ);
+                              })
+                             .SetEase(Ease.Linear)
                              .SetLoops(-1);
                 break;
         }
@@ -82,12 +73,11 @@ public class HelmController : MonoBehaviour
     {
         if (rotateTween == null) return;
 
-        // Gradually slow down the rotation
         DOTween.To(
             () => rotateTween.timeScale,
             x => rotateTween.timeScale = x,
             0f,
-            0.6f   // slowdown duration
+            0.6f   
         )
         .OnComplete(() =>
         {
@@ -95,11 +85,6 @@ public class HelmController : MonoBehaviour
             rotateTween = null;
 
             isRotate = false;
-
-            //transform.DORotateQuaternion(currentRotation, 0.3f)
-            //                                   .SetEase(Ease.OutQuad);
-
-            //currentRotation = transform.rotation;
         });
     }
 }
