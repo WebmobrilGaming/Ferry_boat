@@ -16,15 +16,26 @@ namespace Ferry_boat.Assets.Scripts.Web
             username = userName;
         }
     }
-    public class Request<T> : IRequest where T : class
+    public class Request<T> : Request where T : class
     {
-        public RequestType RequestType { get; private set; }
+        public RequestType requestType { get; private set; }
 
-        public string RequestData { get; private set; }
+        public string requestData { get; private set; }
         public Request(RequestType requestType, T data)
         {
-            RequestType = requestType;
-            RequestData = JsonConvert.SerializeObject(data);
+            this.requestType = requestType;
+            this.requestData = JsonConvert.SerializeObject(data);
+        }
+    }
+    public class ResponseBody : Response
+    {
+        public long status { get; private set; }
+
+        public string message { get; private set; }
+        public ResponseBody(long status, string message)
+        {
+            this.status = status;
+            this.message = message;
         }
     }
 }
