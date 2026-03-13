@@ -7,7 +7,10 @@ using Ferry_boat.Assets.Scripts.Web;
 
 namespace Netconfig
 {
-    [CreateAssetMenu(fileName = "ServerConfig", menuName = "Create ServerConfig", order = 1)]
+    /// <summary>
+    /// This script is supposed to modify according to project need to adapt class structure for API calls
+    /// </summary>
+    [CreateAssetMenu(fileName = "ServerConfig", menuName = "ServerConfig", order = 1)]
     public class ServerConfig : ScriptableObject
     {
         [System.Serializable]

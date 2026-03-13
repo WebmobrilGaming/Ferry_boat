@@ -50,6 +50,7 @@ namespace GF
         public Action<Response> responseCallback;
         public ApiEvent(HttpRequestType httpRequestType,Request request, Action<Response> responseCallback)
         {
+            this.url=ServerConfig.Instance.GetApiUrl(request.requestType);
             this.request = request;
             this.httpRequestType=httpRequestType;
             this.responseCallback = responseCallback;
