@@ -76,7 +76,7 @@ namespace GF
 
         private IEnumerator PostRequest(string url, RequestType requestType, string data, Action<Response> onPostCompleteCalback)
         {
-            Logger.Log(LogType.HttpRequest, $"[Request-POST]-{requestType}-data-{data}");
+            Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
             // Convert JSON string to bytes
             using (UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST))
             {
@@ -101,12 +101,12 @@ namespace GF
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
-                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType}-data-{request.downloadHandler.text}");
+                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
                     onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text,requestType));
                 }
                 else
                 {
-                    Logger.Log(LogType.Error, $"[Response]-{requestType}-data-{request.error}");
+                    Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
                     onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
                 }
             }
@@ -127,7 +127,7 @@ namespace GF
 
         private IEnumerator GetRequest(string url, RequestType requestType, Action<Response> onGetCompleteCallback)
         {
-            Logger.Log(LogType.HttpRequest, $"[Request-GET]-{requestType}");
+            Logger.Log(LogType.HttpRequest, $"[GET] : {requestType}");
             using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
                 // Headers
@@ -139,12 +139,12 @@ namespace GF
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
-                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType}-data-{request.downloadHandler.text}");
+                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
                     onGetCompleteCallback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text,requestType));
                 }
                 else
                 {
-                    Logger.Log(LogType.Error, $"[Response]-{requestType}-data-{request.error}");
+                    Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
                     onGetCompleteCallback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
                 }
             }
@@ -163,7 +163,7 @@ namespace GF
         }
         private IEnumerator PutRequest(string url, RequestType requestType, string data, Action<Response> onPostCompleteCalback)
         {
-            Logger.Log(LogType.HttpRequest, $"[Request-POST]-{requestType}-data-{data}");
+            Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
             // Convert JSON string to bytes
             using (UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPUT))
             {
@@ -188,12 +188,12 @@ namespace GF
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
-                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType}-data-{request.downloadHandler.text}");
+                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
                     onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text,requestType));
                 }
                 else
                 {
-                    Logger.Log(LogType.Error, $"[Response]-{requestType}-data-{request.error}");
+                    Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
                     onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
                 }
             }
@@ -211,7 +211,7 @@ namespace GF
         }
         private IEnumerator DeleteRequest(string url, RequestType requestType, string data, Action<Response> onPostCompleteCalback)
         {
-            Logger.Log(LogType.HttpRequest, $"[Request-POST]-{requestType}-data-{data}");
+            Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
             // Convert JSON string to bytes
             using (UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbDELETE))
             {
@@ -236,12 +236,12 @@ namespace GF
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
-                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType}-data-{request.downloadHandler.text}");
+                    Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
                     onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text,requestType));
                 }
                 else
                 {
-                    Logger.Log(LogType.Error, $"[Response]-{requestType}-data-{request.error}");
+                    Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
                     onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
                 }
             }

@@ -20,7 +20,6 @@ namespace GF
         protected virtual void Awake()
         {
             instance = this;
-            ApplicationManager.Instance.Initialize(LoadingScreenPath);
         }
         protected virtual void Start()
         {

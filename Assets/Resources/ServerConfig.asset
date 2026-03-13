@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9f7cb9a845f427fb5aea7d579db8f2, type: 3}
   m_Name: ServerConfig
   m_EditorClassIdentifier: Assembly-CSharp::Netconfig.ServerConfig
-  apiList: []
-  serverEntries: []
+  apiList:
+  - requestType: 0
+    api: /sign
+  serverEntries:
+  - configName: Prod
+    baseURL: https://toolcity-application-latest.onrender.com
+    socketURL: 
   selectedConfigIndex: 0

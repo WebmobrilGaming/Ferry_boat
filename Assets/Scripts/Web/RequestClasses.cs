@@ -16,12 +16,12 @@ namespace Ferry_boat.Assets.Scripts.Web
             username = userName;
         }
     }
-    public class Request<T> : Request where T : class
+    public class RequestData: Request 
     {
         public RequestType requestType { get; private set; }
 
         public string requestData { get; private set; }
-        public Request(RequestType requestType, T data)
+        public RequestData(RequestType requestType, object data)
         {
             this.requestType = requestType;
             this.requestData = JsonConvert.SerializeObject(data);
