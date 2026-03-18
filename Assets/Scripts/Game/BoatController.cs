@@ -24,24 +24,32 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     private const float MPS_TO_KNOTS = 1.94384f;
 
+    [Header("Speed Settings:")]
     [Space]
     [SerializeField] float speedInKnots;
     [SerializeField] TMP_Text mSpeedKnots;
     private Vector3 mLastPosition;
 
     private float mCurrentSpeed;
+    private float mPreviousSpeed;
+
     [Range(0,10f)]
     [SerializeField] float mAcceleration = 2f;
 
     [Range(0, 10f)]
-    [SerializeField] float mDeceleration = 3f;   
+    [SerializeField] float mDeceleration = 3f;
 
+    [Header("Fuel Settings:")]
+    [SerializeField] Slider mFuelSlider;
+    [SerializeField] Fuel mFuel;
+   
+   
     private void OnEnable()
     {
         helmController.callback = this;
         mGear.callback = this;
 
-
+        mFuelSlider.value = mFuel.currentFuel;
         startRotation = transform.localRotation;
     }
 
@@ -75,10 +83,12 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         }
 
         #region SPEED_HANDLING
-        // Accelerate or decelerate based on gear
-        float targetSpeed = mGear.Stat ? mSpeed : 0f;
+        // Fuel gate
+        bool canMove = mGear.Stat && !mFuel.IsEmpty;
 
-        float rate = mGear.Stat ? mAcceleration : mDeceleration;
+        // Accelerate or decelerate based on gear + fuel
+        float targetSpeed = canMove ? mSpeed : 0f;
+        float rate = canMove ? mAcceleration : mDeceleration;
         mCurrentSpeed = Mathf.MoveTowards(mCurrentSpeed, targetSpeed, rate * Time.deltaTime);
 
         // Move using smoothed speed
@@ -91,7 +101,43 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         mLastPosition = transform.position;
         #endregion
+
+        #region FUEL_HANDLING
+        if (mGear.Stat && !mFuel.IsEmpty)
+        {
+            float speedDelta = mCurrentSpeed - mPreviousSpeed;
+            bool isAccelerating = speedDelta > 0.01f;
+
+            float consumption = mFuel.idleConsumption
+                + mFuel.baseConsumption * mCurrentSpeed
+                + (isAccelerating ? mFuel.accelerationSurcharge * speedDelta : 0f);
+
+            mFuel.currentFuel -= consumption * Time.deltaTime;
+            mFuel.currentFuel = Mathf.Max(mFuel.currentFuel, 0f);
+        }
+
+        mPreviousSpeed = mCurrentSpeed;
+
+        UpdateFuelUI();
+        #endregion
     }
+
+    void UpdateFuelUI()
+    {
+        // Example — wire to your own UI elements
+      //  mFuelText.text = $"{mFuel.currentFuel:F1} L";
+        mFuelSlider.value = mFuel.FuelPercent;
+
+        // Low fuel warning
+        //if (mFuel.FuelPercent < 0.2f)
+        //    mFuelWarning.SetActive(true);
+    }
+
+    public void Refuel(float amount)
+    {
+        mFuel.currentFuel = Mathf.Min(mFuel.currentFuel + amount, mFuel.maxFuel);
+    }
+
 
     private float currentRotation = 0f;
     private float lastHelmZ = 0f;

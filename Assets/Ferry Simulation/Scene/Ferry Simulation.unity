@@ -1042,6 +1042,46 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3436734586156128135, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436734586156128135, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4021508830394278074, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4021508830394278074, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4021508830394278074, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4021508830394278074, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401818647236608006, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401818647236608006, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401818647236608006, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401818647236608006, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4902244577211252705, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1160,6 +1200,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7380008043288403673, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441659043634243026, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441659043634243026, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441659043634243026, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441659043634243026, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7924648161107607380, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
@@ -1803,6 +1859,15 @@ MonoBehaviour:
   isControl: 0
   speedInKnots: 0
   mSpeedKnots: {fileID: 722273052}
+  mAcceleration: 5
+  mDeceleration: 3
+  mFuelSlider: {fileID: 1541593777}
+  mFuel:
+    maxFuel: 100
+    currentFuel: 100
+    idleConsumption: 0
+    baseConsumption: 0.02
+    accelerationSurcharge: 0.05
 --- !u!1 &1169384072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3373072989772051000, guid: 19f0cd7b4b1c7d64a96f94db0a7b0483, type: 3}
@@ -2200,6 +2265,17 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1541593777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3436734586156128135, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+  m_PrefabInstance: {fileID: 579829828}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1541673436
 GameObject:
   m_ObjectHideFlags: 0
