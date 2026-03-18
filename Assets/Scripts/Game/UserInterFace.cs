@@ -23,11 +23,15 @@ public class UserInterFace : MonoBehaviour
     private void OnEnable()
     {
         scrollAction.Enable();
+
+        Act.SpeedInit += SetRange;
     }
 
     private void OnDisable()
     {
         scrollAction.Disable();
+
+        Act.SpeedInit -= SetRange;
     }
 
     private void OnDestroy()
@@ -45,7 +49,7 @@ public class UserInterFace : MonoBehaviour
     {
         Vector2 scroll = ctx.ReadValue<Vector2>();
 
-       float mScrollVal = scroll.y;
+        float mScrollVal = scroll.y;
 
         mScrollRange = Mathf.Clamp(mScrollRange + mScrollVal * sensitivity, rangeMin, rangeMax);
 

@@ -59,12 +59,19 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         mFuelSlider.value = mFuel.currentFuel;
         startRotation = transform.localRotation;
 
+        isControl = false;
+
         Act.SpeedChange += SpeedChange;
     }
 
     private void OnDisable()
     {
         Act.SpeedChange -= SpeedChange;
+    }
+
+    private void Start()
+    {
+        Act.SpeedInit?.Invoke(mSpeed);
     }
 
     void GearAction()
@@ -83,10 +90,10 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         if (mFuel.FuelPercent < 0.1f)
             return;
 
-        if (Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.leftArrowKey.isPressed && isControl)
             helmController.Direct(HelmDirection.left);
 
-        if (Keyboard.current.rightArrowKey.isPressed)
+        if (Keyboard.current.rightArrowKey.isPressed && isControl)
             helmController.Direct(HelmDirection.right);
 
         if (Keyboard.current.spaceKey.isPressed)
@@ -100,7 +107,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         #region SPEED_HANDLING
         // Fuel gate
-        bool canMove = mGear.Stat && !mFuel.IsEmpty;
+        bool canMove = isControl && !mFuel.IsEmpty;
 
         // Accelerate or decelerate based on gear + fuel
         float targetSpeed = canMove ? mBoatSpeed : 0f;
@@ -193,7 +200,5 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         currentRotation += delta * rotationMultiplier;
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
-
-        Debug.Log($"Delta: {delta} | Accumulated: {currentRotation}");
     }
 }
