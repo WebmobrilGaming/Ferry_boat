@@ -6,17 +6,20 @@ public class IntroUIManager : MonoBehaviour
 {
     [Header("Panels")]
     [SerializeField] private GameObject introPanel;
-    [SerializeField] private GameObject newUserPanel;
+    [SerializeField] private GameObject userPanel;
     [SerializeField] private GameObject mainMenuPanel;
 
     [Header("Buttons")]
-    [SerializeField] private Button startGameButton;
+    [SerializeField] private Button previousUserButton;
     [SerializeField] private Button newUserButton;
+    [Header("Player Script")]
+    [SerializeField] private PlayerNameInput playerNameInput;
+    
 
     private void Start()
     {
-        startGameButton.onClick.AddListener(StartGame);
-        newUserButton.onClick.AddListener(OpenNewUserPanel);
+        newUserButton.onClick.AddListener(OpenNewUser);
+        previousUserButton.onClick.AddListener(OpenPreviousUser);
     }
 
     private void StartGame()
@@ -31,15 +34,27 @@ public class IntroUIManager : MonoBehaviour
         });
     }
 
-    private void OpenNewUserPanel()
+    private void OpenNewUser()
+    {
+        playerNameInput.OpenNewPlayer();
+
+        OpenUserPanel();
+    }
+
+    private void OpenPreviousUser()
+    {
+        playerNameInput.OpenPreviousPlayer();
+        OpenUserPanel();
+    }
+
+    private void OpenUserPanel()
     {
         introPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
         {
             introPanel.SetActive(false);
-
-            newUserPanel.SetActive(true);
-            newUserPanel.transform.localScale = Vector3.zero;
-            newUserPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+            userPanel.SetActive(true);
+            userPanel.transform.localScale = Vector3.zero;
+            userPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
         });
     }
 }
