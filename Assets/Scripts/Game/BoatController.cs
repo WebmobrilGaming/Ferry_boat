@@ -63,7 +63,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         }
 
         if(mGear.Stat)
-            transform.position -= transform.forward * mSpeed * Time.deltaTime;
+            transform.position += transform.forward * mSpeed * Time.deltaTime;
     }
 
     private float currentRotation = 0f;

@@ -145,14 +145,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3830483}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.99997634, z: -0, w: 0.006887367}
-  m_LocalPosition: {x: -118.2, y: 59.9, z: -110.4}
+  m_LocalRotation: {x: -0, y: -0.98870856, z: -0, w: 0.14985104}
+  m_LocalPosition: {x: -89.5, y: 59.9, z: -123.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450651912916840}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -179.211, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -162.763, z: 0}
 --- !u!114 &3830485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,9 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowedBarge
   boatTransform: {fileID: 1099790238}
-  ropeLength: 100
-  sternAxis: 1
-  attachOffset: {x: 0, y: 0, z: -100}
+  ropeLength: 150
   pullStrength: 35
   pullDamping: 3
   pathDelay: 0.15
@@ -3300,7 +3298,7 @@ Transform:
   m_GameObject: {fileID: 919132147720721874}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7069721, y: 0.013798483, z: 0.013798483, w: -0.7069721}
-  m_LocalPosition: {x: -46.8, y: -24.7, z: 132.81}
+  m_LocalPosition: {x: -3.6616096, y: -24.7, z: 122.83141}
   m_LocalScale: {x: 1200.0005, y: 1200.0002, z: 1200.0001}
   m_ConstrainProportionsScale: 0
   m_Children:

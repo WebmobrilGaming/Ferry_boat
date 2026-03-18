@@ -2,7 +2,7 @@
 - Project name: Ferry_boat
 - Unity version: Unity 6000.3.10f1
 - Active game object:
-  - Name: Canvas
+  - Name: Water_Plane
   - Tag: Untagged
-  - Layer: UI
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
