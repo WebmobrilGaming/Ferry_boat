@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,9 +9,6 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 {
     [SerializeField] HelmController helmController;
     [SerializeField] Gear mGear;
-
-    [Space]
-    [SerializeField] Button mGearBtn;
 
     [Header("Settings:")]
     [Range(0,1f)]
@@ -24,19 +22,31 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     Quaternion startRotation;
 
+    private const float MPS_TO_KNOTS = 1.94384f;
+
+    [Space]
+    [SerializeField] float speedInKnots;
+    [SerializeField] TMP_Text mSpeedKnots;
+    private Vector3 mLastPosition;
+
+    private float mCurrentSpeed;
+    [Range(0,10f)]
+    [SerializeField] float mAcceleration = 2f;
+
+    [Range(0, 10f)]
+    [SerializeField] float mDeceleration = 3f;   
+
     private void OnEnable()
     {
         helmController.callback = this;
         mGear.callback = this;
 
-        mGearBtn.onClick.AddListener(GearAction);
 
         startRotation = transform.localRotation;
     }
 
     void GearAction()
     {
-        mGearBtn.interactable = false;
         isControl = false;
 
         mGear.Change(!mGear.Stat);
@@ -45,7 +55,6 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     public void GearChange()
     {
         isControl = true;
-        mGearBtn.interactable = true;
     }
 
     private void Update()
@@ -56,14 +65,32 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         if (Keyboard.current.rightArrowKey.isPressed)
             helmController.Direct(HelmDirection.right);
 
+        if (Keyboard.current.spaceKey.isPressed)
+            GearAction();
+
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame)
         {
           //  Debug.Log("Released helm !!!");
             helmController.StopRotation();
         }
 
-        if(mGear.Stat)
-            transform.position += transform.forward * mSpeed * Time.deltaTime;
+        #region SPEED_HANDLING
+        // Accelerate or decelerate based on gear
+        float targetSpeed = mGear.Stat ? mSpeed : 0f;
+
+        float rate = mGear.Stat ? mAcceleration : mDeceleration;
+        mCurrentSpeed = Mathf.MoveTowards(mCurrentSpeed, targetSpeed, rate * Time.deltaTime);
+
+        // Move using smoothed speed
+        transform.position += transform.forward * mCurrentSpeed * Time.deltaTime;
+
+        // Knots from actual displacement
+        float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
+        speedInKnots = actualSpeed * MPS_TO_KNOTS;
+        mSpeedKnots.text = $"{speedInKnots:F2} Knots";
+
+        mLastPosition = transform.position;
+        #endregion
     }
 
     private float currentRotation = 0f;
