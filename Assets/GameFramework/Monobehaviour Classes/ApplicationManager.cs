@@ -11,21 +11,13 @@ namespace GF
         {
             DontDestroyWhenLoad = true;
             ApplyHighlighter(Utils.GetColorByHashString("#8819CE"), Color.white);
-            InitializeServices();
             base.Awake();
         }
-        private void InitializeServices()
-        {            
+        public void Initialize()
+        {
             _gameServiceController = new GameServiceController();
             _gameServiceController.Initialize();
             _gameServiceController.RegisterListener();
-        }
-        public void Initialize(string loadingScreenpath)
-        {
-            if (!string.IsNullOrEmpty(loadingScreenpath))
-            {
-                
-            }
         }
         public void AddService<T>()
         {

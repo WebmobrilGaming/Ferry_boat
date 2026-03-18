@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using GF;
+using Ferry_boat.Assets.Scripts.Web;
 
 public class MenuManager : MonoBehaviour
 {
@@ -30,6 +32,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        ApplicationManager.Instance.Initialize();
         if (startGameButton)
             startGameButton.onClick.AddListener(OpenMainMenu);
 
@@ -62,6 +65,11 @@ public class MenuManager : MonoBehaviour
 
         if (exitSettings)
             exitSettings.onClick.AddListener(ShowMainMenu);
+        APIManager.PostAPI<ResponseBody>(new RequestData(Netconfig.RequestType.SignIn, "hello"), (res) =>
+        {
+            Debug.Log(res.status);
+            Debug.Log(res.message);
+        });
     }
 
     void OpenMainMenu()

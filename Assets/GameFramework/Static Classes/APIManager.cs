@@ -1,7 +1,6 @@
 using System;
-using GF;
 
-namespace Ferry_boat.Assets.Scripts.Web
+namespace GF
 {
     public static class APIManager
     {
