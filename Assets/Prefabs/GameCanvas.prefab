@@ -592,7 +592,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 248.43, y: 80}
+  m_SizeDelta: {x: 248.43, y: 110.1878}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8054238822814730716
 CanvasRenderer:
@@ -1583,8 +1583,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.1529922, y: -17.697012}
-  m_SizeDelta: {x: 196.295, y: 30.754}
+  m_AnchoredPosition: {x: 4.851103, y: -30.7}
+  m_SizeDelta: {x: 229.2436, y: 30.754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3436734586156128135
 MonoBehaviour:
@@ -1823,8 +1823,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.997, y: 17.405}
-  m_SizeDelta: {x: 141.99, y: 39.451}
+  m_AnchoredPosition: {x: 24.997, y: 18.792}
+  m_SizeDelta: {x: 141.99, y: 68.229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7467914650320762695
 CanvasRenderer:
@@ -1854,7 +1854,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ferry
+  m_text: 'Fuel
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
   m_sharedMaterial: {fileID: 1287878626960872744, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
@@ -1881,11 +1883,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 26.25
   m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -2049,8 +2051,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -5.2235, y: 0}
+  m_SizeDelta: {x: -19.5531, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3465675327700416555
 GameObject:
@@ -4917,7 +4919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7944846993804524537}
   - component: {fileID: 1886352876911577391}
-  - component: {fileID: 2150920204654569846}
+  - component: {fileID: 5340040363467172052}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -4952,7 +4954,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7351579062088774266}
   m_CullTransparentMesh: 1
---- !u!114 &2150920204654569846
+--- !u!114 &5340040363467172052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4961,9 +4963,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7351579062088774266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -4972,16 +4974,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2521dd26bc05fc54d8d3b715db01220d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 10
+  m_Texture: {fileID: 8400000, guid: ecfd68eac7b38cf4583c9cf56f174b10, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &7485529466491888615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5915,7 +5914,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 9.968, y: 37.5}
+  m_SizeDelta: {x: 240, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8874053221988148004
 CanvasRenderer:
@@ -5945,7 +5944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 8814d8afb685cc742b8af41a0aebc0c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

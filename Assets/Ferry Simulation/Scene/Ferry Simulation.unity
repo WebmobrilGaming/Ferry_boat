@@ -1012,38 +1012,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1 &523135167 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7351579062088774266, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-  m_PrefabInstance: {fileID: 579829828}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &523135171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523135167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 8400000, guid: ecfd68eac7b38cf4583c9cf56f174b10, type: 2}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1 &526639077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,18 +1171,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2076215666803152643, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 240
-      objectReference: {fileID: 0}
-    - target: {fileID: 2076215666803152643, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 135
-      objectReference: {fileID: 0}
-    - target: {fileID: 2150920204654569846, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2937783248537011989, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1339,10 +1295,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7158443921459161783, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8814d8afb685cc742b8af41a0aebc0c8, type: 3}
     - target: {fileID: 7380008043288403673, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1363,14 +1315,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2150920204654569846, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7351579062088774266, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 523135171}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
 --- !u!4 &693559017 stripped
 Transform:
@@ -1999,13 +1947,14 @@ MonoBehaviour:
   mSpeedKnots: {fileID: 722273052}
   mAcceleration: 5
   mDeceleration: 3
+  mFuelText: {fileID: 2123472663}
   mFuelSlider: {fileID: 1541593777}
   mFuel:
     maxFuel: 100
     currentFuel: 100
     idleConsumption: 0
-    baseConsumption: 0.02
-    accelerationSurcharge: 0.05
+    baseConsumption: 0.05
+    accelerationSurcharge: 0.2
 --- !u!1 &1169384072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3373072989772051000, guid: 19f0cd7b4b1c7d64a96f94db0a7b0483, type: 3}
@@ -3640,6 +3589,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1541673437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123472663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 883995473873867190, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
+  m_PrefabInstance: {fileID: 579829828}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &2134766619 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3121093901954975844, guid: c5143d9ae3a1d6e4cbddb37b5f63b3e2, type: 3}

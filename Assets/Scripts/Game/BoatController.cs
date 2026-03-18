@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -40,9 +41,10 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] float mDeceleration = 3f;
 
     [Header("Fuel Settings:")]
+
+    [SerializeField] TMP_Text mFuelText;
     [SerializeField] Slider mFuelSlider;
     [SerializeField] Fuel mFuel;
-   
    
     private void OnEnable()
     {
@@ -56,7 +58,6 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     void GearAction()
     {
         isControl = false;
-
         mGear.Change(!mGear.Stat);
     }
 
@@ -67,6 +68,9 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     private void Update()
     {
+        if (mFuel.FuelPercent < 0.1f)
+            return;
+
         if (Keyboard.current.leftArrowKey.isPressed)
             helmController.Direct(HelmDirection.left);
 
@@ -125,12 +129,26 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     void UpdateFuelUI()
     {
         // Example — wire to your own UI elements
-      //  mFuelText.text = $"{mFuel.currentFuel:F1} L";
+        //  mFuelText.text = $"{mFuel.currentFuel:F1} L";
         mFuelSlider.value = mFuel.FuelPercent;
 
         // Low fuel warning
-        //if (mFuel.FuelPercent < 0.2f)
-        //    mFuelWarning.SetActive(true);
+        if (mFuel.FuelPercent < 0.2f)
+        {
+            mFuelText.text = "Low Fuel";
+
+            
+            Sequence sequence =  DOTween.Sequence();
+
+            sequence.Join(mFuelText.DOColor(Color.red, 0.2f))
+                    .Append(mFuelText.DOColor(Color.white, 0.2f))
+                    .SetLoops(-1);
+        }
+
+        if(mFuel.FuelPercent < 0.1f)
+        {
+            mGear.Change(false);
+        }
     }
 
     public void Refuel(float amount)
