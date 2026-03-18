@@ -27,23 +27,15 @@ public class Gear : MonoBehaviour
    {
         Sequence seq = DOTween.Sequence();
 
-        if (!stat)
-        {
-            StartCoroutine(WaitForAnimation(stat, () =>
-            {
-                mStat = stat;
-                callback.GearChange();
-            }));
+        mStat = stat;
+        callback.GearChange();
 
-            return;
-        }
+        //StartCoroutine(WaitForAnimation(stat, () =>
+        //{
+        //    mStat = stat;
+        //    callback.GearChange();
 
-        StartCoroutine(WaitForAnimation(stat, () =>
-        {
-            mStat = stat;
-            callback.GearChange();
-
-        }));
+        //}));
     }
 
     IEnumerator WaitForAnimation(bool stat ,Action onComplete)

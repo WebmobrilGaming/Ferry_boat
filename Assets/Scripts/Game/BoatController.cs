@@ -1,4 +1,7 @@
 using DG.Tweening;
+using FerryBoat;
+using System;
+using System.ComponentModel;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -17,6 +20,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     [Range(0, 10f)]
     [SerializeField] float mSpeed = 5.0f;
+    [SerializeField] float mBoatSpeed;
 
 
     [SerializeField] bool isControl;
@@ -45,7 +49,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] TMP_Text mFuelText;
     [SerializeField] Slider mFuelSlider;
     [SerializeField] Fuel mFuel;
-   
+
+
     private void OnEnable()
     {
         helmController.callback = this;
@@ -53,6 +58,13 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         mFuelSlider.value = mFuel.currentFuel;
         startRotation = transform.localRotation;
+
+        Act.SpeedChange += SpeedChange;
+    }
+
+    private void OnDisable()
+    {
+        Act.SpeedChange -= SpeedChange;
     }
 
     void GearAction()
@@ -91,7 +103,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         bool canMove = mGear.Stat && !mFuel.IsEmpty;
 
         // Accelerate or decelerate based on gear + fuel
-        float targetSpeed = canMove ? mSpeed : 0f;
+        float targetSpeed = canMove ? mBoatSpeed : 0f;
         float rate = canMove ? mAcceleration : mDeceleration;
         mCurrentSpeed = Mathf.MoveTowards(mCurrentSpeed, targetSpeed, rate * Time.deltaTime);
 
@@ -124,6 +136,11 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         UpdateFuelUI();
         #endregion
+    }
+
+    private void SpeedChange(float val)
+    {
+        mBoatSpeed = val;
     }
 
     void UpdateFuelUI()

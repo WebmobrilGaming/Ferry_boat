@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "Mouse",
+    "maps": [
+        {
+            "name": "Scroll",
+            "id": "f4d52b34-ac1c-430a-893c-92b43f3597a4",
+            "actions": [
+                {
+                    "name": "scroll",
+                    "type": "Value",
+                    "id": "2d0ec870-c97c-44b6-85bf-f9b2c51d25d9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bc027497-c561-46e2-935b-97c416f5c6c6",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b943ae29-5ead-4994-a8cc-0edd7c6669e3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
