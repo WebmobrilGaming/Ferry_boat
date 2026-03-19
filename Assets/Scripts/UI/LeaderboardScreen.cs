@@ -17,7 +17,7 @@ public class LeaderboardScreen : MonoBehaviour, IRecyclableScrollRectDataSource
     {
         APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard, null), (data, res) =>
         {
-            if (res.status == HttpCodes.OK)
+            if (res.status)
             {
                 leaderboardList = data.data;
                 for (int i = leaderboardList.Count - 1; i >= 0; i--)

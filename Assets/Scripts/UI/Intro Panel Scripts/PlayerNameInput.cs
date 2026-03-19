@@ -93,7 +93,7 @@ public class PlayerNameInput : MonoBehaviour
         var request = new CreatePlayer("previous", previousUsernameInputField.text);
         APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request), (data, res) =>
         {
-            if (res.status == HttpCodes.OK)
+            if (res.status)
             {
                 this.userData = data;
                 Debug.Log("UserDetails: " + userData);

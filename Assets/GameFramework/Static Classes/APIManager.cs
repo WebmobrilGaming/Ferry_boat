@@ -1,4 +1,6 @@
 using System;
+using Ferry_boat.Assets.Scripts.Web;
+using Newtonsoft.Json;
 using Unity.VisualScripting;
 
 namespace GF
@@ -39,16 +41,16 @@ namespace GF
             }));
         }
 
-        private static (T, Response) MapResponse<T>(Response res)
+        private static (T, Response) MapResponse<T>(string res)
         {
             try
             {
-                T data = (T)res;
-                return (data, res);
+                T data = JsonConvert.DeserializeObject<T>(res);
+                return (data,(Response)data);
             }
             catch (Exception e)
             {
-                return (default(T), res);
+                return (default(T),JsonConvert.DeserializeObject<ResponseBody>(res));
             }
         }
     }

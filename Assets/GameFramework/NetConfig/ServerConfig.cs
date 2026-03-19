@@ -28,12 +28,6 @@ namespace Netconfig
         }
         public List<ApiName> apiList;
         private Dictionary<RequestType, string> apiDictionary = new Dictionary<RequestType, string>();
-        private static readonly Dictionary<RequestType, Type> responseMap = new Dictionary<RequestType, Type>
-        {
-          { RequestType.CreatePlayer, typeof(UserDetails) },
-          { RequestType.LoginPlayer, typeof(UserDetails) },
-          { RequestType.LeaderBoard, typeof(LeaderboardResponse) },
-        };
         // Singleton instance for easy access
         private static ServerConfig instance;
         public static ServerConfig Instance
@@ -97,17 +91,9 @@ namespace Netconfig
             if (apiDictionary.Count == 0) BuildApis();
             return $"{CurrentServerURL.baseURL}/{apiDictionary[apiType]}";
         }
-
-        public Response MapResponse(string data, RequestType requestType)
+        public string MapErrorResponse(long code, string message)
         {
-            if (!responseMap.TryGetValue(requestType, out Type type))
-                return new ResponseBody(405, "Request type not supported");
-
-            return (Response)JsonConvert.DeserializeObject(data, type);
-        }
-        public Response MapErrorResponse(long code, string message)
-        {
-            return new ResponseBody(code, message);
+            return JsonConvert.SerializeObject(new ResponseBody(code, message));
         }
     }
     public enum RequestType

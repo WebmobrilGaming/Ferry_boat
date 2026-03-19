@@ -47,8 +47,8 @@ namespace GF
         public  Request request;
         public HttpRequestType httpRequestType;
         public string url;
-        public Action<Response> responseCallback;
-        public ApiEvent(HttpRequestType httpRequestType,Request request, Action<Response> responseCallback)
+        public Action<string> responseCallback;
+        public ApiEvent(HttpRequestType httpRequestType,Request request, Action<string> responseCallback)
         {
             this.url=ServerConfig.Instance.GetApiUrl(request.requestType);
             this.request = request;

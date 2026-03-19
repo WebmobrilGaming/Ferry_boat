@@ -40,12 +40,12 @@ namespace Ferry_boat.Assets.Scripts.Web
     public class ResponseBody : Response
     {
         public long code { get; private set; }
-
         public string message { get; private set; }
-        public HttpCodes status => (HttpCodes)code;
+        public bool status { get; private set; }
         public ResponseBody(long status, string message)
         {
             this.code = status;
+            this.status = code == 200;
             this.message = message;
         }
     }
@@ -67,7 +67,7 @@ namespace Ferry_boat.Assets.Scripts.Web
 
         public long code { get; set; }
 
-        public HttpCodes status => (HttpCodes)code;
+        public bool status => success;
     }
     public class PlayerData
     {
@@ -84,6 +84,6 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string message { get; set; }
         public List<PlayerData> data { get; set; }
         public long code { get; set; }
-        public HttpCodes status => (HttpCodes)code;
+        public bool status => success;
     }
 }

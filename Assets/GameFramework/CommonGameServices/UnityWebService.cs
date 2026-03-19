@@ -69,12 +69,12 @@ namespace GF
         /// <param name="OnPostCompleteCalback"></param>
         /// <param name="OnProgressCallback"></param>
 
-        protected void HTTPPost(string url, RequestType requestType, string data, Action<Response> OnPostCompleteCalback)
+        protected void HTTPPost(string url, RequestType requestType, string data, Action<string> OnPostCompleteCalback)
         {
             Utils.CallEventAsync(new CoroutineEvent(PostRequest(url, requestType, data, OnPostCompleteCalback)));
         }
 
-        private IEnumerator PostRequest(string url, RequestType requestType, string data, Action<Response> onPostCompleteCalback)
+        private IEnumerator PostRequest(string url, RequestType requestType, string data, Action<string> onPostCompleteCalback)
         {
             Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
             // Convert JSON string to bytes
@@ -102,7 +102,7 @@ namespace GF
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
-                    onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text, requestType));
+                    onPostCompleteCalback?.Invoke(request.downloadHandler.text);
                 }
                 else
                 {
@@ -120,12 +120,12 @@ namespace GF
         /// <param name="requestType"></param>
         /// <param name="OnGetCompleteCallback"></param>
         /// <param name="progressCallback"></param>
-        protected void HTTPGet(string url, RequestType requestType, Action<Response> OnGetCompleteCallback)
+        protected void HTTPGet(string url, RequestType requestType, Action<string> OnGetCompleteCallback)
         {
             Utils.CallEventAsync(new CoroutineEvent(GetRequest(url, requestType, OnGetCompleteCallback)));
         }
 
-        private IEnumerator GetRequest(string url, RequestType requestType, Action<Response> onGetCompleteCallback)
+        private IEnumerator GetRequest(string url, RequestType requestType, Action<string> onGetCompleteCallback)
         {
             Logger.Log(LogType.HttpRequest, $"[GET] : {requestType}");
             using (UnityWebRequest request = UnityWebRequest.Get(url))
@@ -141,7 +141,7 @@ namespace GF
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
-                    onGetCompleteCallback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text, requestType));
+                    onGetCompleteCallback?.Invoke(request.downloadHandler.text);
                 }
                 else
                 {
@@ -158,11 +158,11 @@ namespace GF
         /// <param name="requestType"></param>
         /// <param name="data"></param>
         /// <param name="OnPutCompleteCallback"></param>
-        protected void HTTPPut(string url, RequestType requestType, string data, Action<Response> OnPutCompleteCallback)
+        protected void HTTPPut(string url, RequestType requestType, string data, Action<string> OnPutCompleteCallback)
         {
             Utils.CallEventAsync(new CoroutineEvent(PutRequest(url, requestType, data, OnPutCompleteCallback)));
         }
-        private IEnumerator PutRequest(string url, RequestType requestType, string data, Action<Response> onPostCompleteCalback)
+        private IEnumerator PutRequest(string url, RequestType requestType, string data, Action<string> onPostCompleteCalback)
         {
             Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
             // Convert JSON string to bytes
@@ -190,7 +190,7 @@ namespace GF
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
-                    onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text, requestType));
+                    onPostCompleteCalback?.Invoke(request.downloadHandler.text);
                 }
                 else
                 {
@@ -206,11 +206,11 @@ namespace GF
         /// <param name="requestType"></param>
         /// <param name="data"></param>
         /// <param name="OnPutCompleteCallback"></param>
-        protected void HTTPDelete(string url, RequestType requestType, string data, Action<Response> OnPutCompleteCallback)
+        protected void HTTPDelete(string url, RequestType requestType, string data, Action<string> OnPutCompleteCallback)
         {
             Utils.CallEventAsync(new CoroutineEvent(DeleteRequest(url, requestType, data, OnPutCompleteCallback)));
         }
-        private IEnumerator DeleteRequest(string url, RequestType requestType, string data, Action<Response> onPostCompleteCalback)
+        private IEnumerator DeleteRequest(string url, RequestType requestType, string data, Action<string> onPostCompleteCalback)
         {
             Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
             // Convert JSON string to bytes
@@ -238,7 +238,7 @@ namespace GF
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     Logger.Log(LogType.HttpResponse, $"[Response]-{requestType} : {request.downloadHandler.text}");
-                    onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapResponse(request.downloadHandler.text, requestType));
+                    onPostCompleteCalback?.Invoke(request.downloadHandler.text);
                 }
                 else
                 {
@@ -250,52 +250,6 @@ namespace GF
         public void Update()
         {
 
-        }
-        public enum HttpCodes
-        {
-            // ✅ 1xx Informational
-            Continue = 100,
-            SwitchingProtocols = 101,
-            Processing = 102,
-
-            // ✅ 2xx Success
-            OK = 200,
-            Created = 201,
-            Accepted = 202,
-            NonAuthoritativeInformation = 203,
-            NoContent = 204,
-            ResetContent = 205,
-            PartialContent = 206,
-
-            // ✅ 3xx Redirection
-            MultipleChoices = 300,
-            MovedPermanently = 301,
-            Found = 302,
-            SeeOther = 303,
-            NotModified = 304,
-            TemporaryRedirect = 307,
-            PermanentRedirect = 308,
-
-            // ✅ 4xx Client Errors
-            BadRequest = 400,
-            Unauthorized = 401,
-            Forbidden = 403,
-            NotFound = 404,
-            MethodNotAllowed = 405,
-            NotAcceptable = 406,
-            RequestTimeout = 408,
-            Conflict = 409,
-            Gone = 410,
-            PayloadTooLarge = 413,
-            UnsupportedMediaType = 415,
-            TooManyRequests = 429,
-
-            // ✅ 5xx Server Errors
-            InternalServerError = 500,
-            NotImplemented = 501,
-            BadGateway = 502,
-            ServiceUnavailable = 503,
-            GatewayTimeout = 504
         }
     }
 }

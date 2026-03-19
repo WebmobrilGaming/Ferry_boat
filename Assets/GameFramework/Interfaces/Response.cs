@@ -6,7 +6,7 @@ namespace GF
     public interface Response
     {
         long code { get; }
-        HttpCodes status { get; }
+        bool status { get; }
         string message { get; }
     }
 
