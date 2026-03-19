@@ -28,8 +28,8 @@ public class UserInterFace : MonoBehaviour
 
         Act.SpeedInit += SetRange;
         Act.ReachedDestination += LevelFinish;
+        Act.BoatDestroyedAction += BoatDestroyed;
     }
-
 
     private void OnDisable()
     {
@@ -38,6 +38,13 @@ public class UserInterFace : MonoBehaviour
         Act.SpeedInit -= SetRange;
         Act.ReachedDestination -= LevelFinish;
     }
+
+    private void BoatDestroyed()
+    {
+        Time.timeScale = 0;
+        GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
+    }
+
 
     private void OnDestroy()
     {
