@@ -22,6 +22,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] float mSpeed = 5.0f;
     [SerializeField] float mBoatSpeed;
 
+    [SerializeField] Material mIndicator;
+
 
     [SerializeField] bool isControl;
 
@@ -53,7 +55,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] Slider trottleSlider;
 
     [Header("Health Settings:")]
-    [SerializeField] Slider ferrySlider;
+    [SerializeField] Slider mHealthSlider;
 
 
     private void OnEnable()
@@ -80,6 +82,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     {
         Debug.LogError("Hit !! ");
 
+
     }
 
     void GearAction()
@@ -98,8 +101,14 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         
         trottleSlider.maxValue = speed <= 0 ? 0 : speed;
 
-        if(mGear.Stat)
+        if (mGear.Stat)
+        {
             trottleSlider.DOValue(mBoatSpeed, 0.65f);
+            mIndicator.EnableKeyword("_EMISSION");
+        }
+        else
+            mIndicator.DisableKeyword("_EMISSION");
+
 
         Act.SpeedInit?.Invoke(speed);
     }
