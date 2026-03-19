@@ -6,6 +6,7 @@ using GF;
 using Ferry_boat.Assets.Scripts.Web;
 using static GF.UnityWebService;
 using Unity.Android.Gradle.Manifest;
+using System;
 
 public class PlayerNameInput : MonoBehaviour
 {
@@ -91,15 +92,15 @@ public class PlayerNameInput : MonoBehaviour
     {
         //username
         var request = new CreatePlayer("previous", previousUsernameInputField.text);
-        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request), (data, res) =>
+        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request),OnReceive);
+    }
+
+    private void OnReceive(UserDetails details, Response response)
+    {
+        if (response.status)
         {
-            if (res.status)
-            {
-                this.userData = data;
-                Debug.Log("UserDetails: " + userData);
-                isNewUser = false;
-            }
-        });
+            this.userData=details;
+        }
     }
 
     private void OnExitClicked()

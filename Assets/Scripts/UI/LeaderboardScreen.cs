@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Ferry_boat.Assets.Scripts.Web;
 using GF;
@@ -15,19 +16,24 @@ public class LeaderboardScreen : MonoBehaviour, IRecyclableScrollRectDataSource
     }
     void OnEnable()
     {
-        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard, null), (data, res) =>
-        {
-            if (res.status)
-            {
-                leaderboardList = data.data;
-                for (int i = leaderboardList.Count - 1; i >= 0; i--)
-                {
-                    leaderboardList[i].rank = i;
-                }
-                Invoke(nameof(InitializeLeaderboard), 0.2f);
-            }
-        });
+        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard, null),OnRecieveLeaderboard);
     }
+
+    private void OnRecieveLeaderboard(LeaderboardResponse data, Response response)
+    {
+        if (response.status)
+        {
+            leaderboardList=data.data;
+            int rank=1;
+            for(int i =0; i<leaderboardList.Count; i++)
+            {
+                leaderboardList[i].rank=rank;
+                rank++;
+            }
+            Invoke(nameof(InitializeLeaderboard),0.2f);
+        }
+    }
+
     private void InitializeLeaderboard()
     {
         recyclableScrollRect.Initialize(this);
