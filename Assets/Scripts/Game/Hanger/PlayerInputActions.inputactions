@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "13cc0636-026b-447b-8ac4-b847780bf17f",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "fa51ccef-4962-4fc2-ba16-82f3b2ae5a1d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "b578d647-e02c-437c-acb0-d65a001f8316",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d9ba3141-bef6-4f6e-bb8b-7a480ecb8bd2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "244f1e62-faf0-48d0-b9e6-410afe7bdd48",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
