@@ -10,4 +10,6 @@ namespace GF
         long status { get; }
         string message { get; }
     }
+
+    
 }

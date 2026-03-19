@@ -65,11 +65,11 @@ public class MenuManager : MonoBehaviour
 
         if (exitSettings)
             exitSettings.onClick.AddListener(ShowMainMenu);
-        APIManager.PostAPI<ResponseBody>(new RequestData(Netconfig.RequestType.SignIn, "hello"), (res) =>
-        {
-            Debug.Log(res.status);
-            Debug.Log(res.message);
-        });
+        // APIManager.PostAPI<ResponseBody>(new RequestData(Netconfig.RequestType.SignIn, "hello"), (res) =>
+        // {
+        //     Debug.Log(res.status);
+        //     Debug.Log(res.message);
+        // });
     }
 
     void OpenMainMenu()

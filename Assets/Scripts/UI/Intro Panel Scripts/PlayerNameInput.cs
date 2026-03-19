@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using GF;
+using Ferry_boat.Assets.Scripts.Web;
 
 public class PlayerNameInput : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class PlayerNameInput : MonoBehaviour
     [Header("Input Fields - New User")]
     [SerializeField] private TMP_InputField firstNameInputField;
     [SerializeField] private TMP_InputField lastNameInputField;
-    [SerializeField] private TMP_InputField extraFieldInputField; // your 3rd field
+    [SerializeField] private TMP_InputField userNameInputFeild; // your 3rd field
 
     [Header("Buttons")]
     [SerializeField] private Button startGameButton;
@@ -36,10 +38,21 @@ public class PlayerNameInput : MonoBehaviour
 
     public void OpenNewPlayer()
     {
-        isNewUser = true;
-        previousUserFrame.SetActive(false);
-        newUserFrame.SetActive(true);
         OpenUserPanel();
+    }
+
+    private void CreateNewUser()
+    {
+        var request = new CreatePlayer("new", userNameInputFeild.text, firstNameInputField.text, lastNameInputField.text);
+        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.NewUser, request), (res) =>
+        {
+            Debug.Log("UserDetails: " + res);
+            if (res.success)
+            {
+                isNewUser = true;
+
+            }
+        });
     }
 
     public void OpenPreviousPlayer()
@@ -52,6 +65,8 @@ public class PlayerNameInput : MonoBehaviour
 
     private void OpenUserPanel()
     {
+        previousUserFrame.SetActive(false);
+        newUserFrame.SetActive(true);
         introPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
         {
             introPanel.SetActive(false);
@@ -67,7 +82,7 @@ public class PlayerNameInput : MonoBehaviour
         prevFullNameInputField.text = "";
         firstNameInputField.text = "";
         lastNameInputField.text = "";
-        extraFieldInputField.text = "";
+        userNameInputFeild.text = "";
 
         userPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
         {
@@ -86,7 +101,7 @@ public class PlayerNameInput : MonoBehaviour
         {
             string firstName = firstNameInputField.text.Trim();
             string lastName = lastNameInputField.text.Trim();
-            string extra = extraFieldInputField.text.Trim();
+            string extra = userNameInputFeild.text.Trim();
 
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(extra))
             {

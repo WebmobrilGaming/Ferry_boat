@@ -8,15 +8,21 @@ using Newtonsoft.Json;
 
 namespace Ferry_boat.Assets.Scripts.Web
 {
-    public class SignInRequest
+    public class CreatePlayer
     {
-        public string username;
-        public SignInRequest(string userName)
+        public string Type { get; }
+        public string UserName { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public CreatePlayer(string type,string userName,string firstName,string lastName)
         {
-            username = userName;
+            this.LastName = lastName;
+            this.FirstName = firstName;
+            this.UserName = userName;
+            this.Type = type;
         }
     }
-    public class RequestData: Request 
+    public class RequestData : Request
     {
         public RequestType requestType { get; private set; }
 
@@ -37,5 +43,23 @@ namespace Ferry_boat.Assets.Scripts.Web
             this.status = status;
             this.message = message;
         }
+    }
+    public class NewUserData
+    {
+        public string username { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public int score { get; set; }
+        public string difficultyLevel { get; set; }
+        public DateTime time { get; set; }
+    }
+
+    public class UserDetails : Response
+    {
+        public bool success { get; set; }
+        public string message { get; set; }
+        public NewUserData data { get; set; }
+
+        public long status => throw new NotImplementedException();
     }
 }

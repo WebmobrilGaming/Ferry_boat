@@ -15,8 +15,16 @@ MonoBehaviour:
   apiList:
   - requestType: 0
     api: /sign
+  - requestType: 1
+    api: /player/login
   serverEntries:
   - configName: Prod
     baseURL: https://toolcity-application-latest.onrender.com
     socketURL: 
-  selectedConfigIndex: 0
+  - configName: Config Name
+    baseURL: Base URL
+    socketURL: Socket URL
+  - configName: dev
+    baseURL: http://52.22.241.165:10021/api/
+    socketURL: Socket URL
+  selectedConfigIndex: 2

@@ -111,5 +111,10 @@ namespace Netconfig
     public enum RequestType
     {
         SignIn,
+        NewUser,
+        PreviousUser,
+        LeaderBoard
+
+
     }
 }
