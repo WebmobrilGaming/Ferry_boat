@@ -50,6 +50,11 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] Slider mFuelSlider;
     [SerializeField] Fuel mFuel;
 
+    [SerializeField] Slider trottleSlider;
+
+    [Header("Health Settings:")]
+    [SerializeField] Slider ferrySlider;
+
 
     private void OnEnable()
     {
@@ -62,16 +67,19 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         isControl = false;
 
         Act.SpeedChange += SpeedChange;
+        Act.HitAction += HitAction;
     }
 
     private void OnDisable()
     {
         Act.SpeedChange -= SpeedChange;
+        Act.HitAction -= HitAction;
     }
 
-    private void Start()
+    private void HitAction()
     {
-       
+        Debug.LogError("Hit !! ");
+
     }
 
     void GearAction()
@@ -87,6 +95,12 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         isControl = true;
 
         float speed = mGear.Stat ? mSpeed : -1;
+        
+        trottleSlider.maxValue = speed <= 0 ? 0 : speed;
+
+        if(mGear.Stat)
+            trottleSlider.DOValue(mBoatSpeed, 0.65f);
+
         Act.SpeedInit?.Invoke(speed);
     }
 
@@ -153,6 +167,11 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     private void SpeedChange(float val)
     {
         mBoatSpeed = val;
+
+        if (!mGear.Stat)
+            return;
+
+        trottleSlider.DOValue(val,0.65f);  
     }
 
     void UpdateFuelUI()

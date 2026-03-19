@@ -6,6 +6,7 @@ namespace  FerryBoat
    public static  class Act
    {  
        public static Action<float> SpeedChange;
-        public static Action<float> SpeedInit;
+       public static Action<float> SpeedInit;
+       public static Action HitAction;
    }
 }
