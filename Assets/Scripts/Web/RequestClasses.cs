@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GF;
 using Netconfig;
 using Newtonsoft.Json;
@@ -66,6 +67,23 @@ namespace Ferry_boat.Assets.Scripts.Web
 
         public long code { get; set; }
 
+        public HttpCodes status => (HttpCodes)code;
+    }
+    public class PlayerData
+    {
+        public string _id { get; set; }
+        public int rank { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string username { get; set; }
+        public int score { get; set; }
+    }
+    public class LeaderboardResponse : Response
+    {
+        public bool success { get; set; }
+        public string message { get; set; }
+        public List<PlayerData> data { get; set; }
+        public long code { get; set; }
         public HttpCodes status => (HttpCodes)code;
     }
 }

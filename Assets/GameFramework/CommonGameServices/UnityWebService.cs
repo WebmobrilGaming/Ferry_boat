@@ -132,7 +132,8 @@ namespace GF
             {
                 // Headers
                 request.SetRequestHeader("Content-Type", "application/json");
-                request.SetRequestHeader("Authorization", "Bearer " + PlayerPrefs.GetString("BearerToken"));
+                if (PlayerPrefs.HasKey("BearerToken") && !string.IsNullOrEmpty(PlayerPrefs.GetString("BearerToken")))
+                    request.SetRequestHeader("Authorization", "Bearer " + PlayerPrefs.GetString("BearerToken"));
 
                 // Send request
                 yield return request.SendWebRequest();

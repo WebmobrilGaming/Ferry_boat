@@ -20,7 +20,7 @@ MonoBehaviour:
   - requestType: 3
     api: player/updateScore
   - requestType: 2
-    api: player/leaderBoard
+    api: player/leader_board
   serverEntries:
   - configName: DEV
     baseURL: http://52.22.241.165:10021/api
