@@ -60,6 +60,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] float mdamage;
     [SerializeField] Slider mHealthSlider;
 
+    [SerializeField] TMP_Text mHealthText;
+
     bool isHit = false;
     bool isEngine = false;
 
@@ -99,12 +101,18 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         trottleSlider.DOValue(0, 0.65f);
         mIndicator.DisableKeyword("_EMISSION");
         mGear.Change(false);
+
         isHit = true;
 
         mHealth -= mdamage;
         mHealthSlider.DOValue(mHealth, 1.0f);
 
-        if(mHealth <=0)
+        mHealthText.transform.DOShakePosition(0.5f, strength: 20f, vibrato: 10)
+            .OnStart(()=> mHealthText.color = Color.red)
+            .SetUpdate(true)
+            .OnComplete(()=> mHealthText.color = Color.white); 
+
+        if (mHealth <=0)
         {
             Act.BoatDestroyedAction?.Invoke();
             return;
