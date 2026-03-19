@@ -131,6 +131,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         isControl = false;
         mGear.Change(!mGear.Stat);
+
+        Act.EnableScore(mGear.Stat);
     }
 
     public void GearChange()

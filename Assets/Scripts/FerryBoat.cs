@@ -10,5 +10,6 @@ namespace  FerryBoat
        public static Action HitAction;
        public static Action ReachedDestination;
        public static Action BoatDestroyedAction;
+        public static Action<bool> EnableScore;
    }
 }
