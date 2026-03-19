@@ -60,7 +60,6 @@ public class Gear : MonoBehaviour
     {
         float t = Mathf.InverseLerp(0, mRange, val);
 
-        DevDebug.Log($"Animation normalised speed: {t}", DebugColor.Brown);
         _animator.Play("GearON", 0, t);
         _animator.speed = 0f;
     }

@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: 6a45318e221807540898f9e42cbb8765
   - enabled: 1
-    path: Assets/Scenes/GamePlay.unity
-    guid: 279b73ca7f45db747bb450005419da5f
+    path: Assets/Ferry Simulation/Scene/Ferry Simulation.unity
+    guid: e7980e16b49693641a402a0e08e812c9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 6fdb2896206791d498467807504d4b5e, type: 3}
   m_UseUCBPForAssetBundles: 0

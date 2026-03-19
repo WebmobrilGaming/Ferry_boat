@@ -17,6 +17,7 @@ public class UserInterFace : MonoBehaviour
 
     private void Awake()
     {
+        rangeMax = -1;
         scrollAction.performed += OnScroll;
     }
 
@@ -47,9 +48,12 @@ public class UserInterFace : MonoBehaviour
 
     private void OnScroll(InputAction.CallbackContext ctx)
     {
+        if (rangeMax <= 0)
+            return;
+
         Vector2 scroll = ctx.ReadValue<Vector2>();
 
-        float mScrollVal = scroll.y;
+        float mScrollVal = -1 * scroll.y;
 
         mScrollRange = Mathf.Clamp(mScrollRange + mScrollVal * sensitivity, rangeMin, rangeMax);
 

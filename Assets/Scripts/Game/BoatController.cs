@@ -18,7 +18,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [Range(0,1f)]
     [SerializeField] float rotationMultiplier = 0.3f;
 
-    [Range(0, 10f)]
+    [Range(0, 100f)]
     [SerializeField] float mSpeed = 5.0f;
     [SerializeField] float mBoatSpeed;
 
@@ -71,11 +71,13 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     private void Start()
     {
-        Act.SpeedInit?.Invoke(mSpeed);
+       
     }
 
     void GearAction()
     {
+        Debug.Log("GEAR CHANGE !!!");
+
         isControl = false;
         mGear.Change(!mGear.Stat);
     }
@@ -83,6 +85,9 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     public void GearChange()
     {
         isControl = true;
+
+        float speed = mGear.Stat ? mSpeed : -1;
+        Act.SpeedInit?.Invoke(speed);
     }
 
     private void Update()
@@ -90,13 +95,13 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         if (mFuel.FuelPercent < 0.1f)
             return;
 
-        if (Keyboard.current.leftArrowKey.isPressed && isControl)
+        if (Keyboard.current.leftArrowKey.isPressed && mGear.Stat)
             helmController.Direct(HelmDirection.left);
 
-        if (Keyboard.current.rightArrowKey.isPressed && isControl)
+        if (Keyboard.current.rightArrowKey.isPressed && mGear.Stat)
             helmController.Direct(HelmDirection.right);
 
-        if (Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
             GearAction();
 
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame)
@@ -107,7 +112,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         #region SPEED_HANDLING
         // Fuel gate
-        bool canMove = isControl && !mFuel.IsEmpty;
+        bool canMove = mGear.Stat && !mFuel.IsEmpty;
 
         // Accelerate or decelerate based on gear + fuel
         float targetSpeed = canMove ? mBoatSpeed : 0f;
