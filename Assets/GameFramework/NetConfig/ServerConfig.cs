@@ -30,7 +30,7 @@ namespace Netconfig
         private Dictionary<RequestType, string> apiDictionary = new Dictionary<RequestType, string>();
         private static readonly Dictionary<RequestType, Type> responseMap = new Dictionary<RequestType, Type>
         {
-          { RequestType.SignIn, typeof(ResponseBody) },
+          { RequestType.LoginPlayer, typeof(ResponseBody) },
         };
         // Singleton instance for easy access
         private static ServerConfig instance;
@@ -110,11 +110,9 @@ namespace Netconfig
     }
     public enum RequestType
     {
-        SignIn,
-        NewUser,
-        PreviousUser,
-        LeaderBoard
-
-
+        LoginPlayer,
+        CreatePlayer,
+        LeaderBoard,
+        UpdateScore
     }
 }

@@ -1,25 +1,28 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GF;
 using Netconfig;
 using Newtonsoft.Json;
+using static GF.UnityWebService;
 
 namespace Ferry_boat.Assets.Scripts.Web
 {
     public class CreatePlayer
     {
-        public string Type { get; }
-        public string UserName { get; }
-        public string FirstName { get; }
-        public string LastName { get; }
-        public CreatePlayer(string type,string userName,string firstName,string lastName)
+        public string type { get; }
+        public string username { get; }
+        public string firstName { get; }
+        public string lastName { get; }
+        public CreatePlayer(string type, string userName, string firstName, string lastName)
         {
-            this.LastName = lastName;
-            this.FirstName = firstName;
-            this.UserName = userName;
-            this.Type = type;
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.username = userName;
+            this.type = type;
+        }
+        public CreatePlayer(string type, string userName)
+        {
+            this.type = type;
+            this.username = userName;
         }
     }
     public class RequestData : Request
@@ -35,12 +38,13 @@ namespace Ferry_boat.Assets.Scripts.Web
     }
     public class ResponseBody : Response
     {
-        public long status { get; private set; }
+        public long code { get; private set; }
 
         public string message { get; private set; }
+        public HttpCodes status => (HttpCodes)code;
         public ResponseBody(long status, string message)
         {
-            this.status = status;
+            this.code = status;
             this.message = message;
         }
     }
@@ -60,6 +64,8 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string message { get; set; }
         public NewUserData data { get; set; }
 
-        public long status => throw new NotImplementedException();
+        public long code { get; set; }
+
+        public HttpCodes status => (HttpCodes)code;
     }
 }

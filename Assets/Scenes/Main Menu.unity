@@ -7649,11 +7649,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNameInput
   previousUserFrame: {fileID: 1338516515}
   newUserFrame: {fileID: 508779025}
-  prevFullNameInputField: {fileID: 1718394958}
+  previousUsernameInputField: {fileID: 1718394958}
   firstNameInputField: {fileID: 1561287730}
   lastNameInputField: {fileID: 462339683}
-  extraFieldInputField: {fileID: 269467900}
+  userNameInputFeild: {fileID: 269467900}
   startGameButton: {fileID: 718617717}
+  previousGameButton: {fileID: 569629371}
   exitButton: {fileID: 1466103315}
   userPanel: {fileID: 493275916}
   mainMenuPanel: {fileID: 806260263}
@@ -7887,7 +7888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &508779026
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9193,7 +9194,7 @@ GameObject:
   - component: {fileID: 569629372}
   - component: {fileID: 569629371}
   m_Layer: 5
-  m_Name: Start Game Btn
+  m_Name: prevoius_Start Game Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21471,11 +21472,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNameInput
   previousUserFrame: {fileID: 1338516515}
   newUserFrame: {fileID: 508779025}
-  prevFullNameInputField: {fileID: 1718394958}
+  previousUsernameInputField: {fileID: 1718394958}
   firstNameInputField: {fileID: 1561287730}
   lastNameInputField: {fileID: 462339683}
-  extraFieldInputField: {fileID: 269467900}
+  userNameInputFeild: {fileID: 269467900}
   startGameButton: {fileID: 718617717}
+  previousGameButton: {fileID: 569629371}
   exitButton: {fileID: 1466103315}
   userPanel: {fileID: 493275916}
   mainMenuPanel: {fileID: 806260263}
@@ -27891,7 +27893,7 @@ GameObject:
   - component: {fileID: 1718394959}
   - component: {fileID: 1718394958}
   m_Layer: 5
-  m_Name: UniqueUserNameInput (1)
+  m_Name: previousUsernameTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

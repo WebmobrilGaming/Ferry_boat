@@ -4,69 +4,60 @@ using UnityEngine.UI;
 using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
+using static GF.UnityWebService;
+using Unity.Android.Gradle.Manifest;
 
 public class PlayerNameInput : MonoBehaviour
 {
     [Header("Frames")]
-    [SerializeField] private GameObject previousUserFrame;  // 1 field frame
-    [SerializeField] private GameObject newUserFrame;       // 3 fields frame
+    [SerializeField] private GameObject previousUserFrame;
+    [SerializeField] private GameObject newUserFrame;
 
     [Header("Input Fields - Previous User")]
-    [SerializeField] private TMP_InputField prevFullNameInputField;
+    [SerializeField] private TMP_InputField previousUsernameInputField;
 
     [Header("Input Fields - New User")]
     [SerializeField] private TMP_InputField firstNameInputField;
     [SerializeField] private TMP_InputField lastNameInputField;
-    [SerializeField] private TMP_InputField userNameInputFeild; // your 3rd field
+    [SerializeField] private TMP_InputField userNameInputFeild;
 
     [Header("Buttons")]
     [SerializeField] private Button startGameButton;
+    [SerializeField] private Button previousGameButton;
     [SerializeField] private Button exitButton;
 
     [Header("Panels")]
     [SerializeField] private GameObject userPanel;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject introPanel;
-
+    private UserDetails userData = null;
     private bool isNewUser = false;
 
     private void Start()
     {
-        startGameButton.onClick.AddListener(OnStartGameClicked);
+        startGameButton.onClick.AddListener(CreateNewUser);
+        previousGameButton.onClick.AddListener(LoginPreviousUser);
         exitButton.onClick.AddListener(OnExitClicked);
     }
 
     public void OpenNewPlayer()
     {
-        OpenUserPanel();
-    }
-
-    private void CreateNewUser()
-    {
-        var request = new CreatePlayer("new", userNameInputFeild.text, firstNameInputField.text, lastNameInputField.text);
-        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.NewUser, request), (res) =>
-        {
-            Debug.Log("UserDetails: " + res);
-            if (res.success)
-            {
-                isNewUser = true;
-
-            }
-        });
+        isNewUser = true;
+        OpenUserPanel(isNewUser: true);
     }
 
     public void OpenPreviousPlayer()
     {
         isNewUser = false;
-        previousUserFrame.SetActive(true);
-        newUserFrame.SetActive(false);
-        OpenUserPanel();
+        OpenUserPanel(isNewUser: false);
     }
 
-    private void OpenUserPanel()
+    private void OpenUserPanel(bool isNewUser)
     {
-        previousUserFrame.SetActive(false);
-        newUserFrame.SetActive(true);
+
+        previousUserFrame.SetActive(!isNewUser);
+        newUserFrame.SetActive(isNewUser);
+
         introPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
         {
             introPanel.SetActive(false);
@@ -75,11 +66,39 @@ public class PlayerNameInput : MonoBehaviour
             userPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
         });
     }
+    private void CreateNewUser()
+    {
+        //username, firstname, lastname  (validation)
+        var request = new CreatePlayer("new", userNameInputFeild.text, firstNameInputField.text, lastNameInputField.text);
+        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), (data, res) =>
+        {
+            if (res.status == HttpCodes.OK)
+            {
+                this.userData = data;
+                Debug.Log("UserDetails: " + userData);
+                isNewUser = true;
+            }
+        });
+    }
+    private void LoginPreviousUser()
+    {
+        //username
+        var request = new CreatePlayer("previous", previousUsernameInputField.text);
+        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request), (data, res) =>
+        {
+            if (res.status == HttpCodes.OK)
+            {
+                this.userData = data;
+                Debug.Log("UserDetails: " + userData);
+                isNewUser = false;
+            }
+        });
+    }
 
     private void OnExitClicked()
     {
-        // Clear all fields
-        prevFullNameInputField.text = "";
+
+        previousUsernameInputField.text = "";
         firstNameInputField.text = "";
         lastNameInputField.text = "";
         userNameInputFeild.text = "";
@@ -110,12 +129,13 @@ public class PlayerNameInput : MonoBehaviour
             }
 
             fullName = firstName + " " + lastName;
-            // Save extra field however you need:
             PlayerPrefs.SetString("ExtraField", extra);
+
+            LoginPreviousUser();
         }
         else
         {
-            string name = prevFullNameInputField.text.Trim();
+            string name = previousUsernameInputField.text.Trim();
 
             if (string.IsNullOrEmpty(name))
             {

@@ -14,17 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Netconfig.ServerConfig
   apiList:
   - requestType: 0
-    api: /sign
+    api: player/login
   - requestType: 1
-    api: /player/login
+    api: player/login
+  - requestType: 3
+    api: player/updateScore
+  - requestType: 2
+    api: player/leaderBoard
   serverEntries:
-  - configName: Prod
-    baseURL: https://toolcity-application-latest.onrender.com
-    socketURL: 
-  - configName: Config Name
-    baseURL: Base URL
+  - configName: DEV
+    baseURL: http://52.22.241.165:10021/api
     socketURL: Socket URL
-  - configName: dev
-    baseURL: http://52.22.241.165:10021/api/
-    socketURL: Socket URL
-  selectedConfigIndex: 2
+  selectedConfigIndex: 0

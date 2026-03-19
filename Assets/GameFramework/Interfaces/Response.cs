@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using static GF.UnityWebService;
 
 namespace GF
 {
     public interface Response
     {
-        long status { get; }
+        long code { get; }
+        HttpCodes status { get; }
         string message { get; }
     }
 
-    
+
 }
