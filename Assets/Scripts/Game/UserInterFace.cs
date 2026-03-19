@@ -1,5 +1,6 @@
 using DebugUtils;
 using FerryBoat;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,18 +27,27 @@ public class UserInterFace : MonoBehaviour
         scrollAction.Enable();
 
         Act.SpeedInit += SetRange;
+        Act.ReachedDestination += LevelFinish;
     }
+
 
     private void OnDisable()
     {
         scrollAction.Disable();
 
         Act.SpeedInit -= SetRange;
+        Act.ReachedDestination -= LevelFinish;
     }
 
     private void OnDestroy()
     {
         scrollAction.performed -= OnScroll;
+    }
+
+    private void LevelFinish()
+    {
+        Time.timeScale = 0;
+        GamePopUp.Instance.FinalPopUp("Destination Reached");
     }
 
     public void SetRange(float range)

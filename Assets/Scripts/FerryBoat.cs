@@ -8,5 +8,7 @@ namespace  FerryBoat
        public static Action<float> SpeedChange;
        public static Action<float> SpeedInit;
        public static Action HitAction;
+       public static Action ReachedDestination;
+       public static Action BoatDestroyedAction;
    }
 }

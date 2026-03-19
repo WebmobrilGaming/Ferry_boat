@@ -56,6 +56,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] Slider trottleSlider;
 
     [Header("Health Settings:")]
+    [SerializeField] float mHealth;
+    [SerializeField] float mdamage;
     [SerializeField] Slider mHealthSlider;
 
     bool isHit = false;
@@ -75,12 +77,19 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         Act.SpeedChange += SpeedChange;
         Act.HitAction += HitAction;
+
+        mHealthSlider.maxValue = mHealth;
+        mHealthSlider.value = mHealth;
+
+        mIndicator.DisableKeyword("_EMISSION");
     }
 
     private void OnDisable()
     {
         Act.SpeedChange -= SpeedChange;
         Act.HitAction -= HitAction;
+
+        mIndicator.DisableKeyword("_EMISSION");
     }
 
     private void HitAction()
@@ -91,6 +100,15 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         mIndicator.DisableKeyword("_EMISSION");
         mGear.Change(false);
         isHit = true;
+
+        mHealth -= mdamage;
+        mHealthSlider.DOValue(mHealth, 1.0f);
+
+        if(mHealth <=0)
+        {
+            Act.BoatDestroyedAction?.Invoke();
+            return;
+        }
 
         StartCoroutine(Recover());
     }
