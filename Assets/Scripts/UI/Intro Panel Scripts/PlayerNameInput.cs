@@ -69,17 +69,24 @@ public class PlayerNameInput : MonoBehaviour
     private void CreateNewUser()
     {
         //username, firstname, lastname  (validation)
-        var request = new CreatePlayer("new", userNameInputFeild.text, firstNameInputField.text, lastNameInputField.text);
-        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), (data, res) =>
-        {
-            if (res.status == HttpCodes.OK)
-            {
-                this.userData = data;
-                Debug.Log("UserDetails: " + userData);
-                isNewUser = true;
-            }
-        });
+        //var request = new CreatePlayer("new", userNameInputFeild.text, firstNameInputField.text, lastNameInputField.text);
+        //APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), (data, res) =>
+        //{
+        //    if (res.status == HttpCodes.OK)
+        //    {
+        //        this.userData = data;
+        //        Debug.Log("UserDetails: " + userData);
+        //        isNewUser = true;
+        //    }
+        //});
+
+        Debug.Log("UserDetails: " + userData);
+        isNewUser = true;
+
+        OnStartGameClicked();
     }
+
+
     private void LoginPreviousUser()
     {
         //username
@@ -116,37 +123,37 @@ public class PlayerNameInput : MonoBehaviour
     {
         string fullName = "";
 
-        if (isNewUser)
-        {
-            string firstName = firstNameInputField.text.Trim();
-            string lastName = lastNameInputField.text.Trim();
-            string extra = userNameInputFeild.text.Trim();
+        //if (isNewUser)
+        //{
+        //    //string firstName = firstNameInputField.text.Trim();
+        //    //string lastName = lastNameInputField.text.Trim();
+        //    //string extra = userNameInputFeild.text.Trim();
 
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(extra))
-            {
-                Debug.Log("Please fill all fields!");
-                return;
-            }
+        //    //if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(extra))
+        //    //{
+        //    //    Debug.Log("Please fill all fields!");
+        //    //    return;
+        //    //}
 
-            fullName = firstName + " " + lastName;
-            PlayerPrefs.SetString("ExtraField", extra);
+        //    //fullName = firstName + " " + lastName;
+        //    //PlayerPrefs.SetString("ExtraField", extra);
 
-            LoginPreviousUser();
-        }
-        else
-        {
-            string name = previousUsernameInputField.text.Trim();
+        //    LoginPreviousUser();
+        //}
+        //else
+        //{
+        //    string name = previousUsernameInputField.text.Trim();
 
-            if (string.IsNullOrEmpty(name))
-            {
-                Debug.Log("Please enter your name!");
-                return;
-            }
+        //    if (string.IsNullOrEmpty(name))
+        //    {
+        //        Debug.Log("Please enter your name!");
+        //        return;
+        //    }
 
-            fullName = name;
-        }
+        //    fullName = name;
+        //}
 
-        PlayerPrefs.SetString("PlayerName", fullName);
+        //PlayerPrefs.SetString("PlayerName", fullName);
 
         userPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
         {

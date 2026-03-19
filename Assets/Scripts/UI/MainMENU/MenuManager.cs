@@ -99,11 +99,15 @@ public class MenuManager : MonoBehaviour
 
     void OpenStartSimulation()
     {
-        mainMenu.SetActive(false);
+        //mainMenu.SetActive(false);
+        SceneManager.Instance.LoadScene(SceneType.Game);
 
-        startSimulationPanel.SetActive(true);
-        startSimulationPanel.transform.localScale = Vector3.zero;
-        startSimulationPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+        //startSimulationPanel.SetActive(true);
+        // startSimulationPanel.transform.localScale = Vector3.zero;
+        //startSimulationPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).OnComplete(() => 
+        //{
+        //    SceneManager.Instance.LoadAdditive(SceneType.Game);
+        //});
     }
 
     void OpenGameObjective()

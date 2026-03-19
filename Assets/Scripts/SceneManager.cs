@@ -6,8 +6,6 @@ public class SceneManager : MonoBehaviour
     static SceneManager instance;
     public static SceneManager Instance { get { return instance; } }
 
-    private Scene? _additiveScene;
-
     private void Awake()
     {
         if (instance == null)
@@ -23,8 +21,8 @@ public class SceneManager : MonoBehaviour
 
     // ── Public API ────────────────────────────────────────────────
 
-    /// <summary>Load a scene additively by SceneType enum.</summary>
-    public void LoadAdditive(SceneType sceneType)
+    /// <summary>Load a scene by SceneType enum.</summary>
+    public void LoadScene(SceneType sceneType)
     {
         string sceneName = SceneTypeToName(sceneType);
 
@@ -34,30 +32,15 @@ public class SceneManager : MonoBehaviour
             return;
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        Debug.Log($"[SceneManager] Loading additive scene: {sceneName}");
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+        Debug.Log($"[SceneManager] Loading scene: {sceneName}");
     }
 
-    /// <summary>Unload a previously loaded additive scene by SceneType enum.</summary>
-    public void UnloadAdditive(SceneType sceneType)
-    {
-        string sceneName = SceneTypeToName(sceneType);
-
-        if (!IsSceneLoaded(sceneName))
-        {
-            Debug.LogWarning($"[SceneManager] Scene '{sceneName}' is not loaded.");
-            return;
-        }
-
-        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(sceneName);
-        Debug.Log($"[SceneManager] Unloading additive scene: {sceneName}");
-    }
-
-    /// <summary>Reload the active base scene, keeping DontDestroyOnLoad intact.</summary>
+    /// <summary>Reload the currently active scene.</summary>
     public void ReloadActiveScene()
     {
         int activeIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(activeIndex, LoadSceneMode.Single);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(activeIndex);
     }
 
     // ── Helpers ───────────────────────────────────────────────────
@@ -70,7 +53,6 @@ public class SceneManager : MonoBehaviour
 
     private string SceneTypeToName(SceneType sceneType)
     {
-        // Scene names in Build Settings must match these exactly
         return sceneType switch
         {
             SceneType.Home => "Home",
