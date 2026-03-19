@@ -1,6 +1,8 @@
 using DG.Tweening;
 using FerryBoat;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
 using UnityEditor;
@@ -14,6 +16,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] HelmController helmController;
     [SerializeField] Gear mGear;
 
+    [SerializeField] Material mIndicator;
+
     [Header("Settings:")]
     [Range(0,1f)]
     [SerializeField] float rotationMultiplier = 0.3f;
@@ -21,9 +25,6 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [Range(0, 100f)]
     [SerializeField] float mSpeed = 5.0f;
     [SerializeField] float mBoatSpeed;
-
-    [SerializeField] Material mIndicator;
-
 
     [SerializeField] bool isControl;
 
@@ -57,6 +58,9 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [Header("Health Settings:")]
     [SerializeField] Slider mHealthSlider;
 
+    bool isHit = false;
+    bool isEngine = false;
+
 
     private void OnEnable()
     {
@@ -67,6 +71,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         startRotation = transform.localRotation;
 
         isControl = false;
+        isHit = false;
 
         Act.SpeedChange += SpeedChange;
         Act.HitAction += HitAction;
@@ -82,8 +87,25 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     {
         Debug.LogError("Hit !! ");
 
+        trottleSlider.DOValue(0, 0.65f);
+        mIndicator.DisableKeyword("_EMISSION");
+        mGear.Change(false);
+        isHit = true;
 
+        StartCoroutine(Recover());
     }
+
+    IEnumerator Recover()
+    {
+        yield return new WaitForSeconds(4.0f);
+
+        trottleSlider.DOValue(mBoatSpeed, 0.65f);
+        mIndicator.EnableKeyword("_EMISSION");
+
+        mGear.Change(true);
+        isHit = false;
+    }
+     
 
     void GearAction()
     {
@@ -140,7 +162,12 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         // Accelerate or decelerate based on gear + fuel
         float targetSpeed = canMove ? mBoatSpeed : 0f;
         float rate = canMove ? mAcceleration : mDeceleration;
+
+
+
         mCurrentSpeed = Mathf.MoveTowards(mCurrentSpeed, targetSpeed, rate * Time.deltaTime);
+
+        mCurrentSpeed = isHit ? 0 : mCurrentSpeed;
 
         // Move using smoothed speed
         transform.position += transform.forward * mCurrentSpeed * Time.deltaTime;
@@ -204,8 +231,28 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         if(mFuel.FuelPercent < 0.1f)
         {
-            mGear.Change(false);
+            EngineStat(false);
         }
+    }
+
+    void EngineStat(bool enable)
+    {
+        isEngine = enable;
+
+        if (!enable)
+        {
+            trottleSlider.DOValue(0, 0.65f);
+            mIndicator.DisableKeyword("_EMISSION");
+            mGear.Change(false);
+
+            return;
+        }
+
+        trottleSlider.DOValue(mBoatSpeed, 0.65f);
+        mIndicator.EnableKeyword("_EMISSION");
+
+        mGear.Change(true);
+        isHit = false;
     }
 
     public void Refuel(float amount)
