@@ -5,8 +5,6 @@ using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
 using static GF.UnityWebService;
-using Unity.Android.Gradle.Manifest;
-using System;
 
 public class PlayerNameInput : MonoBehaviour
 {
@@ -31,6 +29,7 @@ public class PlayerNameInput : MonoBehaviour
     [SerializeField] private GameObject userPanel;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject introPanel;
+
     private UserDetails userData = null;
     private bool isNewUser = false;
 
@@ -55,7 +54,6 @@ public class PlayerNameInput : MonoBehaviour
 
     private void OpenUserPanel(bool isNewUser)
     {
-
         previousUserFrame.SetActive(!isNewUser);
         newUserFrame.SetActive(isNewUser);
 
@@ -67,45 +65,84 @@ public class PlayerNameInput : MonoBehaviour
             userPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
         });
     }
+
+
+
     private void CreateNewUser()
     {
-        //username, firstname, lastname  (validation)
-        //var request = new CreatePlayer("new", userNameInputFeild.text, firstNameInputField.text, lastNameInputField.text);
-        //APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), (data, res) =>
-        //{
-        //    if (res.status == HttpCodes.OK)
-        //    {
-        //        this.userData = data;
-        //        Debug.Log("UserDetails: " + userData);
-        //        isNewUser = true;
-        //    }
-        //});
+        string firstName = firstNameInputField.text.Trim();
+        string lastName = lastNameInputField.text.Trim();
+        string userName = userNameInputFeild.text.Trim();
 
-        Debug.Log("UserDetails: " + userData);
-        isNewUser = true;
+        // Validate all fields before hitting the API
+        if (string.IsNullOrEmpty(firstName) ||
+            string.IsNullOrEmpty(lastName) ||
+            string.IsNullOrEmpty(userName))
+        {
+            Debug.LogWarning("Please fill in all fields before continuing.");
+            return;
+        }
 
-        OnStartGameClicked();
+        SetButtonsInteractable(false);
+        Debug.Log("call create new user");
+        var request = new CreatePlayer("new", userName, firstName, lastName);
+        APIManager.PostAPI<UserDetails>(
+            new RequestData(Netconfig.RequestType.CreatePlayer, request),
+            (data, response) =>
+            {
+                SetButtonsInteractable(true);
+
+                if (response.status)
+                {
+                    userData = data;
+                    isNewUser = true;
+                    Debug.Log("New user created: " + userData);
+                    OnStartGameClicked();
+                }
+                else
+                {
+                    Debug.LogError("CreateNewUser failed: " + response.message);
+                    // TODO: show an error message to the player in the UI
+                }
+            });
     }
-
 
     private void LoginPreviousUser()
     {
-        //username
-        var request = new CreatePlayer("previous", previousUsernameInputField.text);
-        APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request),OnReceive);
-    }
+        string username = previousUsernameInputField.text.Trim();
 
-    private void OnReceive(UserDetails details, Response response)
-    {
-        if (response.status)
+        if (string.IsNullOrEmpty(username))
         {
-            this.userData=details;
+            Debug.LogWarning("Please enter your username.");
+            return;
         }
+
+        SetButtonsInteractable(false);
+
+        var request = new CreatePlayer("previous", username);
+        APIManager.PostAPI<UserDetails>(
+            new RequestData(Netconfig.RequestType.LoginPlayer, request),
+            (data, response) =>
+            {
+                SetButtonsInteractable(true);
+
+                if (response.status)
+                {
+                    userData = data;
+                    isNewUser = false;
+                    Debug.Log("Login successful: " + userData);
+                    OnStartGameClicked();   // ← only proceed AFTER a successful login
+                }
+                else
+                {
+                    Debug.LogError("LoginPreviousUser failed: " + response.message);
+                    // TODO: show an error message to the player in the UI
+                }
+            });
     }
 
     private void OnExitClicked()
     {
-
         previousUsernameInputField.text = "";
         firstNameInputField.text = "";
         lastNameInputField.text = "";
@@ -119,43 +156,8 @@ public class PlayerNameInput : MonoBehaviour
             introPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
         });
     }
-
     private void OnStartGameClicked()
     {
-        string fullName = "";
-
-        //if (isNewUser)
-        //{
-        //    //string firstName = firstNameInputField.text.Trim();
-        //    //string lastName = lastNameInputField.text.Trim();
-        //    //string extra = userNameInputFeild.text.Trim();
-
-        //    //if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(extra))
-        //    //{
-        //    //    Debug.Log("Please fill all fields!");
-        //    //    return;
-        //    //}
-
-        //    //fullName = firstName + " " + lastName;
-        //    //PlayerPrefs.SetString("ExtraField", extra);
-
-        //    LoginPreviousUser();
-        //}
-        //else
-        //{
-        //    string name = previousUsernameInputField.text.Trim();
-
-        //    if (string.IsNullOrEmpty(name))
-        //    {
-        //        Debug.Log("Please enter your name!");
-        //        return;
-        //    }
-
-        //    fullName = name;
-        //}
-
-        //PlayerPrefs.SetString("PlayerName", fullName);
-
         userPanel.transform.DOScale(0, 0.2f).OnComplete(() =>
         {
             userPanel.SetActive(false);
@@ -163,5 +165,11 @@ public class PlayerNameInput : MonoBehaviour
             mainMenuPanel.transform.localScale = Vector3.zero;
             mainMenuPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
         });
+    }
+
+    private void SetButtonsInteractable(bool interactable)
+    {
+        startGameButton.interactable = interactable;
+        previousGameButton.interactable = interactable;
     }
 }

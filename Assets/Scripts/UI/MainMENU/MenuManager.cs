@@ -7,27 +7,39 @@ using Ferry_boat.Assets.Scripts.Web;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Intro panel")]
     public GameObject introPanel;
+    [Header("MainMenu")]
     public GameObject mainMenu;
 
+    [Header("startSimulationPanel")]
     public GameObject startSimulationPanel;
-    public GameObject gameObjectivePanel;
-    public GameObject ferryHistoryPanel;
-    public GameObject leaderboardPanel;
-    public GameObject settingsPanel;
-
+    public Button startSimulationButton;
+    public Button exitStartSimulation;
     public Button startGameButton;
 
-    public Button startSimulationButton;
-    public Button gameObjectiveButton;
-    public Button ferryHistoryButton;
-    public Button leaderboardButton;
-    public Button settingsButton;
 
-    public Button exitStartSimulation;
+    [Header("gameObjectivePanel")]
+    public GameObject gameObjectivePanel;
+    public Button gameObjectiveButton;
     public Button exitGameObjective;
+
+    [Header("ferryHistoryPanel")]
+
+    public GameObject ferryHistoryPanel;
+    public Button ferryHistoryButton;
     public Button exitFerryHistory;
+
+    [Header("leaderboardPanel")]
+
+    public GameObject leaderboardPanel;
+    public Button leaderboardButton;
     public Button exitLeaderboard;
+
+    [Header("settingsPanel")]
+
+    public GameObject settingsPanel;
+    public Button settingsButton;
     public Button exitSettings;
 
     void Start()
