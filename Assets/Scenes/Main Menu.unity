@@ -2952,8 +2952,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3853,7 +3853,6 @@ GameObject:
   - component: {fileID: 493275917}
   - component: {fileID: 493275919}
   - component: {fileID: 493275918}
-  - component: {fileID: 493275920}
   m_Layer: 5
   m_Name: User Panel
   m_TagString: Untagged
@@ -3921,30 +3920,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493275916}
   m_CullTransparentMesh: 1
---- !u!114 &493275920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493275916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05faced1f5d98cb46acd3d066cd4ec75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerNameInput
-  previousUserFrame: {fileID: 1338516515}
-  newUserFrame: {fileID: 508779025}
-  previousUsernameInputField: {fileID: 1718394958}
-  firstNameInputField: {fileID: 1561287730}
-  lastNameInputField: {fileID: 462339683}
-  userNameInputFeild: {fileID: 269467900}
-  startGameButton: {fileID: 718617717}
-  previousGameButton: {fileID: 569629371}
-  exitButton: {fileID: 1466103315}
-  userPanel: {fileID: 493275916}
-  mainMenuPanel: {fileID: 806260263}
-  introPanel: {fileID: 1301868096}
 --- !u!1 &497832348
 GameObject:
   m_ObjectHideFlags: 0
@@ -11437,7 +11412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1218539646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11848,20 +11823,20 @@ MonoBehaviour:
   introPanel: {fileID: 1301868096}
   mainMenu: {fileID: 806260263}
   startSimulationPanel: {fileID: 0}
-  gameObjectivePanel: {fileID: 1870093666}
-  ferryHistoryPanel: {fileID: 2086368992}
-  leaderboardPanel: {fileID: 31791765}
-  settingsPanel: {fileID: 981153622}
-  startGameButton: {fileID: 0}
   startSimulationButton: {fileID: 102644638}
-  gameObjectiveButton: {fileID: 749832401}
-  ferryHistoryButton: {fileID: 1816064768}
-  leaderboardButton: {fileID: 28874145}
-  settingsButton: {fileID: 1483494690}
   exitStartSimulation: {fileID: 0}
+  startGameButton: {fileID: 0}
+  gameObjectivePanel: {fileID: 1870093666}
+  gameObjectiveButton: {fileID: 749832401}
   exitGameObjective: {fileID: 1841745924}
+  ferryHistoryPanel: {fileID: 2086368992}
+  ferryHistoryButton: {fileID: 1816064768}
   exitFerryHistory: {fileID: 113173480}
+  leaderboardPanel: {fileID: 31791765}
+  leaderboardButton: {fileID: 28874145}
   exitLeaderboard: {fileID: 1958612326}
+  settingsPanel: {fileID: 981153622}
+  settingsButton: {fileID: 1483494690}
   exitSettings: {fileID: 1561654589}
 --- !u!4 &1272846515
 Transform:
@@ -12429,7 +12404,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 806260263}
   previousUserButton: {fileID: 333215686}
   newUserButton: {fileID: 330722875}
-  playerNameInput: {fileID: 493275920}
+  playerNameInput: {fileID: 1301868098}
 --- !u!1 &1308338305
 GameObject:
   m_ObjectHideFlags: 0
@@ -19117,7 +19092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Privious User
+  m_text: 'Previous User
 
 '
   m_isRightToLeft: 0
@@ -19146,8 +19121,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
