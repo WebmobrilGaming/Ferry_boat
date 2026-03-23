@@ -8,6 +8,9 @@ namespace Ferry.Ship
     public class AIController : MonoBehaviour, IShipController
     {
         private NavMeshAgent agent;
+        private Vector3 SourcePos;
+        private Vector3 DestinationPos;
+        private bool isMoving = false;
         public IEnumerator SetDestination(DockSet StartDock, DockSet EndDock)
         {
             agent = GetComponent<NavMeshAgent>();
@@ -15,20 +18,40 @@ namespace Ferry.Ship
             // Disable agent before moving, so it doesn't fight your position set
             agent.enabled = false;
 
-            Vector3 startPos = DockConfig.Instance.GetDock(StartDock).dockPosition;
-            transform.position = startPos;
+            SourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
+            transform.position = SourcePos;
 
             // Re-enable after position is set — agent will warp to current position
-            agent.enabled = true;
-
             yield return new WaitForSeconds(1);
 
-            Vector3 endPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
-            agent.SetDestination(endPos);
+            DestinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
+            yield return MoveAgent();
+        }
+        private IEnumerator MoveAgent()
+        {
+            while (true)
+            {
+                agent.enabled = true;
+                agent.SetDestination(DestinationPos);
+
+                yield return new WaitUntil(() => !agent.pathPending &&
+                                                 agent.remainingDistance <= agent.stoppingDistance);
+
+                agent.enabled = false;
+                SwapAndReturn();
+
+                yield return new WaitForSeconds(1f); // pause at dock before returning
+            }
         }
         void FixedUpdate()
         {
+            if (!agent.enabled) return;
             Debug.DrawRay(transform.position, agent.velocity, Color.red);
+        }
+        private void SwapAndReturn()
+        {
+            // Swap source and destination
+            (SourcePos, DestinationPos) = (DestinationPos, SourcePos);
         }
     }
 }
