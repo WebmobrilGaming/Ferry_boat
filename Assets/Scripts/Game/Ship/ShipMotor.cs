@@ -3,7 +3,6 @@ using Ferry.Config;
 using UnityEngine;
 namespace Ferry.Ship
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class ShipMotor : MonoBehaviour
     {
         public float speed = 10f;

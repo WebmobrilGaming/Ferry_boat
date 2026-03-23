@@ -22,15 +22,15 @@ MonoBehaviour:
   - dockSet: 3
     dockPosition: {x: -1045, y: 30, z: -935}
   - dockSet: 4
-    dockPosition: {x: -921, y: 30, z: -1873}
+    dockPosition: {x: -989, y: 30, z: -2074}
   - dockSet: 5
     dockPosition: {x: -1714, y: 30, z: -3420}
   - dockSet: 6
     dockPosition: {x: 228, y: 30, z: -3364}
   - dockSet: 7
-    dockPosition: {x: 228, y: 30, z: -3364}
-  - dockSet: 8
     dockPosition: {x: -223, y: 30, z: -2257}
+  - dockSet: 8
+    dockPosition: {x: 281, y: 30, z: -549}
   - dockSet: 9
     dockPosition: {x: 1150, y: 30, z: 796}
   - dockSet: 10
