@@ -79,12 +79,12 @@ public class PlayerNameInput : MonoBehaviour
             string.IsNullOrEmpty(lastName) ||
             string.IsNullOrEmpty(userName))
         {
-            Debug.LogWarning("Please fill in all fields before continuing.");
+            PopupController.Instance.ShowFillAllFields();
             return;
         }
 
         SetButtonsInteractable(false);
-        Debug.Log("call create new user");
+
         var request = new CreatePlayer("new", userName, firstName, lastName);
         APIManager.PostAPI<UserDetails>(
             new RequestData(Netconfig.RequestType.CreatePlayer, request),
@@ -96,13 +96,12 @@ public class PlayerNameInput : MonoBehaviour
                 {
                     userData = data;
                     isNewUser = true;
-                    Debug.Log("New user created: " + userData);
+
                     OnStartGameClicked();
                 }
                 else
                 {
-                    Debug.LogError("CreateNewUser failed: " + response.message);
-                    // TODO: show an error message to the player in the UI
+                    PopupController.Instance.ShowUsernameAlreadyExists();
                 }
             });
     }
@@ -113,7 +112,7 @@ public class PlayerNameInput : MonoBehaviour
 
         if (string.IsNullOrEmpty(username))
         {
-            Debug.LogWarning("Please enter your username.");
+            PopupController.Instance.ShowFillAllFields();
             return;
         }
 
@@ -135,8 +134,7 @@ public class PlayerNameInput : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("LoginPreviousUser failed: " + response.message);
-                    // TODO: show an error message to the player in the UI
+                    PopupController.Instance.ShowInvalidUsername();
                 }
             });
     }
