@@ -107,7 +107,7 @@ public class PlayerNameInput : MonoBehaviour
     }
 
     private void LoginPreviousUser()
-    {
+    {OnStartGameClicked();
         string username = previousUsernameInputField.text.Trim();
 
         if (string.IsNullOrEmpty(username))

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e22054d1004604aa0e2209b4ce4a73, type: 3}
+  m_Name: DockConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Config.DockConfig
+  docks:
+  - dockSet: 0
+    dockPosition: {x: -1003.9, y: 30, z: 1221}
+  - dockSet: 1
+    dockPosition: {x: -538.6, y: 30, z: 746.8}
+  - dockSet: 2
+    dockPosition: {x: -538.6, y: 30, z: 310.9}
+  - dockSet: 3
+    dockPosition: {x: -1045, y: 30, z: -935}
+  - dockSet: 4
+    dockPosition: {x: -989, y: 30, z: -2074}
+  - dockSet: 5
+    dockPosition: {x: -610, y: 30, z: -1985}
+  - dockSet: 6
+    dockPosition: {x: -135, y: 30, z: 523}
+  - dockSet: 7
+    dockPosition: {x: 228, y: 30, z: -3364}
+  - dockSet: 8
+    dockPosition: {x: -223, y: 30, z: -2257}
+  - dockSet: 9
+    dockPosition: {x: 281, y: 30, z: -549}
+  - dockSet: 10
+    dockPosition: {x: 1150, y: 30, z: 769}
+  - dockSet: 11
+    dockPosition: {x: 322, y: 30, z: 152}
+  - dockSet: 12
+    dockPosition: {x: 1528, y: 30, z: -2739}
