@@ -1,11 +1,9 @@
 using DG.Tweening;
+using Ferry.Config;
 using FerryBoat;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -64,7 +62,26 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     bool isHit = false;
     bool isEngine = false;
+    public ShipConfig ferryConfig;
+    private void Awake()
+    {
+        ShipConfigController.Instance.BuildMap();
+        LoadConfig();
+    }
 
+    private void LoadConfig()
+    {
+        ferryConfig=ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
+        rotationMultiplier=ferryConfig.rotationMultiplier;
+        mSpeed=ferryConfig.shipSpeed;
+        mAcceleration=ferryConfig.acceleration;
+        mDeceleration=ferryConfig.deceleration;
+        mHealth=ferryConfig.health;
+        mdamage=ferryConfig.damage;
+        mFuel.accelerationSurcharge=ferryConfig.fuelConfig.accelerationSurge;
+        mFuel.baseConsumption=ferryConfig.fuelConfig.baseConsumption;
+        mFuel.maxFuel=ferryConfig.fuelConfig.fuelCapacity;
+    }
 
     private void OnEnable()
     {
