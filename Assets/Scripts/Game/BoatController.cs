@@ -60,7 +60,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private bool isFirstUpdate = true;
     private bool isEngineStarted = false;
     public bool IsEningeActive => isEngineStarted;
-
+    public bool IsInDock{get;set;}
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
@@ -189,7 +189,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
             GearAction();
 
-        if (Keyboard.current.leftArrowKey.wasReleasedThisFrame || 
+        if (Keyboard.current.leftArrowKey.wasReleasedThisFrame ||
             Keyboard.current.rightArrowKey.wasReleasedThisFrame)
             helmController.StopRotation();
 

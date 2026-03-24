@@ -11,14 +11,6 @@ public class Destination : MonoBehaviour
     {
         dockCollider = GetComponent<Collider>();
     }
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if ((targetLayer & (1 << other.gameObject.layer)) != 0)
-    //     {
-    //         DevDebug.Log("Reached target ", DebugColor.Green);
-    //         Act.ReachedDestination?.Invoke();
-    //     }
-    // }
     private void OnTriggerStay(Collider other)
     {
         if (isReached) return;
@@ -36,6 +28,7 @@ public class Destination : MonoBehaviour
                     isReached = true;
                     DevDebug.Log("Boat fully inside dock!", DebugColor.Green);
                     Act.ReachedDestination?.Invoke();
+                    boatController.IsInDock=true;
                 }
             }
         }
@@ -44,6 +37,13 @@ public class Destination : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if ((targetLayer & (1 << other.gameObject.layer)) != 0)
+        {
             isReached = false;
+            var boatController = other.GetComponentInParent<BoatController>();
+            if (boatController != null && boatController.Speed == 0 && !boatController.IsEningeActive)
+            {
+                boatController.IsInDock=false;
+            }
+        }
     }
 }
