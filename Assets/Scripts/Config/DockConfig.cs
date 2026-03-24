@@ -72,6 +72,7 @@ namespace Ferry.Config
         AmericanDock3,
         AmericanDock4,
         AmericanDock5,
-        AmericanDock6
+        AmericanDock6,
+        AmericanDock7
     }
 }

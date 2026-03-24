@@ -27,7 +27,6 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] bool isControl;
 
     Quaternion startRotation;
-
     private const float MPS_TO_KNOTS = 1.94384f;
 
     [Header("Speed Settings:")]
@@ -61,7 +60,6 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] TMP_Text mHealthText;
 
     bool isHit = false;
-    bool isEngine = false;
     public ShipConfig ferryConfig;
     private void Awake()
     {
@@ -192,7 +190,9 @@ public class BoatController : MonoBehaviour,IHelem,IGear
             helmController.Direct(HelmDirection.right);
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
             GearAction();
+        }
 
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame)
         {
@@ -215,7 +215,10 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         mCurrentSpeed = isHit ? 0 : mCurrentSpeed;
 
         // Move using smoothed speed
-        transform.position += transform.forward * mCurrentSpeed * Time.deltaTime;
+        var forward=transform.forward * mCurrentSpeed * Time.deltaTime;
+        var currentTransform=transform.position;
+        var target= new Vector3(currentTransform.x+forward.x,currentTransform.y,currentTransform.z+forward.z);
+        transform.position=target;
 
         // Knots from actual displacement
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
@@ -282,8 +285,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     void EngineStat(bool enable)
     {
-        isEngine = enable;
-
+        isEngineStarted=enable;
         if (!enable)
         {
             trottleSlider.DOValue(0, 0.65f);
@@ -309,6 +311,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     private float currentRotation = 0f;
     private float lastHelmZ = 0f;
     private bool isFirstUpdate = true;
+    private bool isEngineStarted=false;
 
     public void Rotate(float zValue)
     {

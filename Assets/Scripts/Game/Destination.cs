@@ -5,14 +5,41 @@ using UnityEngine;
 public class Destination : MonoBehaviour
 {
     [SerializeField] private LayerMask targetLayer;
-
-    private void OnTriggerEnter(Collider other)
+    private Collider dockCollider;
+    private bool isReached = false;
+    private void Awake()
     {
+        dockCollider = GetComponent<Collider>();
+    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if ((targetLayer & (1 << other.gameObject.layer)) != 0)
+    //     {
+    //         DevDebug.Log("Reached target ", DebugColor.Green);
+    //         Act.ReachedDestination?.Invoke();
+    //     }
+    // }
+    private void OnTriggerStay(Collider other)
+    {
+        if (isReached) return;
+
         if ((targetLayer & (1 << other.gameObject.layer)) != 0)
         {
-            DevDebug.Log("Reached target ", DebugColor.Green);
+            Bounds dockBounds = dockCollider.bounds;
+            Bounds boatBounds = other.bounds;
 
-            Act.ReachedDestination?.Invoke();
+            if (dockBounds.Contains(boatBounds.min) && dockBounds.Contains(boatBounds.max))
+            {
+                isReached = true;
+                DevDebug.Log("Boat fully inside dock!", DebugColor.Green);
+                Act.ReachedDestination?.Invoke();
+            }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if ((targetLayer & (1 << other.gameObject.layer)) != 0)
+            isReached = false;
     }
 }
