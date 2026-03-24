@@ -10,6 +10,7 @@ namespace Ferry.Config
         public float deceleration;
         public float rotationMultiplier;
         public float shipSpeed;
+        public float limit;
         public float health;
         public float damage;
         public FuelConfig fuelConfig;

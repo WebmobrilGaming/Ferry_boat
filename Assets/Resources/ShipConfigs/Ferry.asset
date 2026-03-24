@@ -17,6 +17,7 @@ MonoBehaviour:
   deceleration: 3
   rotationMultiplier: 0.02
   shipSpeed: 20
+  limit: 17
   health: 50
   damage: 10
   fuelConfig:
