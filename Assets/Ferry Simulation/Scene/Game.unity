@@ -1166,7 +1166,7 @@ Transform:
   m_GameObject: {fileID: 133395444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -230.2, y: 36.1, z: -2277.8}
+  m_LocalPosition: {x: -206.1, y: 36.1, z: -2277.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2811,8 +2811,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2.84
-  m_Speed: 15
-  m_Acceleration: 10
+  m_Speed: 20
+  m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 8
   m_StoppingDistance: 0
@@ -6251,6 +6251,7 @@ MonoBehaviour:
   mSpeedKnots: {fileID: 722273052}
   mAcceleration: 5
   mDeceleration: 3
+  mReverseSpeed: 2
   mFuelText: {fileID: 2123472663}
   mFuelSlider: {fileID: 1541593777}
   mFuel:
@@ -9642,8 +9643,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 14.08
-  m_Speed: 15
-  m_Acceleration: 15
+  m_Speed: 10
+  m_Acceleration: 7
   avoidancePriority: 50
   m_AngularSpeed: 5
   m_StoppingDistance: 0
