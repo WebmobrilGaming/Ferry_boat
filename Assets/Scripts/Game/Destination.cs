@@ -30,9 +30,13 @@ public class Destination : MonoBehaviour
 
             if (dockBounds.Contains(boatBounds.min) && dockBounds.Contains(boatBounds.max))
             {
-                isReached = true;
-                DevDebug.Log("Boat fully inside dock!", DebugColor.Green);
-                Act.ReachedDestination?.Invoke();
+                var boatController = other.GetComponentInParent<BoatController>();
+                if (boatController != null && boatController.Speed == 0 && !boatController.IsEningeActive)
+                {
+                    isReached = true;
+                    DevDebug.Log("Boat fully inside dock!", DebugColor.Green);
+                    Act.ReachedDestination?.Invoke();
+                }
             }
         }
     }

@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class BoatController : MonoBehaviour,IHelem,IGear
+public class BoatController : MonoBehaviour, IHelem, IGear
 {
     [SerializeField] HelmController helmController;
     [SerializeField] Gear mGear;
@@ -17,7 +17,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [SerializeField] Material mIndicator;
 
     [Header("Settings:")]
-    [Range(0,1f)]
+    [Range(0, 1f)]
     [SerializeField] float rotationMultiplier = 0.3f;
 
     [Range(0, 100f)]
@@ -32,13 +32,14 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     [Header("Speed Settings:")]
     [Space]
     [SerializeField] float speedInKnots;
+    public float Speed => speedInKnots;
     [SerializeField] TMP_Text mSpeedKnots;
     private Vector3 mLastPosition;
 
     private float mCurrentSpeed;
     private float mPreviousSpeed;
 
-    [Range(0,10f)]
+    [Range(0, 10f)]
     [SerializeField] float mAcceleration = 2f;
 
     [Range(0, 10f)]
@@ -69,16 +70,16 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     private void LoadConfig()
     {
-        ferryConfig=ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
-        rotationMultiplier=ferryConfig.rotationMultiplier;
-        mSpeed=ferryConfig.shipSpeed;
-        mAcceleration=ferryConfig.acceleration;
-        mDeceleration=ferryConfig.deceleration;
-        mHealth=ferryConfig.health;
-        mdamage=ferryConfig.damage;
-        mFuel.accelerationSurcharge=ferryConfig.fuelConfig.accelerationSurge;
-        mFuel.baseConsumption=ferryConfig.fuelConfig.baseConsumption;
-        mFuel.maxFuel=ferryConfig.fuelConfig.fuelCapacity;
+        ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
+        rotationMultiplier = ferryConfig.rotationMultiplier;
+        mSpeed = ferryConfig.shipSpeed;
+        mAcceleration = ferryConfig.acceleration;
+        mDeceleration = ferryConfig.deceleration;
+        mHealth = ferryConfig.health;
+        mdamage = ferryConfig.damage;
+        mFuel.accelerationSurcharge = ferryConfig.fuelConfig.accelerationSurge;
+        mFuel.baseConsumption = ferryConfig.fuelConfig.baseConsumption;
+        mFuel.maxFuel = ferryConfig.fuelConfig.fuelCapacity;
     }
 
     private void OnEnable()
@@ -123,11 +124,11 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         mHealthSlider.DOValue(mHealth, 1.0f);
 
         mHealthText.transform.DOShakePosition(0.5f, strength: 20f, vibrato: 10)
-            .OnStart(()=> mHealthText.color = Color.red)
+            .OnStart(() => mHealthText.color = Color.red)
             .SetUpdate(true)
-            .OnComplete(()=> mHealthText.color = Color.white); 
+            .OnComplete(() => mHealthText.color = Color.white);
 
-        if (mHealth <=0)
+        if (mHealth <= 0)
         {
             Act.BoatDestroyedAction?.Invoke();
             return;
@@ -146,7 +147,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         mGear.Change(true);
         isHit = false;
     }
-     
+
 
     void GearAction()
     {
@@ -163,7 +164,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         isControl = true;
 
         float speed = mGear.Stat ? mSpeed : -1;
-        
+
         trottleSlider.maxValue = speed <= 0 ? 0 : speed;
 
         if (mGear.Stat)
@@ -196,7 +197,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame)
         {
-          //  Debug.Log("Released helm !!!");
+            //  Debug.Log("Released helm !!!");
             helmController.StopRotation();
         }
 
@@ -215,10 +216,10 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         mCurrentSpeed = isHit ? 0 : mCurrentSpeed;
 
         // Move using smoothed speed
-        var forward=transform.forward * mCurrentSpeed * Time.deltaTime;
-        var currentTransform=transform.position;
-        var target= new Vector3(currentTransform.x+forward.x,currentTransform.y,currentTransform.z+forward.z);
-        transform.position=target;
+        var forward = transform.forward * mCurrentSpeed * Time.deltaTime;
+        var currentTransform = transform.position;
+        var target = new Vector3(currentTransform.x + forward.x, currentTransform.y, currentTransform.z + forward.z);
+        transform.position = target;
 
         // Knots from actual displacement
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
@@ -255,7 +256,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         if (!mGear.Stat)
             return;
 
-        trottleSlider.DOValue(val,0.65f);  
+        trottleSlider.DOValue(val, 0.65f);
     }
 
     void UpdateFuelUI()
@@ -269,15 +270,15 @@ public class BoatController : MonoBehaviour,IHelem,IGear
         {
             mFuelText.text = "Low Fuel";
 
-            
-            Sequence sequence =  DOTween.Sequence();
+
+            Sequence sequence = DOTween.Sequence();
 
             sequence.Join(mFuelText.DOColor(Color.red, 0.2f))
                     .Append(mFuelText.DOColor(Color.white, 0.2f))
                     .SetLoops(-1);
         }
 
-        if(mFuel.FuelPercent < 0.1f)
+        if (mFuel.FuelPercent < 0.1f)
         {
             EngineStat(false);
         }
@@ -285,7 +286,7 @@ public class BoatController : MonoBehaviour,IHelem,IGear
 
     void EngineStat(bool enable)
     {
-        isEngineStarted=enable;
+        isEngineStarted = enable;
         if (!enable)
         {
             trottleSlider.DOValue(0, 0.65f);
@@ -311,7 +312,8 @@ public class BoatController : MonoBehaviour,IHelem,IGear
     private float currentRotation = 0f;
     private float lastHelmZ = 0f;
     private bool isFirstUpdate = true;
-    private bool isEngineStarted=false;
+    private bool isEngineStarted = false;
+    public bool IsEningeActive => isEngineStarted;
 
     public void Rotate(float zValue)
     {
