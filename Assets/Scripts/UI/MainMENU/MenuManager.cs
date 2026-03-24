@@ -4,6 +4,9 @@ using UnityEngine.UI;
 using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
+using TMPro;
+using DebugUtils;
+using FerryBoat;
 
 public class MenuManager : MonoBehaviour
 {
@@ -41,6 +44,18 @@ public class MenuManager : MonoBehaviour
     public GameObject settingsPanel;
     public Button settingsButton;
     public Button exitSettings;
+
+    [SerializeField] TMP_Text uName;
+
+    private void OnEnable()
+    {
+        Act.MainMenuAction += OnMainMenu;
+    }
+
+    private void OnDisable()
+    {
+        Act.MainMenuAction -= OnMainMenu;
+    }
 
     void Start()
     {
@@ -92,8 +107,18 @@ public class MenuManager : MonoBehaviour
 
             mainMenu.SetActive(true);
             mainMenu.transform.localScale = Vector3.zero;
-            mainMenu.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+            mainMenu.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                
+            });
         });
+    }
+
+    void OnMainMenu()
+    {
+        DevDebug.Log("Opening the main menu ", DebugColor.Silver);
+        if (PlayerPrefs.HasKey("username"))
+            uName.text = $" Username: {PlayerPrefs.GetString("username")}";
     }
 
     void ShowMainMenu()

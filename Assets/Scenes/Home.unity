@@ -10766,8 +10766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -12.2189, y: 1.9638}
+  m_SizeDelta: {x: 588.3862, y: 123.7498}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &686922188
 MonoBehaviour:
@@ -10789,7 +10789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: St.Clair Historical Museum and Research Center Presents
+  m_text: 'UserName: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10823,7 +10823,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -10855,7 +10855,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -254.06795, y: -49.86386, z: -251.69342, w: -52.238243}
+  m_margin: {x: -0.52581, y: 0.32095528, z: 0.5395584, w: -0.744194}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15530,11 +15530,15 @@ MonoBehaviour:
   tutorialButton: {fileID: 1524442060}
   helpButton: {fileID: 1370440333}
   difficultyExitButton: {fileID: 1616635310}
+  mEasyBtm: {fileID: 1604238208}
+  mMediumBtn: {fileID: 1188685864}
+  mHardBtn: {fileID: 1286875971}
   settingsContent: {fileID: 1423319949}
   difficultyPanel: {fileID: 260994365}
   helpPanel: {fileID: 0}
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
+  difficultyLevel: 0
 --- !u!1 &987189304
 GameObject:
   m_ObjectHideFlags: 0
@@ -21116,6 +21120,7 @@ MonoBehaviour:
   settingsPanel: {fileID: 981153622}
   settingsButton: {fileID: 1483494690}
   exitSettings: {fileID: 1561654589}
+  uName: {fileID: 686922188}
 --- !u!4 &1272846515
 Transform:
   m_ObjectHideFlags: 0

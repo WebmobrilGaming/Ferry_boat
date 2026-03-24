@@ -5,6 +5,7 @@ using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
 using static GF.UnityWebService;
+using FerryBoat;
 
 public class PlayerNameInput : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class PlayerNameInput : MonoBehaviour
 
     private UserDetails userData = null;
     private bool isNewUser = false;
+
+    private void OnEnable()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 
     private void Start()
     {
@@ -97,6 +103,8 @@ public class PlayerNameInput : MonoBehaviour
                     userData = data;
                     isNewUser = true;
 
+                    PlayerPrefs.SetString("username", userName);
+
                     OnStartGameClicked();
                 }
                 else
@@ -130,6 +138,9 @@ public class PlayerNameInput : MonoBehaviour
                     userData = data;
                     isNewUser = false;
                     Debug.Log("Login successful: " + userData);
+
+                    PlayerPrefs.SetString("username", username);
+
                     OnStartGameClicked();   // ← only proceed AFTER a successful login
                 }
                 else
@@ -161,7 +172,10 @@ public class PlayerNameInput : MonoBehaviour
             userPanel.SetActive(false);
             mainMenuPanel.SetActive(true);
             mainMenuPanel.transform.localScale = Vector3.zero;
-            mainMenuPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+            mainMenuPanel.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                Act.MainMenuAction();
+            });
         });
     }
 

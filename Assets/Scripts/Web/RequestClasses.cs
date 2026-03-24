@@ -78,6 +78,7 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string username { get; set; }
         public int score { get; set; }
     }
+
     public class LeaderboardResponse : Response
     {
         public bool success { get; set; }

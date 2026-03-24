@@ -1,6 +1,9 @@
+using DG.Tweening;
+using Newtonsoft.Json;
+using System;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -12,6 +15,11 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Button tutorialButton;
     [SerializeField] private Button helpButton;
     [SerializeField] private Button difficultyExitButton;
+
+    [Space]
+    [SerializeField] Button mEasyBtm;
+    [SerializeField] Button mMediumBtn;
+    [SerializeField] Button mHardBtn;
 
     [Header("Settings Content")]
     [SerializeField] private GameObject settingsContent;
@@ -29,7 +37,9 @@ public class SettingsManager : MonoBehaviour
     private bool vibrationOn = true;
     private bool tutorialOn = true;
 
-    private void Start()
+    [SerializeField]DifficultyLevel difficultyLevel;
+
+    private void OnEnable()
     {
         musicButton.onClick.AddListener(ToggleMusic);
         sfxButton.onClick.AddListener(ToggleSFX);
@@ -38,6 +48,76 @@ public class SettingsManager : MonoBehaviour
         tutorialButton.onClick.AddListener(ToggleTutorial);
         helpButton.onClick.AddListener(OpenHelpPanel);
         difficultyExitButton.onClick.AddListener(CloseDifficultyPanel);
+
+        mEasyBtm.onClick.AddListener(() =>
+        {
+            difficultyLevel = DifficultyLevel.easy;
+            SaveSettings();
+        });
+
+        mMediumBtn.onClick.AddListener(() =>
+        {
+            difficultyLevel = DifficultyLevel.medium;
+            SaveSettings();
+        });
+
+        mHardBtn.onClick.AddListener(() =>
+        {
+            difficultyLevel = DifficultyLevel.hard;
+            SaveSettings();
+        });
+
+        GetSettings();
+    }
+
+    private void OnDisable()
+    {
+        musicButton.onClick.RemoveListener(ToggleMusic);
+        sfxButton.onClick.RemoveListener(ToggleSFX);
+        vibrationButton.onClick.RemoveListener(ToggleVibration);
+        difficultyButton.onClick.RemoveListener(OpenDifficultyPanel);
+        tutorialButton.onClick.RemoveListener(ToggleTutorial);
+        helpButton.onClick.RemoveListener(OpenHelpPanel);
+        difficultyExitButton.onClick.RemoveListener(CloseDifficultyPanel);
+
+        mEasyBtm.onClick.RemoveListener(() =>
+        {
+            difficultyLevel = DifficultyLevel.easy;
+        });
+
+        mMediumBtn.onClick.RemoveListener(() =>
+        {
+            difficultyLevel = DifficultyLevel.medium;
+        });
+            
+        mHardBtn.onClick.RemoveListener(() =>
+        {
+            difficultyLevel = DifficultyLevel.hard;
+        });
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    void SaveSettings()
+    {
+        var data = new SettingsData { level = difficultyLevel};
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+        PlayerPrefs.SetString("Settings", json);
+    }
+
+    void GetSettings()
+    {
+        if (!PlayerPrefs.HasKey("Settings"))
+            return;
+
+        string json = PlayerPrefs.GetString("Settings");
+        var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
+
+        difficultyLevel = loaded.level;
     }
 
     private void ToggleMusic()
@@ -93,3 +173,11 @@ public class SettingsManager : MonoBehaviour
         helpPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
     }
 }
+
+[Serializable]
+public class SettingsData
+{
+    public DifficultyLevel level;
+}
+
+public enum DifficultyLevel {easy, medium,hard }
