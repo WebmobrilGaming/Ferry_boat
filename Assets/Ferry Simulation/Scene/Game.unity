@@ -1209,7 +1209,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  missedDockDelay: 3
 --- !u!4 &162557304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8597898229262586768, guid: f03e5acf59a75734d8deb3ee2e4d25ab, type: 3}
@@ -6457,7 +6456,7 @@ MonoBehaviour:
   mGear: {fileID: 8070560346857972517}
   mIndicator: {fileID: 2100000, guid: fd4116086e6362b408d2d4a095798afb, type: 2}
   rotationMultiplier: 0.02
-  mSpeed: 20
+  mSpeed: 60
   mBoatSpeed: 0
   isControl: 0
   speedInKnots: 0
@@ -6479,6 +6478,8 @@ MonoBehaviour:
   mHealthSlider: {fileID: 180628697}
   mHealthText: {fileID: 1366854945}
   ferryConfig: {fileID: 0}
+  difficultyLevel: 0
+  thresholdSpeed: 0
 --- !u!1 &1100542065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}

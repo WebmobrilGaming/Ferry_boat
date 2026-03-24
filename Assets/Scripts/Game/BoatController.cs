@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Ferry.Config;
 using FerryBoat;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using TMPro;
@@ -62,11 +63,32 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     public bool IsEningeActive => isEngineStarted;
     public bool IsInDock { get; set; }
     public bool IsEnterDock { get; set; }
+
+    [SerializeField] DifficultyLevel difficultyLevel;
+
+    [SerializeField] float thresholdSpeed;
+    
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
         LoadConfig();
         IsEnterDock = false;
+
+        if(!PlayerPrefs.HasKey("Settings"))
+         return;
+        
+        string json = PlayerPrefs.GetString("Settings");
+        var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
+
+        difficultyLevel = loaded.level;
+
+        thresholdSpeed = difficultyLevel switch
+        {
+           DifficultyLevel.easy =>   35.0f,
+           DifficultyLevel.medium => 25.0f,
+           DifficultyLevel.hard => 15.0f,
+           _=> 35.0f
+        };
     }
 
     private void LoadConfig()
@@ -226,7 +248,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         transform.position = target;
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
-        speedInKnots = actualSpeed * MPS_TO_KNOTS;
+        speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.03125f;
         mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} Knots";
 
         mLastPosition = transform.position;
@@ -249,6 +271,12 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mPreviousSpeed = mCurrentSpeed;
         UpdateFuelUI();
         #endregion
+    }
+
+
+    void ThresholdCheck()
+    {
+        //if(thresholdSpeed <= )
     }
 
     private void SpeedChange(float val)

@@ -16,9 +16,11 @@ public class Destination : MonoBehaviour
 
     private bool hasMissed = false; // prevents spam
 
+
     private void Awake()
     {
         dockCollider = GetComponent<Collider>();
+
     }
 
     private void OnTriggerEnter(Collider other)
