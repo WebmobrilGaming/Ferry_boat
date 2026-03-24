@@ -60,11 +60,13 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private bool isFirstUpdate = true;
     private bool isEngineStarted = false;
     public bool IsEningeActive => isEngineStarted;
-    public bool IsInDock{get;set;}
+    public bool IsInDock { get; set; }
+    public bool IsEnterDock { get; set; }
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
         LoadConfig();
+        IsEnterDock = false;
     }
 
     private void LoadConfig()
@@ -112,6 +114,11 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private void HitAction()
     {
         Debug.LogError("Hit !! ");
+
+        Act.BoatDestroyedAction?.Invoke();
+        mHealth = 0;
+        return;
+
 
         trottleSlider.DOValue(0, 0.65f);
         mIndicator.DisableKeyword("_EMISSION");
@@ -187,7 +194,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             helmController.Direct(HelmDirection.right);
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
             GearAction();
+            isEngineStarted = !isEngineStarted;
+        }
 
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame ||
             Keyboard.current.rightArrowKey.wasReleasedThisFrame)
@@ -271,8 +281,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     void EngineStat(bool enable)
     {
-        isEngineStarted = enable;
-
         if (!enable)
         {
             trottleSlider.DOValue(0, 0.65f);
