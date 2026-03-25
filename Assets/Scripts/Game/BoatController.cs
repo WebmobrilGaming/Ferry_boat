@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -35,9 +36,9 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private float mCurrentSpeed;
     private float mPreviousSpeed;
 
-    [Range(0, 10f)]
+    [Range(0, 100f)]
     [SerializeField] float mAcceleration = 2f;
-    [Range(0, 10f)]
+    [Range(0, 100f)]
     [SerializeField] float mDeceleration = 3f;
     [SerializeField] float mReverseSpeed = 2f;
 
@@ -67,28 +68,13 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] DifficultyLevel difficultyLevel;
 
     [SerializeField] float thresholdSpeed;
-    
+    bool mThresholdApplied;
+
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
         LoadConfig();
         IsEnterDock = false;
-
-        if(!PlayerPrefs.HasKey("Settings"))
-         return;
-        
-        string json = PlayerPrefs.GetString("Settings");
-        var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
-
-        difficultyLevel = loaded.level;
-
-        thresholdSpeed = difficultyLevel switch
-        {
-           DifficultyLevel.easy =>   35.0f,
-           DifficultyLevel.medium => 25.0f,
-           DifficultyLevel.hard => 15.0f,
-           _=> 35.0f
-        };
     }
 
     private void LoadConfig()
@@ -116,6 +102,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         isControl = false;
         isHit = false;
 
+        isEngineStarted = false;
+
         Act.SpeedChange += SpeedChange;
         Act.HitAction += HitAction;
 
@@ -123,6 +111,24 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mHealthSlider.value = mHealth;
 
         mIndicator.DisableKeyword("_EMISSION");
+
+        if (PlayerPrefs.HasKey("Settings"))
+        {
+            string json = PlayerPrefs.GetString("Settings");
+            var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
+
+            difficultyLevel = loaded.level;
+        }
+        else
+            difficultyLevel = DifficultyLevel.easy;
+
+        thresholdSpeed = difficultyLevel switch
+        {
+            DifficultyLevel.easy => 5.0f,
+            DifficultyLevel.medium => 4.0f,
+            DifficultyLevel.hard => 3.0f,
+            _ => 5.0f
+        };
     }
 
     private void OnDisable()
@@ -148,19 +154,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         isHit = true;
 
-        mHealth -= mdamage;
-        mHealthSlider.DOValue(mHealth, 1.0f);
-
-        mHealthText.transform.DOShakePosition(0.5f, strength: 20f, vibrato: 10)
-            .OnStart(() => mHealthText.color = Color.red)
-            .SetUpdate(true)
-            .OnComplete(() => mHealthText.color = Color.white);
-
-        if (mHealth <= 0)
-        {
-            Act.BoatDestroyedAction?.Invoke();
-            return;
-        }
 
         StartCoroutine(Recover());
     }
@@ -221,12 +214,16 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             isEngineStarted = !isEngineStarted;
         }
 
+     
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame ||
             Keyboard.current.rightArrowKey.wasReleasedThisFrame)
             helmController.StopRotation();
 
         bool isReversing = (Keyboard.current.sKey.isPressed ||
                             Keyboard.current.downArrowKey.isPressed) && mGear.Stat;
+
+        if (!mGear.Stat)
+            return;
 
         #region SPEED_HANDLING
         bool canMove = mGear.Stat && !mFuel.IsEmpty && !isHit;
@@ -248,10 +245,11 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         transform.position = target;
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
-        speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.03125f;
+        speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;
         mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} Knots";
 
         mLastPosition = transform.position;
+        ThresholdCheck();
         #endregion
 
         #region FUEL_HANDLING
@@ -276,7 +274,37 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     void ThresholdCheck()
     {
-        //if(thresholdSpeed <= )
+        int threshold =(int)thresholdSpeed;
+        int currentSpeed = (int)speedInKnots;
+
+        if (threshold > currentSpeed)
+        {
+            mThresholdApplied = false;
+            return;
+        }
+
+        if (trottleSlider.value <= 0)
+            return;
+
+        if (mThresholdApplied)
+            return;
+
+        mThresholdApplied = true;
+
+        float newHealth = mHealth - mdamage;
+
+        GamePopUp.Instance.PopStat("Deducting Coins", 5.0f);
+
+        //mHealthText.transform.DOShakePosition(0.5f, strength: 5f, vibrato: 2)
+        //    .OnStart(() => mHealthText.color = Color.red)
+        //    .SetUpdate(true)
+        //    .OnComplete(() => mHealthText.color = Color.white);
+
+        //if (mHealth <= 0)
+        //{
+        //    Act.BoatDestroyedAction?.Invoke();
+        //    return;
+        //}
     }
 
     private void SpeedChange(float val)

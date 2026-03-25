@@ -79,8 +79,14 @@ public class UserInterFace : MonoBehaviour
     {
         Time.timeScale = 0;
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
+
+        DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1; SceneManager.Instance.LoadScene(SceneType.Home); });
     }
 
+    public void ExitAction()
+    {
+        SceneManager.Instance.LoadScene(SceneType.Home);
+    }
 
     private void OnDestroy()
     {

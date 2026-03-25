@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Ferry
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Config.ShipConfig
   shipType: 1
-  acceleration: 5
-  deceleration: 3
+  acceleration: 25
+  deceleration: 8
   rotationMultiplier: 0.02
-  shipSpeed: 150
+  shipSpeed: 120
   limit: 17
-  health: 50
-  damage: 10
+  health: 100
+  damage: 5
   fuelConfig:
     fuelCapacity: 100
     idleConsumption: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,10 @@ public class GamePopUp : MonoBehaviour
     [SerializeField] GameObject panelFinal;
     [SerializeField] TMP_Text mFinalText;
 
+    [SerializeField] GameObject panelStat;
+    [SerializeField] TMP_Text mStatText;
+
+    bool isPanel = false;
     private void Awake()
     {
         if (instance == null)
@@ -21,5 +26,25 @@ public class GamePopUp : MonoBehaviour
     {
         panelFinal.SetActive(true);
         mFinalText.text = message;
+    }
+
+    public void PopStat(string message,float delay)
+    {
+        StartCoroutine(Pop(delay, message));
+    }
+
+    IEnumerator Pop(float delay ,string message)
+    {
+        yield return new WaitUntil(() => !isPanel);
+
+        isPanel = true;
+
+        panelStat.SetActive(true);
+        mStatText.text = message;
+
+        yield return new WaitForSeconds(delay);
+        panelStat.SetActive(false);
+
+        isPanel = false;
     }
 }
