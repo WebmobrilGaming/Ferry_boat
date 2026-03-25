@@ -293,7 +293,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         float newHealth = mHealth - mdamage;
 
-        GamePopUp.Instance.PopStat("Deducting Coins", 5.0f);
+        GamePopUp.Instance.PopStat("Deducting Coins", 3.0f);
 
         //mHealthText.transform.DOShakePosition(0.5f, strength: 5f, vibrato: 2)
         //    .OnStart(() => mHealthText.color = Color.red)

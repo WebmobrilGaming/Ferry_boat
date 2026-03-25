@@ -85,6 +85,7 @@ public class UserInterFace : MonoBehaviour
 
     public void ExitAction()
     {
+        Time.timeScale = 1;
         SceneManager.Instance.LoadScene(SceneType.Home);
     }
 

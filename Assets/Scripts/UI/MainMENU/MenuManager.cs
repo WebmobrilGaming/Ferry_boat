@@ -50,6 +50,8 @@ public class MenuManager : MonoBehaviour
     private void OnEnable()
     {
         Act.MainMenuAction += OnMainMenu;
+
+       ApplicationManager.Instance.Initialize();
     }
 
     private void OnDisable()
@@ -59,7 +61,6 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        ApplicationManager.Instance.Initialize();
         if (startGameButton)
             startGameButton.onClick.AddListener(OpenMainMenu);
 
