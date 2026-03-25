@@ -12,6 +12,7 @@ namespace GF
             DontDestroyWhenLoad = true;
             ApplyHighlighter(Utils.GetColorByHashString("#8819CE"), Color.white);
             base.Awake();
+            Initialize();
         }
         public void Initialize()
         {

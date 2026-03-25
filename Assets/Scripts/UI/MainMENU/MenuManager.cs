@@ -46,12 +46,14 @@ public class MenuManager : MonoBehaviour
     public Button exitSettings;
 
     [SerializeField] TMP_Text uName;
+    void Awake()
+    {
+        var instance=ApplicationManager.Instance;
+    }
 
     private void OnEnable()
     {
         Act.MainMenuAction += OnMainMenu;
-
-       ApplicationManager.Instance.Initialize();
     }
 
     private void OnDisable()
