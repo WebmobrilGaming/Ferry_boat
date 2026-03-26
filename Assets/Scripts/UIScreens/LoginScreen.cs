@@ -32,7 +32,7 @@ namespace Ferry.Screens
         {
             prevUserPanel.localScale = Vector3.zero;
             newUserPanel.localScale = Vector3.zero;
-            loginContentPanel.DOScale(1,0.5f).SetEase(Ease.OutBack);
+            loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
             newUserBtn.AddListener(null, CreateNewUser);
             prevUserBtn.AddListener(null, LogInPreviousUser);
             submitNewUserBtn.AddListener(null, SubmitNewUser);
@@ -76,6 +76,12 @@ namespace Ferry.Screens
             {
                 SwitchScreen(ScreenType.Home);
             }
+            else
+            {
+                string prevUsername = prevUsernameInput.text.Trim();
+                var request = new CreatePlayer("new", prevUsername,$"New player{UnityEngine.Random.Range(0,999)}",$"wos{UnityEngine.Random.Range(0,999)}");
+                APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
+            }
         }
 
         private void SubmitNewUser()
@@ -85,7 +91,15 @@ namespace Ferry.Screens
             string username = newUsernameInput.text.Trim();
             if (!ValidDetails(firstName, lastName, username)) return;
             var request = new CreatePlayer("new", username, firstName, lastName);
-            APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnLogin);
+            APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
+        }
+
+        private void OnReceivedNewUser(UserDetails details, Response response)
+        {
+            if (response.status)
+            {
+                SwitchScreen(ScreenType.Home);
+            }
         }
 
         private bool ValidDetails(string firstName, string lastName, string username)
