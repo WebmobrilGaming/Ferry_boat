@@ -46,7 +46,7 @@ namespace Ferry.Screens
 
         private void OpenSettings()
         {
-
+            SwitchScreen(ScreenType.Settings);
         }
 
         private IEnumerator AnimateButtons()

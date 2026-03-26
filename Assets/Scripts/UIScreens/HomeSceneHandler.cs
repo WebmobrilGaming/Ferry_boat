@@ -17,6 +17,7 @@ namespace Ferry.Screens
     {
         Login,
         Home,
-        Leaderboard
+        Leaderboard,
+        Settings
     }
 }
