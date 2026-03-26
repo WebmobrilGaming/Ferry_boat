@@ -1,12 +1,13 @@
-using DebugUtils;
 using DG.Tweening;
 using FerryBoat;
-using System;
+using GF;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UserInterFace : MonoBehaviour
 {
@@ -21,11 +22,17 @@ public class UserInterFace : MonoBehaviour
     public Transform Info;
     public TMP_Text InfoTxt;
     private Coroutine dockMissedRoutine;
-
+    public Button backBtn;
     private void Awake()
     {
         rangeMax = -1;
         scrollAction.performed += OnScroll;
+        backBtn.AddListener(null,GoHome);
+    }
+
+    private void GoHome()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void OnEnable()
@@ -80,13 +87,13 @@ public class UserInterFace : MonoBehaviour
         Time.timeScale = 0;
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
 
-        DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1; SceneManager.Instance.LoadScene(SceneType.Home); });
+        DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1;  });
     }
 
     public void ExitAction()
     {
         Time.timeScale = 1;
-        SceneManager.Instance.LoadScene(SceneType.Home);
+       
     }
 
     private void OnDestroy()
@@ -119,4 +126,5 @@ public class UserInterFace : MonoBehaviour
 
         Act.SpeedChange?.Invoke(mScrollRange);
     }
+    
 }

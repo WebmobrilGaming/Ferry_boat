@@ -19,16 +19,12 @@ namespace GF
         }
         protected virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                OnBackKeyPressed();
-            }
+            
         }
         protected void SwitchScreen(E screenId)
         {
             SceneHandler<E>.Instance.ChangeScreen(screenId);
         }
-        protected abstract void OnBackKeyPressed();
         protected virtual void OnDisable()
         {
             //EventManager.Instance.RemoveListener<UnLoadingCompletedEvent>(DoInitialLoading);

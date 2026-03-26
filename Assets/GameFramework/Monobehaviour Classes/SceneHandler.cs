@@ -9,8 +9,6 @@ namespace GF
     {
         [Header("UI canvas prefab")]
         [SerializeField]private string UIprefabPath;
-        [Header("LoadingScreen prefab path")]
-        [SerializeField]private string LoadingScreenPath;
         protected GameObject GUI = null;
         private readonly Dictionary<T, BaseScreen<T>> _screensDictionary = new Dictionary<T, BaseScreen<T>>();
         public T StartScreen;
