@@ -3039,7 +3039,7 @@ MonoBehaviour:
   speed: 10
   turnSpeed: 50
   StartDock: 8
-  EndDock: 3
+  EndDock: 6
 --- !u!65 &509344909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3193,14 +3193,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516075817}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 1357}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 511960288}
   m_Father: {fileID: 906066516}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &516075819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3215,8 +3215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
   speed: 10
   turnSpeed: 50
-  StartDock: 6
-  EndDock: 5
+  StartDock: 13
+  EndDock: 6
 --- !u!114 &516075821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3239,8 +3239,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 1479372276
   m_Radius: 14.08
-  m_Speed: 10
-  m_Acceleration: 7
+  m_Speed: 12
+  m_Acceleration: 9
   avoidancePriority: 50
   m_AngularSpeed: 5
   m_StoppingDistance: 0
@@ -3425,6 +3425,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &561160436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 561160437}
+  m_Layer: 0
+  m_Name: American_Dock_7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &561160437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561160436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -578, y: 30, z: -2344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 906066516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &573005192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4208,7 +4239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3319045656470108359, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 69.9
+      value: 69.8999
       objectReference: {fileID: 0}
     - target: {fileID: 3319045656470108359, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4464,7 +4495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8406476258742488450, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -15.598999
+      value: -15.599121
       objectReference: {fileID: 0}
     - target: {fileID: 8807814317989325822, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_text
@@ -5835,6 +5866,7 @@ Transform:
   - {fileID: 1607685148}
   - {fileID: 453793430}
   - {fileID: 879613795}
+  - {fileID: 561160437}
   - {fileID: 516075818}
   - {fileID: 1744141376}
   - {fileID: 192893126}
@@ -10310,8 +10342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
   speed: 10
   turnSpeed: 50
-  StartDock: 4
-  EndDock: 11
+  StartDock: 11
+  EndDock: 4
 --- !u!1001 &1753219988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10477,7 +10509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
   speed: 10
   turnSpeed: 50
-  StartDock: 8
+  StartDock: 4
   EndDock: 2
 --- !u!114 &1761937375
 MonoBehaviour:
@@ -14573,16 +14605,24 @@ PrefabInstance:
       value: American_Flag
       objectReference: {fileID: 0}
     - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -238.20001
+      value: -1131
       objectReference: {fileID: 0}
     - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.89005
+      value: 20.1
       objectReference: {fileID: 0}
     - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -123.16795
+      value: -1424
       objectReference: {fileID: 0}
     - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14610,6 +14650,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377345774667611585, guid: 11a57ec76de72f0428f3e56f7a8e552b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
