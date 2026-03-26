@@ -246,7 +246,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
         speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;
-        mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} Knots";
+        mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} Speed";
 
         mLastPosition = transform.position;
         ThresholdCheck();
