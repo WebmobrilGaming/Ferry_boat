@@ -40,7 +40,7 @@ namespace Ferry.Ship
 
         private void StartShip()
         {
-            if (difficultyLevel == DifficultyLevel.hard && shipType == ShipType.TankerShip)
+            if (difficultyLevel != DifficultyLevel.hard && shipType == ShipType.TankerShip)
                 return;
 
             StartCoroutine(RunShuttle());
