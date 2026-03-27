@@ -37,6 +37,10 @@ namespace Ferry.Config
 
         public ShipConfig GetShipConfig(ShipType shipType)
         {
+            if(shipMap==null || shipMap.Count == 0)
+            {
+                BuildMap();
+            }
             if(shipMap.TryGetValue(shipType,out ShipConfig shipConfig))
             {
                 return shipConfig;

@@ -18,14 +18,17 @@ MonoBehaviour:
     deceleration: 3
     angularSpeed: 0.01
     shipSpeed: 35
+    windSpeed: 10
   - acceleration: 5
     deceleration: 3
     angularSpeed: 0.01
     shipSpeed: 32
+    windSpeed: 12
   - acceleration: 5
     deceleration: 3
     angularSpeed: 0.01
     shipSpeed: 29
+    windSpeed: 14
   limit: 17
   health: 100
   damage: 5

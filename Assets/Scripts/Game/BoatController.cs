@@ -93,7 +93,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private bool isInitialized = false;
     private void Awake()
     {
-        ShipConfigController.Instance.BuildMap();
         LoadConfig();
         IsEnterDock = false;
     }

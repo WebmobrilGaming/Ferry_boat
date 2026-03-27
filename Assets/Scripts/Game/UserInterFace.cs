@@ -1,6 +1,8 @@
 using DG.Tweening;
+using Ferry.Config;
 using FerryBoat;
 using GF;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using TMPro;
@@ -24,6 +26,8 @@ public class UserInterFace : MonoBehaviour
     public TMP_Text InfoTxt;
     private Coroutine dockMissedRoutine;
     public Button backBtn;
+    public TMP_Text windTxt;
+    public TMP_Text levelTxt;
     private void Awake()
     {
         rangeMax = -1;
@@ -35,10 +39,23 @@ public class UserInterFace : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
+    private DifficultyLevel GetDifficultyLevel()
+    {
+        if (PlayerPrefs.HasKey("Settings"))
+        {
+            string json = PlayerPrefs.GetString("Settings");
+            var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
+            return loaded.level;
+        }
+        return DifficultyLevel.easy;
+    }
     private void OnEnable()
     {
         scrollAction.Enable();
+        var ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
+        int level = (int)GetDifficultyLevel();
+        windTxt.text = $"Wind : {ferryConfig.velocitiesLevels[level].windSpeed} / mph";
+        levelTxt.text = $"Level : {(DifficultyLevel)level}";
         Destination.OnFerryMissedDockEvent += OnFerryMissedDock;
         Destination.OnEnterDockEvent += OnEnterDock;
         BoatController.OnSpeedThresholdCrossedEvent += OnSpeedCrossed;

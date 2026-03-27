@@ -19,6 +19,7 @@ namespace Ferry.Config
         public float deceleration;
         public float angularSpeed;
         public float shipSpeed;
+        public float windSpeed;
     }
     [Serializable]
     public class FuelConfig
