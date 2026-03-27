@@ -4722,7 +4722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4021508830394278074, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 184.8066
+      value: 143.4243
       objectReference: {fileID: 0}
     - target: {fileID: 4021508830394278074, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5007,7 +5007,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5340040363467172052, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
     - {fileID: 4155970021057209362, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4180481710358517439, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6989272763745420544, guid: b3e368abce7190b42ba888bf99e201b6, type: 3}
       insertIndex: -1
@@ -11138,7 +11139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.5, y: -133.1}
+  m_AnchoredPosition: {x: 122.5, y: -103.4}
   m_SizeDelta: {x: 195.713, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671711342
