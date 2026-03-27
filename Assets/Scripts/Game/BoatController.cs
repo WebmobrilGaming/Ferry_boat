@@ -88,7 +88,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private Quaternion visualStartLocalRot;
     private float waveAmplitude;
     private float waveSpeed;
-
+    private const float MAX_BOAT_SPEED = 35f;
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
@@ -227,7 +227,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         float targetSpeed = 0f;
         if (canMove)
-            targetSpeed = isReversing ? -mReverseSpeed : mBoatSpeed;
+            targetSpeed = isReversing ? -mReverseSpeed : Mathf.Min(mBoatSpeed, MAX_BOAT_SPEED);
 
         float rate = canMove ? mAcceleration : mDeceleration;
 
@@ -266,8 +266,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mPreviousSpeed = mCurrentSpeed;
         UpdateFuelUI();
         #endregion
-
-        ApplyWaveMotion();
     }
 
     private void ApplyWaveMotion()
@@ -314,6 +312,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void SpeedChange(float val)
     {
+        mBoatSpeed = Mathf.Clamp(val, 0f, MAX_BOAT_SPEED);
         mBoatSpeed = val;
 
         if (!mGear.Stat)
@@ -333,7 +332,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     {
         isControl = true;
 
-        float speed = mGear.Stat ? mSpeed : -1;
+        float speed = mGear.Stat ? Mathf.Min(mSpeed, MAX_BOAT_SPEED) : -1f;
         trottleSlider.maxValue = speed <= 0 ? 0 : speed;
 
         if (mGear.Stat)
