@@ -7050,6 +7050,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1682856575}
   - {fileID: 7671748265835084297}
   m_Father: {fileID: 906066516}
   m_LocalEulerAnglesHint: {x: -1.897, y: 0, z: 0}
@@ -7068,6 +7069,15 @@ MonoBehaviour:
   helmController: {fileID: 241515637}
   mGear: {fileID: 8070560346857972517}
   mIndicator: {fileID: 2100000, guid: fd4116086e6362b408d2d4a095798afb, type: 2}
+  boatVisual: {fileID: 7671748265835084297}
+  easyWaveHeight: 0.03
+  mediumWaveHeight: 0.06
+  hardWaveHeight: 0.1
+  easyWaveSpeed: 0.8
+  mediumWaveSpeed: 1.2
+  hardWaveSpeed: 1.8
+  rollAmount: 1.5
+  pitchAmount: 1
   rotationMultiplier: 0.02
   mSpeed: 40
   mBoatSpeed: 0
@@ -10915,12 +10925,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682856571}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0027913009, y: 0.98676383, z: -0.1618758, w: 0.009259893}
-  m_LocalPosition: {x: 0.17000137, y: 0.5849997, z: -6.4900117}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.16167232, y: 0.026044281, z: -0.008580091, w: 0.9864634}
+  m_LocalPosition: {x: 1.47229, y: 15.825, z: 32.427734}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7671748265835084297}
+  m_Father: {fileID: 1099790238}
   m_LocalEulerAnglesHint: {x: 18.628, y: -181.16, z: -0.514}
 --- !u!114 &1682856576
 MonoBehaviour:
@@ -15562,7 +15572,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2570248438400431849}
-  - {fileID: 1682856575}
   - {fileID: 1596994133}
   - {fileID: 1978766784}
   - {fileID: 789742639}

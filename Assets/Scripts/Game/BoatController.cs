@@ -16,6 +16,19 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] Gear mGear;
     [SerializeField] Material mIndicator;
 
+    [Header("Boat Visual Bobbing")]
+    [SerializeField] Transform boatVisual;   // assign boat model/mesh child here
+    [SerializeField] float easyWaveHeight = 0.03f;
+    [SerializeField] float mediumWaveHeight = 0.06f;
+    [SerializeField] float hardWaveHeight = 0.10f;
+
+    [SerializeField] float easyWaveSpeed = 0.8f;
+    [SerializeField] float mediumWaveSpeed = 1.2f;
+    [SerializeField] float hardWaveSpeed = 1.8f;
+
+    [SerializeField] float rollAmount = 1.5f;
+    [SerializeField] float pitchAmount = 1.0f;
+
     [Header("Settings:")]
     [Range(0, 1f)]
     [SerializeField] float rotationMultiplier = 0.3f;
@@ -70,6 +83,12 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float thresholdSpeed;
     bool mThresholdApplied;
 
+    // wave bobbing cache
+    private Vector3 visualStartLocalPos;
+    private Quaternion visualStartLocalRot;
+    private float waveAmplitude;
+    private float waveSpeed;
+
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
@@ -101,7 +120,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         isControl = false;
         isHit = false;
-
         isEngineStarted = false;
 
         Act.SpeedChange += SpeedChange;
@@ -116,11 +134,12 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         {
             string json = PlayerPrefs.GetString("Settings");
             var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
-
             difficultyLevel = loaded.level;
         }
         else
+        {
             difficultyLevel = DifficultyLevel.easy;
+        }
 
         thresholdSpeed = difficultyLevel switch
         {
@@ -129,6 +148,42 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             DifficultyLevel.hard => 3.0f,
             _ => 5.0f
         };
+
+        SetWaveValues();
+
+        if (boatVisual != null)
+        {
+            visualStartLocalPos = boatVisual.localPosition;
+            visualStartLocalRot = boatVisual.localRotation;
+        }
+
+        mLastPosition = transform.position;
+    }
+
+    private void SetWaveValues()
+    {
+        switch (difficultyLevel)
+        {
+            case DifficultyLevel.easy:
+                waveAmplitude = easyWaveHeight;
+                waveSpeed = easyWaveSpeed;
+                break;
+
+            case DifficultyLevel.medium:
+                waveAmplitude = mediumWaveHeight;
+                waveSpeed = mediumWaveSpeed;
+                break;
+
+            case DifficultyLevel.hard:
+                waveAmplitude = hardWaveHeight;
+                waveSpeed = hardWaveSpeed;
+                break;
+
+            default:
+                waveAmplitude = easyWaveHeight;
+                waveSpeed = easyWaveSpeed;
+                break;
+        }
     }
 
     private void OnDisable()
@@ -137,64 +192,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         Act.HitAction -= HitAction;
 
         mIndicator.DisableKeyword("_EMISSION");
-    }
-
-    private void HitAction()
-    {
-        Debug.LogError("Hit !! ");
-
-        Act.BoatDestroyedAction?.Invoke();
-        mHealth = 0;
-        return;
-
-
-        trottleSlider.DOValue(0, 0.65f);
-        mIndicator.DisableKeyword("_EMISSION");
-        mGear.Change(false);
-
-        isHit = true;
-
-
-        StartCoroutine(Recover());
-    }
-
-    IEnumerator Recover()
-    {
-        yield return new WaitForSeconds(4.0f);
-
-        trottleSlider.DOValue(mBoatSpeed, 0.65f);
-        mIndicator.EnableKeyword("_EMISSION");
-
-        mGear.Change(true);
-        isHit = false;
-    }
-
-    void GearAction()
-    {
-        Debug.Log("GEAR CHANGE !!!");
-
-        isControl = false;
-        mGear.Change(!mGear.Stat);
-
-        Act.EnableScore(mGear.Stat);
-    }
-
-    public void GearChange()
-    {
-        isControl = true;
-
-        float speed = mGear.Stat ? mSpeed : -1;
-        trottleSlider.maxValue = speed <= 0 ? 0 : speed;
-
-        if (mGear.Stat)
-        {
-            trottleSlider.DOValue(mBoatSpeed, 0.65f);
-            mIndicator.EnableKeyword("_EMISSION");
-        }
-        else
-            mIndicator.DisableKeyword("_EMISSION");
-
-        Act.SpeedInit?.Invoke(speed);
     }
 
     private void Update()
@@ -214,7 +211,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             isEngineStarted = !isEngineStarted;
         }
 
-     
         if (Keyboard.current.leftArrowKey.wasReleasedThisFrame ||
             Keyboard.current.rightArrowKey.wasReleasedThisFrame)
             helmController.StopRotation();
@@ -269,12 +265,31 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mPreviousSpeed = mCurrentSpeed;
         UpdateFuelUI();
         #endregion
+
+        ApplyWaveMotion();
     }
 
+    private void ApplyWaveMotion()
+    {
+        if (boatVisual == null)
+            return;
+
+        float t = Time.time * waveSpeed;
+
+        // vertical bobbing
+        float bob = Mathf.Sin(t) * waveAmplitude;
+
+        // small roll/pitch so it feels like wave motion
+        float roll = Mathf.Sin(t * 1.3f) * rollAmount;
+        float pitch = Mathf.Cos(t * 1.1f) * pitchAmount;
+
+        boatVisual.localPosition = visualStartLocalPos + new Vector3(0f, bob, 0f);
+        boatVisual.localRotation = visualStartLocalRot * Quaternion.Euler(pitch, 0f, roll);
+    }
 
     void ThresholdCheck()
     {
-        int threshold =(int)thresholdSpeed;
+        int threshold = (int)thresholdSpeed;
         int currentSpeed = (int)speedInKnots;
 
         if (threshold > currentSpeed)
@@ -294,17 +309,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         float newHealth = mHealth - mdamage;
 
         GamePopUp.Instance.PopStat("Deducting Coins", 3.0f);
-
-        //mHealthText.transform.DOShakePosition(0.5f, strength: 5f, vibrato: 2)
-        //    .OnStart(() => mHealthText.color = Color.red)
-        //    .SetUpdate(true)
-        //    .OnComplete(() => mHealthText.color = Color.white);
-
-        //if (mHealth <= 0)
-        //{
-        //    Act.BoatDestroyedAction?.Invoke();
-        //    return;
-        //}
     }
 
     private void SpeedChange(float val)
@@ -315,6 +319,40 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             return;
 
         trottleSlider.DOValue(val, 0.65f);
+    }
+
+    void GearAction()
+    {
+        isControl = false;
+        mGear.Change(!mGear.Stat);
+        Act.EnableScore(mGear.Stat);
+    }
+
+    public void GearChange()
+    {
+        isControl = true;
+
+        float speed = mGear.Stat ? mSpeed : -1;
+        trottleSlider.maxValue = speed <= 0 ? 0 : speed;
+
+        if (mGear.Stat)
+        {
+            trottleSlider.DOValue(mBoatSpeed, 0.65f);
+            mIndicator.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            mIndicator.DisableKeyword("_EMISSION");
+        }
+
+        Act.SpeedInit?.Invoke(speed);
+    }
+
+    private void HitAction()
+    {
+        Debug.LogError("Hit !! ");
+        Act.BoatDestroyedAction?.Invoke();
+        mHealth = 0;
     }
 
     void UpdateFuelUI()
