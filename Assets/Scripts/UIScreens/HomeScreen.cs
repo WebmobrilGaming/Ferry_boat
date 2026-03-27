@@ -21,15 +21,24 @@ namespace Ferry.Screens
         public RectTransform LeaderboardRect;
         public RectTransform SettingsRect;
         public RectTransform CloseRect;
+        public Transform gameObjectivePanel;
+        public Button gameObjectiveCloseBtn;
         protected override void OnEnable()
         {
+            gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
             GameObjectivesBtn.AddListener(null, OpenGameObjective);
             FerryHistoryBtn.AddListener(null, OpenFerryHistory);
             LeaderboardBtn.AddListener(null, OpenLeaderboard);
             SettingsBtn.AddListener(null, OpenSettings);
             CloseBtn.AddListener(null, Logout);
+            gameObjectiveCloseBtn.AddListener(null,CloseObjectivePanel);
             StartCoroutine(AnimateButtons());
+        }
+
+        private void CloseObjectivePanel()
+        {
+            gameObjectivePanel.gameObject.SetActive(false);
         }
 
         private void Logout()
@@ -75,7 +84,7 @@ namespace Ferry.Screens
 
         private void OpenGameObjective()
         {
-
+            gameObjectivePanel.gameObject.SetActive(true);
         }
 
         private void StartGame()
