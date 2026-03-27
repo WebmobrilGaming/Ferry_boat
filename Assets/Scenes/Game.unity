@@ -3285,8 +3285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c959f3b917db6c04eb0cd5e6bdb694a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.AIController
-  StartDock: 8
-  EndDock: 6
+  StartDock: 9
+  EndDock: 13
   shipType: 3
   difficultyLevel: 0
   navMeshSampleDistance: 10
@@ -11051,7 +11051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.AIController
   StartDock: 4
-  EndDock: 2
+  EndDock: 3
   shipType: 3
   difficultyLevel: 0
   navMeshSampleDistance: 10
