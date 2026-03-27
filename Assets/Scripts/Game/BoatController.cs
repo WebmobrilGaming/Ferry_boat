@@ -88,7 +88,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private Quaternion visualStartLocalRot;
     private float waveAmplitude;
     private float waveSpeed;
-    private const float MAX_BOAT_SPEED = 35f;
+    public static event Action OnBoatStartEvent;
+    private bool isInitialized=false;
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
@@ -99,10 +100,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private void LoadConfig()
     {
         ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
-        rotationMultiplier = ferryConfig.rotationMultiplier;
-        mSpeed = ferryConfig.shipSpeed;
-        mAcceleration = ferryConfig.acceleration;
-        mDeceleration = ferryConfig.deceleration;
+        rotationMultiplier = ferryConfig.velocitiesLevels[(int)difficultyLevel].angularSpeed;
+        mSpeed = ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed;
+        mAcceleration = ferryConfig.velocitiesLevels[(int)difficultyLevel].acceleration;
+        mDeceleration = ferryConfig.velocitiesLevels[(int)difficultyLevel].deceleration;
         mHealth = ferryConfig.health;
         mdamage = ferryConfig.damage;
         mFuel.accelerationSurcharge = ferryConfig.fuelConfig.accelerationSurge;
@@ -208,6 +209,11 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
+            if (!isInitialized)
+            {
+                isInitialized=true;
+                OnBoatStartEvent?.Invoke();
+            }
             GearAction();
             isEngineStarted = !isEngineStarted;
         }
@@ -227,7 +233,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         float targetSpeed = 0f;
         if (canMove)
-            targetSpeed = isReversing ? -mReverseSpeed : Mathf.Min(mBoatSpeed, MAX_BOAT_SPEED);
+            targetSpeed = isReversing ? -mReverseSpeed : Mathf.Min(mBoatSpeed, ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed);
 
         float rate = canMove ? mAcceleration : mDeceleration;
 
@@ -312,7 +318,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void SpeedChange(float val)
     {
-        mBoatSpeed = Mathf.Clamp(val, 0f, MAX_BOAT_SPEED);
+        mBoatSpeed = Mathf.Clamp(val, 0f, ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed);
         mBoatSpeed = val;
 
         if (!mGear.Stat)
@@ -332,7 +338,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     {
         isControl = true;
 
-        float speed = mGear.Stat ? Mathf.Min(mSpeed, MAX_BOAT_SPEED) : -1f;
+        float speed = mGear.Stat ? Mathf.Min(mSpeed, ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed) : -1f;
         trottleSlider.maxValue = speed <= 0 ? 0 : speed;
 
         if (mGear.Stat)

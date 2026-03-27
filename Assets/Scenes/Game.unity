@@ -3200,7 +3200,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       propertyPath: m_Name
-      value: Ferry_1 (1)
+      value: Ferry2
       objectReference: {fileID: 0}
     - target: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       propertyPath: m_Layer
@@ -3261,9 +3261,6 @@ PrefabInstance:
       addedObject: {fileID: 509344909}
     - targetCorrespondingSourceObject: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 509344908}
-    - targetCorrespondingSourceObject: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 509344907}
   m_SourcePrefab: {fileID: 100100000, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
 --- !u!4 &509344905 stripped
@@ -3288,22 +3285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c959f3b917db6c04eb0cd5e6bdb694a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.AIController
---- !u!114 &509344908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509344906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1465b72620032674a80b1e3584742b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
-  speed: 10
-  turnSpeed: 50
   StartDock: 8
   EndDock: 6
+  shipType: 3
+  difficultyLevel: 0
+  navMeshSampleDistance: 10
 --- !u!65 &509344909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3333,7 +3319,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509344906}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 2.84
   m_Speed: 35
   m_Acceleration: 25
@@ -3441,7 +3427,6 @@ GameObject:
   - component: {fileID: 516075818}
   - component: {fileID: 516075822}
   - component: {fileID: 516075821}
-  - component: {fileID: 516075819}
   m_Layer: 0
   m_Name: ContainerShip_1
   m_TagString: Untagged
@@ -3466,22 +3451,6 @@ Transform:
   - {fileID: 511960288}
   m_Father: {fileID: 906066516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &516075819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516075817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1465b72620032674a80b1e3584742b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
-  speed: 10
-  turnSpeed: 50
-  StartDock: 13
-  EndDock: 6
 --- !u!114 &516075821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3494,6 +3463,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c959f3b917db6c04eb0cd5e6bdb694a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.AIController
+  StartDock: 13
+  EndDock: 6
+  shipType: 4
+  difficultyLevel: 0
+  navMeshSampleDistance: 10
 --- !u!195 &516075822
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3502,7 +3476,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516075817}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 14.08
   m_Speed: 30
   m_Acceleration: 20
@@ -10427,135 +10401,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 906066516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1626037081
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1626037085}
-  - component: {fileID: 1626037084}
-  - component: {fileID: 1626037083}
-  - component: {fileID: 1626037082}
-  - component: {fileID: 1626037086}
-  m_Layer: 6
-  m_Name: Canvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1626037082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626037081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &1626037083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626037081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!223 &1626037084
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626037081}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!224 &1626037085
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626037081}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!54 &1626037086
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626037081}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1635438893
 GameObject:
   m_ObjectHideFlags: 0
@@ -10977,11 +10822,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1744141376}
-  - component: {fileID: 1744141379}
   - component: {fileID: 1744141378}
   - component: {fileID: 1744141377}
   m_Layer: 0
-  m_Name: Ramp
+  m_Name: Tanker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11016,6 +10860,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c959f3b917db6c04eb0cd5e6bdb694a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.AIController
+  StartDock: 11
+  EndDock: 4
+  shipType: 5
+  difficultyLevel: 0
+  navMeshSampleDistance: 10
 --- !u!195 &1744141378
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11024,7 +10873,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744141375}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 14.08
   m_Speed: 30
   m_Acceleration: 20
@@ -11038,22 +10887,6 @@ NavMeshAgent:
   m_BaseOffset: -29.11
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1744141379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744141375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1465b72620032674a80b1e3584742b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
-  speed: 10
-  turnSpeed: 50
-  StartDock: 11
-  EndDock: 4
 --- !u!1001 &1753219988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11191,7 +11024,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761937363}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 2.84
   m_Speed: 35
   m_Acceleration: 25
@@ -11205,22 +11038,6 @@ NavMeshAgent:
   m_BaseOffset: 1.02
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1761937374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761937363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1465b72620032674a80b1e3584742b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.ShipMotor
-  speed: 10
-  turnSpeed: 50
-  StartDock: 4
-  EndDock: 2
 --- !u!114 &1761937375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11233,6 +11050,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c959f3b917db6c04eb0cd5e6bdb694a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Ship.AIController
+  StartDock: 4
+  EndDock: 2
+  shipType: 3
+  difficultyLevel: 0
+  navMeshSampleDistance: 10
 --- !u!1 &1762178708 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2369879940812953619, guid: 9c3b03da3451d7e40ba4f4ae47919f7c, type: 3}
@@ -15013,7 +14835,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       propertyPath: m_Name
-      value: Ferry_1
+      value: Ferry1
       objectReference: {fileID: 0}
     - target: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       propertyPath: m_Layer
@@ -15072,9 +14894,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1761937372}
-    - targetCorrespondingSourceObject: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1761937374}
     - targetCorrespondingSourceObject: {fileID: 2666323999237955795, guid: fd0b9cba5bbf66e4d8574f7458dbefd5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1761937375}
@@ -15285,7 +15104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8597898229262586768, guid: f03e5acf59a75734d8deb3ee2e4d25ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.017
+      value: -0.0176
       objectReference: {fileID: 0}
     - target: {fileID: 8597898229262586768, guid: f03e5acf59a75734d8deb3ee2e4d25ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15762,7 +15581,6 @@ SceneRoots:
   - {fileID: 906066516}
   - {fileID: 1442855175}
   - {fileID: 81591405}
-  - {fileID: 1626037085}
   - {fileID: 3830484}
   - {fileID: 579829828}
   - {fileID: 686914662}

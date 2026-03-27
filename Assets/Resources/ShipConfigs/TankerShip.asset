@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd9f435cd7d304143b470c72f5f9c4e8, type: 3}
-  m_Name: Ferry
+  m_Name: TankerShip
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Config.ShipConfig
-  shipType: 1
+  shipType: 5
   velocitiesLevels:
-  - acceleration: 5
-    deceleration: 3
-    angularSpeed: 0.01
-    shipSpeed: 25
-  - acceleration: 5
-    deceleration: 3
-    angularSpeed: 0.01
+  - acceleration: 30
+    deceleration: 20
+    angularSpeed: 10
     shipSpeed: 30
-  - acceleration: 5
-    deceleration: 3
-    angularSpeed: 0.01
-    shipSpeed: 35
-  limit: 17
+  - acceleration: 22
+    deceleration: 15
+    angularSpeed: 8
+    shipSpeed: 22
+  - acceleration: 14
+    deceleration: 10
+    angularSpeed: 6
+    shipSpeed: 14
+  limit: 0
   health: 100
-  damage: 5
+  damage: 20
   fuelConfig:
-    fuelCapacity: 100
-    idleConsumption: 0
-    baseConsumption: 0.01
-    accelerationSurge: 0.2
+    fuelCapacity: 500
+    idleConsumption: 0.01
+    baseConsumption: 0.02
+    accelerationSurge: 0.05

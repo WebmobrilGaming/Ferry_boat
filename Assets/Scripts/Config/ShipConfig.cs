@@ -2,18 +2,23 @@ using System;
 using UnityEngine;
 namespace Ferry.Config
 {
-    [CreateAssetMenu(fileName ="ShipConfig", menuName ="Config/ShipConfig")]
+    [CreateAssetMenu(fileName = "ShipConfig", menuName = "Config/ShipConfig")]
     public class ShipConfig : ScriptableObject
     {
         public ShipType shipType;
-        public float acceleration;
-        public float deceleration;
-        public float rotationMultiplier;
-        public float shipSpeed;
+        public Velocity[] velocitiesLevels;
         public float limit;
         public float health;
         public float damage;
         public FuelConfig fuelConfig;
+    }
+    [Serializable]
+    public class Velocity
+    {
+        public float acceleration;
+        public float deceleration;
+        public float angularSpeed;
+        public float shipSpeed;
     }
     [Serializable]
     public class FuelConfig

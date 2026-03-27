@@ -1,57 +1,133 @@
 using System.Collections;
 using Ferry.Config;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AI;
+
 namespace Ferry.Ship
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class AIController : MonoBehaviour, IShipController
+    public class AIController : MonoBehaviour
     {
+        public DockSet StartDock;
+        public DockSet EndDock;
+        public ShipType shipType;
+        public DifficultyLevel difficultyLevel;
+
         private NavMeshAgent agent;
-        private Vector3 SourcePos;
-        private Vector3 DestinationPos;
-        private bool isMoving = false;
-        public IEnumerator SetDestination(DockSet StartDock, DockSet EndDock)
+        private ShipConfig shipConfig;
+
+        private Vector3 sourcePos;
+        private Vector3 destinationPos;
+
+        [SerializeField] private float navMeshSampleDistance = 10f;
+
+        private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
-
-            // Disable agent before moving, so it doesn't fight your position set
-            agent.enabled = false;
-
-            SourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
-            transform.position = SourcePos;
-
-            // Re-enable after position is set — agent will warp to current position
-            yield return new WaitForSeconds(1);
-
-            DestinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
-            yield return MoveAgent();
+            difficultyLevel = GetDifficultyLevel();
         }
-        private IEnumerator MoveAgent()
+
+        private void OnEnable()
         {
+            BoatController.OnBoatStartEvent += StartShip;
+        }
+
+        private void OnDisable()
+        {
+            BoatController.OnBoatStartEvent -= StartShip;
+        }
+
+        private void StartShip()
+        {
+            if (difficultyLevel == DifficultyLevel.hard && shipType == ShipType.TankerShip)
+                return;
+
+            StartCoroutine(RunShuttle());
+        }
+
+        private IEnumerator RunShuttle()
+        {
+            // Load config
+            shipConfig = ShipConfigController.Instance.GetShipConfig(shipType);
+
+            agent.speed = shipConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed;
+            agent.angularSpeed = shipConfig.velocitiesLevels[(int)difficultyLevel].angularSpeed;
+            agent.acceleration = shipConfig.velocitiesLevels[(int)difficultyLevel].acceleration;
+
+            // Get dock positions
+            sourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
+            destinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
+
+            // Snap to valid NavMesh position
+            Vector3 startPoint = GetNearestNavMeshPoint(sourcePos);
+            if (startPoint == Vector3.zero)
+            {
+                Debug.LogError($"[{shipType}] Invalid start position on NavMesh");
+                yield break;
+            }
+
+            agent.Warp(startPoint);
+
+            yield return new WaitForSeconds(0.5f);
+
             while (true)
             {
-                agent.enabled = true;
-                agent.SetDestination(DestinationPos);
+                Vector3 targetPoint = GetNearestNavMeshPoint(destinationPos);
 
-                yield return new WaitUntil(() => !agent.pathPending &&
-                                                 agent.remainingDistance <= agent.stoppingDistance);
+                if (targetPoint == Vector3.zero)
+                {
+                    Debug.LogError($"[{shipType}] Invalid destination on NavMesh");
+                    yield break;
+                }
 
-                agent.enabled = false;
-                SwapAndReturn();
+                if (!agent.isOnNavMesh)
+                {
+                    Debug.LogError($"[{shipType}] Agent is not on NavMesh");
+                    yield break;
+                }
 
-                yield return new WaitForSeconds(1f); // pause at dock before returning
+                agent.SetDestination(targetPoint);
+
+                // Wait until reached
+                yield return new WaitUntil(() =>
+                    !agent.pathPending &&
+                    agent.remainingDistance <= agent.stoppingDistance);
+
+                agent.ResetPath();
+
+                // Swap docks
+                (sourcePos, destinationPos) = (destinationPos, sourcePos);
+
+                yield return new WaitForSeconds(1f);
             }
         }
-        void FixedUpdate()
+
+        private Vector3 GetNearestNavMeshPoint(Vector3 target)
         {
-            if (!agent.enabled) return;
-            Debug.DrawRay(transform.position, agent.velocity, Color.red);
+            if (NavMesh.SamplePosition(target, out NavMeshHit hit, navMeshSampleDistance, NavMesh.AllAreas))
+                return hit.position;
+
+            return Vector3.zero;
         }
-        private void SwapAndReturn()
+
+        private DifficultyLevel GetDifficultyLevel()
         {
-            // Swap source and destination
-            (SourcePos, DestinationPos) = (DestinationPos, SourcePos);
+            if (PlayerPrefs.HasKey("Settings"))
+            {
+                string json = PlayerPrefs.GetString("Settings");
+                var loaded = JsonConvert.DeserializeObject<SettingsData>(json);
+                return loaded.level;
+            }
+            return DifficultyLevel.easy;
+        }
+
+        private void FixedUpdate()
+        {
+            if (agent != null && agent.isOnNavMesh)
+            {
+                Debug.DrawRay(transform.position, agent.velocity, Color.red);
+            }
         }
     }
 }
