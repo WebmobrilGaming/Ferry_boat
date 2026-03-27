@@ -9,9 +9,9 @@ namespace Ferry.Screens
     public class SettingsScreen : BaseScreen<ScreenType>
     {
         [Header("Buttons")]
-        [SerializeField] private Button musicButton;
-        [SerializeField] private Button sfxButton;
-        [SerializeField] private Button vibrationButton;
+        [SerializeField] private ToggleBtn musicToggle;
+        [SerializeField] private ToggleBtn sfxToggle;
+        [SerializeField] private ToggleBtn vibrationToggle;
         [SerializeField] private Button difficultyButton;
         [SerializeField] private Button tutorialButton;
         [SerializeField] private Button helpButton;
@@ -21,21 +21,9 @@ namespace Ferry.Screens
         [SerializeField] Button mEasyBtm;
         [SerializeField] Button mMediumBtn;
         [SerializeField] Button mHardBtn;
-
-        [Header("Settings Content")]
-        [SerializeField] private GameObject settingsContent;
-
         [Header("Panels")]
         [SerializeField] private GameObject difficultyPanel;
         [SerializeField] private GameObject helpPanel;
-
-        [Header("Audio")]
-        [SerializeField] private AudioSource musicSource;
-        [SerializeField] private AudioSource sfxSource;
-
-        private bool musicOn = true;
-        private bool sfxOn = true;
-        private bool vibrationOn = true;
         private bool tutorialOn = true;
         public Button backBtn;
         [SerializeField] DifficultyLevel difficultyLevel;
@@ -43,9 +31,9 @@ namespace Ferry.Screens
         protected override void OnEnable()
         {
             backBtn.onClick.AddListener(Close);
-            musicButton.onClick.AddListener(ToggleMusic);
-            sfxButton.onClick.AddListener(ToggleSFX);
-            vibrationButton.onClick.AddListener(ToggleVibration);
+            musicToggle.AddListener(ToggleMusic);
+            sfxToggle.AddListener(ToggleSFX);
+            vibrationToggle.AddListener(ToggleVibration);
             difficultyButton.onClick.AddListener(OpenDifficultyPanel);
             tutorialButton.onClick.AddListener(ToggleTutorial);
             helpButton.onClick.AddListener(OpenHelpPanel);
@@ -53,19 +41,28 @@ namespace Ferry.Screens
             mEasyBtm.onClick.AddListener(() =>
             {
                 difficultyLevel = DifficultyLevel.easy;
-                SaveSettings();
+                var setting = GetSettingsData();
+                setting.level = difficultyLevel;
+                SaveSettings(setting);
+                difficultyPanel.SetActive(false);
             });
 
             mMediumBtn.onClick.AddListener(() =>
             {
                 difficultyLevel = DifficultyLevel.medium;
-                SaveSettings();
+                var setting = GetSettingsData();
+                setting.level = difficultyLevel;
+                SaveSettings(setting);
+                difficultyPanel.SetActive(false);
             });
 
             mHardBtn.onClick.AddListener(() =>
             {
                 difficultyLevel = DifficultyLevel.hard;
-                SaveSettings();
+                var setting = GetSettingsData();
+                setting.level = difficultyLevel;
+                SaveSettings(setting);
+                difficultyPanel.SetActive(false);
             });
 
             GetSettings();
@@ -73,15 +70,15 @@ namespace Ferry.Screens
 
         private void Close()
         {
-           SwitchScreen(ScreenType.Home);
+            SwitchScreen(ScreenType.Home);
         }
 
         protected override void OnDisable()
         {
             backBtn.onClick.RemoveListener(Close);
-            musicButton.onClick.RemoveListener(ToggleMusic);
-            sfxButton.onClick.RemoveListener(ToggleSFX);
-            vibrationButton.onClick.RemoveListener(ToggleVibration);
+            musicToggle.RemoveListener();
+            sfxToggle.RemoveListener();
+            vibrationToggle.RemoveListener();
             difficultyButton.onClick.RemoveListener(OpenDifficultyPanel);
             tutorialButton.onClick.RemoveListener(ToggleTutorial);
             helpButton.onClick.RemoveListener(OpenHelpPanel);
@@ -108,10 +105,9 @@ namespace Ferry.Screens
 
         }
 
-        void SaveSettings()
+        void SaveSettings(SettingsData settingsData)
         {
-            var data = new SettingsData { level = difficultyLevel };
-            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(settingsData, Formatting.Indented);
 
             PlayerPrefs.SetString("Settings", json);
         }
@@ -127,34 +123,45 @@ namespace Ferry.Screens
             difficultyLevel = loaded.level;
         }
 
-        private void ToggleMusic()
+        SettingsData GetSettingsData()
         {
-            musicOn = !musicOn;
-            musicSource.volume = musicOn ? 1 : 0;
+            if (!PlayerPrefs.HasKey("Settings"))
+                return new SettingsData();
+
+            string json = PlayerPrefs.GetString("Settings");
+            return JsonConvert.DeserializeObject<SettingsData>(json);
+        }
+        private void ToggleMusic(bool isOn)
+        {
+            var setting = GetSettingsData();
+            setting.musicOn = isOn;
+            SaveSettings(setting);
         }
 
-        private void ToggleSFX()
+        private void ToggleSFX(bool isOn)
         {
-            sfxOn = !sfxOn;
-            sfxSource.volume = sfxOn ? 1 : 0;
+            var setting = GetSettingsData();
+            setting.sfxOn=isOn;
+            SaveSettings(setting);
         }
 
-        private void ToggleVibration()
+        private void ToggleVibration(bool isOn)
         {
-            vibrationOn = !vibrationOn;
-            Debug.Log("Vibration: " + vibrationOn);
+            var setting=GetSettingsData();
+            setting.vibrationOn=isOn;
+            SaveSettings(setting);
         }
 
         private void ToggleTutorial()
         {
             tutorialOn = !tutorialOn;
-            Debug.Log("Tutorial: " + tutorialOn);
+            var setting=GetSettingsData();
+            setting.tutorialOn=tutorialOn;
+            SaveSettings(setting);
         }
 
         private void OpenDifficultyPanel()
         {
-            settingsContent.SetActive(false);
-
             difficultyPanel.SetActive(true);
             difficultyPanel.transform.localScale = Vector3.zero;
             difficultyPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
@@ -165,10 +172,6 @@ namespace Ferry.Screens
             difficultyPanel.transform.DOScale(0f, 0.2f).OnComplete(() =>
             {
                 difficultyPanel.SetActive(false);
-                settingsContent.SetActive(true);
-
-                settingsContent.transform.localScale = Vector3.zero;
-                settingsContent.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
             });
         }
 
@@ -183,6 +186,10 @@ namespace Ferry.Screens
     [Serializable]
     public class SettingsData
     {
+        public bool musicOn;
+        public bool sfxOn;
+        public bool vibrationOn;
+        public bool tutorialOn;
         public DifficultyLevel level;
     }
 
