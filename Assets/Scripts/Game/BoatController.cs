@@ -89,7 +89,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private float waveAmplitude;
     private float waveSpeed;
     public static event Action OnBoatStartEvent;
-    private bool isInitialized=false;
+    public static event Action<float> OnSpeedThresholdCrossedEvent;
+    private bool isInitialized = false;
     private void Awake()
     {
         ShipConfigController.Instance.BuildMap();
@@ -211,7 +212,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         {
             if (!isInitialized)
             {
-                isInitialized=true;
+                isInitialized = true;
                 OnBoatStartEvent?.Invoke();
             }
             GearAction();
@@ -313,7 +314,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         float newHealth = mHealth - mdamage;
 
-        GamePopUp.Instance.PopStat("Deducting Coins", 3.0f);
+        OnSpeedThresholdCrossedEvent?.Invoke(thresholdSpeed);
     }
 
     private void SpeedChange(float val)

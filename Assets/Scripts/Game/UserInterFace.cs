@@ -1,6 +1,7 @@
 using DG.Tweening;
 using FerryBoat;
 using GF;
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -19,7 +20,7 @@ public class UserInterFace : MonoBehaviour
     float rangeMin = 0f;
     float rangeMax = 10f;
     [SerializeField] float sensitivity = 1f;
-    public Transform Info;
+    public CanvasGroup Info;
     public TMP_Text InfoTxt;
     private Coroutine dockMissedRoutine;
     public Button backBtn;
@@ -27,7 +28,7 @@ public class UserInterFace : MonoBehaviour
     {
         rangeMax = -1;
         scrollAction.performed += OnScroll;
-        backBtn.AddListener(null,GoHome);
+        backBtn.AddListener(null, GoHome);
     }
 
     private void GoHome()
@@ -40,14 +41,26 @@ public class UserInterFace : MonoBehaviour
         scrollAction.Enable();
         Destination.OnFerryMissedDockEvent += OnFerryMissedDock;
         Destination.OnEnterDockEvent += OnEnterDock;
+        BoatController.OnSpeedThresholdCrossedEvent += OnSpeedCrossed;
         Act.SpeedInit += SetRange;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += BoatDestroyed;
     }
 
+    private void OnSpeedCrossed(float speed)
+    {
+        InfoTxt.text = $"You are crossing speed limit, It will deduct your points..! Keep it under {speed}/mph";
+        if (dockMissedRoutine != null)
+        {
+            StopCoroutine(dockMissedRoutine);
+            dockMissedRoutine = null;
+        }
+        dockMissedRoutine = StartCoroutine(ShowMissedDock());
+    }
+
     private void OnEnterDock()
     {
-        InfoTxt.text="You entered in the dock area";
+        InfoTxt.text = "You entered in the dock area";
         if (dockMissedRoutine != null)
         {
             StopCoroutine(dockMissedRoutine);
@@ -58,7 +71,7 @@ public class UserInterFace : MonoBehaviour
 
     private void OnFerryMissedDock()
     {
-        InfoTxt.text="You missed the dock";
+        InfoTxt.text = "You missed the dock";
         if (dockMissedRoutine != null)
         {
             StopCoroutine(dockMissedRoutine);
@@ -68,9 +81,9 @@ public class UserInterFace : MonoBehaviour
     }
     private IEnumerator ShowMissedDock()
     {
-        Info.DOScale(1, 0.5f).SetEase(Ease.OutBounce);
-        yield return new WaitForSeconds(2f);
-        Info.DOScale(0, 0.5f).SetEase(Ease.InBounce);
+        Info.DOFade(1, 1f);
+        yield return new WaitForSeconds(5f);
+        Info.DOFade(0, 1f).SetEase(Ease.InBounce);
     }
     private void OnDisable()
     {
@@ -79,6 +92,7 @@ public class UserInterFace : MonoBehaviour
         Act.SpeedInit -= SetRange;
         Destination.OnEnterDockEvent -= OnEnterDock;
         Destination.OnFerryMissedDockEvent -= OnFerryMissedDock;
+        BoatController.OnSpeedThresholdCrossedEvent -= OnSpeedCrossed;
         Act.ReachedDestination -= LevelFinish;
     }
 
@@ -87,13 +101,13 @@ public class UserInterFace : MonoBehaviour
         Time.timeScale = 0;
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
 
-        DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1;  });
+        DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1; });
     }
 
     public void ExitAction()
     {
         Time.timeScale = 1;
-       
+
     }
 
     private void OnDestroy()
@@ -126,5 +140,5 @@ public class UserInterFace : MonoBehaviour
 
         Act.SpeedChange?.Invoke(mScrollRange);
     }
-    
+
 }
