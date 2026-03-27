@@ -140,7 +140,7 @@ public class MenuManager : MonoBehaviour
     void OpenStartSimulation()
     {
         //mainMenu.SetActive(false);
-        SceneManager.Instance.LoadScene(SceneType.Game);
+      
 
         //startSimulationPanel.SetActive(true);
         // startSimulationPanel.transform.localScale = Vector3.zero;

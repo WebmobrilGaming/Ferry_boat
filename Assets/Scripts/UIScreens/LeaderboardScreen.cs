@@ -1,22 +1,25 @@
 using System;
 using System.Collections.Generic;
+using Ferry.Screens;
 using Ferry_boat.Assets.Scripts.Web;
 using GF;
 using PolyAndCode.UI;
-using UnityEngine;
-using static GF.UnityWebService;
+using UnityEngine.UI;
 
-public class LeaderboardScreen : MonoBehaviour, IRecyclableScrollRectDataSource
+public class LeaderboardScreen : BaseScreen<ScreenType>, IRecyclableScrollRectDataSource
 {
     public RecyclableScrollRect recyclableScrollRect;
     public List<PlayerData> leaderboardList;
-    void Awake()
+    public Button backBtn;
+    protected override void OnEnable()
     {
-
-    }
-    void OnEnable()
-    {
+        backBtn.AddListener(null,Close);
         APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard, null),OnRecieveLeaderboard);
+    }
+
+    private void Close()
+    {
+        SwitchScreen(ScreenType.Home);
     }
 
     private void OnRecieveLeaderboard(LeaderboardResponse data, Response response)
@@ -58,8 +61,8 @@ public class LeaderboardScreen : MonoBehaviour, IRecyclableScrollRectDataSource
         LeaderboardCell leaderboardCell = cell as LeaderboardCell;
         leaderboardCell.Initialize(leaderboardList[index]);
     }
-    void OnDisable()
+    protected override void OnDisable()
     {
-
+        backBtn.RemoveListener();
     }
 }

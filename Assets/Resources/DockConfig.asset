@@ -20,24 +20,24 @@ MonoBehaviour:
   - dockSet: 2
     dockPosition: {x: -538.6, y: 30, z: 310.9}
   - dockSet: 3
-    dockPosition: {x: -1045, y: 30, z: -935}
+    dockPosition: {x: -1498, y: 30, z: 217}
   - dockSet: 4
-    dockPosition: {x: -989, y: 30, z: -2074}
+    dockPosition: {x: -989, y: 30, z: -2996}
   - dockSet: 5
-    dockPosition: {x: -610, y: 30, z: -1985}
+    dockPosition: {x: -2425, y: 30, z: -3275}
   - dockSet: 6
     dockPosition: {x: -135, y: 30, z: 523}
   - dockSet: 7
     dockPosition: {x: 228, y: 30, z: -3364}
   - dockSet: 8
-    dockPosition: {x: -195.9, y: 30, z: -1915.7}
+    dockPosition: {x: 955, y: 30, z: -1179}
   - dockSet: 9
-    dockPosition: {x: 281, y: 30, z: -549}
+    dockPosition: {x: 887, y: 30, z: 61}
   - dockSet: 10
-    dockPosition: {x: 1150, y: 30, z: 769}
+    dockPosition: {x: 762, y: 30, z: 796}
   - dockSet: 11
-    dockPosition: {x: 322, y: 30, z: 152}
+    dockPosition: {x: 860, y: 30, z: 1252}
   - dockSet: 12
-    dockPosition: {x: 1528, y: 30, z: -2739}
+    dockPosition: {x: -176, y: 30, z: -3207}
   - dockSet: 13
-    dockPosition: {x: -230.2, y: 0, z: -2277.8}
+    dockPosition: {x: -920, y: 30, z: -3209}

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9f435cd7d304143b470c72f5f9c4e8, type: 3}
+  m_Name: ContainerShip
+  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Config.ShipConfig
+  shipType: 4
+  velocitiesLevels:
+  - acceleration: 20
+    deceleration: 20
+    angularSpeed: 10
+    shipSpeed: 25
+  - acceleration: 15
+    deceleration: 15
+    angularSpeed: 8
+    shipSpeed: 22
+  - acceleration: 12
+    deceleration: 12
+    angularSpeed: 6
+    shipSpeed: 18
+  limit: 0
+  health: 100
+  damage: 20
+  fuelConfig:
+    fuelCapacity: 500
+    idleConsumption: 0.01
+    baseConsumption: 0.02
+    accelerationSurge: 0.05

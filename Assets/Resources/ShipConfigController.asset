@@ -15,3 +15,5 @@ MonoBehaviour:
   ShipConfigs:
   - {fileID: 11400000, guid: afb5b2335dc0e4c469db3e6cda6a7711, type: 2}
   - {fileID: 11400000, guid: 2b5da193141d28745a60de8ab91495f7, type: 2}
+  - {fileID: 11400000, guid: 8018af4c1e67d8147b84dd5d70251d5a, type: 2}
+  - {fileID: 11400000, guid: bf4aa411f7002f247a77c0e0114440d6, type: 2}

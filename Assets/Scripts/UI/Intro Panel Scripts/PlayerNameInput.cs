@@ -4,8 +4,9 @@ using UnityEngine.UI;
 using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
-using static GF.UnityWebService;
 using FerryBoat;
+using System;
+using Unity.Android.Gradle.Manifest;
 
 public class PlayerNameInput : MonoBehaviour
 {
@@ -145,7 +146,23 @@ public class PlayerNameInput : MonoBehaviour
                 }
                 else
                 {
-                    PopupController.Instance.ShowInvalidUsername();
+                    CreateNewWhenPreviousFailed(username);
+                }
+            });
+    }
+
+    private void CreateNewWhenPreviousFailed(string username)
+    {
+        APIManager.PostAPI<UserDetails>(
+            new RequestData(Netconfig.RequestType.CreatePlayer, new CreatePlayer("new", username)),
+            (Data, response) =>
+            {
+                if (response.status)
+                {
+                    userData = Data;
+                    isNewUser = true;
+                    PlayerPrefs.SetString("username", username);
+                    OnStartGameClicked();
                 }
             });
     }
