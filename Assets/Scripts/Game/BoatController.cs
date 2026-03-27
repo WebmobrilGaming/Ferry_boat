@@ -196,6 +196,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void Update()
     {
+        ApplyWaveMotion();
         if (mFuel.FuelPercent < 0.1f)
             return;
 
