@@ -55,8 +55,8 @@ public class UserInterFace : MonoBehaviour
         TimerAndScore.TimeOutEvent += TimeOut;
         var ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
         int level = (int)GetDifficultyLevel();
-        windTxt.text = $"Wind : {ferryConfig.velocitiesLevels[level].windSpeed} / mph";
-        levelTxt.text = $"Level : {(DifficultyLevel)level}";
+        windTxt.text = $"{ferryConfig.velocitiesLevels[level].windSpeed} / mph";
+        levelTxt.text = $"{(DifficultyLevel)level}";
         Destination.OnFerryMissedDockEvent += OnFerryMissedDock;
         Destination.OnEnterDockEvent += OnEnterDock;
         BoatController.OnSpeedThresholdCrossedEvent += OnSpeedCrossed;
