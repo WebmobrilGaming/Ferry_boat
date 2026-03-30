@@ -20,7 +20,7 @@ MonoBehaviour:
   - dockSet: 2
     dockPosition: {x: -1419, y: 30, z: 310.9}
   - dockSet: 3
-    dockPosition: {x: -1592, y: 30, z: 1250}
+    dockPosition: {x: -756, y: 30, z: -196}
   - dockSet: 4
     dockPosition: {x: -989, y: 30, z: -2996}
   - dockSet: 5

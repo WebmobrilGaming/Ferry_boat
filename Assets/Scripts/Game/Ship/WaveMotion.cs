@@ -30,7 +30,7 @@ namespace Ferry.Motion
 
         public bool IsTransitioning;
         private float currentSmoothTime;
-        private const float maxSmoothTime =10f;
+        private const float maxSmoothTime =20f;
 
         // phase accumulator — eliminates sine jump when speed changes
         private float wavePhase = 0f;

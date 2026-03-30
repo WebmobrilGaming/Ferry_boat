@@ -52,6 +52,7 @@ public class UserInterFace : MonoBehaviour
     private void OnEnable()
     {
         scrollAction.Enable();
+        TimerAndScore.TimeOutEvent += TimeOut;
         var ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
         int level = (int)GetDifficultyLevel();
         windTxt.text = $"Wind : {ferryConfig.velocitiesLevels[level].windSpeed} / mph";
@@ -62,6 +63,17 @@ public class UserInterFace : MonoBehaviour
         Act.SpeedInit += SetRange;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += BoatDestroyed;
+    }
+
+    private void TimeOut()
+    {
+        InfoTxt.text = "Opps...! Time out";
+        if (dockMissedRoutine != null)
+        {
+            StopCoroutine(dockMissedRoutine);
+            dockMissedRoutine = null;
+        }
+        dockMissedRoutine = StartCoroutine(ShowMissedDock());
     }
 
     private void OnSpeedCrossed(float speed)
@@ -105,7 +117,7 @@ public class UserInterFace : MonoBehaviour
     private void OnDisable()
     {
         scrollAction.Disable();
-
+        TimerAndScore.TimeOutEvent -= TimeOut;
         Act.SpeedInit -= SetRange;
         Destination.OnEnterDockEvent -= OnEnterDock;
         Destination.OnFerryMissedDockEvent -= OnFerryMissedDock;

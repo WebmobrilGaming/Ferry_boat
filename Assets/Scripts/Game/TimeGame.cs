@@ -22,6 +22,8 @@ public class TimerAndScore : MonoBehaviour
     public int mediumMaxTime;
     public int hardMaxTime;
     private int maxTime;
+    public static event Action TimeOutEvent;
+    private bool isTimeOut=false;
     private void OnEnable()
     {
         enableScore = false;
@@ -62,9 +64,11 @@ public class TimerAndScore : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= maxTime)
         {
-            Time.timeScale = 0;
-            GamePopUp.Instance.FinalPopUp("Time out...!");
-            DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1; });
+            if (!isTimeOut)
+            {
+                isTimeOut=true;
+                TimeOutEvent?.Invoke();
+            }
         }
         else
         {

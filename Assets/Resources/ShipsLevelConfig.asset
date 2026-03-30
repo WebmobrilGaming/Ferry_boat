@@ -71,8 +71,8 @@ MonoBehaviour:
       start: 6
       end: 13
     - ship: {fileID: 6925610375704080075, guid: 05565ce224423d04ba4307a2e769909a, type: 3}
-      start: 2
-      end: 7
+      start: 1
+      end: 4
     - ship: {fileID: 9094903903379580939, guid: cf73908786fa0ba438abedac6023a52a, type: 3}
       start: 8
       end: 0

@@ -17,17 +17,17 @@ MonoBehaviour:
   - acceleration: 6.75
     deceleration: 9
     angularSpeed: 9
-    shipSpeed: 20.25
+    shipSpeed: 18.984375
     windSpeed: 1.5
   - acceleration: 9
     deceleration: 11.25
     angularSpeed: 9
-    shipSpeed: 24.75
+    shipSpeed: 23.203125
     windSpeed: 3
   - acceleration: 11.25
     deceleration: 9.75
     angularSpeed: 9
-    shipSpeed: 28.5
+    shipSpeed: 26.71875
     windSpeed: 3.5
   limit: 0
   health: 100

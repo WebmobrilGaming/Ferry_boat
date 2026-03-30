@@ -30,6 +30,9 @@ namespace Ferry.Ship
         {
             agent = GetComponent<NavMeshAgent>();
             difficultyLevel = GetDifficultyLevel();
+
+            // 🔥 IMPORTANT: Disable auto rotation
+            agent.updateRotation = false;
         }
 
         private void OnEnable()
@@ -41,10 +44,12 @@ namespace Ferry.Ship
         {
             BoatController.OnBoatStartEvent -= StartShip;
         }
+
         public void SetPath(DockSet start, DockSet end)
         {
             this.StartDock = start;
             this.EndDock = end;
+
             shipConfig = ShipConfigController.Instance.GetShipConfig(shipType);
             currentVelocityLevel = shipConfig.velocitiesLevels[(int)difficultyLevel];
 
@@ -53,13 +58,12 @@ namespace Ferry.Ship
             agent.acceleration = currentVelocityLevel.acceleration;
             agent.autoBraking = true;
 
-            // stoppingDistance drives how early the agent starts braking —
-            // reusing deceleration value: higher decel = starts braking earlier
             agent.stoppingDistance = Mathf.Clamp(currentVelocityLevel.deceleration, 1f, 10f);
 
             sourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
             destinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
         }
+
         private void StartShip()
         {
             StartCoroutine(RunShuttle());
@@ -75,6 +79,12 @@ namespace Ferry.Ship
             }
 
             agent.Warp(startPoint);
+
+            // 🔥 FACE correct direction immediately at spawn
+            Vector3 initialDir = (destinationPos - startPoint).normalized;
+            if (initialDir != Vector3.zero)
+                transform.forward = initialDir;
+
             yield return new WaitForSeconds(0.5f);
 
             while (true)
@@ -93,9 +103,14 @@ namespace Ferry.Ship
                     yield break;
                 }
 
-                // restore full speed at the start of each leg
+                // restore speed
                 agent.speed = currentVelocityLevel.shipSpeed;
                 isDecelerating = false;
+
+                // 🔥 FORCE forward direction BEFORE movement (NO ROTATE-FIRST)
+                Vector3 dir = (targetPoint - transform.position).normalized;
+                if (dir != Vector3.zero)
+                    transform.forward = dir;
 
                 agent.SetDestination(targetPoint);
 
@@ -105,9 +120,26 @@ namespace Ferry.Ship
 
                 agent.ResetPath();
 
+                // swap source/destination
                 (sourcePos, destinationPos) = (destinationPos, sourcePos);
 
                 yield return new WaitForSeconds(1f);
+            }
+        }
+
+        private void Update()
+        {
+            if (agent == null || !agent.isOnNavMesh) return;
+
+            // 🔥 Smooth rotation WHILE moving (optional but recommended)
+            if (agent.velocity.sqrMagnitude > 0.1f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(agent.velocity.normalized);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRot,
+                    Time.deltaTime * 2f
+                );
             }
         }
 
@@ -119,14 +151,11 @@ namespace Ferry.Ship
 
             if (currentVelocityLevel == null) return;
 
-            // once within braking range, manually decelerate using config value
             bool nearDestination = !agent.pathPending &&
                                    agent.remainingDistance <= agent.stoppingDistance + 3f;
 
             if (nearDestination)
-            {
                 isDecelerating = true;
-            }
 
             if (isDecelerating)
             {
