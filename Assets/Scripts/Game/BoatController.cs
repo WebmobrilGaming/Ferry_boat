@@ -1,11 +1,10 @@
 using DG.Tweening;
 using Ferry.Config;
+using Ferry.Motion;
 using FerryBoat;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,20 +14,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] HelmController helmController;
     [SerializeField] Gear mGear;
     [SerializeField] Material mIndicator;
-
-    [Header("Boat Visual Bobbing")]
-    [SerializeField] Transform boatVisual;   // assign boat model/mesh child here
-    [SerializeField] float easyWaveHeight = 0.03f;
-    [SerializeField] float mediumWaveHeight = 0.06f;
-    [SerializeField] float hardWaveHeight = 0.10f;
-
-    [SerializeField] float easyWaveSpeed = 0.8f;
-    [SerializeField] float mediumWaveSpeed = 1.2f;
-    [SerializeField] float hardWaveSpeed = 1.8f;
-
-    [SerializeField] float rollAmount = 1.5f;
-    [SerializeField] float pitchAmount = 1.0f;
-
     [Header("Settings:")]
     [Range(0, 1f)]
     [SerializeField] float rotationMultiplier = 0.3f;
@@ -36,7 +21,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float mSpeed = 5.0f;
     [SerializeField] float mBoatSpeed;
     [SerializeField] bool isControl;
-
     Quaternion startRotation;
     private const float MPS_TO_KNOTS = 1.94384f;
 
@@ -82,15 +66,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     [SerializeField] float thresholdSpeed;
     bool mThresholdApplied;
-
-    // wave bobbing cache
-    private Vector3 visualStartLocalPos;
-    private Quaternion visualStartLocalRot;
-    private float waveAmplitude;
-    private float waveSpeed;
     public static event Action OnBoatStartEvent;
     public static event Action<float> OnSpeedThresholdCrossedEvent;
     private bool isInitialized = false;
+    private WaveMotion waveMotion;
     private void Awake()
     {
         LoadConfig();
@@ -99,6 +78,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void LoadConfig()
     {
+        waveMotion=GetComponent<WaveMotion>();
         ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
         rotationMultiplier = ferryConfig.velocitiesLevels[(int)difficultyLevel].angularSpeed;
         mSpeed = ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed;
@@ -150,42 +130,11 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             _ => 5.0f
         };
 
-        SetWaveValues();
-
-        if (boatVisual != null)
-        {
-            visualStartLocalPos = boatVisual.localPosition;
-            visualStartLocalRot = boatVisual.localRotation;
-        }
-
         mLastPosition = transform.position;
+        waveMotion.SetLevel(difficultyLevel);
     }
 
-    private void SetWaveValues()
-    {
-        switch (difficultyLevel)
-        {
-            case DifficultyLevel.easy:
-                waveAmplitude = easyWaveHeight;
-                waveSpeed = easyWaveSpeed;
-                break;
 
-            case DifficultyLevel.medium:
-                waveAmplitude = mediumWaveHeight;
-                waveSpeed = mediumWaveSpeed;
-                break;
-
-            case DifficultyLevel.hard:
-                waveAmplitude = hardWaveHeight;
-                waveSpeed = hardWaveSpeed;
-                break;
-
-            default:
-                waveAmplitude = easyWaveHeight;
-                waveSpeed = easyWaveSpeed;
-                break;
-        }
-    }
 
     private void OnDisable()
     {
@@ -197,7 +146,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void Update()
     {
-        ApplyWaveMotion();
         if (mFuel.FuelPercent < 0.1f)
             return;
 
@@ -274,23 +222,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         #endregion
     }
 
-    private void ApplyWaveMotion()
-    {
-        if (boatVisual == null)
-            return;
 
-        float t = Time.time * waveSpeed;
-
-        // vertical bobbing
-        float bob = Mathf.Sin(t) * waveAmplitude;
-
-        // small roll/pitch so it feels like wave motion
-        float roll = Mathf.Sin(t * 1.3f) * rollAmount;
-        float pitch = Mathf.Cos(t * 1.1f) * pitchAmount;
-
-        boatVisual.localPosition = visualStartLocalPos + new Vector3(0f, bob, 0f);
-        boatVisual.localRotation = visualStartLocalRot * Quaternion.Euler(pitch, 0f, roll);
-    }
 
     void ThresholdCheck()
     {
