@@ -1873,7 +1873,7 @@ MonoBehaviour:
     Each truck \u2013 <color=#00FFAA><b>25 points</b></color> <i>(60 sec load time)</i>\r\n\r\n<color=#FF0000><b>GAME
     OVER:</b></color>\r\n\u2022 Hitting or being hit by a freighter or another boat\r\n\u2022
     Running aground on the sand bar (in the middle of the river left of the red buoy
-    with the flashing light)s"
+    with the flashing light)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
