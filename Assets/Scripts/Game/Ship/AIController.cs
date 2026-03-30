@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using Ferry.Config;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -16,11 +17,14 @@ namespace Ferry.Ship
 
         private NavMeshAgent agent;
         private ShipConfig shipConfig;
+        private Velocity currentVelocityLevel;
 
         private Vector3 sourcePos;
         private Vector3 destinationPos;
 
         [SerializeField] private float navMeshSampleDistance = 10f;
+
+        private bool isDecelerating = false;
 
         private void Awake()
         {
@@ -37,29 +41,32 @@ namespace Ferry.Ship
         {
             BoatController.OnBoatStartEvent -= StartShip;
         }
+        public void SetPath(DockSet start, DockSet end)
+        {
+            this.StartDock = start;
+            this.EndDock = end;
+            shipConfig = ShipConfigController.Instance.GetShipConfig(shipType);
+            currentVelocityLevel = shipConfig.velocitiesLevels[(int)difficultyLevel];
 
+            agent.speed = currentVelocityLevel.shipSpeed;
+            agent.angularSpeed = currentVelocityLevel.angularSpeed;
+            agent.acceleration = currentVelocityLevel.acceleration;
+            agent.autoBraking = true;
+
+            // stoppingDistance drives how early the agent starts braking —
+            // reusing deceleration value: higher decel = starts braking earlier
+            agent.stoppingDistance = Mathf.Clamp(currentVelocityLevel.deceleration, 1f, 10f);
+
+            sourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
+            destinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
+        }
         private void StartShip()
         {
-            if (difficultyLevel != DifficultyLevel.hard && shipType == ShipType.TankerShip)
-                return;
-
             StartCoroutine(RunShuttle());
         }
 
         private IEnumerator RunShuttle()
         {
-            // Load config
-            shipConfig = ShipConfigController.Instance.GetShipConfig(shipType);
-
-            agent.speed = shipConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed;
-            agent.angularSpeed = shipConfig.velocitiesLevels[(int)difficultyLevel].angularSpeed;
-            agent.acceleration = shipConfig.velocitiesLevels[(int)difficultyLevel].acceleration;
-
-            // Get dock positions
-            sourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
-            destinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
-
-            // Snap to valid NavMesh position
             Vector3 startPoint = GetNearestNavMeshPoint(sourcePos);
             if (startPoint == Vector3.zero)
             {
@@ -68,7 +75,6 @@ namespace Ferry.Ship
             }
 
             agent.Warp(startPoint);
-
             yield return new WaitForSeconds(0.5f);
 
             while (true)
@@ -87,19 +93,48 @@ namespace Ferry.Ship
                     yield break;
                 }
 
+                // restore full speed at the start of each leg
+                agent.speed = currentVelocityLevel.shipSpeed;
+                isDecelerating = false;
+
                 agent.SetDestination(targetPoint);
 
-                // Wait until reached
                 yield return new WaitUntil(() =>
                     !agent.pathPending &&
                     agent.remainingDistance <= agent.stoppingDistance);
 
                 agent.ResetPath();
 
-                // Swap docks
                 (sourcePos, destinationPos) = (destinationPos, sourcePos);
 
                 yield return new WaitForSeconds(1f);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (agent == null || !agent.isOnNavMesh) return;
+
+            Debug.DrawRay(transform.position, agent.velocity, Color.red);
+
+            if (currentVelocityLevel == null) return;
+
+            // once within braking range, manually decelerate using config value
+            bool nearDestination = !agent.pathPending &&
+                                   agent.remainingDistance <= agent.stoppingDistance + 3f;
+
+            if (nearDestination)
+            {
+                isDecelerating = true;
+            }
+
+            if (isDecelerating)
+            {
+                agent.speed = Mathf.MoveTowards(
+                    agent.speed,
+                    0f,
+                    currentVelocityLevel.deceleration * Time.fixedDeltaTime
+                );
             }
         }
 
@@ -120,14 +155,6 @@ namespace Ferry.Ship
                 return loaded.level;
             }
             return DifficultyLevel.easy;
-        }
-
-        private void FixedUpdate()
-        {
-            if (agent != null && agent.isOnNavMesh)
-            {
-                Debug.DrawRay(transform.position, agent.velocity, Color.red);
-            }
         }
     }
 }

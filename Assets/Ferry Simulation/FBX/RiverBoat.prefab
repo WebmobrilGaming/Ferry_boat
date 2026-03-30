@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d245e1dd0633ba24cb01fae29f5206d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -238.20001
+      value: 501.03513
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d245e1dd0633ba24cb01fae29f5206d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d245e1dd0633ba24cb01fae29f5206d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -123.16795
+      value: -37.48827
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d245e1dd0633ba24cb01fae29f5206d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 243c6d341baf4ba41a3ebcfdc85a8722, type: 2}
     - target: {fileID: 919132149155446097, guid: d245e1dd0633ba24cb01fae29f5206d3, type: 3}
       propertyPath: m_Name
-      value: Giant_Ferries03
+      value: RiverBoat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

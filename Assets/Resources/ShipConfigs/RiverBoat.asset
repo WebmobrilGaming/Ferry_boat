@@ -14,18 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Config.ShipConfig
   shipType: 3
   velocitiesLevels:
-  - acceleration: 20
-    deceleration: 25
-    angularSpeed: 10
-    shipSpeed: 35
-  - acceleration: 15
-    deceleration: 20
-    angularSpeed: 8
-    shipSpeed: 22
-  - acceleration: 10
-    deceleration: 15
-    angularSpeed: 6
-    shipSpeed: 12
+  - acceleration: 8.4375
+    deceleration: 11.25
+    angularSpeed: 9
+    shipSpeed: 25.3125
+    windSpeed: 1.5
+  - acceleration: 11.25
+    deceleration: 14.0625
+    angularSpeed: 9
+    shipSpeed: 30.9375
+    windSpeed: 3
+  - acceleration: 18.75
+    deceleration: 12.1875
+    angularSpeed: 9
+    shipSpeed: 35.625
+    windSpeed: 3.5
   limit: 0
   health: 100
   damage: 20
