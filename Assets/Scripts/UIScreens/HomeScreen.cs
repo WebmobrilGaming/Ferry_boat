@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using GF;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,8 +24,10 @@ namespace Ferry.Screens
         public RectTransform CloseRect;
         public Transform gameObjectivePanel;
         public Button gameObjectiveCloseBtn;
+        public TMP_Text playerNameTxt1;
         protected override void OnEnable()
         {
+            playerNameTxt1.text=UserDataManager.Instance.UserDetails.data.username;
             gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
             GameObjectivesBtn.AddListener(null, OpenGameObjective);

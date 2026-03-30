@@ -74,6 +74,7 @@ namespace Ferry.Screens
         {
             if (response.status)
             {
+                UserDataManager.Instance.SignIn(details);
                 SwitchScreen(ScreenType.Home);
             }
             else
@@ -98,6 +99,7 @@ namespace Ferry.Screens
         {
             if (response.status)
             {
+                UserDataManager.Instance.SignIn(details);
                 SwitchScreen(ScreenType.Home);
             }
         }
