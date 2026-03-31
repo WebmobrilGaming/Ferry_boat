@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using Ferry.Loading;
 using GF;
 using TMPro;
 using UnityEngine;
@@ -82,7 +83,7 @@ namespace Ferry.Screens
 
         private void OpenFerryHistory()
         {
-
+            SwitchScreen(ScreenType.FerryHistory);
         }
 
         private void OpenGameObjective()
@@ -92,7 +93,7 @@ namespace Ferry.Screens
 
         private void StartGame()
         {
-            SceneManager.LoadScene(1);
+            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Game,SceneEnum.Home);
         }
         protected override void OnDisable()
         {

@@ -1,5 +1,6 @@
 using System;
 using Ferry.Config;
+using Ferry.Loading;
 using Ferry.Ship;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class AIShipManager : MonoBehaviour
             AIController aIController=ship.GetComponent<AIController>();
             aIController.SetPath(s.start,s.end);
         }
+        LoadingScreen.Instance.StopLoading();
     }
 
     private DifficultyLevel GetDifficultyLevel()

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Ferry.Config;
+using Ferry.Loading;
 using FerryBoat;
 using GF;
 using Newtonsoft.Json;
@@ -37,7 +38,7 @@ public class UserInterFace : MonoBehaviour
 
     private void GoHome()
     {
-        SceneManager.LoadScene(0);
+       LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
     }
     private DifficultyLevel GetDifficultyLevel()
     {

@@ -1,15 +1,11 @@
 using System;
+using Ferry.Loading;
 using GF;
 using TMPro;
 namespace Ferry.Screens
 {
     public class HomeSceneHandler : SceneHandler<ScreenType>
     {
-        protected override void Awake()
-        {
-            var inst = ApplicationManager.Instance;
-            base.Awake();
-        }
         protected override void RegisterServices()
         {
             UserDataManager.OnLogin += SetPlayerName;
@@ -19,6 +15,7 @@ namespace Ferry.Screens
         {
             var playerNameTxt = GUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
             playerNameTxt.text = obj;
+            LoadingScreen.Instance.StopLoading();
         }
         void OnDisable()
         {
@@ -30,6 +27,7 @@ namespace Ferry.Screens
         Login,
         Home,
         Leaderboard,
-        Settings
+        Settings,
+        FerryHistory
     }
 }

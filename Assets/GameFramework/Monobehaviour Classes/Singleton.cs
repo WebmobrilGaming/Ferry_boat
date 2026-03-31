@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BigJoker
+namespace GF
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
@@ -12,13 +12,14 @@ namespace BigJoker
                 return instance;
             }
         }
-
+        protected bool canDestroy = false;
         protected virtual void Awake()
         {
             if (instance == null)
             {
                 instance = this as T;
-                DontDestroyOnLoad(gameObject); // keep it alive across scenes
+                if (!canDestroy)
+                    DontDestroyOnLoad(gameObject); // keep it alive across scenes
             }
             else if (instance != this)
             {
