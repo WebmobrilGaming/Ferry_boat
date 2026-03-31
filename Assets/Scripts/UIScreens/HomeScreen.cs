@@ -28,7 +28,7 @@ namespace Ferry.Screens
         public TMP_Text playerNameTxt1;
         protected override void OnEnable()
         {
-            playerNameTxt1.text=UserDataManager.Instance.UserDetails.data.username;
+            playerNameTxt1.text=$"Player : {UserDataManager.Instance.UserDetails.data.username}";
             gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
             GameObjectivesBtn.AddListener(null, OpenGameObjective);

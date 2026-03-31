@@ -8,18 +8,7 @@ namespace Ferry.Screens
     {
         protected override void RegisterServices()
         {
-            UserDataManager.OnLogin += SetPlayerName;
-        }
-
-        private void SetPlayerName(string obj)
-        {
-            var playerNameTxt = GUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
-            playerNameTxt.text = obj;
             LoadingScreen.Instance.StopLoading();
-        }
-        void OnDisable()
-        {
-            UserDataManager.OnLogin -= SetPlayerName;
         }
     }
     public enum ScreenType
