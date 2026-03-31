@@ -17,13 +17,14 @@ public class TimerAndScore : MonoBehaviour
     private int lastMinute = 0;
 
     [SerializeField] DifficultyLevel difficultyLevel;
-    bool enableScore = false;
+    public bool enableScore = false;
     public int easyMaxTime;
     public int mediumMaxTime;
     public int hardMaxTime;
     private int maxTime;
     public static event Action TimeOutEvent;
     private bool isTimeOut=false;
+    private bool IsInitialized=false;
     private void OnEnable()
     {
         enableScore = false;
@@ -55,12 +56,15 @@ public class TimerAndScore : MonoBehaviour
     private void EnableScore(bool enable)
     {
         enableScore = enable;
+        IsInitialized=true;
     }
 
     private void Update()
     {
-        if (!enableScore)
+        if (!IsInitialized && !enableScore)
+        {
             return;
+        }
         timer += Time.deltaTime;
         if (timer >= maxTime)
         {

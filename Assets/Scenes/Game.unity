@@ -1236,8 +1236,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 80.97028, y: 104, z: 185.14919}
-  m_Center: {x: 33.887863, y: 27.17601, z: 28.850212}
+  m_Size: {x: 112.53486, y: 104, z: 217.58893}
+  m_Center: {x: 49.670155, y: 27.17601, z: 12.630341}
 --- !u!23 &133395446
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1304,7 +1304,7 @@ Transform:
   m_GameObject: {fileID: 133395444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 967.54364, y: 36.1, z: -2206}
+  m_LocalPosition: {x: 979.4, y: 36.1, z: -2206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9995,6 +9995,7 @@ MonoBehaviour:
   timerText: {fileID: 997312850}
   scoreText: {fileID: 904441859}
   difficultyLevel: 0
+  enableScore: 0
   easyMaxTime: 600
   mediumMaxTime: 480
   hardMaxTime: 360

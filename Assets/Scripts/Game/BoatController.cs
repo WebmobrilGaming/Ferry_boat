@@ -37,7 +37,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float mAcceleration = 2f;
     [Range(0, 100f)]
     [SerializeField] float mDeceleration = 3f;
-    [SerializeField] float mReverseSpeed = 2f;
+    [SerializeField] float mReverseSpeed = 25f;
 
     [Header("Fuel Settings:")]
     [SerializeField] TMP_Text mFuelText;
@@ -176,11 +176,12 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         bool isReversing = (Keyboard.current.sKey.isPressed ||
                             Keyboard.current.downArrowKey.isPressed) && mGear.Stat;
 
-        if (!mGear.Stat)
-            return;
+        // Removed early return here — speed handling must run even when gear/engine
+        // is off so the boat decelerates to a stop instead of freezing mid-motion.
 
         #region SPEED_HANDLING
-        bool canMove = mGear.Stat && !mFuel.IsEmpty && !isHit;
+        // canMove requires the engine to be running, gear engaged, fuel available, and no hit
+        bool canMove = mGear.Stat && isEngineStarted && !mFuel.IsEmpty && !isHit;
 
         float targetSpeed = 0f;
         if (canMove)

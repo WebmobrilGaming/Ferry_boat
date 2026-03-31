@@ -25,7 +25,7 @@ public class AIShipManager : MonoBehaviour
             AIController aIController=ship.GetComponent<AIController>();
             aIController.SetPath(s.start,s.end);
         }
-        // LoadingScreen.Instance.StopLoading();
+        LoadingScreen.Instance.StopLoading();
     }
 
     private DifficultyLevel GetDifficultyLevel()
