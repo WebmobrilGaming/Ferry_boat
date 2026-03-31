@@ -146,7 +146,7 @@ public class UserInterFace : MonoBehaviour
 
     private void LevelFinish()
     {
-        Time.timeScale = 0;
+        StopEngineEvent?.Invoke();
         GamePopUp.Instance.FinalPopUp("Destination Reached");
     }
 

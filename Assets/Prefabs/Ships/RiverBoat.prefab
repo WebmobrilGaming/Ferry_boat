@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1776793577129896868}
   - component: {fileID: 8559006514147954032}
   - component: {fileID: 7060097037411884937}
+  - component: {fileID: 6832245289466032637}
   m_Layer: 0
   m_Name: RiverBoat
   m_TagString: Untagged
@@ -73,6 +74,21 @@ MonoBehaviour:
   shipType: 3
   difficultyLevel: 0
   navMeshSampleDistance: 10
+--- !u!114 &6832245289466032637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094903903379580939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ceaa35fd003a24ebd84a4fcb95e1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Ferry.Motion.WaveMotion
+  boatVisual: {fileID: 351737683480126377}
+  waveConfig: {fileID: 11400000, guid: a2a7fbd5f85e58a438e960d5c74e682b, type: 2}
+  IsTransitioning: 0
 --- !u!1001 &3074516739098057152
 PrefabInstance:
   m_ObjectHideFlags: 0

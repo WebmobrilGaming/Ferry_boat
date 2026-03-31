@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using Ferry.Config;
+using Ferry.Motion;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AI;
@@ -49,7 +50,11 @@ namespace Ferry.Ship
         {
             this.StartDock = start;
             this.EndDock = end;
-
+            var waveMotion=GetComponent<WaveMotion>();
+            if (waveMotion != null)
+            {
+                waveMotion.SetLevel(difficultyLevel);
+            }
             shipConfig = ShipConfigController.Instance.GetShipConfig(shipType);
             currentVelocityLevel = shipConfig.velocitiesLevels[(int)difficultyLevel];
 
