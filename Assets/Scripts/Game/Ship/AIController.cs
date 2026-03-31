@@ -31,7 +31,7 @@ namespace Ferry.Ship
             agent = GetComponent<NavMeshAgent>();
             difficultyLevel = GetDifficultyLevel();
 
-            // 🔥 IMPORTANT: Disable auto rotation
+            // IMPORTANT: Disable auto rotation
             agent.updateRotation = false;
         }
 
@@ -80,7 +80,7 @@ namespace Ferry.Ship
 
             agent.Warp(startPoint);
 
-            // 🔥 FACE correct direction immediately at spawn
+            // FACE correct direction immediately at spawn
             Vector3 initialDir = (destinationPos - startPoint).normalized;
             if (initialDir != Vector3.zero)
                 transform.forward = initialDir;
@@ -107,7 +107,7 @@ namespace Ferry.Ship
                 agent.speed = currentVelocityLevel.shipSpeed;
                 isDecelerating = false;
 
-                // 🔥 FORCE forward direction BEFORE movement (NO ROTATE-FIRST)
+                // FORCE forward direction BEFORE movement (NO ROTATE-FIRST)
                 Vector3 dir = (targetPoint - transform.position).normalized;
                 if (dir != Vector3.zero)
                     transform.forward = dir;
@@ -131,7 +131,7 @@ namespace Ferry.Ship
         {
             if (agent == null || !agent.isOnNavMesh) return;
 
-            // 🔥 Smooth rotation WHILE moving (optional but recommended)
+            // Smooth rotation WHILE moving (optional but recommended)
             if (agent.velocity.sqrMagnitude > 0.1f)
             {
                 Quaternion targetRot = Quaternion.LookRotation(agent.velocity.normalized);
