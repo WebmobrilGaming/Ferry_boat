@@ -29,6 +29,7 @@ public class UserInterFace : MonoBehaviour
     public Button backBtn;
     public TMP_Text windTxt;
     public TMP_Text levelTxt;
+    public static event Action StopEngineEvent;
     private void Awake()
     {
         rangeMax = -1;
@@ -38,7 +39,7 @@ public class UserInterFace : MonoBehaviour
 
     private void GoHome()
     {
-       LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
+        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
     }
     private DifficultyLevel GetDifficultyLevel()
     {
@@ -128,10 +129,8 @@ public class UserInterFace : MonoBehaviour
 
     private void BoatDestroyed()
     {
-        Time.timeScale = 0;
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
-
-        DOVirtual.DelayedCall(2.0f, () => { Time.timeScale = 1; });
+        StopEngineEvent?.Invoke();
     }
 
     public void ExitAction()

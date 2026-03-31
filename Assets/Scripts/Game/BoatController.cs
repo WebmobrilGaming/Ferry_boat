@@ -78,7 +78,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void LoadConfig()
     {
-        waveMotion=GetComponent<WaveMotion>();
+        waveMotion = GetComponent<WaveMotion>();
         ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
         rotationMultiplier = ferryConfig.velocitiesLevels[(int)difficultyLevel].angularSpeed;
         mSpeed = ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed;
@@ -90,7 +90,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mFuel.baseConsumption = ferryConfig.fuelConfig.baseConsumption;
         mFuel.maxFuel = ferryConfig.fuelConfig.fuelCapacity;
     }
-
     private void OnEnable()
     {
         helmController.callback = this;
@@ -110,7 +109,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mHealthSlider.value = mHealth;
 
         mIndicator.DisableKeyword("_EMISSION");
-
+        UserInterFace.StopEngineEvent += StopEngine;
         if (PlayerPrefs.HasKey("Settings"))
         {
             string json = PlayerPrefs.GetString("Settings");
@@ -134,13 +133,17 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         waveMotion.SetLevel(difficultyLevel);
     }
 
-
+    private void StopEngine()
+    {
+        isEngineStarted=false;
+        mFuel.currentFuel=0;
+    }
 
     private void OnDisable()
     {
         Act.SpeedChange -= SpeedChange;
         Act.HitAction -= HitAction;
-
+        UserInterFace.StopEngineEvent -= StopEngine;
         mIndicator.DisableKeyword("_EMISSION");
     }
 
