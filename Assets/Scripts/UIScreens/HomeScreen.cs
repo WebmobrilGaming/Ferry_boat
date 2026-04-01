@@ -28,7 +28,7 @@ namespace Ferry.Screens
         public TMP_Text playerNameTxt1;
         protected override void OnEnable()
         {
-            playerNameTxt1.text=$"Player : {UserDataManager.Instance.UserDetails.data.username}";
+            playerNameTxt1.text = $"Player : {UserDataManager.Instance.UserDetails.data.username}";
             gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
             GameObjectivesBtn.AddListener(null, OpenGameObjective);
@@ -36,7 +36,7 @@ namespace Ferry.Screens
             LeaderboardBtn.AddListener(null, OpenLeaderboard);
             SettingsBtn.AddListener(null, OpenSettings);
             CloseBtn.AddListener(null, Logout);
-            gameObjectiveCloseBtn.AddListener(null,CloseObjectivePanel);
+            gameObjectiveCloseBtn.AddListener(null, CloseObjectivePanel);
             StartCoroutine(AnimateButtons());
         }
 
@@ -47,14 +47,7 @@ namespace Ferry.Screens
 
         private void Logout()
         {
-            PopupController.Instance.ShowYesNo(
-           "Do you want to exit the game?",
-           onYes: () =>
-           {
-               SwitchScreen(ScreenType.Login);
-           },
-           onNo: null
-       );
+            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to quit", () => SwitchScreen(ScreenType.Login), null);
         }
 
         private void OpenSettings()
@@ -64,17 +57,17 @@ namespace Ferry.Screens
 
         private IEnumerator AnimateButtons()
         {
-            startSimulationRect.DOAnchorPosX(900, 0.5f).SetEase(Ease.OutBack);
+            startSimulationRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
-            GameObjectivesRect.DOAnchorPosX(900, 0.5f).SetEase(Ease.OutBack);
+            GameObjectivesRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
-            FerryHistoryRect.DOAnchorPosX(900, 0.5f).SetEase(Ease.OutBack);
+            FerryHistoryRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
-            LeaderboardRect.DOAnchorPosX(900, 0.5f).SetEase(Ease.OutBack);
+            LeaderboardRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
-            SettingsRect.DOAnchorPosX(900, 0.5f).SetEase(Ease.OutBack);
+            SettingsRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
-            CloseRect.DOAnchorPosX(900, 0.5f).SetEase(Ease.OutBack);
+            CloseRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
         }
         private void OpenLeaderboard()
         {
@@ -93,7 +86,7 @@ namespace Ferry.Screens
 
         private void StartGame()
         {
-            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Game,SceneEnum.Home);
+            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Game, SceneEnum.Home);
         }
         protected override void OnDisable()
         {

@@ -27,6 +27,12 @@ namespace Ferry.Config
         }
         public LoadData[] loadDatas;
         private Dictionary<LoadType, LoadData> loadMap = new Dictionary<LoadType, LoadData>();
+        public Dictionary<LoadType, LoadData> GetLoadMap()
+        {
+            if (loadMap.Count == 0)
+                BuildMap();
+            return loadMap;
+        }
         public LoadData GetLoadData(LoadType loadType)
         {
             if (loadMap.Count == 0)
