@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using GF;
 using TMPro;
 using UnityEngine;
@@ -22,49 +23,61 @@ namespace Ferry.Popup
         public Button okBtn;
         private Action okAction;
         public TMP_Text oktitleTxt;
-        public TMP_Text okInfoTxt; 
-        private OkPopupEvent okPopupEvent=null;
+        public TMP_Text okInfoTxt;
+        private OkPopupEvent okPopupEvent = null;
         void OnEnable()
         {
+            yesNoPanel.transform.localScale = Vector3.zero;
+            okPanel.transform.localScale = Vector3.zero;
             yesBtn.AddListener(null, OnYesClick);
             noBtn.AddListener(null, OnNoClick);
-            okBtn.AddListener(null,OnOkClick);
+            okBtn.AddListener(null, OnOkClick);
             EventManager.Instance.AddListener<YesNoPopupEvent>(OnYesNoPopup);
             EventManager.Instance.AddListener<OkPopupEvent>(OnOkPopup);
         }
 
         private void OnOkClick()
         {
-            okAction?.Invoke();
-            okAction=null;
-            okPopupEvent.SetIsDone();
-            okPopupEvent=null;
-            popupPanel.SetActive(false);
-            okPanel.SetActive(false);
+            okPanel.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                okAction?.Invoke();
+                okAction = null;
+                okPopupEvent.SetIsDone();
+                okPopupEvent = null;
+                popupPanel.SetActive(false);
+                okPanel.SetActive(false);
+            });
         }
 
         private void OnOkPopup(OkPopupEvent e)
         {
-            okPopupEvent=e;
-            okAction=e.okAction;
-            oktitleTxt.text=e.title;
-            okInfoTxt.text=e.info;
+            okPopupEvent = e;
+            okAction = e.okAction;
+            oktitleTxt.text = e.title;
+            okInfoTxt.text = e.info;
             popupPanel.SetActive(true);
             okPanel.SetActive(true);
+            okPanel.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack);
         }
 
         private void OnNoClick()
         {
-            noAction?.Invoke();
-            noAction = null;
-            CloseYesNoPanel();
+            yesNoPanel.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                noAction?.Invoke();
+                noAction = null;
+                CloseYesNoPanel();
+            });
         }
 
         private void OnYesClick()
         {
-            yesAction?.Invoke();
-            yesAction = null;
-            CloseYesNoPanel();
+            yesNoPanel.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                yesAction?.Invoke();
+                yesAction = null;
+                CloseYesNoPanel();
+            });
         }
 
         private void OnYesNoPopup(YesNoPopupEvent e)
@@ -76,6 +89,7 @@ namespace Ferry.Popup
             yesnoInfoTxt.text = e.info;
             popupPanel.SetActive(true);
             yesNoPanel.SetActive(true);
+            yesNoPanel.transform.DOScale(1, 1).SetEase(Ease.OutBack);
         }
         private void CloseYesNoPanel()
         {
