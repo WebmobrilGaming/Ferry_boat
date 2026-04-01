@@ -47,7 +47,11 @@ namespace Ferry.Screens
 
         private void Logout()
         {
-            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to quit", () => SwitchScreen(ScreenType.Login), null);
+            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to quit", () =>
+            {
+                PlayerPrefs.DeleteAll();
+                SwitchScreen(ScreenType.Login);
+            }, null);
         }
 
         private void OpenSettings()

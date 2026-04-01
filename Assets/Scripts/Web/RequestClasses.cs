@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GF;
 using Netconfig;
 using Newtonsoft.Json;
-using static GF.UnityWebService;
 
 namespace Ferry_boat.Assets.Scripts.Web
 {

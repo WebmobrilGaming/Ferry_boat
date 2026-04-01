@@ -35,6 +35,10 @@ public class LeaderboardScreen : BaseScreen<ScreenType>, IRecyclableScrollRectDa
             }
             Invoke(nameof(InitializeLeaderboard),0.2f);
         }
+        else
+        {
+            Utils.ShowOkPopup("Error!",response.message,null);
+        }
     }
 
     private void InitializeLeaderboard()

@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Ferry_boat.Assets.Scripts.Web;
 using GF;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,15 +31,23 @@ namespace Ferry.Screens
         public TMP_Text prevUsernameErrorTxt;
         protected override void OnEnable()
         {
-            prevUserPanel.localScale = Vector3.zero;
-            newUserPanel.localScale = Vector3.zero;
-            loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
-            newUserBtn.AddListener(null, CreateNewUser);
-            prevUserBtn.AddListener(null, LogInPreviousUser);
-            submitNewUserBtn.AddListener(null, SubmitNewUser);
-            submitPrevUserBtn.AddListener(null, SubmitPrevUser);
-            closeNewUserPanelBtn.AddListener(null, CloseNewUserPanel);
-            closePrevUserPanelBtn.AddListener(null, ClosePrevUserPanel);
+            if (PlayerPrefs.HasKey("username"))
+            {
+                UserDataManager.Instance.SignIn(JsonConvert.DeserializeObject<UserDetails>(PlayerPrefs.GetString("username")));
+                SwitchScreen(ScreenType.Home);
+            }
+            else
+            {
+                prevUserPanel.localScale = Vector3.zero;
+                newUserPanel.localScale = Vector3.zero;
+                loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
+                newUserBtn.AddListener(null, CreateNewUser);
+                prevUserBtn.AddListener(null, LogInPreviousUser);
+                submitNewUserBtn.AddListener(null, SubmitNewUser);
+                submitPrevUserBtn.AddListener(null, SubmitPrevUser);
+                closeNewUserPanelBtn.AddListener(null, CloseNewUserPanel);
+                closePrevUserPanelBtn.AddListener(null, ClosePrevUserPanel);
+            }
         }
 
         private void ClosePrevUserPanel()
@@ -75,12 +84,13 @@ namespace Ferry.Screens
             if (response.status)
             {
                 UserDataManager.Instance.SignIn(details);
+                PlayerPrefs.SetString("username",JsonConvert.SerializeObject(details));
                 SwitchScreen(ScreenType.Home);
             }
             else
             {
                 string prevUsername = prevUsernameInput.text.Trim();
-                var request = new CreatePlayer("new", prevUsername,$"New player{UnityEngine.Random.Range(0,999)}",$"wos{UnityEngine.Random.Range(0,999)}");
+                var request = new CreatePlayer("new", prevUsername, $"New player{UnityEngine.Random.Range(0, 999)}", $"wos{UnityEngine.Random.Range(0, 999)}");
                 APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
             }
         }
@@ -100,11 +110,12 @@ namespace Ferry.Screens
             if (response.status)
             {
                 UserDataManager.Instance.SignIn(details);
+                PlayerPrefs.SetString("username",details.data.username);
                 SwitchScreen(ScreenType.Home);
             }
             else
             {
-                Utils.ShowOkPopup("Error",response.message,null);
+                Utils.ShowOkPopup("Error", response.message, null);
             }
         }
 
