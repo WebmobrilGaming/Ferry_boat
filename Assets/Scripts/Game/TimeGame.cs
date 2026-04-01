@@ -5,6 +5,7 @@ using FerryBoat;
 using System;
 using Newtonsoft.Json;
 using DG.Tweening;
+using GF;
 
 public class TimerAndScore : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class TimerAndScore : MonoBehaviour
     public int mediumMaxTime;
     public int hardMaxTime;
     private int maxTime;
-    public static event Action TimeOutEvent;
     private bool isTimeOut=false;
     private bool IsInitialized=false;
     private void OnEnable()
@@ -71,7 +71,7 @@ public class TimerAndScore : MonoBehaviour
             if (!isTimeOut)
             {
                 isTimeOut=true;
-                TimeOutEvent?.Invoke();
+                Utils.ShowInGamePopup("Opps...! Time out");
             }
         }
         else

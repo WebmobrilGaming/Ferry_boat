@@ -7,10 +7,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UserInterFace : MonoBehaviour
@@ -25,10 +23,12 @@ public class UserInterFace : MonoBehaviour
     [SerializeField] float sensitivity = 1f;
     public CanvasGroup Info;
     public TMP_Text InfoTxt;
-    private Coroutine dockMissedRoutine;
+    private Coroutine popupRoutine;
     public Button backBtn;
     public TMP_Text windTxt;
     public TMP_Text levelTxt;
+    private InGamePopupEvent popupEvent = null;
+
     public static event Action StopEngineEvent;
     private void Awake()
     {
@@ -54,76 +54,42 @@ public class UserInterFace : MonoBehaviour
     private void OnEnable()
     {
         scrollAction.Enable();
-        TimerAndScore.TimeOutEvent += TimeOut;
+        EventManager.Instance.AddListener<InGamePopupEvent>(OnPopupEventArrive);
         var ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
         int level = (int)GetDifficultyLevel();
         windTxt.text = $"{ferryConfig.velocitiesLevels[level].windSpeed} / mph";
         levelTxt.text = $"{(DifficultyLevel)level}";
-        Destination.OnFerryMissedDockEvent += OnFerryMissedDock;
-        Destination.OnEnterDockEvent += OnEnterDock;
-        BoatController.OnSpeedThresholdCrossedEvent += OnSpeedCrossed;
         Act.SpeedInit += SetRange;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += BoatDestroyed;
     }
 
-    private void TimeOut()
+    private void OnPopupEventArrive(InGamePopupEvent e)
     {
-        InfoTxt.text = "Opps...! Time out";
-        if (dockMissedRoutine != null)
+        this.popupEvent = e;
+        InfoTxt.text = e.info;
+        if (popupRoutine != null)
         {
-            StopCoroutine(dockMissedRoutine);
-            dockMissedRoutine = null;
+            StopCoroutine(popupRoutine);
+            popupRoutine = null;
         }
-        dockMissedRoutine = StartCoroutine(ShowMissedDock());
+        popupRoutine = StartCoroutine(ShowPopupRoutine());
     }
-
-    private void OnSpeedCrossed(float speed)
-    {
-        InfoTxt.text = $"You are crossing speed limit, It will deduct your points..! Keep it under {speed}/mph";
-        if (dockMissedRoutine != null)
-        {
-            StopCoroutine(dockMissedRoutine);
-            dockMissedRoutine = null;
-        }
-        dockMissedRoutine = StartCoroutine(ShowMissedDock());
-    }
-
-    private void OnEnterDock()
-    {
-        InfoTxt.text = "You entered in the dock area";
-        if (dockMissedRoutine != null)
-        {
-            StopCoroutine(dockMissedRoutine);
-            dockMissedRoutine = null;
-        }
-        dockMissedRoutine = StartCoroutine(ShowMissedDock());
-    }
-
-    private void OnFerryMissedDock()
-    {
-        InfoTxt.text = "You missed the dock";
-        if (dockMissedRoutine != null)
-        {
-            StopCoroutine(dockMissedRoutine);
-            dockMissedRoutine = null;
-        }
-        dockMissedRoutine = StartCoroutine(ShowMissedDock());
-    }
-    private IEnumerator ShowMissedDock()
+    private IEnumerator ShowPopupRoutine()
     {
         Info.DOFade(1, 1f);
         yield return new WaitForSeconds(5f);
-        Info.DOFade(0, 1f).SetEase(Ease.InBounce);
+        Info.DOFade(0, 1f).SetEase(Ease.InBounce).OnComplete(() =>
+        {
+            popupEvent.SetIsDone();
+            popupEvent=null;
+        });
     }
     private void OnDisable()
     {
+        EventManager.Instance.RemoveListener<InGamePopupEvent>(OnPopupEventArrive);
         scrollAction.Disable();
-        TimerAndScore.TimeOutEvent -= TimeOut;
         Act.SpeedInit -= SetRange;
-        Destination.OnEnterDockEvent -= OnEnterDock;
-        Destination.OnFerryMissedDockEvent -= OnFerryMissedDock;
-        BoatController.OnSpeedThresholdCrossedEvent -= OnSpeedCrossed;
         Act.ReachedDestination -= LevelFinish;
     }
 

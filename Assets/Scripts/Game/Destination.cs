@@ -1,15 +1,13 @@
 using System;
 using DebugUtils;
 using FerryBoat;
+using GF;
 using UnityEngine;
 
 public class Destination : MonoBehaviour
 {
     [SerializeField] private LayerMask targetLayer;
     private Collider dockCollider;
-
-    public static event Action OnFerryMissedDockEvent;
-    public static event Action OnEnterDockEvent;
 
     private enum DockState { Outside, Entered, FullyDocked }
     private DockState currentState = DockState.Outside;
@@ -35,7 +33,7 @@ public class Destination : MonoBehaviour
         hasMissed = false;
 
         boatController.IsEnterDock = true;
-        OnEnterDockEvent?.Invoke();
+        Utils.ShowInGamePopup("You entered in the dock area");
 
         DevDebug.Log("Ferry entered dock area.", DebugColor.Yellow);
     }
@@ -70,7 +68,7 @@ public class Destination : MonoBehaviour
             hasMissed = true;
 
             DevDebug.Log("Ferry missed the dock!", DebugColor.Red);
-            OnFerryMissedDockEvent?.Invoke();
+            Utils.ShowInGamePopup("You missed the dock");
         }
 
         if (!isStopped)

@@ -11,6 +11,10 @@ namespace GF
     /// </summary>
     public static class Utils
     {
+        public static void ShowInGamePopup(string info)
+        {
+            EventManager.Instance.QueueEvent(new InGamePopupEvent(info));
+        }
         public static void ShowYesNoPopup(string title, string info, Action yes, Action no)
         {
             EventManager.Instance.QueueEvent(new YesNoPopupEvent(title, info, yes, no));

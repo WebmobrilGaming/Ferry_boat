@@ -2,6 +2,7 @@ using DG.Tweening;
 using Ferry.Config;
 using Ferry.Motion;
 using FerryBoat;
+using GF;
 using Newtonsoft.Json;
 using System;
 using TMPro;
@@ -67,7 +68,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float thresholdSpeed;
     bool mThresholdApplied;
     public static event Action OnBoatStartEvent;
-    public static event Action<float> OnSpeedThresholdCrossedEvent;
     private bool isInitialized = false;
     private WaveMotion waveMotion;
     private void Awake()
@@ -135,8 +135,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void StopEngine()
     {
-        isEngineStarted=false;
-        mFuel.currentFuel=0;
+        isEngineStarted = false;
+        mFuel.currentFuel = 0;
     }
 
     private void OnDisable()
@@ -248,8 +248,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mThresholdApplied = true;
 
         float newHealth = mHealth - mdamage;
-
-        OnSpeedThresholdCrossedEvent?.Invoke(thresholdSpeed);
+        Utils.ShowInGamePopup($"You are crossing speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
     }
 
     private void SpeedChange(float val)

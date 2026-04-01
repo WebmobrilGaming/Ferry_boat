@@ -6,6 +6,14 @@ using UnityEngine;
 
 namespace GF
 {
+    public class InGamePopupEvent : GameEvent
+    {
+        public string info;
+        public InGamePopupEvent(string info)
+        {
+            this.info=info;
+        }
+    }
     public class YesNoPopupEvent : GameEvent
     {
         public Action yesAction;
