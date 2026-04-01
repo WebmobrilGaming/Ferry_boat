@@ -144,9 +144,9 @@ namespace GF
         {
             return isDone;
         }
-        public void SetIsDone(bool status)
+        public void SetIsDone()
         {
-            isDone = status;
+            isDone = true;
         }
     }
 }

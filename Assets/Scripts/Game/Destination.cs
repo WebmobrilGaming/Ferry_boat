@@ -55,7 +55,6 @@ public class Destination : MonoBehaviour
 
         bool isStopped = boatController.Speed == 0 && !boatController.IsEningeActive;
 
-        // ✅ SUCCESS CASE
         if (fullyInside && isStopped)
         {
             currentState = DockState.FullyDocked;
@@ -66,7 +65,6 @@ public class Destination : MonoBehaviour
             return;
         }
 
-        // ✅ MISS CASE (only once per stop)
         if (!fullyInside && isStopped && !hasMissed)
         {
             hasMissed = true;
@@ -75,7 +73,6 @@ public class Destination : MonoBehaviour
             OnFerryMissedDockEvent?.Invoke();
         }
 
-        // ✅ RESET miss when boat starts moving again (allows retry)
         if (!isStopped)
         {
             hasMissed = false;

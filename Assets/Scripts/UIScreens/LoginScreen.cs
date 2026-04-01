@@ -102,6 +102,10 @@ namespace Ferry.Screens
                 UserDataManager.Instance.SignIn(details);
                 SwitchScreen(ScreenType.Home);
             }
+            else
+            {
+                Utils.ShowOkPopup("Error",response.message,null);
+            }
         }
 
         private bool ValidDetails(string firstName, string lastName, string username)

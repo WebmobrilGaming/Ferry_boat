@@ -11,6 +11,14 @@ namespace GF
     /// </summary>
     public static class Utils
     {
+        public static void ShowYesNoPopup(string title, string info, Action yes, Action no)
+        {
+            EventManager.Instance.QueueEvent(new YesNoPopupEvent(title, info, yes, no));
+        }
+        public static void ShowOkPopup(string title, string info, Action ok)
+        {
+            EventManager.Instance.QueueEvent(new OkPopupEvent(title, info, ok));
+        }
         public static void CallEventAsync(GameEvent gameEvent)
         {
             EventManager.Instance.TriggerEvent(gameEvent);
@@ -25,13 +33,13 @@ namespace GF
                 (int)(Mathf.Abs(a.g - b.g) * 100) < diff &&
                 (int)(Mathf.Abs(a.b - b.b) * 100) < diff;
         }
-        public static IEnumerator DoLerp<T>(float delay, T obj) where T:Component
+        public static IEnumerator DoLerp<T>(float delay, T obj) where T : Component
         {
             float lerp = 0;
             float v = 0;
             while (lerp <= 1)
             {
-                 v= Mathf.Lerp(0, 1, lerp);
+                v = Mathf.Lerp(0, 1, lerp);
                 lerp += (1 / delay) * Time.deltaTime;
                 yield return null;
             }
@@ -77,9 +85,9 @@ namespace GF
         /// <param name="obj"></param>
         /// <param name="multipleComponentAdable"></param>
         /// <returns></returns>
-        public static T GetOrAddComponent<T>(GameObject obj,bool multipleComponentAdable=false) where T : Component
+        public static T GetOrAddComponent<T>(GameObject obj, bool multipleComponentAdable = false) where T : Component
         {
-            if(multipleComponentAdable)
+            if (multipleComponentAdable)
             {
                 obj.AddComponent<T>();
             }
@@ -97,7 +105,7 @@ namespace GF
         /// <param name="vector2"></param>
         /// <returns></returns>
         /// it returns the Dot Product in float.
-        public static float DotProduct(Vector3 vector1,Vector3 vector2)
+        public static float DotProduct(Vector3 vector1, Vector3 vector2)
         {
             return (vector1.x * vector2.x + vector1.y * vector2.y);
         }
@@ -108,7 +116,7 @@ namespace GF
         /// <param name="vector2"></param>
         /// <returns></returns>
         /// return angle value is in Radian.
-        public static float GetAngleBetweenTwoVectors(Vector3 vector1,Vector3 vector2)
+        public static float GetAngleBetweenTwoVectors(Vector3 vector1, Vector3 vector2)
         {
             float angle = 0;
             angle = Mathf.Acos(DotProduct(vector1, vector2) / Distance(Vector3.zero, vector1) * Distance(Vector3.zero, vector2));
@@ -128,9 +136,9 @@ namespace GF
         /// <param name="vector1"></param>
         /// <param name="vector2"></param>
         /// <returns></returns>
-        public static float Distance(Vector3 vector1,Vector3 vector2)
+        public static float Distance(Vector3 vector1, Vector3 vector2)
         {
-            float squareDist=Sqaure(vector1.x - vector2.x) + Sqaure(vector1.y - vector2.y) + Sqaure(vector1.z - vector2.z);
+            float squareDist = Sqaure(vector1.x - vector2.x) + Sqaure(vector1.y - vector2.y) + Sqaure(vector1.z - vector2.z);
             float squareRoot = Mathf.Sqrt(squareDist);
             return squareRoot;
         }
