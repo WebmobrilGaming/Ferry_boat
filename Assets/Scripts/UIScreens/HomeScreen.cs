@@ -61,6 +61,7 @@ namespace Ferry.Screens
 
         private IEnumerator AnimateButtons()
         {
+            yield return new WaitForSeconds(1);
             startSimulationRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
             GameObjectivesRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
