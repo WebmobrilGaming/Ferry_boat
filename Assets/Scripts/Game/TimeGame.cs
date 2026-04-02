@@ -91,6 +91,7 @@ public class TimerAndScore : MonoBehaviour
 
     private void AddScore(int amount)
     {
+        if (timer >= maxTime) return;
         score += amount;
         scoreText.text = $"{score}";
         var request=new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username,score);

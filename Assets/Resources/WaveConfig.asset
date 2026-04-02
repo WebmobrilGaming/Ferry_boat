@@ -17,11 +17,11 @@ MonoBehaviour:
     waveSpeed: 1.2
     rollAmount: 1.5
     pitchAmount: 1
-  - waveHeight: 0.12
-    waveSpeed: 2.4
-    rollAmount: 3
+  - waveHeight: 0.1
+    waveSpeed: 1.68
+    rollAmount: 2.1
     pitchAmount: 2
-  - waveHeight: 0.18
-    waveSpeed: 3.6
-    rollAmount: 4.5
+  - waveHeight: 0.14
+    waveSpeed: 2.352
+    rollAmount: 2.94
     pitchAmount: 3
