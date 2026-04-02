@@ -16,19 +16,19 @@ MonoBehaviour:
   - dockSet: 0
     dockPosition: {x: 855, y: 30, z: 3918}
   - dockSet: 1
-    dockPosition: {x: 726, y: 30, z: 4696}
+    dockPosition: {x: -9, y: 30, z: 2190}
   - dockSet: 2
-    dockPosition: {x: 971, y: 30, z: 5394}
+    dockPosition: {x: 679, y: 30, z: 1963}
   - dockSet: 3
     dockPosition: {x: 1091, y: 30, z: 1135}
   - dockSet: 4
     dockPosition: {x: 1037, y: 30, z: -3340}
   - dockSet: 5
-    dockPosition: {x: -12, y: 30, z: -5001}
+    dockPosition: {x: 1338, y: 30, z: -1641}
   - dockSet: 6
     dockPosition: {x: -1547, y: 30, z: -5655}
   - dockSet: 7
-    dockPosition: {x: -1380, y: 30, z: -6188}
+    dockPosition: {x: -1093, y: 30, z: -3040}
   - dockSet: 8
     dockPosition: {x: -1762, y: 30, z: -2663}
   - dockSet: 9
@@ -36,4 +36,4 @@ MonoBehaviour:
   - dockSet: 10
     dockPosition: {x: -1602, y: 30, z: 1966}
   - dockSet: 11
-    dockPosition: {x: -652, y: 30, z: -5998}
+    dockPosition: {x: -1789, y: 30, z: -4288}

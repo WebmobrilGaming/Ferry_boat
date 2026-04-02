@@ -76,6 +76,8 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string lastName { get; set; }
         public string username { get; set; }
         public int score { get; set; }
+        public string difficultyLevel { get; set; }
+        public DateTime time { get; set; }
     }
 
     public class LeaderboardResponse : Response
@@ -86,4 +88,26 @@ namespace Ferry_boat.Assets.Scripts.Web
         public long code { get; set; }
         public bool status => success;
     }
+
+    public class UpdateScoreRequest
+    {
+        public UpdateScoreRequest(string username, int score)
+        {
+            this.username = username;
+            this.score = score;
+        }
+
+        public string username { get; set; }
+        public int score { get; set; }
+    }
+    public class UpdateScoreResponse : Response
+    {
+        public bool success { get; set; }
+        public string message { get; set; }
+        public PlayerData data { get; set; }
+        public long code { get; set; }
+        public bool status => success;
+    }
+
+
 }

@@ -6,6 +6,7 @@ using System;
 using Newtonsoft.Json;
 using DG.Tweening;
 using GF;
+using Ferry_boat.Assets.Scripts.Web;
 
 public class TimerAndScore : MonoBehaviour
 {
@@ -92,6 +93,13 @@ public class TimerAndScore : MonoBehaviour
     {
         score += amount;
         scoreText.text = $"{score}";
+        var request=new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username,score);
+        APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore,request),OnScoreUpdate);
+    }
+
+    private void OnScoreUpdate(UpdateScoreResponse data, Response response)
+    {
+        
     }
 
     private void UpdateTimerUI()
