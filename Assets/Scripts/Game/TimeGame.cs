@@ -26,10 +26,13 @@ public class TimerAndScore : MonoBehaviour
     private int maxTime;
     private bool isTimeOut = false;
     private bool IsInitialized = false;
+    private bool isLevelFinished=false;
     private void OnEnable()
     {
         enableScore = false;
         Act.EnableScore += EnableScore;
+        Act.ReachedDestination += LevelFinish;
+        Act.BoatDestroyedAction += LevelFinish;
         if (PlayerPrefs.HasKey("Settings"))
         {
             string json = PlayerPrefs.GetString("Settings");
@@ -49,9 +52,16 @@ public class TimerAndScore : MonoBehaviour
         };
     }
 
+    private void LevelFinish()
+    {
+        isLevelFinished=true;
+    }
+
     private void OnDisable()
     {
         Act.EnableScore -= EnableScore;
+        Act.ReachedDestination -= LevelFinish;
+        Act.BoatDestroyedAction -= LevelFinish;
     }
 
     private void EnableScore(bool enable)
@@ -75,6 +85,7 @@ public class TimerAndScore : MonoBehaviour
                 Utils.ShowInGamePopup("Opps...! Time out");
             }
         }
+        if(isLevelFinished) return;
         UpdateTimerUI();
         CheckMinutePassed();
     }
