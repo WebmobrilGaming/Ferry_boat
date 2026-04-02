@@ -66,13 +66,11 @@ namespace Ferry.Config
         CanadianDock4,
         CanadianDock5,
         CanadianDock6,
-        CanadianDock7,
         AmericanDock1,
         AmericanDock2,
         AmericanDock3,
         AmericanDock4,
         AmericanDock5,
         AmericanDock6,
-        AmericanDock7
     }
 }

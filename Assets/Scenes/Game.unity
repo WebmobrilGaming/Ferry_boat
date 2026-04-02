@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3830484
 Transform:
   m_ObjectHideFlags: 0
@@ -150,6 +150,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 154635114}
   - {fileID: 543450651912916840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -2.559, z: 0}
@@ -165,10 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f099be354f8d9184c9b991279a81f71b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowedBarge
-  boatTransform: {fileID: 1099790238}
+  boatTransform: {fileID: 1578644527}
+  joinPoint: {fileID: 0}
   ropeLength: 100
   sternAxis: 1
-  attachOffset: {x: 0, y: 0, z: -100}
+  attachOffset: {x: 0, y: 0, z: -50}
   pullStrength: 35
   pullDamping: 3
   pathDelay: 0.15
@@ -974,7 +976,7 @@ Transform:
   m_GameObject: {fileID: 126591630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1419, y: 30, z: 310.9}
+  m_LocalPosition: {x: 971, y: 30, z: 5394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1510,6 +1512,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148188230}
   m_CullTransparentMesh: 1
+--- !u!1 &154635113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154635114}
+  m_Layer: 0
+  m_Name: JointPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &154635114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154635113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -43.9, y: -5.34, z: 40.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3830484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &169453761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}
@@ -3051,7 +3084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453793430}
   m_Layer: 0
-  m_Name: American_Dock_5
+  m_Name: American_Dock_5_RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3066,7 +3099,7 @@ Transform:
   m_GameObject: {fileID: 453793429}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 306, y: 30, z: 398}
+  m_LocalPosition: {x: -1602, y: 30, z: 1966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3741,37 +3774,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!1 &561160436
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 561160437}
-  m_Layer: 0
-  m_Name: American_Dock_7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &561160437
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561160436}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -920, y: 30, z: -3209}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 906066516}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &573005192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4486,31 +4488,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.7
+      value: -450.69882
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00002
+      value: -0.000022888184
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -472.8
+      value: -3146.875
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.1641995
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.9864272
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4518,7 +4520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 161.099
       objectReference: {fileID: 0}
     - target: {fileID: 8769349457865561410, guid: fbad8620079f7374db33e87328741c41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -6513,7 +6515,7 @@ Transform:
   m_GameObject: {fileID: 713322267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -538.6, y: 30, z: 746.8}
+  m_LocalPosition: {x: 726, y: 30, z: 4696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6968,7 +6970,7 @@ Transform:
   m_GameObject: {fileID: 791689767}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1003.9, y: 30, z: 1221}
+  m_LocalPosition: {x: 855, y: 30, z: 3918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7222,7 +7224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 875342479}
   m_Layer: 0
-  m_Name: American_Dock_3
+  m_Name: American_Dock_3_RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7237,7 +7239,7 @@ Transform:
   m_GameObject: {fileID: 875342478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 887, y: 30, z: 61}
+  m_LocalPosition: {x: -1762, y: 30, z: -2663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7253,7 +7255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 877829812}
   m_Layer: 0
-  m_Name: Canada_Dock_5
+  m_Name: Canada_Dock_5_RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7268,7 +7270,7 @@ Transform:
   m_GameObject: {fileID: 877829811}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -989, y: 30, z: -2996}
+  m_LocalPosition: {x: 1037, y: 30, z: -3340}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7299,7 +7301,7 @@ Transform:
   m_GameObject: {fileID: 879613794}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -176, y: 30, z: -3207}
+  m_LocalPosition: {x: -652, y: 30, z: -5998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7390,7 +7392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 890839499}
   m_Layer: 0
-  m_Name: Canada_Dock_6
+  m_Name: Canada_Dock_6_RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7405,7 +7407,7 @@ Transform:
   m_GameObject: {fileID: 890839498}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2425, y: 30, z: -3275}
+  m_LocalPosition: {x: -12, y: 30, z: -5001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7494,14 +7496,12 @@ Transform:
   - {fileID: 1919385624}
   - {fileID: 877829812}
   - {fileID: 890839499}
-  - {fileID: 1609329535}
   - {fileID: 1575102142}
   - {fileID: 1946161610}
   - {fileID: 875342479}
   - {fileID: 1607685148}
   - {fileID: 453793430}
   - {fileID: 879613795}
-  - {fileID: 561160437}
   - {fileID: 192893126}
   - {fileID: 1099790238}
   - {fileID: 543450651893137888}
@@ -8677,6 +8677,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7671748265835084297}
+  - {fileID: 1578644527}
   m_Father: {fileID: 906066516}
   m_LocalEulerAnglesHint: {x: -0.271, y: -0.645, z: -1.878}
 --- !u!114 &1099790239
@@ -12573,12 +12574,43 @@ Transform:
   m_GameObject: {fileID: 1575102141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 228, y: 30, z: -3364}
+  m_LocalPosition: {x: -1547, y: 30, z: -5655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 906066516}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &1578644526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1578644527}
+  m_Layer: 3
+  m_Name: TowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1578644527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578644526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.7, y: 8.9, z: -61.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1099790238}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1593240457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7213631392869875261, guid: 9c3b03da3451d7e40ba4f4ae47919f7c, type: 3}
@@ -12816,7 +12848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607685148}
   m_Layer: 0
-  m_Name: American_Dock_4
+  m_Name: American_Dock_4_RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12831,43 +12863,12 @@ Transform:
   m_GameObject: {fileID: 1607685147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 567, y: 30, z: -3886}
+  m_LocalPosition: {x: -2027, y: 30, z: -1455}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 906066516}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &1609329534
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1609329535}
-  m_Layer: 0
-  m_Name: Canada_Dock_7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1609329535
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609329534}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -135, y: 30, z: 523}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 906066516}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635438893
 GameObject:
   m_ObjectHideFlags: 0
@@ -14419,7 +14420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919385624}
   m_Layer: 0
-  m_Name: Canada_Dock_4
+  m_Name: Canada_Dock_4_RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14434,7 +14435,7 @@ Transform:
   m_GameObject: {fileID: 1919385623}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -756, y: 30, z: -196}
+  m_LocalPosition: {x: 1091, y: 30, z: 1135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14591,7 +14592,7 @@ Transform:
   m_GameObject: {fileID: 1946161609}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1559, y: 30, z: -836}
+  m_LocalPosition: {x: -1380, y: 30, z: -6188}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

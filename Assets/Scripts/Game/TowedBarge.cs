@@ -6,6 +6,7 @@ public class TowedBarge : MonoBehaviour
 {
     [Header("Boat")]
     public Transform boatTransform;
+    public Transform joinPoint;
     public float ropeLength = 5f;
 
     public enum BoatAxis { Forward, Back, Right, Left }
@@ -89,7 +90,7 @@ public class TowedBarge : MonoBehaviour
             });
         }
 
-        transform.position = startPos;
+        joinPoint.position = startPos;
     }
 
     private void Update()
@@ -120,7 +121,7 @@ public class TowedBarge : MonoBehaviour
         if (boatTransform == null) return;
 
         Vector3 anchor = SamplePath(Time.time - pathDelay);
-        Vector3 toAnchor = anchor - transform.position;
+        Vector3 toAnchor = anchor - joinPoint.position;
         float dist = toAnchor.magnitude;
 
         if (dist > 0.05f)

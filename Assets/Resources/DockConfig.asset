@@ -14,30 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ferry.Config.DockConfig
   docks:
   - dockSet: 0
-    dockPosition: {x: -1003.9, y: 30, z: 1221}
+    dockPosition: {x: 855, y: 30, z: 3918}
   - dockSet: 1
-    dockPosition: {x: -538.6, y: 30, z: 746.8}
+    dockPosition: {x: 726, y: 30, z: 4696}
   - dockSet: 2
-    dockPosition: {x: -1419, y: 30, z: 310.9}
+    dockPosition: {x: 971, y: 30, z: 5394}
   - dockSet: 3
-    dockPosition: {x: -756, y: 30, z: -196}
+    dockPosition: {x: 1091, y: 30, z: 1135}
   - dockSet: 4
-    dockPosition: {x: -989, y: 30, z: -2996}
+    dockPosition: {x: 1037, y: 30, z: -3340}
   - dockSet: 5
-    dockPosition: {x: -2425, y: 30, z: -3275}
+    dockPosition: {x: -12, y: 30, z: -5001}
   - dockSet: 6
-    dockPosition: {x: -135, y: 30, z: 523}
+    dockPosition: {x: -1547, y: 30, z: -5655}
   - dockSet: 7
-    dockPosition: {x: 228, y: 30, z: -3364}
+    dockPosition: {x: -1380, y: 30, z: -6188}
   - dockSet: 8
-    dockPosition: {x: 1559, y: 30, z: -836}
+    dockPosition: {x: -1762, y: 30, z: -2663}
   - dockSet: 9
-    dockPosition: {x: 887, y: 30, z: 61}
+    dockPosition: {x: -2027, y: 30, z: -1455}
   - dockSet: 10
-    dockPosition: {x: 567, y: 30, z: -3886}
+    dockPosition: {x: -1602, y: 30, z: 1966}
   - dockSet: 11
-    dockPosition: {x: 306, y: 30, z: 398}
-  - dockSet: 12
-    dockPosition: {x: -176, y: 30, z: -3207}
-  - dockSet: 13
-    dockPosition: {x: -920, y: 30, z: -3209}
+    dockPosition: {x: -652, y: 30, z: -5998}
