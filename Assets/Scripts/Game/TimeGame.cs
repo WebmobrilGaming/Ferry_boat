@@ -23,8 +23,8 @@ public class TimerAndScore : MonoBehaviour
     public int mediumMaxTime;
     public int hardMaxTime;
     private int maxTime;
-    private bool isTimeOut=false;
-    private bool IsInitialized=false;
+    private bool isTimeOut = false;
+    private bool IsInitialized = false;
     private void OnEnable()
     {
         enableScore = false;
@@ -56,7 +56,7 @@ public class TimerAndScore : MonoBehaviour
     private void EnableScore(bool enable)
     {
         enableScore = enable;
-        IsInitialized=true;
+        IsInitialized = true;
     }
 
     private void Update()
@@ -70,15 +70,12 @@ public class TimerAndScore : MonoBehaviour
         {
             if (!isTimeOut)
             {
-                isTimeOut=true;
+                isTimeOut = true;
                 Utils.ShowInGamePopup("Opps...! Time out");
             }
         }
-        else
-        {
-            UpdateTimerUI();
-            CheckMinutePassed();
-        }
+        UpdateTimerUI();
+        CheckMinutePassed();
     }
 
     private void CheckMinutePassed()
