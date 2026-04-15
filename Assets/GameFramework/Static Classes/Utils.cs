@@ -15,18 +15,22 @@ namespace GF
         {
             EventManager.Instance.QueueEvent(new InGamePopupEvent(info));
         }
+
         public static void ShowYesNoPopup(string title, string info, Action yes, Action no)
         {
             EventManager.Instance.QueueEvent(new YesNoPopupEvent(title, info, yes, no));
         }
+
         public static void ShowOkPopup(string title, string info, Action ok)
         {
             EventManager.Instance.QueueEvent(new OkPopupEvent(title, info, ok));
         }
+
         public static void CallEventAsync(GameEvent gameEvent)
         {
             EventManager.Instance.TriggerEvent(gameEvent);
         }
+
         public static void CallEventSync(GameEvent gameEvent)
         {
             EventManager.Instance.QueueEvent(gameEvent);

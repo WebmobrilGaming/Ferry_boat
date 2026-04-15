@@ -103,10 +103,10 @@ public class TimerAndScore : MonoBehaviour
     private void AddScore(int amount)
     {
         if (timer >= maxTime) return;
-        score += amount;
-        scoreText.text = $"{score}";
-        var request=new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username,score);
-        APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore,request),OnScoreUpdate);
+        //score += amount;
+        // scoreText.text = $"{score}";
+
+        Score_System.Instance.Set(amount);
     }
 
     private void OnScoreUpdate(UpdateScoreResponse data, Response response)

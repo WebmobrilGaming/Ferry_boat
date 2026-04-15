@@ -8875,6 +8875,51 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!1 &1078547925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1078547926}
+  - component: {fileID: 1078547927}
+  m_Layer: 0
+  m_Name: '[SCORE]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1078547926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078547925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1169.4535, y: -0.00001, z: 7219.835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078547927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078547925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f5962a2fe6ab243b3326cbb6e8c909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Score_System
+  mScore: {fileID: 904441859}
 --- !u!1 &1083019847
 GameObject:
   m_ObjectHideFlags: 0
@@ -9023,6 +9068,7 @@ MonoBehaviour:
   mdamage: 5
   mHealthSlider: {fileID: 180628697}
   mHealthText: {fileID: 1366854945}
+  score_System: {fileID: 1078547927}
   ferryConfig: {fileID: 11400000, guid: afb5b2335dc0e4c469db3e6cda6a7711, type: 2}
   difficultyLevel: 0
   thresholdSpeed: 0
@@ -20009,3 +20055,4 @@ SceneRoots:
   - {fileID: 133395448}
   - {fileID: 1277258121}
   - {fileID: 2069139401}
+  - {fileID: 1078547926}

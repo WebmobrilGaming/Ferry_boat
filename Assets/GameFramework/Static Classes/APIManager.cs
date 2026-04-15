@@ -15,12 +15,12 @@ namespace GF
                 Callback?.Invoke(result.Item1, result.Item2);
             }));
         }
-        public static void PostAPI<T>(Request request, Action<T, Response> Callback)
+        public static void PostAPI<T>(Request request, Action<T> Callback)
         {
             Utils.CallEventAsync(new ApiEvent(HttpRequestType.POST, request, (res) =>
             {
                 var result = MapResponse<T>(res);
-                Callback?.Invoke(result.Item1, result.Item2);
+                Callback?.Invoke(result.Item1);
 
             }));
         }
