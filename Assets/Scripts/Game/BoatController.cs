@@ -23,7 +23,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float mBoatSpeed;
     [SerializeField] bool isControl;
     Quaternion startRotation;
-    private const float MPS_TO_KNOTS = 1.94384f;
+    private const float MPS_TO_KNOTS = 2.23694f;
 
     [Header("Speed Settings:")]
     [Space]
@@ -51,6 +51,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float mdamage;
     [SerializeField] Slider mHealthSlider;
     [SerializeField] TMP_Text mHealthText;
+
+    [Header("Score Settings")]
+    [SerializeField] Score_System score_System;
+
 
     bool isHit = false;
     public ShipConfig ferryConfig;
@@ -201,7 +205,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
         speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;
-        mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} Speed";
+        mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} mph";
 
         mLastPosition = transform.position;
         ThresholdCheck();
@@ -247,8 +251,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         mThresholdApplied = true;
 
-        float newHealth = mHealth - mdamage;
+        //float newHealth = mHealth - mdamage;
         Utils.ShowInGamePopup($"You are crossing speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+
+        score_System.Set(-20);
     }
 
     private void SpeedChange(float val)
@@ -351,5 +357,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         currentRotation += delta * rotationMultiplier;
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
+    }
+
+    void UpdateScoreUI()
+    {
+
     }
 }

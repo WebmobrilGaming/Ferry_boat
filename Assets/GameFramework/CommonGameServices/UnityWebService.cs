@@ -76,7 +76,7 @@ namespace GF
 
         private IEnumerator PostRequest(string url, RequestType requestType, string data, Action<string> onPostCompleteCalback)
         {
-            Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} : {data}");
+            Logger.Log(LogType.HttpRequest, $"[POST] : {requestType} {url}: {data}");
             // Convert JSON string to bytes
             using (UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST))
             {

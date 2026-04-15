@@ -1,11 +1,12 @@
-using System;
 using DG.Tweening;
 using Ferry_boat.Assets.Scripts.Web;
 using GF;
 using Newtonsoft.Json;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Audio.ProcessorInstance;
 namespace Ferry.Screens
 {
     public class LoginScreen : BaseScreen<ScreenType>
@@ -33,9 +34,10 @@ namespace Ferry.Screens
         {
             if (PlayerPrefs.HasKey("username"))
             {
-                DebugUtils.DevDebug.Log($"Username is available: {PlayerPrefs.GetString("username")}", DebugColor.Indigo);
+                DebugUtils.DevDebug.Log($"Username is available: {PlayerPrefs.GetString("username")}", DebugColor.Pink);
 
                 string username = PlayerPrefs.GetString("username");
+
 
                 SubmitPrevUser(username);
                // SwitchScreen(ScreenType.Home);
@@ -89,12 +91,12 @@ namespace Ferry.Screens
             APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request), OnLogin);
         }
 
-        private void OnLogin(UserDetails details, Response response)
+        private void OnLogin(UserDetails details)
         {
-            if (response.status)
+            if (details.success)
             {
                 UserDataManager.Instance.SignIn(details);
-                PlayerPrefs.SetString("username",JsonConvert.SerializeObject(details));
+                PlayerPrefs.SetString("username",details.data.username);
                 SwitchScreen(ScreenType.Home);
             }
             else
@@ -115,17 +117,19 @@ namespace Ferry.Screens
             APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
         }
 
-        private void OnReceivedNewUser(UserDetails details, Response response)
+        private void OnReceivedNewUser(UserDetails details)
         {
-            if (response.status)
+            if (details.success)
             {
                 UserDataManager.Instance.SignIn(details);
+
+
                 PlayerPrefs.SetString("username",details.data.username);
                 SwitchScreen(ScreenType.Home);
             }
             else
             {
-                Utils.ShowOkPopup("Error", response.message, null);
+                Utils.ShowOkPopup("Error", details.message, null);
             }
         }
 
