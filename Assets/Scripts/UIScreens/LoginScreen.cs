@@ -33,8 +33,12 @@ namespace Ferry.Screens
         {
             if (PlayerPrefs.HasKey("username"))
             {
-                UserDataManager.Instance.SignIn(JsonConvert.DeserializeObject<UserDetails>(PlayerPrefs.GetString("username")));
-                SwitchScreen(ScreenType.Home);
+                DebugUtils.DevDebug.Log($"Username is available: {PlayerPrefs.GetString("username")}", DebugColor.Indigo);
+
+                string username = PlayerPrefs.GetString("username");
+
+                SubmitPrevUser(username);
+               // SwitchScreen(ScreenType.Home);
             }
             else
             {
@@ -44,7 +48,12 @@ namespace Ferry.Screens
                 newUserBtn.AddListener(null, CreateNewUser);
                 prevUserBtn.AddListener(null, LogInPreviousUser);
                 submitNewUserBtn.AddListener(null, SubmitNewUser);
-                submitPrevUserBtn.AddListener(null, SubmitPrevUser);
+                submitPrevUserBtn.AddListener(null, () =>
+                {
+                    string prevUsername = prevUsernameInput.text.Trim();
+
+                    SubmitPrevUser(prevUsername);
+                });
                 closeNewUserPanelBtn.AddListener(null, CloseNewUserPanel);
                 closePrevUserPanelBtn.AddListener(null, ClosePrevUserPanel);
             }
@@ -68,14 +77,15 @@ namespace Ferry.Screens
             });
         }
 
-        private void SubmitPrevUser()
+        private void SubmitPrevUser(string username)
         {
-            string prevUsername = prevUsernameInput.text.Trim();
-            if (string.IsNullOrEmpty(prevUsername) || prevUsername.Length < 3)
+           // string prevUsername = prevUsernameInput.text.Trim();
+
+            if (string.IsNullOrEmpty(username) || username.Length < 3)
             {
                 return;
             }
-            var request = new CreatePlayer("previous", prevUsername);
+            var request = new CreatePlayer("previous", username);
             APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request), OnLogin);
         }
 
