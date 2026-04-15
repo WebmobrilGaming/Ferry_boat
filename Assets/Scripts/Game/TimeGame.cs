@@ -15,7 +15,6 @@ public class TimerAndScore : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
 
     private float timer = 0f;
-    private int score = 0;
     private int lastMinute = 0;
 
     [SerializeField] DifficultyLevel difficultyLevel;
@@ -27,12 +26,16 @@ public class TimerAndScore : MonoBehaviour
     private bool isTimeOut = false;
     private bool IsInitialized = false;
     private bool isLevelFinished=false;
+
+    int timeLimit;
+
     private void OnEnable()
     {
         enableScore = false;
         Act.EnableScore += EnableScore;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
+
         if (PlayerPrefs.HasKey("Settings"))
         {
             string json = PlayerPrefs.GetString("Settings");
@@ -50,6 +53,11 @@ public class TimerAndScore : MonoBehaviour
             DifficultyLevel.hard => hardMaxTime,
             _ => easyMaxTime
         };
+    }
+
+    private void SetTimeLimit(int time)
+    {
+        timeLimit = time;
     }
 
     private void LevelFinish()

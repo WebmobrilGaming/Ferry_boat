@@ -359,9 +359,4 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
     }
-
-    void UpdateScoreUI()
-    {
-
-    }
 }

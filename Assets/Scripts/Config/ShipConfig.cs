@@ -11,6 +11,7 @@ namespace Ferry.Config
         public float health;
         public float damage;
         public FuelConfig fuelConfig;
+
     }
     [Serializable]
     public class Velocity
@@ -20,6 +21,7 @@ namespace Ferry.Config
         public float angularSpeed;
         public float shipSpeed;
         public float windSpeed;
+        public int timeLimit;
     }
     [Serializable]
     public class FuelConfig

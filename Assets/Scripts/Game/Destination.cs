@@ -69,6 +69,8 @@ public class Destination : MonoBehaviour
 
             DevDebug.Log("Ferry missed the dock!", DebugColor.Red);
             Utils.ShowInGamePopup("You missed the dock");
+
+            Score_System.Instance.Set(-20);
         }
 
         if (!isStopped)
