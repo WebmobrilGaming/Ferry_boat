@@ -96,6 +96,8 @@ public class UserInterFace : MonoBehaviour
     private void BoatDestroyed()
     {
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
+        AudioManager.Instance.PlaySFX(AudioState.crash);
+
         StopEngineEvent?.Invoke();
     }
 

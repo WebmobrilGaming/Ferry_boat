@@ -94,6 +94,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mFuel.baseConsumption = ferryConfig.fuelConfig.baseConsumption;
         mFuel.maxFuel = ferryConfig.fuelConfig.fuelCapacity;
     }
+
     private void OnEnable()
     {
         helmController.callback = this;
