@@ -31,4 +31,18 @@ public class AudioManager : MonoBehaviour
 
         audioSource.PlayOneShot(clip,1.0f);
     }
+
+    public void PlayBg(AudioState state)
+    {
+        AudioClip clip = audioStore.GetAudioClip(state, AudioType.bg);
+
+        audioSource.clip = clip;
+        audioSource.Play();
+        audioSource.loop = true;
+    }
+
+    public void Stop()
+    {
+        audioSource.Stop();
+    }
 }

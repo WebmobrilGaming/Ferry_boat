@@ -16,13 +16,13 @@ MonoBehaviour:
   velocitiesLevels:
   - acceleration: 5
     deceleration: 3
-    angularSpeed: 0.08
+    angularSpeed: 0.03
     shipSpeed: 35
     windSpeed: 10
     timeLimit: 10
   - acceleration: 5
     deceleration: 3
-    angularSpeed: 0.04
+    angularSpeed: 0.02
     shipSpeed: 32
     windSpeed: 12
     timeLimit: 8

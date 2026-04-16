@@ -267,6 +267,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             return;
 
         trottleSlider.DOValue(val, 0.65f);
+
+
     }
 
     void GearAction()

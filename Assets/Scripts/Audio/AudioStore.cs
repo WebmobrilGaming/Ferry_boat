@@ -25,5 +25,5 @@ public class AudioData
 }
 
 
-public enum AudioState { crash };
+public enum AudioState { crash,boat };
 public enum AudioType { sfx,bg }
