@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc734eadc54077043a710cf5f5da9e09, type: 3}
+  m_Name: Female_01_Path
+  m_EditorClassIdentifier: Assembly-CSharp::PathData
+  _waypoints:
+  - {x: 940.061, y: 33.47, z: -17.650019}
+  - {x: 917.4924, y: 34.138123, z: -95.31956}
+  - {x: 900.9786, y: 33.47, z: -112.66546}
+  _loop: 0
+  _useCatmullRom: 1

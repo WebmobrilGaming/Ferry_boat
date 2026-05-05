@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 944a87d287092954c8d7281319d2c324, type: 3}
+  m_Name: NPCStore
+  m_EditorClassIdentifier: Assembly-CSharp::NPCStore
+  NPCs:
+  - {fileID: 431484181107875029, guid: 8c701dbaa5620ad449b03e3a898f6664, type: 3}
+  - {fileID: 1268182110658868445, guid: dfaa031f63080fb4a850a826343714fc, type: 3}
+  - {fileID: 1839899611254275585, guid: 13acf94b507f783428b49a5ec6f349fc, type: 3}
+  - {fileID: 7964649318950693407, guid: 08527643bf14e474fa8137d3f013b673, type: 3}
+  - {fileID: 972280498392913089, guid: 7d6d8e03fb8ab8746bddd36ea381cedd, type: 3}
+  - {fileID: 541935020978658661, guid: 00841e6bd37ed29428257c3d97108919, type: 3}
+  - {fileID: 1126305366464414670, guid: 347ca5876caa31d4e932f6cf41ff3919, type: 3}
+  - {fileID: 8064604028226332749, guid: 18ef202a562280943abbeb24c1cf990f, type: 3}
+  - {fileID: 6031864961728934994, guid: a0f2efa81c5ba7f4fb482fc166dd154f, type: 3}
+  - {fileID: 3001021158642557501, guid: 7a7021be6e645d146ba6c323127ba442, type: 3}
