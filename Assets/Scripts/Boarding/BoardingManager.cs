@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     [Header("NPC")]
     [SerializeField] NPCStore mNPCStore;
     [SerializeField] Transform mNPCTransform;
+
+    [Header("Timer:")]
+    [SerializeField] Timer mTimer;
 
     int score = 0;
     int time = 0;
@@ -52,6 +56,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         });
 
         mBoardingStartBtn.interactable = false;
+
+        mTimer.DisplayTimer += DisplayTimerAction;
+        mTimer.OnCompleteAct += TimerEndAction;
     }
 
     private void OnDisable()
@@ -61,6 +68,32 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         _cts?.Cancel();
         _cts?.Dispose();
         _cts = null;
+
+        mTimer.DisplayTimer -= DisplayTimerAction;
+        mTimer.OnCompleteAct -= TimerEndAction;
+    }
+
+    private void OnDestroy()
+    {
+        mBoardingStartBtn.onClick.RemoveAllListeners();
+
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = null;
+
+        mTimer.DisplayTimer -= DisplayTimerAction;
+        mTimer.OnCompleteAct -= TimerEndAction;
+    }
+
+    private void DisplayTimerAction(string obj)
+    {
+        mTime.text = obj;
+    }
+
+    private void TimerEndAction()
+    {
+        mTime.text = "00:00 mins";
+        GameCamController.Instaance.SetCam(CamType.driver);
     }
 
     public void SetBoard(BoardType type)
@@ -75,6 +108,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
                 Score_System.Instance.Set(score);
                 mBoardingPanel.SetActive(false);
+
+                mTimer.Begin(120);
+                mTime.text = mTimer.Display;
 
                 PassengerBaording(passengerCount);
 
@@ -91,17 +127,24 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         if (count <= 0)
             return;
 
+        GameCamController.Instaance.SetCam(CamType.passengers);
+
         for (int i = 0;  i < count; i++)
         {
+            mTimer.Resume();
+
             GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
 
-            NPC npc = go.GetComponent<NPC>();   
+            NPC npc = go.GetComponent<NPC>();
+            npc.SetPathDuration(5);
+
             go.SetActive(true);
 
             await npc.WaitForPathComplete(_cts.Token);
 
-            Destroy(go.gameObject,0.2f);
+            mTimer.Pause();
 
+            Destroy(go.gameObject,0.2f);
             DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
         }
     }
@@ -142,7 +185,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         int s = Mathf.FloorToInt(time % 60f);
         mTime.text = string.Format($"Boarding time: {m:00}:{s:00} mins");
 
-        mBoardingStartBtn.interactable = time <= 120 && time > 0;
+        mBoardingStartBtn.interactable = time == 120;
     }
    
 }

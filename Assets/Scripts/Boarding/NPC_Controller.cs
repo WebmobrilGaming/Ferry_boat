@@ -11,6 +11,8 @@ public class NPC : MonoBehaviour
     Animator animator;
 
     [SerializeField] PathFollower pathFollower;
+    public PathFollower Path => pathFollower;
+
 
     private TaskCompletionSource<bool> _pathCompleteTcs;
     private CancellationTokenSource _cts;
@@ -27,7 +29,21 @@ public class NPC : MonoBehaviour
         _cts = new CancellationTokenSource();
     }
 
+    public void SetPathDuration(float duration){  pathFollower.SetTargetDuration(duration); }
+
     private void OnDisable()
+    {
+        pathFollower.OnPathComplete -= PathCompleteAction;
+
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = null;
+
+        _pathCompleteTcs?.TrySetCanceled();
+        _pathCompleteTcs = null;
+    }
+
+    private void OnDestroy()
     {
         pathFollower.OnPathComplete -= PathCompleteAction;
 

@@ -25,6 +25,8 @@ public class PathFollower : MonoBehaviour
     public event Action<int> OnReachWaypoint;
     public event Action OnPathComplete;
 
+    public void SetTargetDuration(float duration){ _targetDuration = duration; }
+
     /// <summary>
     /// Get or set the target duration. Setting this does NOT apply it immediately —
     /// call ApplyTargetDuration() when ready.
