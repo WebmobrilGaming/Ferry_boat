@@ -1,7 +1,7 @@
 using DG.Tweening;
 using Ferry.Config;
 using Ferry.Motion;
-using FerryBoat;
+using FerryBoat.Actions;
 using GF;
 using Newtonsoft.Json;
 using System;

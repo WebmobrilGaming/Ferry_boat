@@ -6,7 +6,7 @@ using GF;
 using Ferry_boat.Assets.Scripts.Web;
 using TMPro;
 using DebugUtils;
-using FerryBoat;
+using FerryBoat.Actions;
 
 public class MenuManager : MonoBehaviour
 {

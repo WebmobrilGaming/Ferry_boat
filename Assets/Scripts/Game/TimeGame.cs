@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using FerryBoat;
+using FerryBoat.Actions;
 using System;
 using Newtonsoft.Json;
 using DG.Tweening;

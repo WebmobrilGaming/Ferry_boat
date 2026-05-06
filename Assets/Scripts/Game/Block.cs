@@ -1,5 +1,5 @@
 using DebugUtils;
-using FerryBoat;
+using FerryBoat.Actions;
 using System;
 using UnityEngine;
 

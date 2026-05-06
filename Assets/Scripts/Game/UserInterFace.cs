@@ -1,7 +1,8 @@
 using DG.Tweening;
 using Ferry.Config;
 using Ferry.Loading;
-using FerryBoat;
+using Ferry.Popup;
+using FerryBoat.Actions;
 using GF;
 using Newtonsoft.Json;
 using System;
@@ -39,7 +40,15 @@ public class UserInterFace : MonoBehaviour
 
     private void GoHome()
     {
-        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+        GamePopUp.Instance.PopControl("Are you sure you wanna quit?", () =>
+        {
+            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+        }, 
+        () =>
+        {
+
+        });
+       
     }
     private DifficultyLevel GetDifficultyLevel()
     {

@@ -1,6 +1,6 @@
 using DebugUtils;
 using DG.Tweening;
-using FerryBoat;
+using FerryBoat.Actions;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -55,7 +55,6 @@ public class Gear : MonoBehaviour
 
         //}));
     }
-
     private void SpeedChange(float val)
     {
         float t = Mathf.InverseLerp(0, mRange, val);

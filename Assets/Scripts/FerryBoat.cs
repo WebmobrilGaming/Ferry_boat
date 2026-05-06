@@ -3,14 +3,27 @@ using UnityEngine;
 
 namespace  FerryBoat
 {
-   public static  class Act
-   {  
-       public static Action<float> SpeedChange;
-       public static Action<float> SpeedInit;
-       public static Action HitAction;
-       public static Action ReachedDestination;
-       public static Action BoatDestroyedAction;
-       public static Action MainMenuAction;
-       public static Action<bool> EnableScore;
-   }
+    namespace Actions
+    {
+        public static class Act
+        {
+            public static Action<float> SpeedChange;
+            public static Action<float> SpeedInit;
+            public static Action HitAction;
+            public static Action ReachedDestination;
+            public static Action BoatDestroyedAction;
+            public static Action MainMenuAction;
+            public static Action<bool> EnableScore;
+        }
+    }
+
+    namespace Store
+    {
+        public static class Data
+        {
+            public static int passengerCount;
+            public static int carCount;
+            public static int truckCount;
+        }
+    }
 }

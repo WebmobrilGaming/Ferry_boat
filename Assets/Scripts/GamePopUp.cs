@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePopUp : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class GamePopUp : MonoBehaviour
 
     [SerializeField] GameObject panelStat;
     [SerializeField] TMP_Text mStatText;
+
+    [SerializeField] GameObject panelYesNo;
+    [SerializeField] TMP_Text mYesNoText;
+    [SerializeField] Button yesBtn;
+    [SerializeField] Button noBtn;
+     
 
     bool isPanel = false;
     private void Awake()
@@ -46,5 +53,25 @@ public class GamePopUp : MonoBehaviour
         panelStat.SetActive(false);
 
         isPanel = false;
+    }
+
+
+    public void PopControl(string message, Action yesAct, Action noAct)
+    {
+        mYesNoText.text = message;
+
+        yesBtn?.onClick.RemoveAllListeners();
+        noBtn?.onClick.RemoveAllListeners();
+
+        yesBtn?.onClick.AddListener(() =>
+        {
+            yesAct?.Invoke();
+        });
+
+        noBtn?.onClick.AddListener(() =>
+        {
+            panelYesNo.gameObject.SetActive(false);
+            noAct?.Invoke();
+        });
     }
 }

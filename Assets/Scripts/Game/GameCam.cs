@@ -1,4 +1,4 @@
-using FerryBoat;
+using FerryBoat.Actions;
 using System.Collections;
 using UnityEngine;
 
