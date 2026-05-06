@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3830484
 Transform:
   m_ObjectHideFlags: 0
@@ -16755,6 +16755,8 @@ MonoBehaviour:
   - {fileID: 1980241198}
   - {fileID: 104095645}
   - {fileID: 780582849}
+  mNPCStore: {fileID: 11400000, guid: 4337655a099e11a498b8815bc10f2068, type: 2}
+  mNPCTransform: {fileID: 0}
 --- !u!1 &1659020163
 GameObject:
   m_ObjectHideFlags: 0
@@ -21798,10 +21800,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Female_04
       objectReference: {fileID: 0}
-    - target: {fileID: 439314743079056380, guid: 13acf94b507f783428b49a5ec6f349fc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8520252340282923673, guid: 13acf94b507f783428b49a5ec6f349fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.789429
@@ -22109,10 +22107,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Male_05
       objectReference: {fileID: 0}
-    - target: {fileID: 1656522376456234162, guid: a0f2efa81c5ba7f4fb482fc166dd154f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22407,10 +22401,6 @@ PrefabInstance:
     - target: {fileID: 9033916082195603271, guid: 00841e6bd37ed29428257c3d97108919, type: 3}
       propertyPath: m_Name
       value: Male_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 9033916082195603271, guid: 00841e6bd37ed29428257c3d97108919, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23182,10 +23172,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Female_06
       objectReference: {fileID: 0}
-    - target: {fileID: 5117293384687580891, guid: 7d6d8e03fb8ab8746bddd36ea381cedd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5857282702641425550, guid: 7d6d8e03fb8ab8746bddd36ea381cedd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.72461
@@ -23368,10 +23354,6 @@ PrefabInstance:
     - target: {fileID: 4442888159673182091, guid: 08527643bf14e474fa8137d3f013b673, type: 3}
       propertyPath: m_Name
       value: Female_05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4442888159673182091, guid: 08527643bf14e474fa8137d3f013b673, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8135412651045751790, guid: 08527643bf14e474fa8137d3f013b673, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23704,10 +23686,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Male_04
       objectReference: {fileID: 0}
-    - target: {fileID: 2493005039299452402, guid: 7a7021be6e645d146ba6c323127ba442, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6525054981384031304, guid: 7a7021be6e645d146ba6c323127ba442, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.387207
@@ -23877,10 +23855,6 @@ PrefabInstance:
     - target: {fileID: 2051163740235482719, guid: dfaa031f63080fb4a850a826343714fc, type: 3}
       propertyPath: m_Name
       value: Female_02
-      objectReference: {fileID: 0}
-    - target: {fileID: 2051163740235482719, guid: dfaa031f63080fb4a850a826343714fc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8526137479638221662, guid: dfaa031f63080fb4a850a826343714fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24206,10 +24180,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Male_03
       objectReference: {fileID: 0}
-    - target: {fileID: 7146635109260685991, guid: 18ef202a562280943abbeb24c1cf990f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24234,10 +24204,6 @@ PrefabInstance:
     - target: {fileID: 1342624046399473619, guid: 347ca5876caa31d4e932f6cf41ff3919, type: 3}
       propertyPath: m_Name
       value: Male_02
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342624046399473619, guid: 347ca5876caa31d4e932f6cf41ff3919, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5628762207361394364, guid: 347ca5876caa31d4e932f6cf41ff3919, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2152,7 +2152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2460648163673752761
 Transform:
   m_ObjectHideFlags: 0
@@ -2161,7 +2161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9033916082195603271}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9988832, z: -0, w: -0.04724914}
+  m_LocalRotation: {x: 0, y: 0.9988833, z: -0, w: -0.04724594}
   m_LocalPosition: {x: -15.1, y: 34.01, z: -54.04}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
@@ -2180,7 +2180,7 @@ Animator:
   m_GameObject: {fileID: 9033916082195603271}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fa51c13bbeaa3cb489f0041918dad4cc, type: 3}
-  m_Controller: {fileID: 9100000, guid: d364ca49805604b47a81dcbcff61b614, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3b02501b56a78374daa28ba44ab98c4a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2207,6 +2207,7 @@ MonoBehaviour:
   _path: {fileID: 11400000, guid: a6e2c41f6bd9f774eb5dd56746be9dc5, type: 2}
   _speed: 18
   _playOnAwake: 1
+  _targetDuration: 5
   _easingCurve:
     serializedVersion: 2
     m_Curve:

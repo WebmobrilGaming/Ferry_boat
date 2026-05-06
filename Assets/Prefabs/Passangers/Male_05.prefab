@@ -652,7 +652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1398570100781965503
 Transform:
   m_ObjectHideFlags: 0
@@ -680,7 +680,7 @@ Animator:
   m_GameObject: {fileID: 1656522376456234162}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 471d5c89673f117468fd2a7e046ca3b0, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1404ab0947beab94fa1da1150567da47, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3b02501b56a78374daa28ba44ab98c4a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -707,6 +707,7 @@ MonoBehaviour:
   _path: {fileID: 11400000, guid: a6e2c41f6bd9f774eb5dd56746be9dc5, type: 2}
   _speed: 18
   _playOnAwake: 1
+  _targetDuration: 5
   _easingCurve:
     serializedVersion: 2
     m_Curve:

@@ -1,11 +1,13 @@
 
 
-using System.Collections.Generic;
+using DebugUtils;
+using FerryBoat.Store;
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using FerryBoat.Store;
 
 public class BoardingManager : MonoBehaviour,IBoardCal
 {
@@ -28,6 +30,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     int carCount = 0;
     int truckCount = 0;
 
+    private CancellationTokenSource _cts;
+
+
     private void Awake()
     {
         foreach (var cal in boardings)
@@ -35,6 +40,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         score = 0;
         time = 0;
+
+        _cts = new CancellationTokenSource();
     }
 
     private void OnEnable()
@@ -50,6 +57,10 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     private void OnDisable()
     {
         mBoardingStartBtn.onClick.RemoveAllListeners();
+
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = null;
     }
 
     public void SetBoard(BoardType type)
@@ -65,6 +76,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 Score_System.Instance.Set(score);
                 mBoardingPanel.SetActive(false);
 
+                PassengerBaording(passengerCount);
+
                 break;
 
 
@@ -73,7 +86,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         }
     }
 
-    public void PassengerBaording(int count)
+    public async void PassengerBaording(int count)
     {
         if (count <= 0)
             return;
@@ -81,8 +94,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         for (int i = 0;  i < count; i++)
         {
             GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
-            NPC npc = go.GetComponent<NPC>();   
 
+            NPC npc = go.GetComponent<NPC>();   
+            go.SetActive(true);
+
+            await npc.WaitForPathComplete(_cts.Token);
+
+            Destroy(go.gameObject,0.2f);
+
+            DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
         }
     }
 
