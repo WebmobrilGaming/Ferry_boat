@@ -24,6 +24,8 @@ namespace  FerryBoat
             public static int passengerCount;
             public static int carCount;
             public static int truckCount;
+
+            public static float time;
         }
     }
 }

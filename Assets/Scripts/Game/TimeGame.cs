@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
+using FerryBoat.Store;
 
 public class TimerAndScore : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class TimerAndScore : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    private float timer = 0f;
+    public float timer = 0f;
+
+
     private int lastMinute = 0;
 
     [SerializeField] DifficultyLevel difficultyLevel;
@@ -79,6 +82,8 @@ public class TimerAndScore : MonoBehaviour
 
         if (enable)
             timer = maxTime;
+
+        Data.time = timer;
     }
 
     private void Update()
@@ -89,6 +94,7 @@ public class TimerAndScore : MonoBehaviour
         }
 
         timer -= Time.deltaTime;
+        Data.time = timer;
 
         if (timer <=0 )
         {
@@ -119,7 +125,7 @@ public class TimerAndScore : MonoBehaviour
         //score += amount;
         // scoreText.text = $"{score}";
 
-        Score_System.Instance.Set(amount);
+        Score_System.Instance.Set(amount,Data.time);
     }
 
     private void OnScoreUpdate(UpdateScoreResponse data, Response response)

@@ -58,6 +58,8 @@ public class GamePopUp : MonoBehaviour
 
     public void PopControl(string message, Action yesAct, Action noAct)
     {
+        panelYesNo.SetActive(true);
+
         mYesNoText.text = message;
 
         yesBtn?.onClick.RemoveAllListeners();

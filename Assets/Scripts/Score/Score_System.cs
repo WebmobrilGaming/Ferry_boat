@@ -11,6 +11,8 @@ public class Score_System : MonoBehaviour
 
     [SerializeField] int score;
 
+    public int Score => score;
+
     static Score_System instance;
 
     public static  Score_System Instance {  get { return instance; } }
@@ -26,15 +28,13 @@ public class Score_System : MonoBehaviour
         score = 0;
     }
 
-    public void Set(int inx,float time = -1, Action onComplete = null)
+    public void Set(int inx,float time = 0, Action onComplete = null)
     {  
         score =  score + inx;
         mScore.text =  score.ToString();
 
-        if (time < 0)
-            return;
-
-        var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, score);
+        int timedata = (int)time;
+        var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, timedata, score);
         APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore, request), (res) =>
         {
             onComplete?.Invoke();

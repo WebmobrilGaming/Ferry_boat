@@ -2121,7 +2121,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Destination Reached !!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
   m_sharedMaterial: {fileID: 1287878626960872744, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10744,6 +10744,7 @@ MonoBehaviour:
   mSpeed: 40
   mBoatSpeed: 0
   isControl: 0
+  mWind: {fileID: 1413294757}
   speedInKnots: 0
   mSpeedKnots: {fileID: 8807814318500735930}
   mAcceleration: 8
@@ -15060,7 +15061,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 686914663}
         m_TargetAssemblyTypeName: UserInterFace, Assembly-CSharp
-        m_MethodName: ExitAction
+        m_MethodName: GoHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15858,7 +15859,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 686914663}
         m_TargetAssemblyTypeName: UserInterFace, Assembly-CSharp
-        m_MethodName: ExitAction
+        m_MethodName: GoHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18391,7 +18392,7 @@ GameObject:
   - component: {fileID: 1788003457}
   - component: {fileID: 1788003456}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Panel_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18859,7 +18860,7 @@ GameObject:
   - component: {fileID: 1825755827}
   - component: {fileID: 1825755826}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: Panel_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18898,7 +18899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9098039}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

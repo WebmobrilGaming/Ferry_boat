@@ -1,6 +1,7 @@
 using System;
 using DebugUtils;
 using FerryBoat.Actions;
+using FerryBoat.Store;
 using GF;
 using UnityEngine;
 
@@ -70,7 +71,7 @@ public class Destination : MonoBehaviour
             DevDebug.Log("Ferry missed the dock!", DebugColor.Red);
             Utils.ShowInGamePopup("You missed the dock");
 
-            Score_System.Instance.Set(-20);
+            Score_System.Instance.Set(-20,Data.time);
         }
 
         if (!isStopped)

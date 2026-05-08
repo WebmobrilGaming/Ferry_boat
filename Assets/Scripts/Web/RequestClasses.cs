@@ -91,14 +91,17 @@ namespace Ferry_boat.Assets.Scripts.Web
 
     public class UpdateScoreRequest
     {
-        public UpdateScoreRequest(string username, int score)
+        public UpdateScoreRequest(string username, int score,int time)
         {
             this.username = username;
             this.score = score;
+            this.totalTimeSecond = time;
         }
 
         public string username { get; set; }
         public int score { get; set; }
+
+        public int totalTimeSecond { get; set; }
     }
     public class UpdateScoreResponse : Response
     {

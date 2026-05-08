@@ -3,6 +3,7 @@ using Ferry.Config;
 using Ferry.Loading;
 using Ferry.Popup;
 using FerryBoat.Actions;
+using FerryBoat.Store;
 using GF;
 using Newtonsoft.Json;
 using System;
@@ -38,11 +39,14 @@ public class UserInterFace : MonoBehaviour
         backBtn.AddListener(null, GoHome);
     }
 
-    private void GoHome()
+    public void GoHome()
     {
         GamePopUp.Instance.PopControl("Are you sure you wanna quit?", () =>
         {
-            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+            Score_System.Instance.Set(Score_System.Instance.Score,Data.time, () =>
+            {
+                LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+            }); 
         }, 
         () =>
         {

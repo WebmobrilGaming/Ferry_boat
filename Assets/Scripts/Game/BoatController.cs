@@ -2,6 +2,7 @@ using DG.Tweening;
 using Ferry.Config;
 using Ferry.Motion;
 using FerryBoat.Actions;
+using FerryBoat.Store;
 using GF;
 using Newtonsoft.Json;
 using System;
@@ -24,6 +25,9 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] bool isControl;
     Quaternion startRotation;
     private const float MPS_TO_KNOTS = 2.23694f;
+
+    [SerializeField] TMP_Text mWind;
+
 
     [Header("Speed Settings:")]
     [Space]
@@ -125,6 +129,13 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         {
             difficultyLevel = DifficultyLevel.easy;
         }
+
+        mWind.text = difficultyLevel switch
+        {
+            DifficultyLevel.easy => "Stable",
+            DifficultyLevel.medium => "Challenging",
+            DifficultyLevel.hard => "Extreme"
+        };
 
         thresholdSpeed = difficultyLevel switch
         {
@@ -255,7 +266,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         //float newHealth = mHealth - mdamage;
         Utils.ShowInGamePopup($"You are crossing speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
 
-        score_System.Set(-20);
+        score_System.Set(-20,Data.time);
     }
 
     private void SpeedChange(float val)
