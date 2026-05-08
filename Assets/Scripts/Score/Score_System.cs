@@ -9,7 +9,7 @@ public class Score_System : MonoBehaviour
 {
     [SerializeField] TMP_Text mScore;
 
-    int score;
+    [SerializeField] int score;
 
     static Score_System instance;
 
@@ -26,10 +26,13 @@ public class Score_System : MonoBehaviour
         score = 0;
     }
 
-    public void Set(int inx,Action onComplete = null)
+    public void Set(int inx,float time = -1, Action onComplete = null)
     {  
         score =  score + inx;
         mScore.text =  score.ToString();
+
+        if (time < 0)
+            return;
 
         var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, score);
         APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore, request), (res) =>

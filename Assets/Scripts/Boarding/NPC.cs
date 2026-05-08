@@ -26,14 +26,17 @@ public class NPC : MonoBehaviour
     {
         pathFollower.OnPathComplete += PathCompleteAction;
 
+        pathFollower.OnAnimationSpeedChanged += AnimationSpeedChange;
+
+        animator.Play("walking");
+
         _cts = new CancellationTokenSource();
     }
-
-    public void SetPathDuration(float duration){  pathFollower.SetTargetDuration(duration); }
 
     private void OnDisable()
     {
         pathFollower.OnPathComplete -= PathCompleteAction;
+        pathFollower.OnAnimationSpeedChanged -= AnimationSpeedChange;
 
         _cts?.Cancel();
         _cts?.Dispose();
@@ -42,6 +45,11 @@ public class NPC : MonoBehaviour
         _pathCompleteTcs?.TrySetCanceled();
         _pathCompleteTcs = null;
     }
+
+    private void AnimationSpeedChange(float val){ /*animator.SetFloat("Speed", val);*/ }
+
+    public void SetPathDuration(float duration) { pathFollower.SetTargetDuration(duration); }
+
 
     private void OnDestroy()
     {

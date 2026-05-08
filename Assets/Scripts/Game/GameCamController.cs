@@ -6,7 +6,7 @@ public class GameCamController : MonoBehaviour
 {
     static GameCamController instance;
 
-    public static GameCamController Instaance { get { return instance; }  }
+    public static GameCamController Instance { get { return instance; }  }
 
     [SerializeField] CamType camType;
     public CamType Cam => camType;

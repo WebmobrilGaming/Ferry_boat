@@ -16,13 +16,14 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     [SerializeField] TMP_Text mTime;
     [SerializeField] Button mBoardingStartBtn;
     [SerializeField] GameObject mBoardingPanel;
+    [SerializeField] GameObject mEnginePanel;
+    [SerializeField] GameObject mBargeObj;
 
     [Header("Boardings")]
     [SerializeField] List<BoardingCal> boardings = new List<BoardingCal>();
 
     [Header("NPC")]
     [SerializeField] NPCStore mNPCStore;
-    [SerializeField] Transform mNPCTransform;
 
     [Header("Timer:")]
     [SerializeField] Timer mTimer;
@@ -59,6 +60,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         mTimer.DisplayTimer += DisplayTimerAction;
         mTimer.OnCompleteAct += TimerEndAction;
+
+        mBargeObj.SetActive(true);
     }
 
     private void OnDisable()
@@ -93,7 +96,14 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     private void TimerEndAction()
     {
         mTime.text = "00:00 mins";
-        GameCamController.Instaance.SetCam(CamType.driver);
+
+        GameCamController.Instance.SetCam(CamType.driver);
+        mEnginePanel.SetActive(true);
+
+        GamePopUp.Instance.PopStat("Please start the space bar to start the engine", 3.0f);
+        mBargeObj.SetActive(false);
+
+        this.gameObject.SetActive(false);
     }
 
     public void SetBoard(BoardType type)
@@ -112,7 +122,13 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 mTimer.Begin(120);
                 mTime.text = mTimer.Display;
 
-                PassengerBaording(passengerCount);
+                PassengerBoarding(passengerCount, () =>
+                {
+                    CarBoarding(carCount, () =>
+                    {
+                        TruckBoarding(truckCount);
+                    });
+                });
 
                 break;
 
@@ -122,12 +138,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         }
     }
 
-    public async void PassengerBaording(int count)
+    public async void PassengerBoarding(int count,Action onComplete = null)
     {
         if (count <= 0)
+        {
+            onComplete?.Invoke();
             return;
+        }
 
-        GameCamController.Instaance.SetCam(CamType.passengers);
+        GameCamController.Instance.SetCam(CamType.passengers);
 
         for (int i = 0;  i < count; i++)
         {
@@ -147,6 +166,72 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             Destroy(go.gameObject,0.2f);
             DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
         }
+
+        onComplete?.Invoke();
+    }
+
+    public async void CarBoarding(int count,Action onComplete = null)
+    {
+        if (count <= 0)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+
+        GameCamController.Instance.SetCam(CamType.vechicle);
+
+        for (int i = 0; i < count; i++)
+        {
+            mTimer.Resume();
+
+            GameObject go = Instantiate(mNPCStore.GetRandomCar().gameObject);
+
+            Vehicle vehicle = go.GetComponent<Vehicle>();
+            vehicle.SetPathDuration(30);
+
+            go.SetActive(true);
+
+            await vehicle.WaitForPathComplete(_cts.Token);
+
+            mTimer.Pause();
+
+            Destroy(go.gameObject, 0.2f);
+            DevDebug.Log($"Car:{i} is reached ", DebugColor.Orange);
+        }
+
+        onComplete?.Invoke();
+    }
+
+    public async void TruckBoarding(int count, Action onComplete = null)
+    {
+        if (count <= 0)
+        {
+            onComplete?.Invoke();
+            return;
+        }
+
+        GameCamController.Instance.SetCam(CamType.vechicle);
+
+        for (int i = 0; i < count; i++)
+        {
+            mTimer.Resume();
+
+            GameObject go = Instantiate(mNPCStore.GetRandomTruck().gameObject);
+
+            Vehicle vehicle = go.GetComponent<Vehicle>();
+            vehicle.SetPathDuration(60);
+
+            go.SetActive(true);
+
+            await vehicle.WaitForPathComplete(_cts.Token);
+
+            mTimer.Pause();
+
+            Destroy(go.gameObject, 0.2f);
+            DevDebug.Log($"Truck:{i} is reached ", DebugColor.Orange);
+        }
+
+        onComplete?.Invoke();
     }
 
     public void UpdateBoarding(BoardCharType boardCharType,bool onBoard)

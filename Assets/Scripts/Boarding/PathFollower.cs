@@ -11,8 +11,8 @@ public class PathFollower : MonoBehaviour
     [SerializeField] private bool _playOnAwake = true;
 
     [Header("Duration")]
-    [SerializeField] private float _targetDuration = 5f; // editable in Inspector
-    public float Duration =>_targetDuration;
+    [SerializeField] private float _targetDuration = 5f;
+    public float Duration => _targetDuration;
 
     [Header("Easing (optional)")]
     [SerializeField] private AnimationCurve _easingCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -25,16 +25,15 @@ public class PathFollower : MonoBehaviour
     public event Action<int> OnReachWaypoint;
     public event Action OnPathComplete;
 
-    public void SetTargetDuration(float duration){ _targetDuration = duration; }
+    // Broadcasts _speed whenever movement is active.
+    // Subscribe from your AnimatorController or any other system
+    // that needs to match animation speed to movement speed.
+    public event Action<float> OnAnimationSpeedChanged;
 
-    /// <summary>
-    /// Get or set the target duration. Setting this does NOT apply it immediately —
-    /// call ApplyTargetDuration() when ready.
-    /// </summary>
     public float TargetDuration
     {
         get => _targetDuration;
-        set => _targetDuration = Mathf.Max(0.001f, value); // guard against zero/negative
+        set => _targetDuration = Mathf.Max(0.001f, value);
     }
 
     private float _t;
@@ -70,7 +69,7 @@ public class PathFollower : MonoBehaviour
     private void Awake()
     {
         if (_path != null) _pathLength = ComputeLength();
-        if (_playOnAwake) ApplyTargetDuration(); // uses _targetDuration from Inspector
+        if (_playOnAwake) ApplyTargetDuration();
     }
 
     private void Update()
@@ -80,12 +79,19 @@ public class PathFollower : MonoBehaviour
         float delta = (_pathLength > 0) ? (_speed * Time.deltaTime / _pathLength) : 0f;
         _t += delta;
 
+        // Broadcast _speed every frame while moving so subscribers
+        // (e.g. Animator, IK, VFX) can react to the current movement speed.
+        OnAnimationSpeedChanged?.Invoke(_speed);
+
         if (!_path.Loop && _t >= 1f)
         {
             _t = 1f;
             _isPlaying = false;
             transform.position = _path.Evaluate(1f);
             OrientToPath(1f);
+
+            // Zero out so animator returns to idle on path complete.
+            OnAnimationSpeedChanged?.Invoke(0f);
             OnPathComplete?.Invoke();
             return;
         }
@@ -97,30 +103,31 @@ public class PathFollower : MonoBehaviour
     }
 
     public void Play() { _isPlaying = true; }
-    public void Pause() { _isPlaying = false; }
-    public void Stop() { _isPlaying = false; _t = 0f; }
+
+    public void Pause()
+    {
+        _isPlaying = false;
+        // Zero out so animator doesn't freeze on last speed value.
+        OnAnimationSpeedChanged?.Invoke(0f);
+    }
+
+    public void Stop()
+    {
+        _isPlaying = false;
+        _t = 0f;
+        // Zero out so animator returns to idle.
+        OnAnimationSpeedChanged?.Invoke(0f);
+    }
+
     public void SetT(float t) { _t = Mathf.Clamp01(t); }
+    public void SetTargetDuration(float duration) { _targetDuration = duration; }
 
-    // -------------------------------------------------------------------------
-    // Duration API
-    // -------------------------------------------------------------------------
-
-    /// <summary>
-    /// Apply the current TargetDuration from current _t to endT, then Play.
-    /// Use this when you've already set TargetDuration via the property or Inspector.
-    /// </summary>
     public void ApplyTargetDuration(float endT = 1f)
         => ApplyTargetDuration(_t, endT, _targetDuration);
 
-    /// <summary>
-    /// Set TargetDuration and apply it immediately from current _t to endT, then Play.
-    /// </summary>
     public void ApplyTargetDuration(float endT, float durationSeconds)
         => ApplyTargetDuration(_t, endT, durationSeconds);
 
-    /// <summary>
-    /// Full control — set startT, endT, and duration explicitly, then Play.
-    /// </summary>
     public void ApplyTargetDuration(float startT, float endT, float durationSeconds)
     {
         if (durationSeconds <= 0f)
@@ -129,16 +136,17 @@ public class PathFollower : MonoBehaviour
             return;
         }
 
-        _targetDuration = durationSeconds;         // keep property in sync
+        _targetDuration = durationSeconds;
         _t = Mathf.Clamp01(startT);
 
         float segmentLength = ComputeSegmentLength(_t, Mathf.Clamp01(endT));
+
+        // _speed is recalculated here from path length and duration.
+        // This is the value OnAnimationSpeedChanged will broadcast.
         _speed = segmentLength / _targetDuration;
 
         Play();
     }
-
-    // -------------------------------------------------------------------------
 
     private void OrientToPath(float t)
     {

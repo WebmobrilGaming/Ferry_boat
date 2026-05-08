@@ -76,6 +76,9 @@ public class TimerAndScore : MonoBehaviour
     {
         enableScore = enable;
         IsInitialized = true;
+
+        if (enable)
+            timer = maxTime;
     }
 
     private void Update()
@@ -84,8 +87,10 @@ public class TimerAndScore : MonoBehaviour
         {
             return;
         }
-        timer += Time.deltaTime;
-        if (timer >= maxTime)
+
+        timer -= Time.deltaTime;
+
+        if (timer <=0 )
         {
             if (!isTimeOut)
             {

@@ -4,22 +4,21 @@ using UnityEngine;
 
 
 
-[RequireComponent(typeof(CinemachineClearShot))]
+[RequireComponent(typeof(CinemachineCamera))]
 public class Cam : MonoBehaviour
 {
-    CinemachineClearShot shot;
+    [SerializeField] CinemachineCamera shot;
 
     [SerializeField] CamType camType;
     public CamType Type => camType;
 
     private void Awake()
     {
-        shot = GetComponent<CinemachineClearShot>();
+        shot = GetComponent<CinemachineCamera>();
     }
 
     public void SetPriority(bool enable)
     {
-
         if (shot == null)
         {
             Debug.LogError($"[Cam] shot is null on {gameObject.name}", this);
