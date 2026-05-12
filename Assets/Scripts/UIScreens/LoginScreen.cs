@@ -30,6 +30,10 @@ namespace Ferry.Screens
         public TMP_Text newLastNameErrorTxt;
         public TMP_Text newUsernameErrorTxt;
         public TMP_Text prevUsernameErrorTxt;
+        public TMP_Text prevUserDontExistTxt;
+        public Button excalamationMark;
+        public Button usernameAlreadyExistBox;
+        
         protected override void OnEnable()
         {
             if (PlayerPrefs.HasKey("username"))
@@ -46,6 +50,8 @@ namespace Ferry.Screens
             {
                 prevUserPanel.localScale = Vector3.zero;
                 newUserPanel.localScale = Vector3.zero;
+                excalamationMark.onClick.AddListener(OnExclamationMarkClicked);
+                usernameAlreadyExistBox.onClick.AddListener(OnUsernameAlreadyExistBoxClicked);
                 loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
                 newUserBtn.AddListener(null, CreateNewUser);
                 prevUserBtn.AddListener(null, LogInPreviousUser);
@@ -63,7 +69,6 @@ namespace Ferry.Screens
             OnPreviousUserScreenDisable();
             
         }
-
         private void ClosePrevUserPanel()
         {
             newUserPanel.localScale = Vector3.zero;
@@ -107,8 +112,10 @@ namespace Ferry.Screens
             else
             {
                 string prevUsername = prevUsernameInput.text.Trim();
-                var request = new CreatePlayer("new", prevUsername, $"New player{UnityEngine.Random.Range(0, 999)}", $"wos{UnityEngine.Random.Range(0, 999)}");
-                APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
+                prevUserDontExistTxt.text="User Does'nt exist";
+
+                // var request = new CreatePlayer("new", prevUsername, $"New player{UnityEngine.Random.Range(0, 999)}", $"wos{UnityEngine.Random.Range(0, 999)}");
+                // APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
             }
         }
 
@@ -136,6 +143,7 @@ namespace Ferry.Screens
             else
             {
                 Utils.ShowOkPopup("Error", details.message, null);
+                Debug.LogWarning(details.message);
             }
         }
 
@@ -201,6 +209,8 @@ namespace Ferry.Screens
             prevUserBtn.RemoveListener();
             submitNewUserBtn.RemoveListener();
             submitPrevUserBtn.RemoveListener();
+            usernameAlreadyExistBox.onClick.RemoveAllListeners();
+            excalamationMark.onClick.RemoveAllListeners();
         }
         private void OnNewUserScreenDisable()
         {
@@ -216,6 +226,16 @@ namespace Ferry.Screens
         {
             prevUsernameInput.text="";
             prevUsernameErrorTxt.text="";
+            prevUserDontExistTxt.text="";
         }
+        private void OnExclamationMarkClicked()
+        {
+            usernameAlreadyExistBox.gameObject.SetActive(true);
+        }
+        private void OnUsernameAlreadyExistBoxClicked()
+        {
+            usernameAlreadyExistBox.gameObject.SetActive(false);
+        }
+
     }
 }
