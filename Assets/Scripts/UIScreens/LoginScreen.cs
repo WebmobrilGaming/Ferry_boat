@@ -59,11 +59,15 @@ namespace Ferry.Screens
                 closeNewUserPanelBtn.AddListener(null, CloseNewUserPanel);
                 closePrevUserPanelBtn.AddListener(null, ClosePrevUserPanel);
             }
+            OnNewUserScreenDisable();
+            OnPreviousUserScreenDisable();
+            
         }
 
         private void ClosePrevUserPanel()
         {
             newUserPanel.localScale = Vector3.zero;
+            OnPreviousUserScreenDisable();
             prevUserPanel.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
@@ -73,6 +77,7 @@ namespace Ferry.Screens
         private void CloseNewUserPanel()
         {
             prevUserPanel.localScale = Vector3.zero;
+            OnNewUserScreenDisable();
             newUserPanel.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
@@ -112,6 +117,7 @@ namespace Ferry.Screens
             string firstName = newFirstNameInput.text.Trim();
             string lastName = newLastNameInput.text.Trim();
             string username = newUsernameInput.text.Trim();
+            ValidDetails(firstName,lastName,username);
             if (!ValidDetails(firstName, lastName, username)) return;
             var request = new CreatePlayer("new", username, firstName, lastName);
             APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
@@ -135,31 +141,39 @@ namespace Ferry.Screens
 
         private bool ValidDetails(string firstName, string lastName, string username)
         {
+            newUsernameErrorTxt.text="";
+            newFirstNameErrorTxt.text="";
+            newLastNameErrorTxt.text="";
             bool status = true;
             if (string.IsNullOrEmpty(firstName))
             {
                 status = false;
                 newFirstNameErrorTxt.text = "First name should not be empty";
+                return status;
             }
             if (firstName.Length < 3)
             {
                 status = false;
                 newFirstNameErrorTxt.text = "First name length should be greater than or equal to 3";
+                return status;
             }
             if (string.IsNullOrEmpty(lastName))
             {
                 status = false;
                 newLastNameErrorTxt.text = "Last name should not be empty";
+                return status;
             }
             if (string.IsNullOrEmpty(username))
             {
                 status = false;
                 newUsernameErrorTxt.text = "User name should not be empty";
+                return status;
             }
             if (username.Length < 3)
             {
                 status = false;
                 newUsernameErrorTxt.text = "User name length should be greater than or equal to 3";
+                return status;
             }
             return status;
         }
@@ -187,6 +201,21 @@ namespace Ferry.Screens
             prevUserBtn.RemoveListener();
             submitNewUserBtn.RemoveListener();
             submitPrevUserBtn.RemoveListener();
+        }
+        private void OnNewUserScreenDisable()
+        {
+            newFirstNameErrorTxt.text="";
+            newLastNameErrorTxt.text="";
+            newUsernameErrorTxt.text="";
+            newFirstNameInput.text = "";
+            newLastNameInput.text = "";
+            newUsernameInput.text="";
+        
+        }
+        private void OnPreviousUserScreenDisable()
+        {
+            prevUsernameInput.text="";
+            prevUsernameErrorTxt.text="";
         }
     }
 }
