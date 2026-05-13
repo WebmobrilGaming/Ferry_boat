@@ -26,8 +26,10 @@ namespace Ferry.Screens
         public Transform gameObjectivePanel;
         public Button gameObjectiveCloseBtn;
         public TMP_Text playerNameTxt1;
+        public GameObject gameLogo;
         protected override void OnEnable()
         {
+            Debug.LogWarning(UserDataManager.Instance.UserDetails.data.username);
             playerNameTxt1.text = $"Player : {UserDataManager.Instance.UserDetails.data.username}";
             gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
@@ -38,6 +40,7 @@ namespace Ferry.Screens
             CloseBtn.AddListener(null, Logout);
             gameObjectiveCloseBtn.AddListener(null, CloseObjectivePanel);
             StartCoroutine(AnimateButtons());
+            gameLogo.SetActive(true);
         }
 
         private void CloseObjectivePanel()
@@ -99,6 +102,7 @@ namespace Ferry.Screens
             GameObjectivesBtn.RemoveListener();
             FerryHistoryBtn.RemoveListener();
             LeaderboardBtn.RemoveListener();
+            gameLogo.SetActive(false);
         }
     }
 }

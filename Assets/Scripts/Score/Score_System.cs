@@ -35,7 +35,7 @@ public class Score_System : MonoBehaviour
 
         int timedata = (int)time;
         var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, timedata, score);
-        APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore, request), (res) =>
+        APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore, request), (res,Response) =>
         {
             onComplete?.Invoke();
         });

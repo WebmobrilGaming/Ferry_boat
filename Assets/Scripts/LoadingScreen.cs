@@ -82,7 +82,12 @@ namespace Ferry.Loading
             if (previousSceneIndex != 0)
             {
                 //unload previous scene first.
-                yield return SceneManager.UnloadSceneAsync(previousSceneIndex);
+                Scene previousScene = SceneManager.GetSceneByBuildIndex(previousSceneIndex);
+                if (previousScene.isLoaded)
+                {
+                    yield return SceneManager.UnloadSceneAsync(previousSceneIndex);
+                }
+                
             }
             yield return SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
             Scene currentScene = SceneManager.GetSceneByBuildIndex(sceneIndex);

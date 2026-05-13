@@ -7,6 +7,7 @@ public class LeaderboardCell : MonoBehaviour,ICell
     public TMP_Text rankTxt;
     public TMP_Text userNameTxt;
     public TMP_Text scoreTimeTxt;
+    public TMP_Text timeText;
 
     public GameObject GetGameObject()
     {
@@ -18,5 +19,6 @@ public class LeaderboardCell : MonoBehaviour,ICell
         rankTxt.text = $"# {playerData.rank}";
         userNameTxt.text = $"{playerData.username}";
         scoreTimeTxt.text = $"{playerData.score}";
+        timeText.text=$"{playerData.difficultyLevel}";
     }
 }

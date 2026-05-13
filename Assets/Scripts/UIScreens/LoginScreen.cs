@@ -32,7 +32,7 @@ namespace Ferry.Screens
         public TMP_Text prevUsernameErrorTxt;
         public TMP_Text prevUserDontExistTxt;
         public Button excalamationMark;
-        public Button usernameAlreadyExistBox;
+        public Button usernameisCaseSensitiveBox;
         
         protected override void OnEnable()
         {
@@ -51,7 +51,7 @@ namespace Ferry.Screens
                 prevUserPanel.localScale = Vector3.zero;
                 newUserPanel.localScale = Vector3.zero;
                 excalamationMark.onClick.AddListener(OnExclamationMarkClicked);
-                usernameAlreadyExistBox.onClick.AddListener(OnUsernameAlreadyExistBoxClicked);
+                usernameisCaseSensitiveBox.onClick.AddListener(OnUsernameAlreadyExistBoxClicked);
                 loginContentPanel.DOScale(1, 0.5f).SetEase(Ease.OutBack);
                 newUserBtn.AddListener(null, CreateNewUser);
                 prevUserBtn.AddListener(null, LogInPreviousUser);
@@ -95,13 +95,14 @@ namespace Ferry.Screens
 
             if (string.IsNullOrEmpty(username) || username.Length < 3)
             {
+                prevUserDontExistTxt.text = "Please enter your username";
                 return;
             }
             var request = new CreatePlayer("previous", username);
             APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.LoginPlayer, request), OnLogin);
         }
 
-        private void OnLogin(UserDetails details)
+        private void OnLogin(UserDetails details,GF.Response response)
         {
             if (details.success)
             {
@@ -112,7 +113,7 @@ namespace Ferry.Screens
             else
             {
                 string prevUsername = prevUsernameInput.text.Trim();
-                prevUserDontExistTxt.text="User Does'nt exist";
+                prevUserDontExistTxt.text="User Doesn't exist";
 
                 // var request = new CreatePlayer("new", prevUsername, $"New player{UnityEngine.Random.Range(0, 999)}", $"wos{UnityEngine.Random.Range(0, 999)}");
                 // APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
@@ -130,7 +131,7 @@ namespace Ferry.Screens
             APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);
         }
 
-        private void OnReceivedNewUser(UserDetails details)
+        private void OnReceivedNewUser(UserDetails details,GF.Response response)
         {
             if (details.success)
             {
@@ -142,8 +143,8 @@ namespace Ferry.Screens
             }
             else
             {
-                Utils.ShowOkPopup("Error", details.message, null);
-                Debug.LogWarning(details.message);
+                Utils.ShowOkPopup("Error", response.message, null);
+                Debug.LogWarning(response.message);
             }
         }
 
@@ -209,7 +210,7 @@ namespace Ferry.Screens
             prevUserBtn.RemoveListener();
             submitNewUserBtn.RemoveListener();
             submitPrevUserBtn.RemoveListener();
-            usernameAlreadyExistBox.onClick.RemoveAllListeners();
+            usernameisCaseSensitiveBox.onClick.RemoveAllListeners();
             excalamationMark.onClick.RemoveAllListeners();
         }
         private void OnNewUserScreenDisable()
@@ -220,6 +221,7 @@ namespace Ferry.Screens
             newFirstNameInput.text = "";
             newLastNameInput.text = "";
             newUsernameInput.text="";
+            usernameisCaseSensitiveBox.gameObject.SetActive(false);
         
         }
         private void OnPreviousUserScreenDisable()
@@ -230,11 +232,11 @@ namespace Ferry.Screens
         }
         private void OnExclamationMarkClicked()
         {
-            usernameAlreadyExistBox.gameObject.SetActive(true);
+            usernameisCaseSensitiveBox.gameObject.SetActive(true);
         }
         private void OnUsernameAlreadyExistBoxClicked()
         {
-            usernameAlreadyExistBox.gameObject.SetActive(false);
+            usernameisCaseSensitiveBox.gameObject.SetActive(false);
         }
 
     }

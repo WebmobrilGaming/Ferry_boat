@@ -25,6 +25,7 @@ public class BoardingCal : MonoBehaviour
     private void OnEnable()
     {
         count = 0;
+        mMinusBtn.interactable = false;
         UpdateText(count);
 
         mPlusBtn?.onClick.AddListener(() =>
@@ -39,6 +40,10 @@ public class BoardingCal : MonoBehaviour
                 mPlusBtn.interactable = true;
             });
             callback?.UpdateBoarding(boardCharType, true);
+            if (count > 0)
+            {
+                mMinusBtn.interactable = true;
+            }
         });
 
         mMinusBtn?.onClick.AddListener(() =>
@@ -53,9 +58,14 @@ public class BoardingCal : MonoBehaviour
 
             textAnimator.Animate($" - {boardCharType.ToString()}", Color.red, () =>
             {
-                mMinusBtn.interactable = true;
+                if (count != 0)
+                {
+                    mMinusBtn.interactable = true;
+                }
+                
             });
             callback?.UpdateBoarding(boardCharType, false);
+            
         });
     }
 

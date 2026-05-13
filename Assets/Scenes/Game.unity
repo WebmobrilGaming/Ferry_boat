@@ -1442,7 +1442,7 @@ Camera:
   m_GameObject: {fileID: 110854424}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -8724,7 +8724,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cars: '
+  m_text: 'Car''s: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
   m_sharedMaterial: {fileID: 1287878626960872744, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
@@ -13761,6 +13761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimerAndScore
   timerText: {fileID: 9168182675726643791}
   scoreText: {fileID: 7913293705061554185}
+  timer: 0
   difficultyLevel: 0
   enableScore: 0
   easyMaxTime: 600
@@ -13926,7 +13927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Passengers:'
+  m_text: 'Passenger''s:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
   m_sharedMaterial: {fileID: 1287878626960872744, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
@@ -22209,7 +22210,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Trucks: '
+  m_text: 'Truck''s: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}
   m_sharedMaterial: {fileID: 1287878626960872744, guid: 484f34be4005535449fd4547b7ade1d2, type: 2}

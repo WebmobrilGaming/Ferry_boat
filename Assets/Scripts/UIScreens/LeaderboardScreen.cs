@@ -14,6 +14,7 @@ public class LeaderboardScreen : BaseScreen<ScreenType>, IRecyclableScrollRectDa
     protected override void OnEnable()
     {
         backBtn.AddListener(null,Close);
+        backBtn.interactable = false;
         APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard, null),OnRecieveLeaderboard);
     }
 
@@ -34,16 +35,19 @@ public class LeaderboardScreen : BaseScreen<ScreenType>, IRecyclableScrollRectDa
                 rank++;
             }
             Invoke(nameof(InitializeLeaderboard),0.2f);
+
         }
         else
         {
             Utils.ShowOkPopup("Error!",response.message,null);
         }
+       
     }
 
     private void InitializeLeaderboard()
     {
         recyclableScrollRect.Initialize(this);
+        backBtn.interactable = true;
     }
     public int GetItemCount()
     {

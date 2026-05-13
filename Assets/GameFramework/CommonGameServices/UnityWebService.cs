@@ -107,7 +107,7 @@ namespace GF
                 else
                 {
                     Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
-                    onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
+                    onPostCompleteCalback?.Invoke(request.downloadHandler.text);
                 }
             }
 
@@ -146,7 +146,7 @@ namespace GF
                 else
                 {
                     Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
-                    onGetCompleteCallback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
+                    onGetCompleteCallback?.Invoke(request.downloadHandler.text);
                 }
             }
         }
@@ -195,7 +195,7 @@ namespace GF
                 else
                 {
                     Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
-                    onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
+                    onPostCompleteCalback?.Invoke(request.downloadHandler.text);
                 }
             }
         }
@@ -243,7 +243,7 @@ namespace GF
                 else
                 {
                     Logger.Log(LogType.Error, $"[Response]-{requestType} : {request.error}");
-                    onPostCompleteCalback?.Invoke(ServerConfig.Instance.MapErrorResponse(request.responseCode, request.error));
+                    onPostCompleteCalback?.Invoke(request.downloadHandler.text);
                 }
             }
         }
