@@ -27,6 +27,7 @@ namespace Ferry.Screens
         public Button gameObjectiveCloseBtn;
         public TMP_Text playerNameTxt1;
         public GameObject gameLogo;
+        public GameObject GroupBtn;
         protected override void OnEnable()
         {
             Debug.LogWarning(UserDataManager.Instance.UserDetails.data.username);
@@ -46,6 +47,8 @@ namespace Ferry.Screens
         private void CloseObjectivePanel()
         {
             gameObjectivePanel.gameObject.SetActive(false);
+            gameLogo.SetActive(true);
+            GroupBtn.SetActive(true);
         }
 
         private void Logout()
@@ -90,6 +93,8 @@ namespace Ferry.Screens
         private void OpenGameObjective()
         {
             gameObjectivePanel.gameObject.SetActive(true);
+            gameLogo.SetActive(false);
+            GroupBtn.SetActive(false);
         }
 
         private void StartGame()

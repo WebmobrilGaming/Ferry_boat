@@ -23,7 +23,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] float mSpeed = 5.0f;
     [SerializeField] float mBoatSpeed;
     [SerializeField] bool isControl;
-    Quaternion startRotation;
+    public Quaternion startRotation;
     private const float MPS_TO_KNOTS = 2.23694f;
 
     [SerializeField] TMP_Text mWind;
@@ -63,10 +63,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     bool isHit = false;
     public ShipConfig ferryConfig;
 
-    private float currentRotation = 0f;
+    public float currentRotation = 0f;
     private float lastHelmZ = 0f;
     private bool isFirstUpdate = true;
-    private bool isEngineStarted = false;
+    public bool isEngineStarted = false;
     public bool IsEningeActive => isEngineStarted;
     public bool IsInDock { get; set; }
     public bool IsEnterDock { get; set; }
@@ -78,6 +78,9 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     public static event Action OnBoatStartEvent;
     private bool isInitialized = false;
     private WaveMotion waveMotion;
+    [Header("Steering Wheel")]
+    [SerializeField] private float steeringSensitivity = 120f;
+    private float wheelInput;
     private void Awake()
     {
         LoadConfig();
@@ -165,6 +168,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void Update()
     {
+    
+
         if (mFuel.FuelPercent < 0.1f)
             return;
 
@@ -371,5 +376,42 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         currentRotation += delta * rotationMultiplier;
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
+    }
+
+    void SteeringWheel()
+    {
+        float finalInput = 0f;
+
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.leftArrowKey.isPressed)
+                finalInput = -1f;
+
+            if (Keyboard.current.rightArrowKey.isPressed)
+                finalInput = 1f;
+        }
+
+        if (Gamepad.current != null)
+        {
+            float gamepadInput =
+                Gamepad.current.leftStick.x.ReadValue();
+
+            if (Mathf.Abs(gamepadInput) > 0.1f)
+                finalInput = gamepadInput;
+        }
+
+        Debug.Log(finalInput);
+
+        if (mGear.Stat && isEngineStarted)
+        {
+            currentRotation +=
+                finalInput *
+                steeringSensitivity *
+                Time.deltaTime;
+
+            transform.localRotation =
+                startRotation *
+                Quaternion.Euler(0, currentRotation, 0);
+        }
     }
 }

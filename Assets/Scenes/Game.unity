@@ -10701,6 +10701,7 @@ GameObject:
   - component: {fileID: 1099790238}
   - component: {fileID: 1099790239}
   - component: {fileID: 1099790240}
+  - component: {fileID: 1099790241}
   m_Layer: 3
   m_Name: '[BOAT]'
   m_TagString: Untagged
@@ -10744,6 +10745,7 @@ MonoBehaviour:
   mSpeed: 40
   mBoatSpeed: 0
   isControl: 0
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
   mWind: {fileID: 1413294757}
   speedInKnots: 0
   mSpeedKnots: {fileID: 8807814318500735930}
@@ -10765,8 +10767,11 @@ MonoBehaviour:
   mHealthText: {fileID: 1669641232147005698}
   score_System: {fileID: 1078547927}
   ferryConfig: {fileID: 11400000, guid: afb5b2335dc0e4c469db3e6cda6a7711, type: 2}
+  currentRotation: 0
+  isEngineStarted: 0
   difficultyLevel: 0
   thresholdSpeed: 0
+  steeringSensitivity: 120
 --- !u!114 &1099790240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10782,6 +10787,24 @@ MonoBehaviour:
   boatVisual: {fileID: 7671748265835084297}
   waveConfig: {fileID: 11400000, guid: a2a7fbd5f85e58a438e960d5c74e682b, type: 2}
   IsTransitioning: 0
+--- !u!114 &1099790241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099790237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15e7c74a690ecb40bd53c287d0affb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatControllerUsingSteeringWheel
+  boatController: {fileID: 1099790239}
+  steeringSensitivity: 120
+  deadZone: 0.1
+  steeeringSmothness: 2
+  maxTurnSpeed: 35
+  helmController: {fileID: 241515637}
 --- !u!1 &1100542065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}
