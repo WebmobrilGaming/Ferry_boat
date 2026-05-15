@@ -67,6 +67,8 @@ namespace Ferry.Screens
             }
             OnNewUserScreenDisable();
             OnPreviousUserScreenDisable();
+            submitNewUserBtn.interactable = true;
+            submitPrevUserBtn.interactable = true;
             
         }
         private void ClosePrevUserPanel()
@@ -92,10 +94,11 @@ namespace Ferry.Screens
         private void SubmitPrevUser(string username)
         {
            // string prevUsername = prevUsernameInput.text.Trim();
-
+             submitPrevUserBtn.interactable = false;
             if (string.IsNullOrEmpty(username) || username.Length < 3)
             {
                 prevUserDontExistTxt.text = "Please enter your username";
+                submitPrevUserBtn.interactable = true;
                 return;
             }
             var request = new CreatePlayer("previous", username);
@@ -114,6 +117,7 @@ namespace Ferry.Screens
             {
                 string prevUsername = prevUsernameInput.text.Trim();
                 prevUserDontExistTxt.text="User Doesn't exist";
+                submitPrevUserBtn.interactable = true;
 
                 // var request = new CreatePlayer("new", prevUsername, $"New player{UnityEngine.Random.Range(0, 999)}", $"wos{UnityEngine.Random.Range(0, 999)}");
                 // APIManager.PostAPI<UserDetails>(new RequestData(Netconfig.RequestType.CreatePlayer, request), OnReceivedNewUser);

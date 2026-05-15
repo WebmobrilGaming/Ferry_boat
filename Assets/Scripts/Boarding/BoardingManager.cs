@@ -5,6 +5,7 @@ using FerryBoat.Store;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -99,11 +100,11 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         GameCamController.Instance.SetCam(CamType.driver);
         mEnginePanel.SetActive(true);
-
         GamePopUp.Instance.PopStat("Please start the space bar to start the engine", 3.0f);
         mBargeObj.SetActive(false);
-
         this.gameObject.SetActive(false);
+
+
     }
 
     public void SetBoard(BoardType type)
@@ -158,8 +159,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             npc.SetPathDuration(5);
 
             go.SetActive(true);
-
-            await npc.WaitForPathComplete(_cts.Token);
+            try
+            {
+                await npc.WaitForPathComplete(_cts.Token);
+            }
+            catch(TaskCanceledException)
+            {
+                return;
+            }
+           
 
             mTimer.Pause();
 
@@ -190,8 +198,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             vehicle.SetPathDuration(30);
 
             go.SetActive(true);
-
-            await vehicle.WaitForPathComplete(_cts.Token);
+            try
+            {
+                await vehicle.WaitForPathComplete(_cts.Token);
+            }
+            catch(TaskCanceledException)
+            {
+                return;
+            }
+           
 
             mTimer.Pause();
 
@@ -222,8 +237,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             vehicle.SetPathDuration(60);
 
             go.SetActive(true);
-
-            await vehicle.WaitForPathComplete(_cts.Token);
+            try
+            {
+                await vehicle.WaitForPathComplete(_cts.Token);
+            }
+            catch
+            {
+                return;
+            }
+           
 
             mTimer.Pause();
 

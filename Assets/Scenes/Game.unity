@@ -10238,6 +10238,7 @@ GameObject:
   - component: {fileID: 1063575552}
   - component: {fileID: 1063575554}
   - component: {fileID: 1063575553}
+  - component: {fileID: 1063575555}
   m_Layer: 0
   m_Name: Public_Stair (4)
   m_TagString: Untagged
@@ -10317,6 +10318,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063575551}
   m_Mesh: {fileID: -7214908469818035945, guid: 8c7a4c5cd02c4844ab7c42dc1940d8b3, type: 3}
+--- !u!114 &1063575555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063575551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08975cefe09502549a902e27678c15e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Block
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1001 &1067460920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15144,6 +15160,7 @@ GameObject:
   - component: {fileID: 1431053261}
   - component: {fileID: 1431053263}
   - component: {fileID: 1431053262}
+  - component: {fileID: 1431053264}
   m_Layer: 0
   m_Name: Public_Stair (3)
   m_TagString: Untagged
@@ -15223,6 +15240,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431053260}
   m_Mesh: {fileID: -7214908469818035945, guid: 8c7a4c5cd02c4844ab7c42dc1940d8b3, type: 3}
+--- !u!114 &1431053264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431053260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08975cefe09502549a902e27678c15e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Block
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1433118533
 GameObject:
   m_ObjectHideFlags: 0
@@ -15434,6 +15466,7 @@ GameObject:
   - component: {fileID: 1452117421}
   - component: {fileID: 1452117423}
   - component: {fileID: 1452117422}
+  - component: {fileID: 1452117424}
   m_Layer: 0
   m_Name: Public_Stair (2)
   m_TagString: Untagged
@@ -15513,6 +15546,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452117420}
   m_Mesh: {fileID: -7214908469818035945, guid: 8c7a4c5cd02c4844ab7c42dc1940d8b3, type: 3}
+--- !u!114 &1452117424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452117420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08975cefe09502549a902e27678c15e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Block
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1455612773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}
@@ -25255,6 +25303,7 @@ GameObject:
   - component: {fileID: 4581365957684805596}
   - component: {fileID: 4012789599889638839}
   - component: {fileID: 4582871725841299883}
+  - component: {fileID: 4582871725841299884}
   m_Layer: 0
   m_Name: Public_Stair
   m_TagString: Untagged
@@ -26838,6 +26887,21 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4582871725841299884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565076412295117969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08975cefe09502549a902e27678c15e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Block
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &4590358856554497561
 MonoBehaviour:
   m_ObjectHideFlags: 0

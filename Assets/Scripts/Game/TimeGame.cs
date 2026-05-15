@@ -8,6 +8,8 @@ using DG.Tweening;
 using GF;
 using Ferry_boat.Assets.Scripts.Web;
 using FerryBoat.Store;
+using UnityEngine.SceneManagement;
+using Ferry.Loading;
 
 public class TimerAndScore : MonoBehaviour
 {
@@ -38,6 +40,7 @@ public class TimerAndScore : MonoBehaviour
         Act.EnableScore += EnableScore;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
+        Act.BoatDestroyedAction += ToHomeScreen;
 
         if (PlayerPrefs.HasKey("Settings"))
         {
@@ -58,6 +61,19 @@ public class TimerAndScore : MonoBehaviour
         };
     }
 
+    private void ToHomeScreen()
+    {
+        StartCoroutine(EndGame());
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+        Debug.LogWarning("!!!!!!to home screen comment here !!!!");
+        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
+        
+    }
+
     private void SetTimeLimit(int time)
     {
         timeLimit = time;
@@ -73,6 +89,7 @@ public class TimerAndScore : MonoBehaviour
         Act.EnableScore -= EnableScore;
         Act.ReachedDestination -= LevelFinish;
         Act.BoatDestroyedAction -= LevelFinish;
+        Act.BoatDestroyedAction -= ToHomeScreen;
     }
 
     private void EnableScore(bool enable)

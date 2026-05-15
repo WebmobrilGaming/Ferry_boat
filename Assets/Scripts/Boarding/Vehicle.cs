@@ -56,7 +56,7 @@ public class Vehicle : MonoBehaviour
     public Task WaitForPathComplete(CancellationToken token)
     {
         _pathCompleteTcs = new TaskCompletionSource<bool>();
-        token.Register(() => _pathCompleteTcs.TrySetCanceled());
+        token.Register(() => _pathCompleteTcs?.TrySetCanceled());
         return _pathCompleteTcs.Task;
     }
 }

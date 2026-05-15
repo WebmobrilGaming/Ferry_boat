@@ -316,7 +316,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void HitAction()
     {
-        Debug.LogError("Hit !! ");
+        Debug.LogWarning("Hit !! ");
         Act.BoatDestroyedAction?.Invoke();
         mHealth = 0;
     }
