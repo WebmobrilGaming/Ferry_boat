@@ -76,4 +76,9 @@ public class GamePopUp : MonoBehaviour
             noAct?.Invoke();
         });
     }
+
+    public void ClosePanel()
+    {
+        panelFinal.SetActive(false);
+    }
 }

@@ -9,6 +9,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class BoatController : MonoBehaviour, IHelem, IGear
@@ -376,42 +377,5 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         currentRotation += delta * rotationMultiplier;
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
-    }
-
-    void SteeringWheel()
-    {
-        float finalInput = 0f;
-
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.leftArrowKey.isPressed)
-                finalInput = -1f;
-
-            if (Keyboard.current.rightArrowKey.isPressed)
-                finalInput = 1f;
-        }
-
-        if (Gamepad.current != null)
-        {
-            float gamepadInput =
-                Gamepad.current.leftStick.x.ReadValue();
-
-            if (Mathf.Abs(gamepadInput) > 0.1f)
-                finalInput = gamepadInput;
-        }
-
-        Debug.Log(finalInput);
-
-        if (mGear.Stat && isEngineStarted)
-        {
-            currentRotation +=
-                finalInput *
-                steeringSensitivity *
-                Time.deltaTime;
-
-            transform.localRotation =
-                startRotation *
-                Quaternion.Euler(0, currentRotation, 0);
-        }
     }
 }

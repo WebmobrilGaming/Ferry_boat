@@ -1,4 +1,7 @@
+using System;
+using FerryBoat.Actions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,13 +24,14 @@ public class BoardingCal : MonoBehaviour
     public IBoardCal callback;
 
     [SerializeField] TextAnimator textAnimator;
+    [SerializeField] bool maximumBoardTimeReached;
  
     private void OnEnable()
     {
         count = 0;
+        maximumBoardTimeReached = false;
         mMinusBtn.interactable = false;
         UpdateText(count);
-
         mPlusBtn?.onClick.AddListener(() =>
         {
             mPlusBtn.interactable = false;
@@ -37,7 +41,11 @@ public class BoardingCal : MonoBehaviour
 
             textAnimator.Animate($" + {boardCharType.ToString()}", Color.green, () =>
             {
-                mPlusBtn.interactable = true;
+                if(!maximumBoardTimeReached)
+                {
+                    mPlusBtn.interactable = true;
+                }
+               
             });
             callback?.UpdateBoarding(boardCharType, true);
             if (count > 0)
@@ -50,6 +58,12 @@ public class BoardingCal : MonoBehaviour
         {
             mMinusBtn.interactable = false;
             count--;
+            if(maximumBoardTimeReached == true)
+            {
+                mPlusBtn.interactable = true;
+                maximumBoardTimeReached = false;
+            }
+           
 
             if(count <= 0)
                 count = 0;
@@ -69,13 +83,14 @@ public class BoardingCal : MonoBehaviour
         });
     }
 
+
     void UpdateText(int count)
     {
         mP_Text.text = boardCharType switch
         {
-            BoardCharType.passenger => $"Passenger:{count}",
-            BoardCharType.car => $"Cars:{count}",
-            BoardCharType.truck => $"Trucks:{count}"
+            BoardCharType.passenger => $"<mspace=0.6em>{"Passenger",-12} : {count,8}</mspace>",
+            BoardCharType.car => $"<mspace=0.6em>{"Cars",-12} : {count,8}</mspace>",
+            BoardCharType.truck => $"<mspace=0.6em>{"Trucks",-12} : {count,8}</mspace>",
         };
     }
 

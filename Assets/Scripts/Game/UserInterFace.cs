@@ -75,7 +75,9 @@ public class UserInterFace : MonoBehaviour
         Act.SpeedInit += SetRange;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += BoatDestroyed;
+        Act.EndPointReached+= EndPointReached;
     }
+
 
     private void OnPopupEventArrive(InGamePopupEvent e)
     {
@@ -111,6 +113,11 @@ public class UserInterFace : MonoBehaviour
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
         AudioManager.Instance.PlaySFX(AudioState.crash);
 
+        StopEngineEvent?.Invoke();
+    }
+    private void EndPointReached()
+    {
+        GamePopUp.Instance.FinalPopUp("EndPoint Reached");
         StopEngineEvent?.Invoke();
     }
 

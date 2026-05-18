@@ -31,16 +31,19 @@ public class TimerAndScore : MonoBehaviour
     private bool isTimeOut = false;
     private bool IsInitialized = false;
     private bool isLevelFinished=false;
+    private bool timerAlreadyStarted;
 
     int timeLimit;
 
     private void OnEnable()
     {
         enableScore = false;
+        timerAlreadyStarted = false;
         Act.EnableScore += EnableScore;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
         Act.BoatDestroyedAction += ToHomeScreen;
+        Act.EndPointReached += OnEndPointReached;
 
         if (PlayerPrefs.HasKey("Settings"))
         {
@@ -97,10 +100,16 @@ public class TimerAndScore : MonoBehaviour
         enableScore = enable;
         IsInitialized = true;
 
-        if (enable)
-            timer = maxTime;
+         if (!timerAlreadyStarted)
+        {
+            if (enable)
+                timer = maxTime;
 
-        Data.time = timer;
+            Data.time = timer;
+            timerAlreadyStarted = true;
+            Debug.LogWarning("Timer Started");
+        }
+        
     }
 
     private void Update()
@@ -156,4 +165,17 @@ public class TimerAndScore : MonoBehaviour
         int seconds = Mathf.FloorToInt(timer % 60f);
         timerText.text = $"{minutes:00} : {seconds:00}";
     }
+    private void OnEndPointReached()
+    {
+        StartCoroutine(IEndPointReached());
+    }
+
+    IEnumerator IEndPointReached()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+        Debug.LogWarning("!!!!!End Point Reached - Game Over!!!!");
+        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+    }
+
+    
 }

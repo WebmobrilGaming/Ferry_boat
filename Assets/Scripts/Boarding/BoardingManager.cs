@@ -1,8 +1,10 @@
 
 
 using DebugUtils;
+using FerryBoat.Actions;
 using FerryBoat.Store;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -288,13 +290,24 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         if(time <=0)
             time = 0;
 
+        if (time > 120)
+        {
+            StartCoroutine(OverTwoMinuteLimit());
+        }
         int m = Mathf.FloorToInt(time / 60f);
         int s = Mathf.FloorToInt(time % 60f);
         mTime.text = string.Format($"Boarding time: {m:00}:{s:00} mins");
 
         mBoardingStartBtn.interactable = time == 120;
     }
-   
+
+    IEnumerator OverTwoMinuteLimit()
+    {
+        GamePopUp.Instance.FinalPopUp("Warning \n you have crossed the 2 min limit");
+        yield return new WaitForSecondsRealtime(5f);
+        GamePopUp.Instance.ClosePanel();
+
+    }
 }
 
 public enum BoardType { onBoard,offBoard}

@@ -14,6 +14,7 @@ namespace  FerryBoat
             public static Action BoatDestroyedAction;
             public static Action MainMenuAction;
             public static Action<bool> EnableScore;
+            public static Action EndPointReached;
         }
     }
 
