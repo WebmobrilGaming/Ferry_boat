@@ -40,6 +40,7 @@ namespace Ferry.Screens
             difficultyExitButton.onClick.AddListener(CloseDifficultyPanel);
             mEasyBtm.onClick.AddListener(() =>
             {
+                Debug.LogWarning("Easy");
                 difficultyLevel = DifficultyLevel.easy;
                 var setting = GetSettingsData();
                 setting.level = difficultyLevel;
@@ -48,7 +49,7 @@ namespace Ferry.Screens
             });
 
             mMediumBtn.onClick.AddListener(() =>
-            {
+            {   Debug.LogWarning("Medium");
                 difficultyLevel = DifficultyLevel.medium;
                 var setting = GetSettingsData();
                 setting.level = difficultyLevel;
@@ -57,7 +58,7 @@ namespace Ferry.Screens
             });
 
             mHardBtn.onClick.AddListener(() =>
-            {
+            {   Debug.LogWarning("Hard");
                 difficultyLevel = DifficultyLevel.hard;
                 var setting = GetSettingsData();
                 setting.level = difficultyLevel;

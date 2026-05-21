@@ -35,7 +35,11 @@ public class Destination : MonoBehaviour
 
         boatController.IsEnterDock = true;
         Utils.ShowInGamePopup("You entered in the dock area");
-
+        if(boatController.speedInKnots > 1)
+        {
+            Utils.ShowInGamePopup($"You are crossed the Docking speed limit - > 1 mph..");
+            boatController.score_System.Set(-20,Data.time);
+        }
         DevDebug.Log("Ferry entered dock area.", DebugColor.Yellow);
     }
 

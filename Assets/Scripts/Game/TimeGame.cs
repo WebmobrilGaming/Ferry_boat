@@ -20,7 +20,7 @@ public class TimerAndScore : MonoBehaviour
     public float timer = 0f;
 
 
-    private int lastMinute = 0;
+    private int lastSecond = 0;
 
     [SerializeField] DifficultyLevel difficultyLevel;
     public bool enableScore = false;
@@ -104,6 +104,7 @@ public class TimerAndScore : MonoBehaviour
         {
             if (enable)
                 timer = maxTime;
+                lastSecond = Mathf.FloorToInt(timer);
 
             Data.time = timer;
             timerAlreadyStarted = true;
@@ -120,6 +121,7 @@ public class TimerAndScore : MonoBehaviour
         }
 
         timer -= Time.deltaTime;
+        timer = Mathf.Clamp(timer,0,660);
         Data.time = timer;
 
         if (timer <=0 )
@@ -137,10 +139,10 @@ public class TimerAndScore : MonoBehaviour
 
     private void CheckMinutePassed()
     {
-        int currentMinute = Mathf.FloorToInt(timer / 60f);
-        if (currentMinute > lastMinute)
+        int currentSecond = Mathf.FloorToInt(timer);
+        if (currentSecond < lastSecond)
         {
-            lastMinute = currentMinute;
+            lastSecond = currentSecond;
             AddScore(1);
         }
     }
@@ -150,7 +152,11 @@ public class TimerAndScore : MonoBehaviour
         if (timer >= maxTime) return;
         //score += amount;
         // scoreText.text = $"{score}";
-
+        // if(timer<=0)
+        // {
+        //     // Debug.LogWarning("Behind scheduled time");
+        //     // return;
+        // }
         Score_System.Instance.Set(amount,Data.time);
     }
 
@@ -164,6 +170,7 @@ public class TimerAndScore : MonoBehaviour
         int minutes = Mathf.FloorToInt(timer / 60f);
         int seconds = Mathf.FloorToInt(timer % 60f);
         timerText.text = $"{minutes:00} : {seconds:00}";
+        
     }
     private void OnEndPointReached()
     {

@@ -32,7 +32,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     [Header("Speed Settings:")]
     [Space]
-    [SerializeField] float speedInKnots;
+    [SerializeField] public float speedInKnots;
     public float Speed => speedInKnots;
     [SerializeField] TMP_Text mSpeedKnots;
     private Vector3 mLastPosition;
@@ -58,7 +58,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] TMP_Text mHealthText;
 
     [Header("Score Settings")]
-    [SerializeField] Score_System score_System;
+    [SerializeField] public Score_System score_System;
 
 
     bool isHit = false;
@@ -81,6 +81,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private WaveMotion waveMotion;
     [Header("Steering Wheel")]
     [SerializeField] private float steeringSensitivity = 120f;
+    [SerializeField] public bool isTurning;
     private float wheelInput;
     private void Awake()
     {
@@ -107,7 +108,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     {
         helmController.callback = this;
         mGear.callback = this;
-
+        isTurning = false;
         mFuelSlider.value = mFuel.currentFuel;
         startRotation = transform.localRotation;
 
@@ -222,7 +223,9 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         transform.position = target;
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
-        speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;
+        //speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;
+        speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.13f;
+        speedInKnots =Mathf.Clamp(speedInKnots,0,10);
         mSpeedKnots.text = $"{(mCurrentSpeed < 0 ? "-" : "")}{speedInKnots:F2} mph";
 
         mLastPosition = transform.position;
@@ -252,27 +255,33 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     void ThresholdCheck()
     {
-        int threshold = (int)thresholdSpeed;
-        int currentSpeed = (int)speedInKnots;
-
-        if (threshold > currentSpeed)
+        if (!DockPassCheker.passedStartingDock)
         {
-            mThresholdApplied = false;
-            return;
+            int threshold = (int)thresholdSpeed;
+            int currentSpeed = (int)speedInKnots;
+
+            if (threshold > currentSpeed)
+            {
+                mThresholdApplied = false;
+                return;
+            }
+
+            if (trottleSlider.value <= 0)
+                return;
+
+            if (mThresholdApplied)
+                return;
+
+            mThresholdApplied = true;
+
+            //float newHealth = mHealth - mdamage;
+            Utils.ShowInGamePopup($"You are crossing speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+
+            score_System.Set(-20, Data.time);
         }
-
-        if (trottleSlider.value <= 0)
-            return;
-
-        if (mThresholdApplied)
-            return;
-
-        mThresholdApplied = true;
-
-        //float newHealth = mHealth - mdamage;
-        Utils.ShowInGamePopup($"You are crossing speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
-
-        score_System.Set(-20,Data.time);
+            
+        
+        
     }
 
     private void SpeedChange(float val)
@@ -377,5 +386,40 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         currentRotation += delta * rotationMultiplier;
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
+    }
+    public void PerformUTurn()
+    {
+        if (isTurning)
+            return;
+
+        isTurning = true;
+
+        float previousSpeed = mCurrentSpeed;
+
+        DOTween.To(
+     () => mCurrentSpeed,
+     x => mCurrentSpeed = x,
+     0,
+     1f
+ )
+ .OnComplete(() =>
+ {
+     transform.DORotate(
+         transform.eulerAngles + new Vector3(0, 180, 0),
+         3f
+     )
+     .OnComplete(() =>
+     {
+        currentRotation = transform.localEulerAngles.y;
+         DOTween.To(
+             () => mCurrentSpeed,
+             x => mCurrentSpeed = x,
+             previousSpeed,
+             1f
+         );
+
+         isTurning = false;
+     });
+ });
     }
 }

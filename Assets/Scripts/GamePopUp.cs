@@ -67,12 +67,14 @@ public class GamePopUp : MonoBehaviour
 
         yesBtn?.onClick.AddListener(() =>
         {
+            Time.timeScale=1;
             yesAct?.Invoke();
         });
 
         noBtn?.onClick.AddListener(() =>
         {
             panelYesNo.gameObject.SetActive(false);
+            Time.timeScale = 1;
             noAct?.Invoke();
         });
     }

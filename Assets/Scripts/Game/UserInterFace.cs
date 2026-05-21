@@ -41,8 +41,10 @@ public class UserInterFace : MonoBehaviour
 
     public void GoHome()
     {
+        Time.timeScale = 0;
         GamePopUp.Instance.PopControl("Are you sure you wanna quit?", () =>
         {
+            
             Score_System.Instance.Set(Score_System.Instance.Score,Data.time, () =>
             {
                 LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
@@ -136,6 +138,16 @@ public class UserInterFace : MonoBehaviour
     {
         StopEngineEvent?.Invoke();
         GamePopUp.Instance.FinalPopUp("Destination Reached");
+        StartCoroutine(ReachedDestinationDock());
+    }
+
+    IEnumerator ReachedDestinationDock()
+    {
+        yield return new WaitForSecondsRealtime(5f);
+        Score_System.Instance.Set(Score_System.Instance.Score, Data.time, () =>
+            {
+                LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+            });
     }
 
     public void SetRange(float range)
