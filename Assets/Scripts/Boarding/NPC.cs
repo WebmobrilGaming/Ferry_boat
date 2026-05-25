@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -73,7 +74,12 @@ public class NPC : MonoBehaviour
     public Task WaitForPathComplete(CancellationToken token)
     {
         _pathCompleteTcs = new TaskCompletionSource<bool>();
-        token.Register(() => _pathCompleteTcs.TrySetCanceled());
-        return _pathCompleteTcs.Task;
+        //token.Register(() => _pathCompleteTcs.TrySetCanceled());
+        var tcs = _pathCompleteTcs;
+        token.Register(()=>
+        {
+            tcs?.TrySetCanceled();
+        });
+        return tcs.Task;
     }
 }

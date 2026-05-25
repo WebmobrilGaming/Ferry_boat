@@ -171,7 +171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -171.2, y: -0.3}
+  m_AnchoredPosition: {x: -165, y: -0.3}
   m_SizeDelta: {x: 45.0261, y: 44.142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1536030814269947054
@@ -482,6 +482,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8746121958317439732}
+  - component: {fileID: 5633347214524167801}
+  - component: {fileID: 7120957068761321173}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -507,8 +509,48 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1197.03}
+  m_SizeDelta: {x: 0, y: 1378.83}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5633347214524167801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438677910892512888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &7120957068761321173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438677910892512888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1461691367145197286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168.95015, y: -0}
+  m_AnchoredPosition: {x: -165, y: -0}
   m_SizeDelta: {x: 41.4997, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4976041127740025654
@@ -1488,7 +1530,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 425433626998752854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.2559663}
+  m_AnchorMin: {x: 0, y: 0.32713968}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -1824,7 +1866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168.95015, y: 0}
+  m_AnchoredPosition: {x: -165, y: 0}
   m_SizeDelta: {x: 41.4997, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7612456167055595429
@@ -1876,6 +1918,7 @@ GameObject:
   - component: {fileID: 8282078816332759309}
   - component: {fileID: 4083748790122794011}
   - component: {fileID: 6847385694834305734}
+  - component: {fileID: 7044120380587237177}
   m_Layer: 5
   m_Name: ObjectiveTxt
   m_TagString: Untagged
@@ -1897,10 +1940,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8746121958317439732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1383, y: 1197.03}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 691.5, y: -689.415}
+  m_SizeDelta: {x: 1383, y: 1378.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4083748790122794011
 CanvasRenderer:
@@ -1932,22 +1975,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\n<align=center><b><size=130%>GAME OBJECTIVE</size></b></align>\r\n\r\n<b>Score
     Points By:</b>\r\n1. <b>LOADING</b> the best combination of passengers, cars,
-    and trucks onto the scow within the <color=#FFD700>two-minute</color> time limit.\r\n2.
+    and trucks onto the scow within the <color=#FFD700>two-minute</color> time limit.\n\r\n2.
     <b>DRIVING</b> the Marilyn M ferry pulling the scow across the St. Clair river
-    without hitting another boat, freighter, or running aground.\r\n3. <b>DOCKING
+    without hitting another boat, freighter, or running aground.\n\r\n3. <b>DOCKING
     AND UNLOADING</b> the ferry and scow within the time limits for each difficulty
     level.\r\n   <i>(Score 1 point for each second under:</i>\r\n   <color=#00FF00>EASY:
     11 minutes</color>,\r\n   <color=#FFA500>MEDIUM: 9 minutes</color>,\r\n   <color=#FF5555>HARD:
-    7 minutes</color><i>)</i>\r\n\r\n<color=#FF4444><b>20 Points Deducted For:</b></color>\r\n\u2022
-    Leaving the Courtright, Canada dock faster than <b>5 mph</b>\r\n\u2022 Landing
-    at the St. Clair, USA dock faster than <b>1 mph</b>\r\n\r\n<b>Challenges:</b>\r\n\u2022
-    Total <color=#FFD700>2-minute</color> limit to load and unload\r\n\u2022 Each
-    passenger \u2013 <color=#00FFAA><b>2 points</b></color> <i>(5 sec load time)</i>\r\n\u2022
-    Each car \u2013 <color=#00FFAA><b>10 points</b></color> <i>(30 sec load time)</i>\r\n\u2022
-    Each truck \u2013 <color=#00FFAA><b>25 points</b></color> <i>(60 sec load time)</i>\r\n\r\n<color=#FF0000><b>GAME
-    OVER:</b></color>\r\n\u2022 Hitting or being hit by a freighter or another boat\r\n\u2022
+    7 minutes</color><i>).</i>\r\n\r\n<color=#FF4444><b>20 Points Deducted For:</b></color>\r\n\u2022
+    Leaving the Courtright, Canada dock faster than <b>5 mph.</b>\r\n\u2022 Landing
+    at the St. Clair, USA dock faster than <b>1 mph.</b>\r\n\r\n<b>Challenges:</b>\r\n\u2022
+    Total <color=#FFD700>2-minute</color> limit to load and unload.\r\n\u2022 Each
+    passenger \u2013 <color=#00FFAA><b>2 points</b></color> <i>(5 sec load time).</i>\r\n\u2022
+    Each car \u2013 <color=#00FFAA><b>10 points</b></color> <i>(30 sec load time).</i>\r\n\u2022
+    Each truck \u2013 <color=#00FFAA><b>25 points</b></color> <i>(60 sec load time).</i>\r\n\r\n<color=#FF0000><b>GAME
+    OVER:</b></color>\r\n\u2022 Hitting or being hit by a freighter or another boat.\r\n\u2022
     Running aground on the sand bar (in the middle of the river left of the red buoy
-    with the flashing light)\n"
+    with the flashing light).\n\\t\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2013,12 +2056,26 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 20, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 1.852417, z: 0, w: -805.1532}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7044120380587237177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714436492874830897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &5800603223758927390
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168.95015, y: 1.0000229}
+  m_AnchoredPosition: {x: -165, y: 1.0000229}
   m_SizeDelta: {x: 41.4997, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9155566367245477243
@@ -2357,7 +2414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -172.2, y: -0.5}
+  m_AnchoredPosition: {x: -165, y: -0.5}
   m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5226171242583347614
@@ -2660,8 +2717,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0141, y: -17.5554}
-  m_SizeDelta: {x: 1511.5449, y: 890.6307}
+  m_AnchoredPosition: {x: 1.0141, y: -36.12001}
+  m_SizeDelta: {x: 1511.5449, y: 927.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6232262936428374663
 CanvasRenderer:
@@ -2716,7 +2773,7 @@ MonoBehaviour:
   m_Content: {fileID: 8746121958317439732}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -2725,7 +2782,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 4371469605591930222}
   m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
+  m_VerticalScrollbarVisibility: 0
   m_HorizontalScrollbarSpacing: -3
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
@@ -2765,7 +2822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -172.2, y: -1.3}
+  m_AnchoredPosition: {x: -165, y: -1.3}
   m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3661230786874479543
@@ -2927,7 +2984,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6856239873482185362}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.7440337
+  m_Size: 0.6728603
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -33,9 +33,9 @@ namespace Ferry.Loading
         private IEnumerator LoadSplash()
         {
             splashScreen.DOFade(1, 1f);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSecondsRealtime(2f);
             splashScreen.DOFade(0, 1f);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSecondsRealtime(2f);
             ShowLoadingScreen();
             splashScreen.gameObject.SetActive(false);
             LoadSceneAsync(SceneEnum.Home);
@@ -54,7 +54,7 @@ namespace Ferry.Loading
         {
             loadingObj.SetActive(true);
             yield return new WaitUntil(() => !isLoading);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSecondsRealtime(1.0f);
             loadingObj.SetActive(false);
             cameraObj.SetActive(false);
         }
@@ -69,7 +69,7 @@ namespace Ferry.Loading
         private IEnumerator LoadSceneDelay(int sceneIndex, int previousSceneIndex = 0)
         {
             ShowLoadingScreen();
-            isLoading = false;
+        
 
             // check if target scene exists
             if (!SceneIndexExists(sceneIndex))
@@ -77,6 +77,13 @@ namespace Ferry.Loading
                 Debug.LogError($"Scene with index {sceneIndex} does not exist in Build Settings!");
                 StopLoading();
                 yield break; // stop coroutine safely
+            }
+            Scene targetScene = SceneManager.GetSceneByBuildIndex(sceneIndex);
+            if(targetScene.IsValid() && targetScene.isLoaded)
+            {
+                Debug.LogWarning("scene already loaded");
+                StopLoading();
+                yield break;
             }
 
             if (previousSceneIndex != 0)
@@ -92,6 +99,7 @@ namespace Ferry.Loading
             yield return SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
             Scene currentScene = SceneManager.GetSceneByBuildIndex(sceneIndex);
             SceneManager.SetActiveScene(currentScene);
+            StopLoading();
         }
         private bool SceneIndexExists(int sceneIndex)
         {
@@ -105,7 +113,7 @@ namespace Ferry.Loading
                 if (currentTime >= maxTime)
                 {
                     currentTime = 0;
-                    isLoading = false;
+                    StopLoading();
                 }
             }
         }

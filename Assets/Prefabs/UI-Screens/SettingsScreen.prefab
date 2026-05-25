@@ -820,7 +820,7 @@ MonoBehaviour:
   musicToggle: {fileID: 2277099713678475954}
   sfxToggle: {fileID: 1138321887138873052}
   vibrationToggle: {fileID: 6691922136267719975}
-  difficultyButton: {fileID: 2670648865233940422}
+  difficultyButton: {fileID: 5713813557174553681}
   tutorialButton: {fileID: 6028905002464905768}
   helpButton: {fileID: 2738095310091178690}
   difficultyExitButton: {fileID: 8283989496239551565}
@@ -1336,6 +1336,7 @@ MonoBehaviour:
   dotImg: {fileID: 933339122557521529}
   startX: -24
   endX: 24
+  key: VibrationToggle
 --- !u!1 &3909723645064404235
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,6 +3231,7 @@ MonoBehaviour:
   dotImg: {fileID: 6775921996643371967}
   startX: -24
   endX: 24
+  key: MusicToggle
 --- !u!1 &5695825708590098985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3563,7 +3565,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -32.446564, y: 0, z: -169.5964, w: 0}
+  m_margin: {x: -32.446564, y: 0, z: -18.197418, w: -20.06488}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4546,6 +4548,7 @@ MonoBehaviour:
   dotImg: {fileID: 5389490532677373784}
   startX: -24
   endX: 24
+  key: SoundToggle
 --- !u!1 &7889828581607711353
 GameObject:
   m_ObjectHideFlags: 0
@@ -4679,7 +4682,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -12.547211, y: 0, z: 0, w: 0}
+  m_margin: {x: -12.547211, y: 0, z: 0, w: -17.561829}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4827,6 +4830,7 @@ GameObject:
   - component: {fileID: 1514904551080261311}
   - component: {fileID: 4157488953926925569}
   - component: {fileID: 424147503008560869}
+  - component: {fileID: 5713813557174553681}
   m_Layer: 5
   m_Name: Dificulty Level
   m_TagString: Untagged
@@ -4850,8 +4854,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 260.02936, y: -33.95392}
+  m_SizeDelta: {x: 280.0586, y: 67.9078}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4157488953926925569
 CanvasRenderer:
@@ -4947,12 +4951,56 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -10.749664, y: 0, z: -120.92313, w: 0}
+  m_margin: {x: -10.749664, y: 0, z: 2.0763855, w: -1.4132385}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5713813557174553681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313421363081571129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 424147503008560869}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8447181323770434671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5430,7 +5478,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -31.399933, y: 0, z: 0, w: 0}
+  m_margin: {x: -31.399933, y: 0, z: 0, w: -20.064941}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5992,7 +6040,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -37.6799, y: 0, z: 0, w: 0}
+  m_margin: {x: -37.6799, y: 0, z: 67.49115, w: -21.888977}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

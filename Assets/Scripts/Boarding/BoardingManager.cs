@@ -102,9 +102,18 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         GameCamController.Instance.SetCam(CamType.driver);
         mEnginePanel.SetActive(true);
-        GamePopUp.Instance.PopStat("Please start the space bar to start the engine", 3.0f);
+        GamePopUp.Instance.PopStat("Please Press the <color=yellow>[Space Bar]</color> to start the engine", 3.0f);
         mBargeObj.SetActive(false);
-        this.gameObject.SetActive(false);
+        try
+        {
+            this.gameObject.SetActive(false);
+
+        }
+        catch(NullReferenceException ex)
+        {
+            Debug.LogWarning(ex.Message);
+        }
+
 
 
     }
@@ -122,7 +131,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 Score_System.Instance.Set(score);
                 mBoardingPanel.SetActive(false);
 
-                mTimer.Begin(120);
+                mTimer.Begin(120); // main game logic ,enable after final build
                 mTime.text = mTimer.Display;
 
                 PassengerBoarding(passengerCount, () =>
@@ -308,6 +317,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         GamePopUp.Instance.ClosePanel();
 
     }
+    
 }
 
 public enum BoardType { onBoard,offBoard}

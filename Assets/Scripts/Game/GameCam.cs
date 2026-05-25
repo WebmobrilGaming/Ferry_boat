@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GameCam : MonoBehaviour
 {
+    private bool isHit;
     private void OnEnable()
     {
+        isHit = false;
         Act.HitAction += Hit;
     }
 
@@ -16,26 +18,35 @@ public class GameCam : MonoBehaviour
 
     void Hit()
     {
-        StartCoroutine(Shake(0.2f, 0.1f));
+        Debug.LogWarning("Playing Vibration Functionality");
+        int vib = PlayerPrefs.GetInt(GamePrefs.isVibrationOn,0);
+        if(vib == 1)
+        {
+            StartCoroutine(Shake(0.2f, 0.1f));
+            isHit = true;
+        }
     }
-
-
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = transform.localPosition;
-
-        float elapsed = 0f;
-        while (elapsed < duration)
+        if (!isHit)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            
+            Vector3 originalPos = transform.localPosition;
 
-            transform.localPosition = new Vector3(x, y, originalPos.z);
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                float x = Random.Range(-1f, 1f) * magnitude;
+                float y = Random.Range(-1f, 1f) * magnitude;
 
-            elapsed += Time.deltaTime;
-            yield return null;
+                transform.localPosition = new Vector3(x, y, originalPos.z);
+
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localPosition = originalPos;
         }
-
-        transform.localPosition = originalPos;
+        
     }
 }

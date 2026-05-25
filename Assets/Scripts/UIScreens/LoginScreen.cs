@@ -69,8 +69,15 @@ namespace Ferry.Screens
             OnPreviousUserScreenDisable();
             submitNewUserBtn.interactable = true;
             submitPrevUserBtn.interactable = true;
+            newFirstNameInput.onValueChanged.AddListener(OnFirstNameValueChange);
             
         }
+
+        private void OnFirstNameValueChange(string arg0)
+        {
+            newFirstNameErrorTxt.text="";
+        }
+
         private void ClosePrevUserPanel()
         {
             newUserPanel.localScale = Vector3.zero;

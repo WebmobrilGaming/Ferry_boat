@@ -36,7 +36,7 @@ public class UserInterFace : MonoBehaviour
     {
         rangeMax = -1;
         scrollAction.performed += OnScroll;
-        backBtn.AddListener(null, GoHome);
+        
     }
 
     public void GoHome()
@@ -69,6 +69,7 @@ public class UserInterFace : MonoBehaviour
     private void OnEnable()
     {
         scrollAction.Enable();
+        //StartCoroutine(BackButtonEnabler());
         EventManager.Instance.AddListener<InGamePopupEvent>(OnPopupEventArrive);
         var ferryConfig = ShipConfigController.Instance.GetShipConfig(ShipType.Ferry);
         int level = (int)GetDifficultyLevel();
@@ -78,9 +79,15 @@ public class UserInterFace : MonoBehaviour
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += BoatDestroyed;
         Act.EndPointReached+= EndPointReached;
+        backBtn.onClick.AddListener(GoHome);
     }
 
-
+    IEnumerator BackButtonEnabler()
+    {
+        backBtn.enabled = false;
+        yield return new WaitForSecondsRealtime(5f);
+        backBtn.enabled = true;
+    }
     private void OnPopupEventArrive(InGamePopupEvent e)
     {
         this.popupEvent = e;
@@ -108,12 +115,20 @@ public class UserInterFace : MonoBehaviour
         scrollAction.Disable();
         Act.SpeedInit -= SetRange;
         Act.ReachedDestination -= LevelFinish;
+        Act.BoatDestroyedAction-=BoatDestroyed;
+        Act.EndPointReached-=EndPointReached;
+        backBtn.onClick.RemoveListener(GoHome);
     }
 
     private void BoatDestroyed()
     {
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
-        AudioManager.Instance.PlaySFX(AudioState.crash);
+        int SfxOn = PlayerPrefs.GetInt(GamePrefs.isSFXOn,0);
+        if (SfxOn == 1)
+        {
+            AudioManager.Instance.PlaySFX(AudioState.crash);
+        }
+        
 
         StopEngineEvent?.Invoke();
     }

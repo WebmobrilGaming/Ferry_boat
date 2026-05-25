@@ -1334,8 +1334,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110854424}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02092116, y: 0.9767894, z: -0.20475808, w: -0.059320886}
-  m_LocalPosition: {x: 868.86816, y: 92.7, z: -261.48422}
+  m_LocalRotation: {x: 0.13525999, y: -0.06149815, z: 0.026394777, w: 0.98854744}
+  m_LocalPosition: {x: 923.46814, y: 55.8, z: -172.88422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6426,8 +6426,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610646088}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.010425319, y: 0.93260336, z: -0.3592467, w: -0.03292701}
-  m_LocalPosition: {x: 0.670428, y: -1.8962536, z: -33.50787}
+  m_LocalRotation: {x: -0.0235892, y: -0.070802495, z: 0.061903365, w: 0.99528825}
+  m_LocalPosition: {x: 11.120016, y: -2.7378511, z: -14.070602}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9512,6 +9512,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caea1e468f1269347ab4a1b1dca8d14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiDisplayTest
+  cams:
+  - {fileID: 1682856571}
+  - {fileID: 1817731253}
+  - {fileID: 610646088}
 --- !u!114 &924104501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10918,6 +10922,7 @@ MonoBehaviour:
   thresholdSpeed: 0
   steeringSensitivity: 120
   isTurning: 0
+  backButton: {fileID: 1428637200}
 --- !u!114 &1099790240
 MonoBehaviour:
   m_ObjectHideFlags: 0

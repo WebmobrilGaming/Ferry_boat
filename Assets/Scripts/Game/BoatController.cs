@@ -82,6 +82,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [Header("Steering Wheel")]
     [SerializeField] private float steeringSensitivity = 120f;
     [SerializeField] public bool isTurning;
+    [SerializeField] private Button backButton;
     private float wheelInput;
     private void Awake()
     {
@@ -115,6 +116,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         isControl = false;
         isHit = false;
         isEngineStarted = false;
+        backButton.gameObject.SetActive(true);
 
         Act.SpeedChange += SpeedChange;
         Act.HitAction += HitAction;
@@ -327,6 +329,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private void HitAction()
     {
         Debug.LogWarning("Hit !! ");
+        backButton.gameObject.SetActive(false);
         Act.BoatDestroyedAction?.Invoke();
         mHealth = 0;
     }

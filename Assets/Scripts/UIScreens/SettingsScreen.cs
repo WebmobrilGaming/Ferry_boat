@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using GF;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Ferry.Screens
@@ -28,6 +29,7 @@ namespace Ferry.Screens
         public Button backBtn;
         [SerializeField] DifficultyLevel difficultyLevel;
 
+        
         protected override void OnEnable()
         {
             backBtn.onClick.AddListener(Close);
@@ -136,6 +138,15 @@ namespace Ferry.Screens
         {
             var setting = GetSettingsData();
             setting.musicOn = isOn;
+            Debug.LogWarning("Music key Player pref");
+            if(setting.musicOn == true)
+            {
+                PlayerPrefs.SetInt("isMusicON",1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("isMusicON",0);
+            }
             SaveSettings(setting);
         }
 
@@ -143,6 +154,17 @@ namespace Ferry.Screens
         {
             var setting = GetSettingsData();
             setting.sfxOn=isOn;
+            Debug.LogWarning("SFX key Player pref");
+            if (setting.sfxOn == true)
+            {
+                PlayerPrefs.SetInt(GamePrefs.isSFXOn, 1);
+            }
+            else if(setting.sfxOn == false )
+            {
+                PlayerPrefs.SetInt(GamePrefs.isSFXOn, 0);
+            }
+            Debug.LogWarning(setting.sfxOn);
+            Debug.LogWarning("SFX value : "+ PlayerPrefs.GetInt(GamePrefs.isSFXOn,0));
             SaveSettings(setting);
         }
 
@@ -150,6 +172,18 @@ namespace Ferry.Screens
         {
             var setting=GetSettingsData();
             setting.vibrationOn=isOn;
+            Debug.LogWarning("Vibration key Player pref");
+            if (setting.vibrationOn == true)
+            {
+                PlayerPrefs.SetInt(GamePrefs.isVibrationOn, 1);
+            }
+            else if (setting.vibrationOn == false)
+            {
+                PlayerPrefs.SetInt(GamePrefs.isVibrationOn, 0);
+            }
+            Debug.LogWarning(setting.vibrationOn
+            );
+            Debug.LogWarning("Vibration value : " + PlayerPrefs.GetInt(GamePrefs.isVibrationOn, 0));
             SaveSettings(setting);
         }
 
@@ -183,6 +217,13 @@ namespace Ferry.Screens
             helpPanel.transform.localScale = Vector3.zero;
             helpPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
         }
+        // public void ToggleChecker()
+        // {
+        //      int musicCheck = PlayerPrefs.GetInt(GamePrefs.isMusicOn,0);
+        //      int SfxCheck = PlayerPrefs.GetInt(GamePrefs.isSFXOn);
+        //      int vibrationCheck=PlayerPrefs.GetInt(GamePrefs.isVibrationOn,0);
+             
+        // }
     }
     [Serializable]
     public class SettingsData
@@ -193,6 +234,7 @@ namespace Ferry.Screens
         public bool tutorialOn;
         public DifficultyLevel level;
     }
-
+   
+   
     public enum DifficultyLevel { easy, medium, hard }
 }
