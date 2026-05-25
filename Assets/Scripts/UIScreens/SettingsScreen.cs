@@ -217,13 +217,7 @@ namespace Ferry.Screens
             helpPanel.transform.localScale = Vector3.zero;
             helpPanel.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
         }
-        // public void ToggleChecker()
-        // {
-        //      int musicCheck = PlayerPrefs.GetInt(GamePrefs.isMusicOn,0);
-        //      int SfxCheck = PlayerPrefs.GetInt(GamePrefs.isSFXOn);
-        //      int vibrationCheck=PlayerPrefs.GetInt(GamePrefs.isVibrationOn,0);
-             
-        // }
+        
     }
     [Serializable]
     public class SettingsData

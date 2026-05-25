@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 namespace GF
@@ -28,6 +29,7 @@ namespace GF
 
             DotPositionOnEnable();
             button.onClick.AddListener(OnToggle);
+
         }
         public void AddListener(Action<bool> action)
         {
@@ -70,12 +72,14 @@ namespace GF
         {
             float x = dotRect.anchoredPosition.x;
             float y = dotRect.anchoredPosition.y;
+            float savedX = PlayerPrefs.GetFloat(key,startX);
             dotRect.anchoredPosition = new Vector2(PlayerPrefs.GetFloat(key,startX),y);
-
+            isOn = savedX == endX;
             if(dotRect.anchoredPosition.x == endX)
             {
                 dotImg.color = Color.green;
             }
         }
+        
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MultiDisplayTest : MonoBehaviour
 {
     [SerializeField] private GameObject[] cams;
+    [SerializeField] private GameObject[] gameplayCam;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -19,20 +20,21 @@ public class MultiDisplayTest : MonoBehaviour
         Debug.LogWarning("Detected display : "+ Display.displays.Length);
     }
     void OnDisable()
-    {   
-        // Debug.LogWarning("disabling left and right camera");
-        // for(int i = 1; i < Display.displays.Length; i++)
-        // {
-        //      cams[i].SetActive(false);
-        //      Debug.LogWarning($"cam {i} disabled");
-        // }
+    {
+       cams[1].gameObject.SetActive(false);
+       cams[2].gameObject.SetActive(false);
+        gameplayCam[0].SetActive(true);
+        gameplayCam[1].SetActive(true);
     }
 
     public void EnableCams()
     {
-        for (int i = 1; i < Display.displays.Length; i++)
+        gameplayCam[0].SetActive(false);
+        gameplayCam[1].SetActive(false);
+        for (int i = 1; i < cams.Length; i++)
         {
             cams[i].SetActive(true);
+            
         }
     }
 }
