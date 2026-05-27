@@ -70,7 +70,25 @@ namespace Ferry.Screens
             submitNewUserBtn.interactable = true;
             submitPrevUserBtn.interactable = true;
             newFirstNameInput.onValueChanged.AddListener(OnFirstNameValueChange);
+            newLastNameInput.onValueChanged.AddListener(OnLastNameValueChnaged);
+            newUsernameInput.onValueChanged.AddListener(OnNewUserNameValueChanged);
+            prevUsernameInput.onValueChanged.AddListener(OnPrevUsernameValueChanged);
             
+        }
+
+        private void OnPrevUsernameValueChanged(string arg0)
+        {
+            prevUserDontExistTxt.text="";
+        }
+
+        private void OnNewUserNameValueChanged(string arg0)
+        {
+            newUsernameErrorTxt.text="";
+        }
+
+        private void OnLastNameValueChnaged(string arg0)
+        {
+            newLastNameErrorTxt.text="";
         }
 
         private void OnFirstNameValueChange(string arg0)

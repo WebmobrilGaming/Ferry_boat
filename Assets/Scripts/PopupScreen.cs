@@ -62,21 +62,25 @@ namespace Ferry.Popup
 
         private void OnNoClick()
         {
+            noBtn.interactable = false;
             yesNoPanel.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 noAction?.Invoke();
                 noAction = null;
                 CloseYesNoPanel();
+                noBtn.interactable = true;
             });
         }
 
         private void OnYesClick()
         {
+            yesBtn.interactable = false;
             yesNoPanel.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 yesAction?.Invoke();
                 yesAction = null;
                 CloseYesNoPanel();
+                yesBtn.interactable = true;
             });
         }
 

@@ -123,7 +123,7 @@ public class UserInterFace : MonoBehaviour
     private void BoatDestroyed()
     {
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
-        int SfxOn = PlayerPrefs.GetInt(GamePrefs.isSFXOn,0);
+        int SfxOn = PlayerPrefs.GetInt(GamePrefs.isSFXOn,1);
         if (SfxOn == 1)
         {
             AudioManager.Instance.PlaySFX(AudioState.crash);
@@ -159,7 +159,7 @@ public class UserInterFace : MonoBehaviour
     IEnumerator ReachedDestinationDock()
     {
         yield return new WaitForSecondsRealtime(5f);
-        Score_System.Instance.Set(Score_System.Instance.Score, Data.time, () =>
+        Score_System.Instance.UploadFinalScore(Score_System.Instance.Score, Data.time, () =>
             {
                 LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
             });

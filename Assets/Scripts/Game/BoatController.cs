@@ -48,7 +48,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [Header("Fuel Settings:")]
     [SerializeField] TMP_Text mFuelText;
     [SerializeField] Slider mFuelSlider;
-    [SerializeField] Fuel mFuel;
+    //[SerializeField] Fuel mFuel;
     [SerializeField] Slider trottleSlider;
 
     [Header("Health Settings:")]
@@ -100,9 +100,9 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mDeceleration = ferryConfig.velocitiesLevels[(int)difficultyLevel].deceleration;
         mHealth = ferryConfig.health;
         mdamage = ferryConfig.damage;
-        mFuel.accelerationSurcharge = ferryConfig.fuelConfig.accelerationSurge;
-        mFuel.baseConsumption = ferryConfig.fuelConfig.baseConsumption;
-        mFuel.maxFuel = ferryConfig.fuelConfig.fuelCapacity;
+        // mFuel.accelerationSurcharge = ferryConfig.fuelConfig.accelerationSurge;
+        // mFuel.baseConsumption = ferryConfig.fuelConfig.baseConsumption;
+        // mFuel.maxFuel = ferryConfig.fuelConfig.fuelCapacity;
     }
 
     private void OnEnable()
@@ -110,7 +110,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         helmController.callback = this;
         mGear.callback = this;
         isTurning = false;
-        mFuelSlider.value = mFuel.currentFuel;
+       // mFuelSlider.value = mFuel.currentFuel;
         startRotation = transform.localRotation;
 
         isControl = false;
@@ -159,7 +159,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private void StopEngine()
     {
         isEngineStarted = false;
-        mFuel.currentFuel = 0;
+        //mFuel.currentFuel = 0;
     }
 
     private void OnDisable()
@@ -174,8 +174,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     {
     
 
-        if (mFuel.FuelPercent < 0.1f)
-            return;
+        // if (mFuel.FuelPercent < 0.1f)
+        //     return;
 
         if (Keyboard.current.leftArrowKey.isPressed && mGear.Stat)
             helmController.Direct(HelmDirection.left);
@@ -206,7 +206,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         #region SPEED_HANDLING
         // canMove requires the engine to be running, gear engaged, fuel available, and no hit
-        bool canMove = mGear.Stat && isEngineStarted && !mFuel.IsEmpty && !isHit;
+        bool canMove = mGear.Stat && isEngineStarted && !isHit ; //&& !mFuel.IsEmpty;
 
         float targetSpeed = 0f;
         if (canMove)
@@ -235,21 +235,21 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         #endregion
 
         #region FUEL_HANDLING
-        if (mGear.Stat && !mFuel.IsEmpty)
-        {
-            float speedDelta = mCurrentSpeed - mPreviousSpeed;
-            bool isAccelerating = speedDelta > 0.01f;
+        // if (mGear.Stat && !mFuel.IsEmpty)
+        // {
+        //     float speedDelta = mCurrentSpeed - mPreviousSpeed;
+        //     bool isAccelerating = speedDelta > 0.01f;
 
-            float consumption = mFuel.idleConsumption
-                + mFuel.baseConsumption * Mathf.Abs(mCurrentSpeed)
-                + (isAccelerating ? mFuel.accelerationSurcharge * speedDelta : 0f);
+        //     float consumption = mFuel.idleConsumption
+        //         + mFuel.baseConsumption * Mathf.Abs(mCurrentSpeed)
+        //         + (isAccelerating ? mFuel.accelerationSurcharge * speedDelta : 0f);
 
-            mFuel.currentFuel -= consumption * Time.deltaTime;
-            mFuel.currentFuel = Mathf.Max(mFuel.currentFuel, 0f);
-        }
+        //     mFuel.currentFuel -= consumption * Time.deltaTime;
+        //     mFuel.currentFuel = Mathf.Max(mFuel.currentFuel, 0f);
+        // }
 
-        mPreviousSpeed = mCurrentSpeed;
-        UpdateFuelUI();
+        // mPreviousSpeed = mCurrentSpeed;
+        // UpdateFuelUI();
         #endregion
     }
 
@@ -277,7 +277,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             mThresholdApplied = true;
 
             //float newHealth = mHealth - mdamage;
-            Utils.ShowInGamePopup($"You are crossing speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+            Utils.ShowInGamePopup($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
 
             score_System.Set(-20, Data.time);
         }
@@ -334,23 +334,23 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mHealth = 0;
     }
 
-    void UpdateFuelUI()
-    {
-        mFuelSlider.value = mFuel.FuelPercent;
+    // void UpdateFuelUI()
+    // {
+    //     mFuelSlider.value = mFuel.FuelPercent;
 
-        if (mFuel.FuelPercent < 0.2f)
-        {
-            mFuelText.text = "Low Fuel";
+    //     if (mFuel.FuelPercent < 0.2f)
+    //     {
+    //         mFuelText.text = "Low Fuel";
 
-            Sequence sequence = DOTween.Sequence();
-            sequence.Join(mFuelText.DOColor(Color.red, 0.2f))
-                    .Append(mFuelText.DOColor(Color.white, 0.2f))
-                    .SetLoops(-1);
-        }
+    //         Sequence sequence = DOTween.Sequence();
+    //         sequence.Join(mFuelText.DOColor(Color.red, 0.2f))
+    //                 .Append(mFuelText.DOColor(Color.white, 0.2f))
+    //                 .SetLoops(-1);
+    //     }
 
-        if (mFuel.FuelPercent < 0.1f)
-            EngineStat(false);
-    }
+    //     if (mFuel.FuelPercent < 0.1f)
+    //         EngineStat(false);
+    // }
 
     void EngineStat(bool enable)
     {
@@ -369,10 +369,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         isHit = false;
     }
 
-    public void Refuel(float amount)
-    {
-        mFuel.currentFuel = Mathf.Min(mFuel.currentFuel + amount, mFuel.maxFuel);
-    }
+    // public void Refuel(float amount)
+    // {
+    //     mFuel.currentFuel = Mathf.Min(mFuel.currentFuel + amount, mFuel.maxFuel);
+    // }
 
     public void Rotate(float zValue)
     {

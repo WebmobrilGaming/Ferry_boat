@@ -28,7 +28,12 @@ public class GamePopUp : MonoBehaviour
         if (instance == null)
             instance = this;
     }
-  
+
+    void OnEnable()
+    {
+        yesBtn.interactable = true;
+        noBtn.interactable = true;
+    }
     public void FinalPopUp(string message)
     {
         panelFinal.SetActive(true);
@@ -67,12 +72,14 @@ public class GamePopUp : MonoBehaviour
 
         yesBtn?.onClick.AddListener(() =>
         {
+            yesBtn.interactable = false;
             Time.timeScale=1;
             yesAct?.Invoke();
         });
 
         noBtn?.onClick.AddListener(() =>
         {
+            
             panelYesNo.gameObject.SetActive(false);
             Time.timeScale = 1;
             noAct?.Invoke();

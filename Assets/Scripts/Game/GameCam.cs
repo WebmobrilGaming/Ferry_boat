@@ -19,7 +19,7 @@ public class GameCam : MonoBehaviour
     void Hit()
     {
         Debug.LogWarning("Playing Vibration Functionality");
-        int vib = PlayerPrefs.GetInt(GamePrefs.isVibrationOn,0);
+        int vib = PlayerPrefs.GetInt(GamePrefs.isVibrationOn,1);
         if(vib == 1)
         {
             StartCoroutine(Shake(0.2f, 0.1f));

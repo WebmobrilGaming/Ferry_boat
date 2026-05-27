@@ -9,8 +9,8 @@ namespace GF
     {
         public Image dotImg;
         private RectTransform dotRect;
-        private bool isOn = false;
-        public bool IsOn => isOn;
+        private bool isOff=false;
+        public bool IsOn => isOff;
         private Button button;
         public float startX;
         public float endX;
@@ -26,7 +26,7 @@ namespace GF
         }
         void OnEnable()
         {
-
+            
             DotPositionOnEnable();
             button.onClick.AddListener(OnToggle);
 
@@ -37,8 +37,8 @@ namespace GF
         }
         private void OnToggle()
         {
-            isOn = !isOn;
-            if (isOn)
+            isOff = !isOff;
+            if (!isOff)
             {
                 dotRect.DOAnchorPosX(endX, 0.3f).SetEase(Ease.OutBack);
                 SaveDotPosition(endX);
@@ -72,9 +72,9 @@ namespace GF
         {
             float x = dotRect.anchoredPosition.x;
             float y = dotRect.anchoredPosition.y;
-            float savedX = PlayerPrefs.GetFloat(key,startX);
-            dotRect.anchoredPosition = new Vector2(PlayerPrefs.GetFloat(key,startX),y);
-            isOn = savedX == endX;
+            float savedX = PlayerPrefs.GetFloat(key,endX);
+            dotRect.anchoredPosition = new Vector2(PlayerPrefs.GetFloat(key,endX),y);
+            isOff = savedX == startX;
             if(dotRect.anchoredPosition.x == endX)
             {
                 dotImg.color = Color.green;
