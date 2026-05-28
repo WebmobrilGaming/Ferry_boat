@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GF;
+using Mono.Cecil;
 using Netconfig;
 using Newtonsoft.Json;
 
@@ -77,7 +78,95 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string username { get; set; }
         public int score { get; set; }
         public string difficultyLevel { get; set; }
+        public string totalTimeSecond {get ; set;}
         public DateTime time { get; set; }
+    }
+    // public class WindSpeedByDifficulty
+    // {
+    //     public int easy { get;set;}
+    //     public int medium {get; set;}
+    //     public int hard {get;set;}
+    // }
+    // public class WaveLevelRange
+    // {
+    //     public int minWave { get; set; }
+    //     public int maxWave { get; set; }
+    // }
+    // public class WaveSpeedLimitRange
+    // {
+    //     public int min{get;set;}
+    //     public int max{get;set;}
+    // }
+    // public class WavesSpeedLimit
+    // {
+    //     public WaveSpeedLimitRange easy{get;set;}
+    //     public WaveSpeedLimitRange medium{get;set;}
+    //     public WaveSpeedLimitRange hard{get;set;}
+    // }
+    // public class WaveDifficultyData
+    // {
+    //     public string waveDifficulty{get;set;}
+    //     public WaveLevelRange waveLevelRange { get; set; }
+
+    //     public int waveLevel {get; set;}
+
+    //     public WindSpeedByDifficulty windSpeedByDifficulty {get;set;}
+    // }[Serializable]
+    public class MinMax
+    {
+        public int min { get; set; }
+        public int? max { get; set; }
+    }
+
+    [Serializable]
+    public class WaveLevelRange
+    {
+        public int minWave { get; set; }
+        public int maxWave { get; set; }
+    }
+
+    [Serializable]
+    public class WindSpeedLimits
+    {
+        public MinMax easy { get; set; }
+        public MinMax medium { get; set; }
+        public MinMax hard { get; set; }
+    }
+
+    [Serializable]
+    public class WindSpeedByDifficulty
+    {
+        public int easy { get; set; }
+        public int medium { get; set; }
+        public int hard { get; set; }
+    }
+    [Serializable]
+    public class WaveLevelByDifficulty
+    {
+        public int easy {get;set;}
+        public int medium {get;set;}
+        public int hard {get;set;}
+    }
+
+    [Serializable]
+    public class WaveDifficultyData
+    {
+        public string waveDifficulty { get; set; }
+
+        public WaveLevelRange waveLevelRange { get; set; }
+
+        public int waveLevel { get; set; }
+        public WaveLevelByDifficulty waveLevelByDifficulty {get;set;}
+
+        public WindSpeedLimits windSpeedLimits { get; set; }
+
+        public WindSpeedLimits windSpeedRanges { get; set; }
+
+        public MinMax windSpeedRange { get; set; }
+
+        public WindSpeedByDifficulty windSpeedByDifficulty { get; set; }
+
+        public int windSpeed { get; set; }
     }
 
     public class LeaderboardResponse : Response
@@ -91,10 +180,11 @@ namespace Ferry_boat.Assets.Scripts.Web
 
     public class UpdateScoreRequest
     {
-        public UpdateScoreRequest(string username, int score,int time)
+        public UpdateScoreRequest(string username, int score,int time,string currentDifficulty)
         {
             this.username = username;
             this.score = score;
+            this.difficultyLevel = currentDifficulty;
             this.totalTimeSecond = time;
         }
 
@@ -102,12 +192,22 @@ namespace Ferry_boat.Assets.Scripts.Web
         public int score { get; set; }
 
         public int totalTimeSecond { get; set; }
+        public string difficultyLevel{get;set;}
     }
     public class UpdateScoreResponse : Response
     {
         public bool success { get; set; }
         public string message { get; set; }
         public PlayerData data { get; set; }
+        public long code { get; set; }
+        public bool status => success;
+    }
+
+    public class WaveDifficultyResponse : Response
+    {
+        public bool success { get; set; }
+        public string message { get; set; }
+        public WaveDifficultyData data {get;set;}
         public long code { get; set; }
         public bool status => success;
     }

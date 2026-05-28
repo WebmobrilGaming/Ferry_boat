@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3113683028119781338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -485,6 +485,9 @@ MonoBehaviour:
   Screen: 2
   recyclableScrollRect: {fileID: 2065615083973114181}
   backBtn: {fileID: 7296044862125802048}
+  easyBtn: {fileID: 7128400489378259754}
+  mediumBtn: {fileID: 2816459513908204609}
+  HardBtn: {fileID: 8207334483893674123}
 --- !u!1 &2181085280856040678
 GameObject:
   m_ObjectHideFlags: 0

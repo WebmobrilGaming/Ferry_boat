@@ -44,6 +44,7 @@ namespace Ferry.Screens
             {
                 Debug.LogWarning("Easy");
                 difficultyLevel = DifficultyLevel.easy;
+                PlayerPrefs.SetString(GamePrefs.difficulty_Level,difficultyLevel.ToString());
                 var setting = GetSettingsData();
                 setting.level = difficultyLevel;
                 SaveSettings(setting);
@@ -53,6 +54,7 @@ namespace Ferry.Screens
             mMediumBtn.onClick.AddListener(() =>
             {   Debug.LogWarning("Medium");
                 difficultyLevel = DifficultyLevel.medium;
+                PlayerPrefs.SetString(GamePrefs.difficulty_Level,difficultyLevel.ToString());
                 var setting = GetSettingsData();
                 setting.level = difficultyLevel;
                 SaveSettings(setting);
@@ -62,6 +64,7 @@ namespace Ferry.Screens
             mHardBtn.onClick.AddListener(() =>
             {   Debug.LogWarning("Hard");
                 difficultyLevel = DifficultyLevel.hard;
+                PlayerPrefs.SetString(GamePrefs.difficulty_Level, difficultyLevel.ToString());
                 var setting = GetSettingsData();
                 setting.level = difficultyLevel;
                 SaveSettings(setting);
@@ -141,11 +144,11 @@ namespace Ferry.Screens
             Debug.LogWarning("Music key Player pref");
             if(setting.musicOn == true)
             {
-                PlayerPrefs.SetInt("isMusicON",1);
+                PlayerPrefs.SetInt(GamePrefs.isMusicOn,1);
             }
             else
             {
-                PlayerPrefs.SetInt("isMusicON",0);
+                PlayerPrefs.SetInt(GamePrefs.isMusicOn,0);
             }
             SaveSettings(setting);
         }

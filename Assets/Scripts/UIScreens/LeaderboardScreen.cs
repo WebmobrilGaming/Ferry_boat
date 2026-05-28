@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Ferry.Screens;
 using Ferry_boat.Assets.Scripts.Web;
 using GF;
@@ -11,11 +12,35 @@ public class LeaderboardScreen : BaseScreen<ScreenType>, IRecyclableScrollRectDa
     public RecyclableScrollRect recyclableScrollRect;
     public List<PlayerData> leaderboardList;
     public Button backBtn;
+    public Button easyBtn;
+    public Button mediumBtn;
+    public Button HardBtn;
     protected override void OnEnable()
     {
         backBtn.AddListener(null,Close);
         backBtn.interactable = false;
-        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard, null),OnRecieveLeaderboard);
+        easyBtn.onClick.AddListener(OnEasyCliked);
+        mediumBtn.onClick.AddListener(OnMediumCliked);
+        HardBtn.onClick.AddListener(OnHardCliked);
+        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard_Easy, null),OnRecieveLeaderboard);
+    }
+
+    private void OnHardCliked()
+    {
+        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard_Hard, null), OnRecieveLeaderboard);
+        backBtn.interactable = false;
+    }
+
+    private void OnMediumCliked()
+    {
+        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard_Medium, null), OnRecieveLeaderboard);
+        backBtn.interactable = false;
+    }
+
+    private void OnEasyCliked()
+    {
+        APIManager.GetAPI<LeaderboardResponse>(new RequestData(Netconfig.RequestType.LeaderBoard_Easy, null), OnRecieveLeaderboard);
+        backBtn.interactable = false;
     }
 
     private void Close()
@@ -73,4 +98,8 @@ public class LeaderboardScreen : BaseScreen<ScreenType>, IRecyclableScrollRectDa
     {
         backBtn.RemoveListener();
     }
+
+    
+
+
 }

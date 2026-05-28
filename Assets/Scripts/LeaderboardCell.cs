@@ -19,6 +19,6 @@ public class LeaderboardCell : MonoBehaviour,ICell
         rankTxt.text = $"# {playerData.rank}";
         userNameTxt.text = $"{playerData.username}";
         scoreTimeTxt.text = $"{playerData.score}";
-        timeText.text=$"{playerData.difficultyLevel}";
+        timeText.text=$"{playerData.totalTimeSecond}";
     }
 }

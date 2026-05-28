@@ -29,6 +29,7 @@ public class UserInterFace : MonoBehaviour
     public Button backBtn;
     public TMP_Text windTxt;
     public TMP_Text levelTxt;
+    public string currentDifficulty;
     private InGamePopupEvent popupEvent = null;
 
     public static event Action StopEngineEvent;
@@ -80,6 +81,8 @@ public class UserInterFace : MonoBehaviour
         Act.BoatDestroyedAction += BoatDestroyed;
         Act.EndPointReached+= EndPointReached;
         backBtn.onClick.AddListener(GoHome);
+        currentDifficulty = PlayerPrefs.GetString(GamePrefs.difficulty_Level,DifficultyLevel.easy.ToString());
+        
     }
 
     IEnumerator BackButtonEnabler()

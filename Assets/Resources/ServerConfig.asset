@@ -21,8 +21,19 @@ MonoBehaviour:
     api: player/updateScore
   - requestType: 2
     api: player/leader_board
+  - requestType: 4
+    api: player/leader_board?difficulty=easy
+  - requestType: 5
+    api: player/leader_board?difficulty=medium
+  - requestType: 6
+    api: player/leader_board?difficulty=hard
+  - requestType: 7
+    api: player/wave-difficulty
   serverEntries:
   - configName: DEV
     baseURL: http://52.22.241.165:10021/api
     socketURL: Socket URL
-  selectedConfigIndex: 0
+  - configName: New_Dev
+    baseURL: http://52.22.241.165:10021/api
+    socketURL: 
+  selectedConfigIndex: 1

@@ -14,6 +14,7 @@ public class Score_System : MonoBehaviour
     public int Score => score;
 
     static Score_System instance;
+    public string currentDifficulty;
 
     public static  Score_System Instance {  get { return instance; } }
 
@@ -26,15 +27,15 @@ public class Score_System : MonoBehaviour
     private void OnEnable()
     {
         score = 0;
+        currentDifficulty = PlayerPrefs.GetString(GamePrefs.difficulty_Level, DifficultyLevel.easy.ToString());
     }
 
     public void Set(int inx,float time = 0, Action onComplete = null)
     {  
         score =  score + inx;
         mScore.text =  score.ToString();
-
         int timedata = (int)time;
-        var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, timedata, score);
+        var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, timedata, score ,currentDifficulty);
         APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore, request), (res,Response) =>
         {
             onComplete?.Invoke();
@@ -44,7 +45,7 @@ public class Score_System : MonoBehaviour
     {
         score = inx;
         int timedata = (int)time;
-        var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, timedata, score);
+        var request = new UpdateScoreRequest(UserDataManager.Instance.UserDetails.data.username, timedata, score,currentDifficulty);
         APIManager.PostAPI<UpdateScoreResponse>(new RequestData(Netconfig.RequestType.UpdateScore, request), (res, Response) =>
         {
             onComplete?.Invoke();

@@ -110,6 +110,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         helmController.callback = this;
         mGear.callback = this;
         isTurning = false;
+        var currentDifficulty = PlayerPrefs.GetString(GamePrefs.difficulty_Level,DifficultyLevel.easy.ToString());
+        Debug.LogWarning(currentDifficulty);
        // mFuelSlider.value = mFuel.currentFuel;
         startRotation = transform.localRotation;
 

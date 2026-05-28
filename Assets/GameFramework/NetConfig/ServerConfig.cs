@@ -101,6 +101,10 @@ namespace Netconfig
         LoginPlayer,
         CreatePlayer,
         LeaderBoard,
-        UpdateScore
+        UpdateScore,
+        LeaderBoard_Easy,
+        LeaderBoard_Medium,
+        LeaderBoard_Hard,
+        Wave_Diffiulty
     }
 }
