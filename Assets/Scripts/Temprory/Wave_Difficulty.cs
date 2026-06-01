@@ -7,8 +7,8 @@ using Newtonsoft.Json;
 
 public class Wave_Difficulty : MonoBehaviour
 {
-    public int windspeed;
-    public int wavelevel;
+    public static int windspeed;
+    public static int wavelevel;
     public string currentdifficulty;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,21 +27,21 @@ public class Wave_Difficulty : MonoBehaviour
             
             if (currentdifficulty == DifficultyLevel.easy.ToString())
             {
-                this.windspeed = data.data.windSpeedByDifficulty.easy;
-                this.wavelevel = data.data.waveLevelByDifficulty.easy;
+                windspeed = data.data.windSpeedByDifficulty.easy;
+                wavelevel = data.data.waveLevelByDifficulty.easy;
             }
             else if (currentdifficulty == DifficultyLevel.medium.ToString())
             {
-                this.windspeed = data.data.windSpeedByDifficulty.medium;
-                this.wavelevel = data.data.waveLevelByDifficulty.medium;
+                windspeed = data.data.windSpeedByDifficulty.medium;
+                wavelevel = data.data.waveLevelByDifficulty.medium;
             }
             else if( currentdifficulty == DifficultyLevel.hard.ToString())
             {
-                this.windspeed = data.data.windSpeedByDifficulty.hard;
-                this.wavelevel = data.data.waveLevelByDifficulty.hard;
+                windspeed = data.data.windSpeedByDifficulty.hard;
+                wavelevel = data.data.waveLevelByDifficulty.hard;
             }
                 
-                Debug.LogWarning($"current level : {currentdifficulty} \n windspeed : {this.windspeed} \n wavelevel : {wavelevel}");
+                Debug.LogWarning($"current level : {currentdifficulty} \n windspeed : {windspeed} \n wavelevel : {wavelevel}");
             
         }
     }

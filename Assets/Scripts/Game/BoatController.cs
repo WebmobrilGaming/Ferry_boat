@@ -79,10 +79,11 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     public static event Action OnBoatStartEvent;
     private bool isInitialized = false;
     private WaveMotion waveMotion;
-    [Header("Steering Wheel")]
+    [Header("Steering")]
     [SerializeField] private float steeringSensitivity = 120f;
     [SerializeField] public bool isTurning;
     [SerializeField] private Button backButton;
+    [SerializeField] private float windDriftStrength;
     private float wheelInput;
     private void Awake()
     {
@@ -225,6 +226,22 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             currentTransform.y,
             currentTransform.z + forward.z);
         transform.position = target;
+        if (Mathf.Abs(mCurrentSpeed) > 0.1f)
+        {
+            if (waveMotion.currentWindSpeed != 0)
+            {
+                float drift =
+               windDriftStrength * (waveMotion.currentWindSpeed / 35f);
+
+                currentRotation += drift * Time.deltaTime;
+
+                transform.localRotation =
+                    startRotation *
+                    Quaternion.Euler(0, currentRotation, 0);
+            }
+           
+        }
+
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
         //speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;

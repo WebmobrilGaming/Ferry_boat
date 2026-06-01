@@ -5,7 +5,7 @@ using UnityEngine;
 public class MultiDisplayTest : MonoBehaviour
 {
     [SerializeField] private GameObject[] cams;
-    [SerializeField] private GameObject[] gameplayCam;
+    //[SerializeField] private GameObject[] gameplayCam;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -23,14 +23,14 @@ public class MultiDisplayTest : MonoBehaviour
     {
        cams[1].gameObject.SetActive(false);
        cams[2].gameObject.SetActive(false);
-        gameplayCam[0].SetActive(true);
-        gameplayCam[1].SetActive(true);
+        // gameplayCam[0].SetActive(true);
+        // gameplayCam[1].SetActive(true);
     }
 
     public void EnableCams()
     {
-        gameplayCam[0].SetActive(false);
-        gameplayCam[1].SetActive(false);
+        // gameplayCam[0].SetActive(false);
+        // gameplayCam[1].SetActive(false);
         for (int i = 1; i < cams.Length; i++)
         {
             cams[i].SetActive(true);

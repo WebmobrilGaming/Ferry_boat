@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using GF;
-using Mono.Cecil;
 using Netconfig;
 using Newtonsoft.Json;
 
@@ -78,7 +77,7 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string username { get; set; }
         public int score { get; set; }
         public string difficultyLevel { get; set; }
-        public string totalTimeSecond {get ; set;}
+        public float totalTimeSecond {get ; set;}
         public DateTime time { get; set; }
     }
     // public class WindSpeedByDifficulty

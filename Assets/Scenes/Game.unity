@@ -9546,8 +9546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5ac56b92b9ea44c873573b5ff8a3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wave_Difficulty
-  windspeed: 0
-  wavelevel: 0
   currentdifficulty: 
 --- !u!1 &924008126
 GameObject:
@@ -9597,9 +9595,6 @@ MonoBehaviour:
   - {fileID: 1682856571}
   - {fileID: 1817731253}
   - {fileID: 610646088}
-  gameplayCam:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &924104501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11002,6 +10997,7 @@ MonoBehaviour:
   steeringSensitivity: 120
   isTurning: 0
   backButton: {fileID: 1428637200}
+  windDriftStrength: 1.5
 --- !u!114 &1099790240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11017,6 +11013,8 @@ MonoBehaviour:
   boatVisual: {fileID: 7671748265835084297}
   waveConfig: {fileID: 11400000, guid: a2a7fbd5f85e58a438e960d5c74e682b, type: 2}
   IsTransitioning: 0
+  currentWindSpeed: 0
+  currentWaveLevel: 0
 --- !u!114 &1099790241
 MonoBehaviour:
   m_ObjectHideFlags: 0
