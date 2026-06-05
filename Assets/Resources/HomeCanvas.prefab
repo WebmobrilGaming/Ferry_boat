@@ -274,6 +274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HomeScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 8124291823812013233, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9186878024437471163, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

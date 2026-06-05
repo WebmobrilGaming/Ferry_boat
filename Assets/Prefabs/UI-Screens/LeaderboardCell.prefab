@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7667499881650460807
 RectTransform:
   m_ObjectHideFlags: 0
@@ -112,6 +112,8 @@ MonoBehaviour:
   userNameTxt: {fileID: 7404339120998755251}
   scoreTimeTxt: {fileID: 6273118231070022430}
   timeText: {fileID: 390218346045904283}
+  min: 0
+  sec: 0
 --- !u!1 &6227904307234770890
 GameObject:
   m_ObjectHideFlags: 0

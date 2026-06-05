@@ -55,7 +55,22 @@ namespace Ferry_boat.Assets.Scripts.Web
         public string lastName { get; set; }
         public int score { get; set; }
         public string difficultyLevel { get; set; }
+        public ScoresByDifficulty scoresByDifficulty { get; set; }
         public DateTime time { get; set; }
+    }
+    [Serializable]
+    public class DifficultyScore
+    {
+        public int score { get; set; }
+        public int totalTimeSecond { get; set; }
+    }
+
+    [Serializable]
+    public class ScoresByDifficulty
+    {
+        public DifficultyScore easy { get; set; }
+        public DifficultyScore medium { get; set; }
+        public DifficultyScore hard { get; set; }
     }
 
     public class UserDetails : Response

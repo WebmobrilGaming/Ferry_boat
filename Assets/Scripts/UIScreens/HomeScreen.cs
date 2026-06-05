@@ -28,10 +28,12 @@ namespace Ferry.Screens
         public TMP_Text playerNameTxt1;
         public GameObject gameLogo;
         public GameObject GroupBtn;
+        public Button exitGameBtn;
         protected override void OnEnable()
         {
             Debug.LogWarning(UserDataManager.Instance.UserDetails.data.username);
             playerNameTxt1.text = $"Player : {UserDataManager.Instance.UserDetails.data.username}";
+            Debug.LogWarning(UserDataManager.Instance.UserDetails.data.scoresByDifficulty.medium.score);
             gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
             GameObjectivesBtn.AddListener(null, OpenGameObjective);
@@ -42,6 +44,7 @@ namespace Ferry.Screens
             gameObjectiveCloseBtn.AddListener(null, CloseObjectivePanel);
             StartCoroutine(AnimateButtons());
             gameLogo.SetActive(true);
+            exitGameBtn.onClick.AddListener(ExitGame);
         }
 
         private void CloseObjectivePanel()
@@ -53,10 +56,17 @@ namespace Ferry.Screens
 
         private void Logout()
         {
-            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to quit", () =>
+            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to Logout", () =>
             {
                 PlayerPrefs.DeleteAll();
                 SwitchScreen(ScreenType.Login);
+            }, null);
+        }
+        private void ExitGame()
+        {
+            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to Exit to Desktop", () =>
+            {
+                Application.Quit();
             }, null);
         }
 
@@ -108,6 +118,7 @@ namespace Ferry.Screens
             FerryHistoryBtn.RemoveListener();
             LeaderboardBtn.RemoveListener();
             gameLogo.SetActive(false);
+            exitGameBtn.onClick.RemoveListener(ExitGame);
         }
     }
 }

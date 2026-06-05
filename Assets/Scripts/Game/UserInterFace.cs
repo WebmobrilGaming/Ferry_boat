@@ -162,7 +162,7 @@ public class UserInterFace : MonoBehaviour
     IEnumerator ReachedDestinationDock()
     {
         yield return new WaitForSecondsRealtime(5f);
-        Score_System.Instance.UploadFinalScore(Score_System.Instance.Score, Data.time, () =>
+        Score_System.Instance.UploadFinalScore( Data.time, () =>
             {
                 LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
             });
