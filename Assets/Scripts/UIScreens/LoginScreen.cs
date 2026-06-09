@@ -204,13 +204,19 @@ namespace Ferry.Screens
             if (string.IsNullOrEmpty(username))
             {
                 status = false;
-                newUsernameErrorTxt.text = "User name should not be empty";
+                newUsernameErrorTxt.text = "Username should not be empty";
                 return status;
             }
             if (username.Length < 3)
             {
                 status = false;
-                newUsernameErrorTxt.text = "User name length should be greater than or equal to 3";
+                newUsernameErrorTxt.text = "Username length should be greater than or equal to 3";
+                return status;
+            }
+            if(newUsernameInput.text.Contains(" "))
+            {
+                status = false;
+                newUsernameErrorTxt.text = "Username can only contain letters, numbers, and special characters";
                 return status;
             }
             return status;

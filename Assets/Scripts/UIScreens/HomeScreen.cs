@@ -33,7 +33,6 @@ namespace Ferry.Screens
         {
             Debug.LogWarning(UserDataManager.Instance.UserDetails.data.username);
             playerNameTxt1.text = $"Player : {UserDataManager.Instance.UserDetails.data.username}";
-            Debug.LogWarning(UserDataManager.Instance.UserDetails.data.scoresByDifficulty.medium.score);
             gameObjectivePanel.gameObject.SetActive(false);
             startSimulationBtn.AddListener(null, StartGame);
             GameObjectivesBtn.AddListener(null, OpenGameObjective);

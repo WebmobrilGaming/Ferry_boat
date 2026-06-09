@@ -52,28 +52,6 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
         if (!boatController.isEngineStarted)
             return;
 
-        float targetSteering = wheelInput * maxTurnSpeed;
-
-        currentSteering = Mathf.Lerp(
-            currentSteering,
-            targetSteering,
-            steeeringSmothness * Time.deltaTime
-        );
-
-        float speedFactor = Mathf.Clamp01(Mathf.Abs(boatController.Speed)/10f);
-
-        // Apply rotation
-        boatController.currentRotation +=
-            currentSteering *
-            speedFactor *
-            Time.deltaTime;
-
-        transform.localRotation =
-            boatController.startRotation *
-            Quaternion.Euler(
-                0,
-                boatController.currentRotation,
-                0
-            );
+      
     }
 }

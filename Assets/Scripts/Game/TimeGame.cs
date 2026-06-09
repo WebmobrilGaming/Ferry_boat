@@ -119,6 +119,7 @@ public class TimerAndScore : MonoBehaviour
         {
             return;
         }
+        if (isLevelFinished) return;
 
         timer -= Time.deltaTime;
         timer = Mathf.Clamp(timer,0,660);
@@ -132,7 +133,6 @@ public class TimerAndScore : MonoBehaviour
                 Utils.ShowInGamePopup("Opps...! Time out");
             }
         }
-        if(isLevelFinished) return;
         UpdateTimerUI();
         CheckMinutePassed();
     }
