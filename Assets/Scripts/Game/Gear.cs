@@ -55,13 +55,24 @@ public class Gear : MonoBehaviour
 
         //}));
     }
-    private void SpeedChange(float val)
+    private void SpeedChange(float val) // MOUSE Gear Position Change
     {
         float t = Mathf.InverseLerp(0, mRange, val);
-
+        Debug.LogWarning("Gear Movement Here");
         _animator.Play("GearON", 0, t);
         _animator.speed = 0f;
     }
+    public void Thrustmaster_GearPositionChange(float normalisedValue) // Thrustmaster Gear Change
+    {
+        if (mStat)
+        {
+            _animator.Play("GearON", 0, normalisedValue);
+            Debug.LogWarning("Gear Movement Here through thrustmaster");
+            _animator.speed = 0f;
+        }
+       
+    }
+
 
 
     IEnumerator WaitForAnimation(bool stat ,Action onComplete)

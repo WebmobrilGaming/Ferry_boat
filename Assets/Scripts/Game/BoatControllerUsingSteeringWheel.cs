@@ -28,7 +28,9 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
         // No wheel connected
         if (Gamepad.current == null)
             return;
-
+        if (!boatController.isEngineStarted)
+            return;
+            
         // Read steering wheel axis
         wheelInput = Gamepad.current.leftStick.x.ReadValue();
         if (wheelInput < 0)
@@ -48,9 +50,8 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
         if (Mathf.Abs(wheelInput) < deadZone)
             wheelInput = 0f;
 
-        // Only steer if engine + gear active
-        if (!boatController.isEngineStarted)
-            return;
+        
+       
 
       
     }

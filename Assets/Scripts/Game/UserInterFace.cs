@@ -31,12 +31,18 @@ public class UserInterFace : MonoBehaviour
     public TMP_Text levelTxt;
     public string currentDifficulty;
     private InGamePopupEvent popupEvent = null;
+    [SerializeField] private bool is_MouseControl;
 
     public static event Action StopEngineEvent;
     private void Awake()
     {
         rangeMax = -1;
-        scrollAction.performed += OnScroll;
+        Debug.LogWarning("Mouse scroll controller here");
+        if (is_MouseControl)
+        {
+            scrollAction.performed += OnScroll; //mouse input
+        }
+       
         
     }
 
@@ -149,7 +155,11 @@ public class UserInterFace : MonoBehaviour
 
     private void OnDestroy()
     {
-        scrollAction.performed -= OnScroll;
+        if (is_MouseControl)
+        {
+            scrollAction.performed -= OnScroll;
+        }
+         
     }
 
     private void LevelFinish()

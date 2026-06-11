@@ -7387,6 +7387,7 @@ MonoBehaviour:
   windTxt: {fileID: 143730355}
   levelTxt: {fileID: 519710904}
   currentDifficulty: 
+  is_MouseControl: 0
 --- !u!114 &686914664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9948,6 +9949,73 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0.017}
   m_TimeToStationary: 0.5
+--- !u!1 &1008287306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1008287307}
+  - component: {fileID: 1008287309}
+  - component: {fileID: 1008287308}
+  m_Layer: 3
+  m_Name: '[CONTROLLER]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1008287307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008287306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1099790238}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1008287308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008287306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15e7c74a690ecb40bd53c287d0affb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoatControllerUsingSteeringWheel
+  boatController: {fileID: 1099790239}
+  steeringSensitivity: 120
+  deadZone: 0.1
+  steeeringSmothness: 2
+  maxTurnSpeed: 35
+  helmController: {fileID: 241515637}
+--- !u!114 &1008287309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008287306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7bfac3d4be6c04da264a8c483d0555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Thrustmaster
+  boatController: {fileID: 1099790239}
+  smoothTrottle: 0
+  mGear: {fileID: 8070560346857972517}
+  previousThrottle: 0
 --- !u!1001 &1018483491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10962,7 +11030,6 @@ GameObject:
   - component: {fileID: 1099790238}
   - component: {fileID: 1099790239}
   - component: {fileID: 1099790240}
-  - component: {fileID: 1099790241}
   m_Layer: 3
   m_Name: '[BOAT]'
   m_TagString: Untagged
@@ -10985,6 +11052,7 @@ Transform:
   m_Children:
   - {fileID: 7671748265835084297}
   - {fileID: 1578644527}
+  - {fileID: 1008287307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.271, y: -0.645, z: -1.878}
 --- !u!114 &1099790239
@@ -11030,6 +11098,7 @@ MonoBehaviour:
   isTurning: 0
   backButton: {fileID: 1428637200}
   windDriftStrength: 1.5
+  Is_KeyboardEnabled: 0
 --- !u!114 &1099790240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11047,24 +11116,6 @@ MonoBehaviour:
   IsTransitioning: 0
   currentWindSpeed: 0
   currentWaveLevel: 0
---- !u!114 &1099790241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099790237}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c15e7c74a690ecb40bd53c287d0affb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoatControllerUsingSteeringWheel
-  boatController: {fileID: 1099790239}
-  steeringSensitivity: 120
-  deadZone: 0.1
-  steeeringSmothness: 2
-  maxTurnSpeed: 35
-  helmController: {fileID: 241515637}
 --- !u!1 &1100542065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}

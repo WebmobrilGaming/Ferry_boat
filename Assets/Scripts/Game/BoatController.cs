@@ -72,7 +72,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     public bool IsInDock { get; set; }
     public bool IsEnterDock { get; set; }
 
-    [SerializeField] DifficultyLevel difficultyLevel;
+    [SerializeField] public DifficultyLevel difficultyLevel;
 
     [SerializeField] float thresholdSpeed;
     bool mThresholdApplied;
@@ -84,6 +84,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] public bool isTurning;
     [SerializeField] private Button backButton;
     [SerializeField] private float windDriftStrength;
+    [SerializeField] private bool Is_KeyboardEnabled;
     private float wheelInput;
     private void Awake()
     {
@@ -175,32 +176,35 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void Update()
     {
-    
+
 
         // if (mFuel.FuelPercent < 0.1f)
         //     return;
-
-        if (Keyboard.current.leftArrowKey.isPressed && mGear.Stat)
-            helmController.Direct(HelmDirection.left);
-
-        if (Keyboard.current.rightArrowKey.isPressed && mGear.Stat)
-            helmController.Direct(HelmDirection.right);
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Is_KeyboardEnabled)
         {
-            if (!isInitialized)
-            {
-                isInitialized = true;
-                OnBoatStartEvent?.Invoke();
-            }
-            GearAction();
-            isEngineStarted = !isEngineStarted;
+            if (Keyboard.current.leftArrowKey.isPressed && mGear.Stat)
+                helmController.Direct(HelmDirection.left);
+
+            if (Keyboard.current.rightArrowKey.isPressed && mGear.Stat)
+                helmController.Direct(HelmDirection.right);
+            if (Keyboard.current.leftArrowKey.wasReleasedThisFrame ||
+                Keyboard.current.rightArrowKey.wasReleasedThisFrame)
+                helmController.StopRotation();
         }
 
-        if (Keyboard.current.leftArrowKey.wasReleasedThisFrame ||
-            Keyboard.current.rightArrowKey.wasReleasedThisFrame)
-            helmController.StopRotation();
-
+        if (Timer.gameStarted)
+        {
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                if (!isInitialized)
+                {
+                    isInitialized = true;
+                    OnBoatStartEvent?.Invoke();
+                }
+                GearAction();
+                isEngineStarted = !isEngineStarted;
+            }
+        }
         bool isReversing = (Keyboard.current.sKey.isPressed ||
                             Keyboard.current.downArrowKey.isPressed) && mGear.Stat;
 
@@ -305,7 +309,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         
     }
 
-    private void SpeedChange(float val)
+    public void SpeedChange(float val)
     {
         mBoatSpeed = Mathf.Clamp(val, 0f, ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed);
         mBoatSpeed = val;

@@ -13,9 +13,14 @@ public class Timer : MonoBehaviour
 
     void Start() => Reset();
 
-    public Action OnCompleteAct;
+    public  Action OnCompleteAct;
     public  Action<string> DisplayTimer;
+    public static bool gameStarted;
 
+    void OnEnable()
+    {
+        gameStarted = false;
+    }
     void Update()
     {
         if (!_running) return;
@@ -45,7 +50,7 @@ public class Timer : MonoBehaviour
     {
         Debug.Log("Timer done!");
         // your logic here
-
+        gameStarted = true;
         OnCompleteAct?.Invoke();
     }
 }
