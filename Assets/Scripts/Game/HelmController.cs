@@ -68,6 +68,17 @@ public class HelmController : MonoBehaviour
                 break;
         }
     }
+    public void SetWheelAngle(float wheelInput)
+    {
+        
+
+        float maxHelmAngle = 360f;
+
+        float targetAngle = wheelInput * maxHelmAngle;
+
+        transform.localRotation =
+            Quaternion.Euler(0, 0, targetAngle);
+    }
 
     public void StopRotation()
     {

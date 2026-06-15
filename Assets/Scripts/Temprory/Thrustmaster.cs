@@ -62,9 +62,6 @@ public class Thrustmaster : MonoBehaviour
         if (throttle1 == null || throttle2 == null)
             return;
 
-        // float t1 = throttle1.ReadValue();
-        // float t2 = throttle2.ReadValue();
-
         float t1 = 1f - throttle1.ReadValue();
 
         t1 = t1 * 0.5f;

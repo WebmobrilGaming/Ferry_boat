@@ -7,6 +7,7 @@ using GF;
 using Newtonsoft.Json;
 using System;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -85,6 +86,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] private Button backButton;
     [SerializeField] private float windDriftStrength;
     [SerializeField] private bool Is_KeyboardEnabled;
+    [SerializeField] private float maxTurnSpeed = 20f;
     private float wheelInput;
     private void Awake()
     {
@@ -412,6 +414,12 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         currentRotation += delta * rotationMultiplier;
 
         transform.localRotation = startRotation * Quaternion.Euler(0, currentRotation, 0);
+    }
+    public void SetSteering(float wheelValue)
+    {
+        float turnRate = wheelValue * maxTurnSpeed;
+        currentRotation += turnRate * Time.deltaTime;
+        transform.localRotation =  startRotation * Quaternion.Euler(0,currentRotation,0);
     }
     public void PerformUTurn()
     {

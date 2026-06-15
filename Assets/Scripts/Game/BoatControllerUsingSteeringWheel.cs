@@ -8,7 +8,7 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
 
     [Header("Wheel Settings")]
     [SerializeField] private float steeringSensitivity = 120f;
-    [SerializeField] private float deadZone = 0.1f;
+    [SerializeField] private float deadZone;
     [SerializeField] private float steeeringSmothness = 2f;
     [SerializeField] private float maxTurnSpeed = 35f;
     private float currentSteering;
@@ -20,6 +20,7 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
     {
         if (boatController == null)
             boatController = GetComponent<BoatController>();
+            deadZone = 0.001f;
             //helmController = GetComponent<HelmController>();
     }
 
@@ -33,22 +34,26 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
             
         // Read steering wheel axis
         wheelInput = Gamepad.current.leftStick.x.ReadValue();
-        if (wheelInput < 0)
-        {
-            helmController.Direct(HelmDirection.left);
-        }
-        if (wheelInput > 0)
-        {
-            helmController.Direct(HelmDirection.right);
-        }
-        if (wheelInput == 0)
-        {
-            helmController.StopRotation();
-        }
+        Debug.LogWarning(wheelInput);
+        if(Mathf.Abs(wheelInput)<deadZone)wheelInput = 0f;
+        helmController.SetWheelAngle(wheelInput);
+        boatController.SetSteering(wheelInput);
+        // if (wheelInput < 0)
+        // {
+        //     helmController.Direct(HelmDirection.left);
+        // }
+        // if (wheelInput > 0)
+        // {
+        //     helmController.Direct(HelmDirection.right);
+        // }
+        // if (wheelInput == 0)
+        // {
+        //     helmController.StopRotation();
+        // }
         
-        // Deadzone
-        if (Mathf.Abs(wheelInput) < deadZone)
-            wheelInput = 0f;
+        // // Deadzone
+        // if (Mathf.Abs(wheelInput) < deadZone)
+        //     wheelInput = 0f;
 
         
        

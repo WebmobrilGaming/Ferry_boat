@@ -66,7 +66,7 @@ public class Gear : MonoBehaviour
     {
         if (mStat)
         {
-            _animator.Play("GearON", 0, normalisedValue);
+            _animator.Play("GearOFF", 0, normalisedValue);
             Debug.LogWarning("Gear Movement Here through thrustmaster");
             _animator.speed = 0f;
         }

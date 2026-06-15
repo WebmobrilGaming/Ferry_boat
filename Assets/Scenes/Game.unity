@@ -11099,6 +11099,7 @@ MonoBehaviour:
   backButton: {fileID: 1428637200}
   windDriftStrength: 1.5
   Is_KeyboardEnabled: 0
+  maxTurnSpeed: 20
 --- !u!114 &1099790240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30614,13 +30615,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143363831698630941}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.045163106, y: 0.04268358, z: 0.004711771, w: 0.99805623}
-  m_LocalPosition: {x: -0.2021637, y: -0.3918991, z: -8.441315}
+  m_LocalRotation: {x: 0.3698207, y: 0.03695699, z: 0.021869361, w: 0.92811024}
+  m_LocalPosition: {x: -0.20216766, y: -0.39266548, z: -8.442104}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1596994133}
-  m_LocalEulerAnglesHint: {x: -5.195, y: 4.883, z: 0.319}
+  m_LocalEulerAnglesHint: {x: 43.224, y: 4.883, z: 0.319}
 --- !u!114 &8070560346857972517
 MonoBehaviour:
   m_ObjectHideFlags: 0
