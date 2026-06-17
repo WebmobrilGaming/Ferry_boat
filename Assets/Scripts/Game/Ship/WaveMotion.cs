@@ -42,6 +42,12 @@ namespace Ferry.Motion
         [Header("Wave difficulty")]
         public float currentWindSpeed;
         public float currentWaveLevel;
+        [Header("Boat Deviation From Wind")]
+        [SerializeField] private Rigidbody rb;
+
+        [SerializeField] private Vector3 riverDirection = Vector3.forward;
+        [SerializeField] private float currentStrength = 0.5f;
+        [SerializeField] private float maxWindPush = 2f;
 
         void OnEnable()
         {
@@ -99,13 +105,26 @@ namespace Ferry.Motion
         }
 
         void Update()
-        {
+        {   
             if (!IsInitialized) return;
 
             if (IsTransitioning)
                 TickTransition();
 
             ApplyWaveMotion();
+        }
+        private void FixedUpdate()
+        {
+            if(rb==null) return;
+            Debug.LogWarning("Force Being ADD");
+            float windFactor = Mathf.InverseLerp(5f, 35f, currentWindSpeed);
+
+            Vector3 currentForce = riverDirection.normalized * currentStrength;
+
+            Vector3 windForce = riverDirection.normalized *
+                                Mathf.Lerp(0f, maxWindPush, windFactor);
+
+            rb.AddForce(currentForce + windForce, ForceMode.Acceleration);
         }
 
         private void BeginTransition(float toAmp, float toSpd,
@@ -168,5 +187,7 @@ namespace Ferry.Motion
             boatVisual.localPosition = visualStartLocalPos + new Vector3(0f, bob, 0f);
             boatVisual.localRotation = visualStartLocalRot * Quaternion.Euler(pitch, 0f, roll);
         }
+
+       
     }
 }

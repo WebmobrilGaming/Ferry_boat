@@ -95,14 +95,14 @@ public class TimerAndScore : MonoBehaviour
         Act.BoatDestroyedAction -= ToHomeScreen;
     }
 
-    private void EnableScore(bool enable)
+    private void EnableScore()
     {
-        enableScore = enable;
+        enableScore = true;  // = enable;
         IsInitialized = true;
 
          if (!timerAlreadyStarted)
         {
-            if (enable)
+            //if (enable)
                 timer = maxTime;
                 lastSecond = Mathf.FloorToInt(timer);
 

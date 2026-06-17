@@ -21,6 +21,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     [SerializeField] GameObject mBoardingPanel;
     [SerializeField] GameObject mEnginePanel;
     [SerializeField] GameObject mBargeObj;
+    public static bool GameStarted;
 
     [Header("Boardings")]
     [SerializeField] List<BoardingCal> boardings = new List<BoardingCal>();
@@ -63,7 +64,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         mTimer.DisplayTimer += DisplayTimerAction;
         mTimer.OnCompleteAct += TimerEndAction;
-
+        GameStarted = false;
         mBargeObj.SetActive(true);
     }
 
@@ -99,7 +100,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     private void TimerEndAction()
     {
         mTime.text = "00:00 mins";
-
+        GameStarted = true;
+        Act.EnableScore();
         GameCamController.Instance.SetCam(CamType.driver);
         mEnginePanel.SetActive(true);
         GamePopUp.Instance.PopStat("Please Press the <color=yellow>[Space Bar]</color> to start the engine", 3.0f);

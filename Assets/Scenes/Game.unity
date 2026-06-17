@@ -7387,7 +7387,7 @@ MonoBehaviour:
   windTxt: {fileID: 143730355}
   levelTxt: {fileID: 519710904}
   currentDifficulty: 
-  is_MouseControl: 0
+  is_MouseControl: 1
 --- !u!114 &686914664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11117,6 +11117,10 @@ MonoBehaviour:
   IsTransitioning: 0
   currentWindSpeed: 0
   currentWaveLevel: 0
+  rb: {fileID: 7671748265835084299}
+  riverDirection: {x: 0, y: 0, z: 1}
+  currentStrength: 0.5
+  maxWindPush: 2
 --- !u!1 &1100542065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}

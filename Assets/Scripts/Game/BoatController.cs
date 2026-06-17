@@ -87,6 +87,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] private float windDriftStrength;
     [SerializeField] private bool Is_KeyboardEnabled;
     [SerializeField] private float maxTurnSpeed = 20f;
+    [SerializeField] Vector3 windDirection;
     private float wheelInput;
     private void Awake()
     {
@@ -112,6 +113,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private void OnEnable()
     {
         helmController.callback = this;
+        windDirection = Vector3.right;  // wind direction 
         mGear.callback = this;
         isTurning = false;
         var currentDifficulty = PlayerPrefs.GetString(GamePrefs.difficulty_Level,DifficultyLevel.easy.ToString());
@@ -224,20 +226,23 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         float rate = canMove ? mAcceleration : mDeceleration;
 
         mCurrentSpeed = Mathf.MoveTowards(mCurrentSpeed, targetSpeed, rate * Time.deltaTime);
-
-        var forward = transform.forward * mCurrentSpeed * Time.deltaTime;
+        float windAlignment =Vector3.Dot(transform.forward,windDirection.normalized);
+        float resistance =Mathf.Lerp(1f, 0.5f,Mathf.Max(0f, -windAlignment));
+        float effectiveSpeed = mCurrentSpeed * resistance;
+        var forward = transform.forward * effectiveSpeed * Time.deltaTime;
         var currentTransform = transform.position;
         var target = new Vector3(
             currentTransform.x + forward.x,
             currentTransform.y,
             currentTransform.z + forward.z);
         transform.position = target;
-        if (Mathf.Abs(mCurrentSpeed) > 0.1f)
+        if (Mathf.Abs(mCurrentSpeed) >= 0f && BoardingManager.GameStarted)
         {
             if (waveMotion.currentWindSpeed != 0)
             {
+                float sidewind = Vector3.Dot(transform.right,windDirection.normalized);
                 float drift =
-               windDriftStrength * (waveMotion.currentWindSpeed / 35f);
+               sidewind * windDriftStrength * (waveMotion.currentWindSpeed / 35f);
 
                 currentRotation += drift * Time.deltaTime;
 
@@ -328,7 +333,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     {
         isControl = false;
         mGear.Change(!mGear.Stat);
-        Act.EnableScore(mGear.Stat);
+        //Act.EnableScore(mGear.Stat);
     }
 
     public void GearChange()
