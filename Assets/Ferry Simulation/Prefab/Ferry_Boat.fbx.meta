@@ -22,14 +22,43 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -83,7 +112,47 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Ferry_Boat(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ferry_Boat
+      parentName: Ferry_Boat(Clone)
+      position: {x: -0.008339691, y: 3.6484337, z: -0.0016137497}
+      rotation: {x: -0.00000006657785, y: 0.0059616733, z: 3.969224e-10, w: 0.99998224}
+      scale: {x: 1, y: 1.000001, z: 1}
+    - name: Sterring
+      parentName: Ferry_Boat(Clone)
+      position: {x: -0.012988129, y: 2.8730528, z: -8.104446}
+      rotation: {x: 0.00000006657826, y: 0.004811067, z: -3.203162e-10, w: 0.99998844}
+      scale: {x: 1.000001, y: 1.000001, z: 1.000001}
+    - name: Gear
+      parentName: Ferry_Boat(Clone)
+      position: {x: -0.42422834, y: 3.2570581, z: -8.441868}
+      rotation: {x: 0.0000000665402, y: 0.03414488, z: -0.0000000022733329, w: 0.9994169}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Door01
+      parentName: Ferry_Boat(Clone)
+      position: {x: -2.7448142, y: 2.841361, z: -6.8031716}
+      rotation: {x: 2.776145e-12, y: 0.005961725, z: 4.656531e-10, w: 0.99998224}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000005}
+    - name: Door02
+      parentName: Ferry_Boat(Clone)
+      position: {x: -2.9962726, y: 2.8234868, z: -4.795796}
+      rotation: {x: -3.712258e-11, y: -0.07972012, z: 4.641793e-10, w: 0.9968173}
+      scale: {x: 1.0000006, y: 1.0000006, z: 0.95184827}
+    - name: Door03
+      parentName: Ferry_Boat(Clone)
+      position: {x: 3.2050784, y: 2.8696008, z: -4.8925123}
+      rotation: {x: 8.565624e-17, y: 0.803306, z: -8.565624e-17, w: 0.5955666}
+      scale: {x: 1, y: 1.000001, z: 1}
+    - name: Door04
+      parentName: Ferry_Boat(Clone)
+      position: {x: 2.9471974, y: 2.8721924, z: -6.8731375}
+      rotation: {x: -3.0421082e-10, y: -0.6532877, z: 3.5255673e-10, w: 0.75710976}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000005}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -92,15 +161,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Ferry_Boat
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
