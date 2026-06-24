@@ -175,7 +175,8 @@ namespace Ferry.Motion
             wavePhase += Time.deltaTime * waveSpeed;
             float waveFactor = Mathf.InverseLerp(3f,11f,currentWaveLevel);
             float windfactor = Mathf.InverseLerp(5f,35f,currentWindSpeed);
-            float seaFactor = Mathf.Lerp(1f,3f,(waveFactor + windfactor)*0.5f);
+            float seaFactor = Mathf.Lerp(1f,6f,(waveFactor + windfactor)*0.5f); // change the values of (1f,6f) if required for more intensive wave effect
+          
 
             float bob   = Mathf.Sin(wavePhase)        * waveAmplitude;
             float roll  = Mathf.Sin(wavePhase * 1.3f) * rollAmount;
@@ -183,11 +184,11 @@ namespace Ferry.Motion
             roll *= seaFactor;
             pitch *=seaFactor;
             bob *= seaFactor;
-
             boatVisual.localPosition = visualStartLocalPos + new Vector3(0f, bob, 0f);
             boatVisual.localRotation = visualStartLocalRot * Quaternion.Euler(pitch, 0f, roll);
+           
         }
 
-       
+
     }
 }

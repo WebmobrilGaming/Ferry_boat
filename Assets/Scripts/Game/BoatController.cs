@@ -243,7 +243,6 @@ public class BoatController : MonoBehaviour, IHelem, IGear
                 float sidewind = Vector3.Dot(transform.right,windDirection.normalized);
                 float drift =
                sidewind * windDriftStrength * (waveMotion.currentWindSpeed / 35f);
-
                 currentRotation += drift * Time.deltaTime;
 
                 transform.localRotation =

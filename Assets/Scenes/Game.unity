@@ -11194,7 +11194,7 @@ MonoBehaviour:
   deadZone: 0.1
   steeeringSmothness: 2
   maxTurnSpeed: 35
-  helmController: {fileID: 241515637}
+  helmController: {fileID: 1269117856}
 --- !u!114 &1008287309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11209,7 +11209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Thrustmaster
   boatController: {fileID: 1099790239}
   smoothTrottle: 0
-  mGear: {fileID: 8070560346857972517}
+  mGear: {fileID: 8070560347868802252}
   previousThrottle: 0
 --- !u!1001 &1011424942
 PrefabInstance:
@@ -12703,8 +12703,8 @@ MonoBehaviour:
   steeringSensitivity: 120
   isTurning: 0
   backButton: {fileID: 1428637200}
-  windDriftStrength: 1.5
-  Is_KeyboardEnabled: 0
+  windDriftStrength: 3
+  Is_KeyboardEnabled: 1
   maxTurnSpeed: 20
   windDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1099790240
@@ -14157,7 +14157,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -21188,7 +21188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d69813dfbc458246af49b288e6a4951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DockPassCheker
-  ferryBoat: {fileID: 7376235210115583285}
+  ferryBoat: {fileID: 919132148276399821}
 --- !u!1 &1919385623
 GameObject:
   m_ObjectHideFlags: 0
@@ -32398,7 +32398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143363832709457651}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000665402, y: 0.03414488, z: -0.0000000022733326, w: 0.9994169}
+  m_LocalRotation: {x: 0.36982068, y: 0.03695699, z: 0.021869361, w: 0.9281103}
   m_LocalPosition: {x: -0.30500132, y: 3.2570584, z: -8.44187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32439,7 +32439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63579f7e90066a04b93675a4b07709c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gear
-  _animator: {fileID: 8070560346857972518}
+  _animator: {fileID: 8070560347868802251}
   mRange: 0
   mStat: 0
 --- !u!1001 &8102163035369718951

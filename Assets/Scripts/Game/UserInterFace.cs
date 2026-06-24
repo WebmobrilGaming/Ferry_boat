@@ -19,7 +19,7 @@ public class UserInterFace : MonoBehaviour
 
     [Space]
     [SerializeField] float mScrollRange;
-
+    bool crashSoundPlayed;
     float rangeMin = 0f;
     float rangeMax = 10f;
     [SerializeField] float sensitivity = 1f;
@@ -88,7 +88,7 @@ public class UserInterFace : MonoBehaviour
         Act.EndPointReached+= EndPointReached;
         backBtn.onClick.AddListener(GoHome);
         currentDifficulty = PlayerPrefs.GetString(GamePrefs.difficulty_Level,DifficultyLevel.easy.ToString());
-        
+        crashSoundPlayed = false;
     }
 
     IEnumerator BackButtonEnabler()
@@ -133,8 +133,10 @@ public class UserInterFace : MonoBehaviour
     {
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
         int SfxOn = PlayerPrefs.GetInt(GamePrefs.isSFXOn,1);
-        if (SfxOn == 1)
+       
+        if (SfxOn == 1 && crashSoundPlayed == false)
         {
+            crashSoundPlayed = true;
             AudioManager.Instance.PlaySFX(AudioState.crash);
         }
         
