@@ -165,8 +165,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         for (int i = 0;  i < count; i++)
         {
             mTimer.Resume();
+            var npcPrefab = mNPCStore.GetRandomNPC();
+            if(npcPrefab == null)
+            {
+                Debug.LogWarning("NPC RECIEVED WAS NULL");
+                continue;
+            }
 
-            GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
+            //GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
+            GameObject go = Instantiate(npcPrefab.gameObject);
 
             NPC npc = go.GetComponent<NPC>();
             npc.SetPathDuration(5);
@@ -178,6 +185,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             }
             catch(TaskCanceledException)
             {
+                Debug.LogWarning($"NPC:{i} Error");
                 return;
             }
            

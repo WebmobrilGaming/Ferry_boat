@@ -35,7 +35,7 @@ namespace Ferry.Motion
 
         public bool IsTransitioning;
         private float currentSmoothTime;
-        private const float maxSmoothTime =20f;
+        [SerializeField] private float maxSmoothTime ;
 
         // phase accumulator — eliminates sine jump when speed changes
         private float wavePhase = 0f;
@@ -48,6 +48,7 @@ namespace Ferry.Motion
         [SerializeField] private Vector3 riverDirection = Vector3.forward;
         [SerializeField] private float currentStrength = 0.5f;
         [SerializeField] private float maxWindPush = 2f;
+        [SerializeField] private bool isWaveFactorsClamped;
 
         void OnEnable()
         {
@@ -55,6 +56,7 @@ namespace Ferry.Motion
             {
                 visualStartLocalPos = boatVisual.localPosition;
                 visualStartLocalRot = boatVisual.localRotation;
+                isWaveFactorsClamped = false;
                 
             }
         }
@@ -108,8 +110,8 @@ namespace Ferry.Motion
         {   
             if (!IsInitialized) return;
 
-            if (IsTransitioning)
-                TickTransition();
+            // if (IsTransitioning)   // if need transition from smooth to rough effect 
+            //     TickTransition();
 
             ApplyWaveMotion();
         }
@@ -169,6 +171,7 @@ namespace Ferry.Motion
         private void ApplyWaveMotion()
         {
             if (boatVisual == null) return;
+            if(!BoardingManager.GameStarted)return;
 
             // advance phase by deltaTime instead of using Time.time * speed
             // keeps the sine wave continuous even when speed changes
@@ -176,14 +179,14 @@ namespace Ferry.Motion
             float waveFactor = Mathf.InverseLerp(3f,11f,currentWaveLevel);
             float windfactor = Mathf.InverseLerp(5f,35f,currentWindSpeed);
             float seaFactor = Mathf.Lerp(1f,6f,(waveFactor + windfactor)*0.5f); // change the values of (1f,6f) if required for more intensive wave effect
-          
+            Debug.LogWarning("seaFactor : "+seaFactor);
 
             float bob   = Mathf.Sin(wavePhase)        * waveAmplitude;
             float roll  = Mathf.Sin(wavePhase * 1.3f) * rollAmount;
             float pitch = Mathf.Cos(wavePhase * 1.1f) * pitchAmount;
-            roll *= seaFactor;
-            pitch *=seaFactor;
-            bob *= seaFactor;
+             roll *= seaFactor;
+             pitch *= seaFactor;
+             bob *= seaFactor;
             boatVisual.localPosition = visualStartLocalPos + new Vector3(0f, bob, 0f);
             boatVisual.localRotation = visualStartLocalRot * Quaternion.Euler(pitch, 0f, roll);
            

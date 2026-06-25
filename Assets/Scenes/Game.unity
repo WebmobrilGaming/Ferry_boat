@@ -6906,13 +6906,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610646088}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.023519536, y: -0.08364917, z: 0.06580193, w: 0.9940421}
-  m_LocalPosition: {x: 11.495605, y: -1.4641976, z: -10.809966}
+  m_LocalRotation: {x: -0.098859094, y: 0.30485302, z: -0.07352641, w: 0.94439685}
+  m_LocalPosition: {x: -0.000001576147, y: -0.019967496, z: 0.010095576}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1682856575}
-  m_LocalEulerAnglesHint: {x: -7.495, y: 45.774, z: -15.327}
+  m_LocalEulerAnglesHint: {x: -8.158, y: 36.611, z: -11.606}
 --- !u!114 &610646090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7015,7 +7015,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610646088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -12722,12 +12722,14 @@ MonoBehaviour:
   boatVisual: {fileID: 543450652464403575}
   waveConfig: {fileID: 11400000, guid: a2a7fbd5f85e58a438e960d5c74e682b, type: 2}
   IsTransitioning: 0
+  maxSmoothTime: 2
   currentWindSpeed: 0
   currentWaveLevel: 0
   rb: {fileID: 1269117858}
   riverDirection: {x: 0, y: 0, z: 1}
   currentStrength: 0.5
   maxWindPush: 2
+  isWaveFactorsClamped: 0
 --- !u!1 &1100542065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 384818158275416975, guid: 02524822aafc69444831da810bbd6aac, type: 3}
@@ -18861,15 +18863,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682856571}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.020417789, y: 0.9868404, z: -0.1603612, w: 0.0036594728}
-  m_LocalPosition: {x: 0.1609948, y: 4.244656, z: -6.5613093}
+  m_LocalRotation: {x: -0.0011634447, y: -0.98705155, z: 0.16023876, w: -0.00716668}
+  m_LocalPosition: {x: -0.045, y: 4.384, z: -6.086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1817731254}
   - {fileID: 610646089}
   m_Father: {fileID: 543450652464403575}
-  m_LocalEulerAnglesHint: {x: 18.628, y: -181.16, z: -0.514}
+  m_LocalEulerAnglesHint: {x: 18.442, y: -180.832, z: 0}
 --- !u!114 &1682856576
 MonoBehaviour:
   m_ObjectHideFlags: 0
