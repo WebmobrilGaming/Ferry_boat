@@ -227,8 +227,14 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         mCurrentSpeed = Mathf.MoveTowards(mCurrentSpeed, targetSpeed, rate * Time.deltaTime);
         float windAlignment =Vector3.Dot(transform.forward,windDirection.normalized);
-        float resistance =Mathf.Lerp(1f, 0.5f,Mathf.Max(0f, -windAlignment));
-        float effectiveSpeed = mCurrentSpeed * resistance;
+        float resistance = difficultyLevel switch
+        { 
+            DifficultyLevel.easy => 1f,
+            DifficultyLevel.medium => 0.75f,
+            DifficultyLevel.hard => 0.5f  
+        }; 
+        float resistanceMin = Mathf.Lerp(1f, resistance, Mathf.Max(0f, -windAlignment));
+        float effectiveSpeed = mCurrentSpeed * resistanceMin;
         var forward = transform.forward * effectiveSpeed * Time.deltaTime;
         var currentTransform = transform.position;
         var target = new Vector3(
