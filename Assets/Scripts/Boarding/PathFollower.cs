@@ -81,7 +81,7 @@ public class PathFollower : MonoBehaviour
 
         // Broadcast _speed every frame while moving so subscribers
         // (e.g. Animator, IK, VFX) can react to the current movement speed.
-        OnAnimationSpeedChanged?.Invoke(_speed);
+        //OnAnimationSpeedChanged?.Invoke(_speed);
 
         if (!_path.Loop && _t >= 1f)
         {
@@ -91,7 +91,7 @@ public class PathFollower : MonoBehaviour
             OrientToPath(1f);
 
             // Zero out so animator returns to idle on path complete.
-            OnAnimationSpeedChanged?.Invoke(0f);
+            //OnAnimationSpeedChanged?.Invoke(0f);
             OnPathComplete?.Invoke();
             return;
         }
@@ -108,7 +108,7 @@ public class PathFollower : MonoBehaviour
     {
         _isPlaying = false;
         // Zero out so animator doesn't freeze on last speed value.
-        OnAnimationSpeedChanged?.Invoke(0f);
+        //OnAnimationSpeedChanged?.Invoke(0f);
     }
 
     public void Stop()
@@ -116,7 +116,7 @@ public class PathFollower : MonoBehaviour
         _isPlaying = false;
         _t = 0f;
         // Zero out so animator returns to idle.
-        OnAnimationSpeedChanged?.Invoke(0f);
+      //  OnAnimationSpeedChanged?.Invoke(0f);
     }
 
     public void SetT(float t) { _t = Mathf.Clamp01(t); }

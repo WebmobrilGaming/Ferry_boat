@@ -109,6 +109,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Vehicle
   pathFollower: {fileID: 4305073638500741778}
   boardCharType: 2
+  wheelRotationMultiplier: 50
+  tyres:
+  - {fileID: 6441405630749687968}
+  - {fileID: 4699050233169463696}
+  - {fileID: 8920843717355114583}
+  - {fileID: 1739157830971595376}
 --- !u!1001 &1218205148392731510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,5 +211,25 @@ PrefabInstance:
 --- !u!4 &1688100395772892317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0e89c8ea331f22249acaf9fbc6284997, type: 3}
+  m_PrefabInstance: {fileID: 1218205148392731510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1739157830971595376 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 632005837747300614, guid: 0e89c8ea331f22249acaf9fbc6284997, type: 3}
+  m_PrefabInstance: {fileID: 1218205148392731510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4699050233169463696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5895649975610145510, guid: 0e89c8ea331f22249acaf9fbc6284997, type: 3}
+  m_PrefabInstance: {fileID: 1218205148392731510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6441405630749687968 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5297244075866026966, guid: 0e89c8ea331f22249acaf9fbc6284997, type: 3}
+  m_PrefabInstance: {fileID: 1218205148392731510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8920843717355114583 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7722225546393428769, guid: 0e89c8ea331f22249acaf9fbc6284997, type: 3}
   m_PrefabInstance: {fileID: 1218205148392731510}
   m_PrefabAsset: {fileID: 0}
