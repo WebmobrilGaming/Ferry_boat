@@ -23,6 +23,6 @@ MonoBehaviour:
   skyboxExposure: 0.45
   ambientClip: {fileID: 8300000, guid: 084239eccdc3b8a4e9932608c9f539e1, type: 3}
   ambientVolume: 0.5
-  rainIntensity: 0.2
+  rainIntensity: 0
   rainColor: {r: 0.7, g: 0.8, b: 0.9, a: 0.35}
   rainSpeed: 18

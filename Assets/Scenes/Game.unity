@@ -3200,7 +3200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialState: {fileID: 11400000, guid: f322e8968b5c97c4d8f14ad4ac80824a, type: 2}
-  defaultTransitionDuration: 2
+  defaultTransitionDuration: 1
   transitionCurve:
     serializedVersion: 2
     m_Curve:
@@ -9322,7 +9322,7 @@ MonoBehaviour:
   presetRain: {fileID: 11400000, guid: 717ddedc7861f404f95ffb79abff2a24, type: 2}
   presetFog: {fileID: 11400000, guid: cd7c28e3d14de144faeac607d8ce3b65, type: 2}
   presetStorm: {fileID: 11400000, guid: a9b430364bed84745ad439238b51e42d, type: 2}
-  transitionDuration: 3
+  transitionDuration: 1.5
 --- !u!4 &1080972345
 Transform:
   m_ObjectHideFlags: 0
