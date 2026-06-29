@@ -5585,7 +5585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4432637003087408357, guid: 12ef9f38c3fdbac48ad3267de2aec016, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5905,7 +5905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7191720095839341117, guid: b6b4ae57cb656d74b965ff4876b8e35a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7531654643793432711, guid: b6b4ae57cb656d74b965ff4876b8e35a, type: 3}
       propertyPath: m_LocalScale.x
@@ -7548,7 +7548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f2801075be6cd45a703dc378c9e175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalLight: {fileID: 0}
+  directionalLight: {fileID: 1052525777}
 --- !u!1 &875342478
 GameObject:
   m_ObjectHideFlags: 0
@@ -8332,9 +8332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rainParticles: {fileID: 0}
-  maxEmissionRate: 400
-  spawnHeight: 15
-  spawnRadius: 25
+  maxEmissionRate: 1000
+  spawnHeight: 25
+  spawnRadius: 500
   followTarget: {fileID: 0}
 --- !u!1 &1008287306
 GameObject:
@@ -14201,7 +14201,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
