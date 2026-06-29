@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Vehicle : MonoBehaviour
 {
@@ -54,14 +55,15 @@ public class Vehicle : MonoBehaviour
     }
 
     private void Update()
-    {  
+    {  if(Time.deltaTime == 0f) return;
         float speed = Vector3.Distance(this.transform.position, lastPosition) / Time.deltaTime;
         lastPosition = this.transform.position;
 
         float rotation = -speed * wheelRotationMultiplier * Time.deltaTime;
-
         foreach (Transform t in tyres)
+        {
             t.Rotate(rotation, 0f, 0f, Space.Self);
+        }
 
         //float delta = Mathf.DeltaAngle(lastYRotation, transform.eulerAngles.y);
         //lastYRotation = transform.eulerAngles.y;
