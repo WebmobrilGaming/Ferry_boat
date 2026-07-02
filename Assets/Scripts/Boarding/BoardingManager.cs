@@ -179,21 +179,28 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             npc.SetPathDuration(5);
 
             go.SetActive(true);
-            try
-            {
-                await npc.WaitForPathComplete(_cts.Token);
-            }
-            catch(TaskCanceledException)
-            {
-                Debug.LogWarning($"NPC:{i} Error");
-                return;
-            }
-           
+
+            await npc.WaitForPathComplete(_cts.Token);
 
             mTimer.Pause();
 
-            Destroy(go.gameObject,0.2f);
+            Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
+
+            //try
+            //{
+            //    await npc.WaitForPathComplete(_cts.Token);
+
+            //    mTimer.Pause();
+
+            //    Destroy(go.gameObject, 0.2f);
+            //    DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
+            //}
+            //catch(TaskCanceledException)
+            //{
+            //    Debug.LogWarning($"NPC:{i} Error");
+            //    return;
+            //}  
         }
 
         onComplete?.Invoke();
