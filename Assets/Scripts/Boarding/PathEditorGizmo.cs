@@ -12,6 +12,7 @@ public class PathEditorGizmo : MonoBehaviour
     [SerializeField] public Color PathColor = new Color(0.3f, 1f, 0.6f, 0.9f);
     [SerializeField] public float HandleSize = 0.25f;
     [SerializeField] public bool ShowIndices = true;
+
 }
 
 [CustomEditor(typeof(PathEditorGizmo))]
@@ -20,7 +21,6 @@ public class PathEditorGizmoEditor : Editor
     private PathEditorGizmo _gizmo;
     private PathData _path;
     private const int DrawSamples = 60;
-
     private void OnEnable()
     {
         _gizmo = (PathEditorGizmo)target;
@@ -85,5 +85,6 @@ public class PathEditorGizmoEditor : Editor
             _path.RemoveWaypoint(_path.Count - 1);
         }
     }
+   
 }
 #endif

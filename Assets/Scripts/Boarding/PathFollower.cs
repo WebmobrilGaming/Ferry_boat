@@ -1,10 +1,12 @@
 using System;
+using System.IO;
 using UnityEngine;
 
 public class PathFollower : MonoBehaviour
 {
     [Header("Path")]
     [SerializeField] private PathData _path;
+    [SerializeField] private int no_FixedWayPoints;
 
     [Header("Movement")]
     [SerializeField] private float _speed = 5f;
@@ -19,7 +21,7 @@ public class PathFollower : MonoBehaviour
 
     [Header("Orientation")]
     [SerializeField] private bool _flattenY = false;
-    [SerializeField] private bool _orientToPath = true;
+    [SerializeField] public bool _orientToPath = true;
     [SerializeField] private float _rotationSpeed = 10f;
 
     public event Action<int> OnReachWaypoint;
@@ -193,4 +195,32 @@ public class PathFollower : MonoBehaviour
         }
         return len;
     }
+
+    public void InsertWaypoint(int index)
+    {
+        Transform target_location = VehicleDockLoadingLocations.instance.vehicle_Loc[index];
+        _path.AddWaypoint(target_location.position);
+    }
+    public void RemoveWayPoint()
+    {
+         if(_path.Count-1 > no_FixedWayPoints)
+        {
+            for(int i = no_FixedWayPoints+1; i <= _path.Count - 1; i++)
+            {
+                _path.RemoveWaypoint(i);
+            }
+        }
+       
+    }
+
+    public void FixedWayPoints()
+    {
+        no_FixedWayPoints = _path.Count-1;
+    }
+    void OnDestroy()
+    {
+        RemoveWayPoint(); 
+    }
+
+
 }

@@ -5,10 +5,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class Vehicle : MonoBehaviour
 {
     [SerializeField] PathFollower pathFollower;
+    [SerializeField] private float rotationSpeed = 90f;
+    private Coroutine rotateCoroutine;
     public PathFollower Path => pathFollower;
 
 
@@ -30,15 +33,52 @@ public class Vehicle : MonoBehaviour
     private void OnEnable()
     {
         pathFollower.OnPathComplete += PathCompleteAction;
+        pathFollower.OnReachWaypoint+=ReachWayPointAction;
 
         _cts = new CancellationTokenSource();
     }
 
+    private void ReachWayPointAction(int current)
+    {
+        Debug.LogWarning($"Reached Waypoint {current}");
+        if(current == 2)
+        {
+            pathFollower._orientToPath = false;
+
+            Quaternion targetRotation = CompareTag("Truck")
+                ? Quaternion.Euler(0, 1.60655582f, 0)
+                : Quaternion.Euler(-3.153f, -5.198f, 0.755f);
+
+            StartCoroutine(SmoothRotate(targetRotation));
+        }
+    }
+
+    private IEnumerator SmoothRotate(Quaternion targetRotation)
+    {
+        // Stop any previous rotation
+        if (rotateCoroutine != null)
+            StopCoroutine(rotateCoroutine);
+
+        rotateCoroutine = null;
+
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                 Time.deltaTime);
+
+            yield return null;
+        }
+
+        transform.rotation = targetRotation;
+    }
     public void SetPathDuration(float duration) { pathFollower.SetTargetDuration(duration); }
 
     private void OnDisable()
     {
         pathFollower.OnPathComplete -= PathCompleteAction;
+        pathFollower.OnReachWaypoint -= ReachWayPointAction;
 
         _cts?.Cancel();
         _cts?.Dispose();
