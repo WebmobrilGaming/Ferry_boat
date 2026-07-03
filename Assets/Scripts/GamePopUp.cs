@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Cysharp.Threading.Tasks;
+
 public class GamePopUp : MonoBehaviour
 {
     static GamePopUp instance;
@@ -40,24 +42,26 @@ public class GamePopUp : MonoBehaviour
         mFinalText.text = message;
     }
 
-    public void PopStat(string message,float delay)
+    public void PopStat(string message,float delay,Action onComplete = null)
     {
-        StartCoroutine(Pop(delay, message));
+        Pop(delay, message);
     }
 
-    IEnumerator Pop(float delay ,string message)
+    async UniTask Pop(float delay ,string message, Action onComplete = null)
     {
-        yield return new WaitUntil(() => !isPanel);
+        await UniTask.WaitUntil(() => !isPanel);
 
         isPanel = true;
 
         panelStat.SetActive(true);
         mStatText.text = message;
 
-        yield return new WaitForSeconds(delay);
+        await UniTask.Delay((int)delay*1000);
         panelStat.SetActive(false);
 
         isPanel = false;
+
+        onComplete?.Invoke();
     }
 
 

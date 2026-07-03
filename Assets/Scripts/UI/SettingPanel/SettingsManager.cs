@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Ferry.Screens;
 using Newtonsoft.Json;
 using System;
 using UnityEngine;
@@ -179,4 +180,4 @@ public class SettingsData
     public DifficultyLevel level;
 }
 
-public enum DifficultyLevel {easy, medium,hard }
+public enum DifficultyLevel {easy, medium, hard }

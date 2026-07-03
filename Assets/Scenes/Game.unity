@@ -3453,7 +3453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc32daf6b0e31654288be315cb4ce375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: {fileID: 11400000, guid: f322e8968b5c97c4d8f14ad4ac80824a, type: 2}
+  initialState: {fileID: 11400000, guid: 717ddedc7861f404f95ffb79abff2a24, type: 2}
   defaultTransitionDuration: 1
   transitionCurve:
     serializedVersion: 2
@@ -5851,6 +5851,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3947461638545127007, guid: 12ef9f38c3fdbac48ad3267de2aec016, type: 3}
   m_PrefabInstance: {fileID: 662602467}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &662602469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432637003087408357, guid: 12ef9f38c3fdbac48ad3267de2aec016, type: 3}
+  m_PrefabInstance: {fileID: 662602467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &674398265
 GameObject:
   m_ObjectHideFlags: 0
@@ -6217,6 +6222,11 @@ PrefabInstance:
 --- !u!4 &684580289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7531654643793432711, guid: b6b4ae57cb656d74b965ff4876b8e35a, type: 3}
+  m_PrefabInstance: {fileID: 684580288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &684580290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7191720095839341117, guid: b6b4ae57cb656d74b965ff4876b8e35a, type: 3}
   m_PrefabInstance: {fileID: 684580288}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &686914661
@@ -6776,7 +6786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &766165971
 Transform:
   m_ObjectHideFlags: 0
@@ -8265,6 +8275,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wave_Difficulty
   currentdifficulty: 
+  weatherManager: {fileID: 299792554}
+  calmWeather: {fileID: 11400000, guid: f322e8968b5c97c4d8f14ad4ac80824a, type: 2}
+  rainWeather: {fileID: 11400000, guid: 717ddedc7861f404f95ffb79abff2a24, type: 2}
+  stormWeather: {fileID: 11400000, guid: a9b430364bed84745ad439238b51e42d, type: 2}
+  mCalmWater: {fileID: 3042813860794355313}
+  mRainyWater: {fileID: 662602469}
+  mStormWater: {fileID: 684580290}
 --- !u!1 &924008126
 GameObject:
   m_ObjectHideFlags: 0
