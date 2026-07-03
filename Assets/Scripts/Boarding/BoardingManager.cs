@@ -20,6 +20,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     [SerializeField] Button mBoardingStartBtn;
     [SerializeField] GameObject mBoardingPanel;
     [SerializeField] GameObject mEnginePanel;
+    [SerializeField] int no_VehiclesParked;
     [SerializeField] GameObject mBargeObj;
     public static bool GameStarted;
 
@@ -66,6 +67,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         mTimer.OnCompleteAct += TimerEndAction;
         GameStarted = false;
         mBargeObj.SetActive(true);
+        no_VehiclesParked = 0;
     }
 
     private void OnDisable()
@@ -223,6 +225,11 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameObject go = Instantiate(mNPCStore.GetRandomCar().gameObject);
 
             Vehicle vehicle = go.GetComponent<Vehicle>();
+            PathFollower vehicle_loc = go.GetComponent<PathFollower>();
+            vehicle_loc._orientToPath = true;
+            vehicle_loc.FixedWayPoints(); // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
+            vehicle_loc.InsertWaypoint(i);
+
             vehicle.SetPathDuration(30);
 
             go.SetActive(true);
@@ -237,9 +244,12 @@ public class BoardingManager : MonoBehaviour,IBoardCal
            
 
             mTimer.Pause();
-
-            Destroy(go.gameObject, 0.2f);
+            //Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"Car:{i} is reached ", DebugColor.Orange);
+            no_VehiclesParked += 1;
+            Debug.LogWarning($"Vehicles Parked {no_VehiclesParked}");
+            vehicle_loc.RemoveWayPoint();
+
         }
 
         onComplete?.Invoke();
@@ -262,6 +272,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameObject go = Instantiate(mNPCStore.GetRandomTruck().gameObject);
 
             Vehicle vehicle = go.GetComponent<Vehicle>();
+            PathFollower tvehicle_loc = go.GetComponent<PathFollower>();
+            tvehicle_loc.FixedWayPoints(); // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
+            tvehicle_loc.InsertWaypoint(i + no_VehiclesParked);
             vehicle.SetPathDuration(60);
 
             go.SetActive(true);
@@ -277,8 +290,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             mTimer.Pause();
 
-            Destroy(go.gameObject, 0.2f);
+            //Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"Truck:{i} is reached ", DebugColor.Orange);
+            tvehicle_loc.RemoveWayPoint();
         }
 
         onComplete?.Invoke();

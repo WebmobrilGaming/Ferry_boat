@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1670913809748987769}
   m_Layer: 0
   m_Name: Trucks_01
-  m_TagString: Untagged
+  m_TagString: Truck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: d6752a550a3ae0148b108edaf217da99, type: 2}
+  no_FixedWayPoints: 0
   _speed: 5
   _playOnAwake: 1
   _targetDuration: 60

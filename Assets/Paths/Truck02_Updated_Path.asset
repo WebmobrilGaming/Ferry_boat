@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc734eadc54077043a710cf5f5da9e09, type: 3}
-  m_Name: Female_01_Path
+  m_Name: Truck02_Updated_Path
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: 876.73596, y: 34.40889, z: -122.80695}
+  - {x: 934.66766, y: 0.0000016172999, z: -415.02963}
+  - {x: 934.66766, y: 0.0000016172999, z: -412.02963}
   _loop: 0
   _useCatmullRom: 1
