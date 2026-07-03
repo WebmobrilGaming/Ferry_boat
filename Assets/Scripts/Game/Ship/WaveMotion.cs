@@ -3,6 +3,7 @@ using System.Collections;
 using Ferry.Config;
 using Ferry_boat.Assets.Scripts.Web;
 using GF;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -49,6 +50,10 @@ namespace Ferry.Motion
         [SerializeField] private float currentStrength = 0.5f;
         [SerializeField] private float maxWindPush = 2f;
         [SerializeField] private bool isWaveFactorsClamped;
+
+        [Header("WaveMotion")]
+        [SerializeField] public static float wave_MaxValue;
+        
 
         void OnEnable()
         {
@@ -178,7 +183,7 @@ namespace Ferry.Motion
             wavePhase += Time.deltaTime * waveSpeed;
             float waveFactor = Mathf.InverseLerp(3f,11f,currentWaveLevel);
             float windfactor = Mathf.InverseLerp(5f,35f,currentWindSpeed);
-            float seaFactor = Mathf.Lerp(1f,6f,(waveFactor + windfactor)*0.5f); // change the values of (1f,6f) if required for more intensive wave effect
+            float seaFactor = Mathf.Lerp(1f,wave_MaxValue,(waveFactor + windfactor)*0.5f); // change the values of (1f,6f) if required for more intensive wave effect
             Debug.LogWarning("seaFactor : "+seaFactor);
 
             float bob   = Mathf.Sin(wavePhase)        * waveAmplitude;

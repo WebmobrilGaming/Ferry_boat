@@ -1,5 +1,6 @@
 using DynamicWeatherSystem;
 using Ferry.Loading;
+using Ferry.Motion;
 using Ferry.Screens;
 using Ferry_boat.Assets.Scripts.Web;
 using FerryBoat.Store;
@@ -68,6 +69,7 @@ public class Wave_Difficulty : MonoBehaviour
                     mCalmWater.SetActive(true);
                     mRainyWater.SetActive(false);
                     mStormWater.SetActive(false);
+                    WaveMotion.wave_MaxValue = 1f;
 
                     break;
 
@@ -80,6 +82,7 @@ public class Wave_Difficulty : MonoBehaviour
                     mCalmWater.SetActive(false);
                     mRainyWater.SetActive(true);
                     mStormWater.SetActive(false);
+                    WaveMotion.wave_MaxValue = 1.5f;
 
                     break;
 
@@ -89,6 +92,7 @@ public class Wave_Difficulty : MonoBehaviour
                     windspeed = data.data.windSpeedByDifficulty.hard;
                     wavelevel = data.data.waveLevelByDifficulty.hard;
                     stateData = stormWeather;
+                    WaveMotion.wave_MaxValue = 6f;
 
                     mCalmWater.SetActive(false);
                     mRainyWater.SetActive(false);
@@ -99,6 +103,7 @@ public class Wave_Difficulty : MonoBehaviour
                     windspeed = data.data.windSpeedByDifficulty.easy;
                     wavelevel = data.data.waveLevelByDifficulty.easy;
                     stateData = calmWeather;
+                    WaveMotion.wave_MaxValue = 1f;
 
                     mCalmWater.SetActive(true);
                     mRainyWater.SetActive(false);

@@ -135,7 +135,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 Score_System.Instance.Set(score);
                 mBoardingPanel.SetActive(false);
 
-                mTimer.Begin(120); // main game logic ,enable after final build
+                mTimer.Begin(1); // main game logic ,enable after final build
                 mTime.text = mTimer.Display;
 
                 PassengerBoarding(passengerCount, () =>

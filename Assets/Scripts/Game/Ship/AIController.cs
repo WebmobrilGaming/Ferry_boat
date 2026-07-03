@@ -23,7 +23,7 @@ namespace Ferry.Ship
         private Vector3 sourcePos;
         private Vector3 destinationPos;
 
-        [SerializeField] private float navMeshSampleDistance = 10f;
+        [SerializeField] private float navMeshSampleDistance = 50f;
 
         private bool isDecelerating = false;
 
@@ -39,6 +39,7 @@ namespace Ferry.Ship
         private void OnEnable()
         {
             BoatController.OnBoatStartEvent += StartShip;
+            navMeshSampleDistance = 10f;
         }
 
         private void OnDisable()
@@ -66,16 +67,18 @@ namespace Ferry.Ship
             agent.stoppingDistance = Mathf.Clamp(currentVelocityLevel.deceleration, 1f, 10f);
 
             sourcePos = DockConfig.Instance.GetDock(StartDock).dockPosition;
+            Debug.Log($"Dock {StartDock}: {sourcePos}");
             destinationPos = DockConfig.Instance.GetDock(EndDock).dockPosition;
         }
 
         private void StartShip()
         {
-            StartCoroutine(RunShuttle());
+            //StartCoroutine(RunShuttle());
         }
 
         private IEnumerator RunShuttle()
         {
+            Debug.Log($"[{shipType}] Source Position: {sourcePos}");
             Vector3 startPoint = GetNearestNavMeshPoint(sourcePos);
             if (startPoint == Vector3.zero)
             {
@@ -175,8 +178,12 @@ namespace Ferry.Ship
         private Vector3 GetNearestNavMeshPoint(Vector3 target)
         {
             if (NavMesh.SamplePosition(target, out NavMeshHit hit, navMeshSampleDistance, NavMesh.AllAreas))
+            {
+                Debug.Log($"Found NavMesh at {hit.position}");
                 return hit.position;
+            }
 
+            Debug.LogError($"No NavMesh found within {navMeshSampleDistance} units of {target}");
             return Vector3.zero;
         }
 
