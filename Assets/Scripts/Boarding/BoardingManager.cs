@@ -174,6 +174,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 continue;
             }
 
+            _cts = new CancellationTokenSource();
+            DevDebug.Log($"Loading the passenger: [{i}]", DebugColor.Brown);
+
             //GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
             GameObject go = Instantiate(npcPrefab.gameObject);
 
@@ -183,6 +186,10 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             go.SetActive(true);
 
             await npc.WaitForPathComplete(_cts.Token);
+
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
 
             mTimer.Pause();
 
@@ -227,21 +234,30 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             Vehicle vehicle = go.GetComponent<Vehicle>();
             PathFollower vehicle_loc = go.GetComponent<PathFollower>();
             vehicle_loc._orientToPath = true;
-            vehicle_loc.FixedWayPoints(); // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
+             // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
             vehicle_loc.InsertWaypoint(i);
+            vehicle_loc.FixedWayPoints();
 
             vehicle.SetPathDuration(30);
 
             go.SetActive(true);
-            try
-            {
-                await vehicle.WaitForPathComplete(_cts.Token);
-            }
-            catch(TaskCanceledException)
-            {
-                return;
-            }
-           
+
+            _cts = new CancellationTokenSource();
+
+            //try
+            //{
+            //    await vehicle.WaitForPathComplete(_cts.Token);
+            //}
+            //catch(TaskCanceledException)
+            //{
+            //    return;
+            //}
+
+            await vehicle.WaitForPathComplete(_cts.Token);
+
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
 
             mTimer.Pause();
             //Destroy(go.gameObject, 0.2f);
@@ -273,8 +289,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             Vehicle vehicle = go.GetComponent<Vehicle>();
             PathFollower tvehicle_loc = go.GetComponent<PathFollower>();
-            tvehicle_loc.FixedWayPoints(); // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
+        // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
             tvehicle_loc.InsertWaypoint(i + no_VehiclesParked);
+            tvehicle_loc.FixedWayPoints();
             vehicle.SetPathDuration(60);
 
             go.SetActive(true);

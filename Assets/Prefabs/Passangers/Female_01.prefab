@@ -417,12 +417,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198383010910803437}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d18bc887ffcacd41aa15560e8b87001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: a6e2c41f6bd9f774eb5dd56746be9dc5, type: 2}
+  no_FixedWayPoints: 0
   _speed: 18
   _playOnAwake: 1
   _targetDuration: 1
@@ -460,7 +461,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198383010910803437}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d50111e526d6db8418a6f2c1f45e47f2, type: 3}
   m_Name: 
@@ -477,7 +478,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198383010910803437}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8882e2ffee7354a479a0e7993aeeae64, type: 3}
   m_Name: 

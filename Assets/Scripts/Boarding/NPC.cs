@@ -70,13 +70,13 @@ public class NPC : MonoBehaviour
 
         if (wayPoint == 1)
         {
-            animator.CrossFadeInFixedTime("walking", 0.2f);
+            animator.CrossFadeInFixedTime("walking", 0.8f);
         }
 
 
         if (wayPoint == 2)
         {
-            animator.CrossFadeInFixedTime("Crouched", 0.2f);
+            animator.CrossFadeInFixedTime("Crouched", 0.8f);
         }
 
         //animator.Play("walking");

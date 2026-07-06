@@ -203,14 +203,8 @@ public class PathFollower : MonoBehaviour
     }
     public void RemoveWayPoint()
     {
-         if(_path.Count-1 > no_FixedWayPoints)
-        {
-            for(int i = no_FixedWayPoints+1; i <= _path.Count - 1; i++)
-            {
-                _path.RemoveWaypoint(i);
-            }
-        }
-       
+        _path.RemoveWaypoint(_path.Count - 1);
+
     }
 
     public void FixedWayPoints()
@@ -219,7 +213,7 @@ public class PathFollower : MonoBehaviour
     }
     void OnDestroy()
     {
-        RemoveWayPoint(); 
+      //  RemoveWayPoint(); 
     }
 
 
