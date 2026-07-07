@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.025733296, y: -0.8051387, z: 0.04291985, w: 0.5909715}
   m_LocalPosition: {x: 984.89, y: 51.05, z: -572.11}
-  m_LocalScale: {x: 4.762303, y: 3.9828417, z: 4.838224}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7237564942728461979}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: d6752a550a3ae0148b108edaf217da99, type: 2}
+  no_FixedWayPoints: 0
   _speed: 5
   _playOnAwake: 1
   _targetDuration: 30
@@ -108,7 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vehicle
   pathFollower: {fileID: 2427570194816719030}
+  rotationSpeed: 90
   boardCharType: 1
+  wheelRotationMultiplier: 300
+  tyres: []
 --- !u!1 &6593363871630198215
 GameObject:
   m_ObjectHideFlags: 0

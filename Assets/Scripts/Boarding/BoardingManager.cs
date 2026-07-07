@@ -264,7 +264,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             DevDebug.Log($"Car:{i} is reached ", DebugColor.Orange);
             no_VehiclesParked += 1;
             Debug.LogWarning($"Vehicles Parked {no_VehiclesParked}");
-            vehicle_loc.RemoveWayPoint();
+           // vehicle_loc.RemoveWayPoint();
 
         }
 
@@ -309,7 +309,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             //Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"Truck:{i} is reached ", DebugColor.Orange);
-            tvehicle_loc.RemoveWayPoint();
+            //tvehicle_loc.RemoveWayPoint();
         }
 
         onComplete?.Invoke();

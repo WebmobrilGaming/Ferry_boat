@@ -1,11 +1,11 @@
-using System.Threading;
-using System.Threading.Tasks;
-using UnityEngine;
-
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
@@ -26,6 +26,10 @@ public class Vehicle : MonoBehaviour
     public float wheelRotationMultiplier = 300f;
 
     public List<Transform> tyres = new List<Transform>();
+
+    [Header("TurnWheels:")]
+    [SerializeField] Transform f1Tyre;
+    [SerializeField] Transform f2Tyre;
 
     private Vector3 lastPosition;
     private float lastYRotation;
@@ -73,6 +77,7 @@ public class Vehicle : MonoBehaviour
 
         transform.rotation = targetRotation;
     }
+
     public void SetPathDuration(float duration) { pathFollower.SetTargetDuration(duration); }
 
     private void OnDisable()
@@ -96,6 +101,7 @@ public class Vehicle : MonoBehaviour
 
     private void Update()
     {  if(Time.deltaTime == 0f) return;
+
         float speed = Vector3.Distance(this.transform.position, lastPosition) / Time.deltaTime;
         lastPosition = this.transform.position;
 
@@ -105,13 +111,14 @@ public class Vehicle : MonoBehaviour
             t.Rotate(rotation, 0f, 0f, Space.Self);
         }
 
-        //float delta = Mathf.DeltaAngle(lastYRotation, transform.eulerAngles.y);
-        //lastYRotation = transform.eulerAngles.y;
+        float delta = Mathf.DeltaAngle(lastYRotation, transform.eulerAngles.y);
 
+        float steerAngle = Mathf.Clamp(delta * 100f, -120f, 120f);
 
-        //float steerAngle = Mathf.Clamp(delta * 10f, -30f, 30f);
+        f2Tyre.localRotation = Quaternion.Euler(0, steerAngle, 0);
+        f1Tyre.localRotation = Quaternion.Euler(0, steerAngle, 0);
+        lastYRotation = transform.eulerAngles.y;
 
-        //tyres[0].localRotation = Quaternion.Euler(rotation, steerAngle, 0);
         //tyres[2].localRotation = Quaternion.Euler(rotation, steerAngle, 0);
     }
 

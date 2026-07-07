@@ -426,7 +426,7 @@ MonoBehaviour:
   no_FixedWayPoints: 0
   _speed: 18
   _playOnAwake: 1
-  _targetDuration: 1
+  _targetDuration: 5
   _easingCurve:
     serializedVersion: 2
     m_Curve:

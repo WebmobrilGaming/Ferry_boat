@@ -199,11 +199,14 @@ public class PathFollower : MonoBehaviour
     public void InsertWaypoint(int index)
     {
         Transform target_location = VehicleDockLoadingLocations.instance.vehicle_Loc[index];
-        _path.AddWaypoint(target_location.position);
+
+        _path.SetWaypoint(_path.Count - 1, target_location.position);
+
+       // _path.AddWaypoint(target_location.position);
     }
     public void RemoveWayPoint()
     {
-        _path.RemoveWaypoint(_path.Count - 1);
+       // _path.RemoveWaypoint(_path.Count - 1);
 
     }
 
