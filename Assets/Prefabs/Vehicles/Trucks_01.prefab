@@ -451,7 +451,7 @@ Transform:
   m_GameObject: {fileID: 5356431063137474789}
   serializedVersion: 2
   m_LocalRotation: {x: -0.014473807, y: 0.9992637, z: 0.0074799564, w: 0.034738332}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -581,6 +581,8 @@ MonoBehaviour:
   - {fileID: 5643539782383881394}
   f1Tyre: {fileID: 3274274569386437422}
   f2Tyre: {fileID: 6970950539299450177}
+  steerSensitivity: 300
+  maxSteerAngle: 180
 --- !u!1 &8434910447809093077
 GameObject:
   m_ObjectHideFlags: 0

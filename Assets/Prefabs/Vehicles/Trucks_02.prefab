@@ -119,6 +119,9 @@ MonoBehaviour:
   - {fileID: 1739157830971595376}
   f1Tyre: {fileID: 2596843375000908004}
   f2Tyre: {fileID: 4365490342786927211}
+  steerSensitivity: 300
+  maxSteerAngle: 180
+  steerSmooth: 10
 --- !u!1 &2028457052519337511
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 2028457052519337511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:

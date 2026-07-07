@@ -31,6 +31,13 @@ public class Vehicle : MonoBehaviour
     [SerializeField] Transform f1Tyre;
     [SerializeField] Transform f2Tyre;
 
+    [Space]
+    [SerializeField] private float steerSensitivity = 250f;
+    [SerializeField] private float maxSteerAngle = 180f;
+    [SerializeField] private float steerSmooth = 10f;
+
+    float currentSteerAngle;
+
     private Vector3 lastPosition;
     private float lastYRotation;
 
@@ -113,10 +120,20 @@ public class Vehicle : MonoBehaviour
 
         float delta = Mathf.DeltaAngle(lastYRotation, transform.eulerAngles.y);
 
-        float steerAngle = Mathf.Clamp(delta * 100f, -120f, 120f);
+        float targetSteerAngle = Mathf.Clamp( delta * steerSensitivity,
+                                     -maxSteerAngle, maxSteerAngle);
 
-        f2Tyre.localRotation = Quaternion.Euler(0, steerAngle, 0);
-        f1Tyre.localRotation = Quaternion.Euler(0, steerAngle, 0);
+        currentSteerAngle = Mathf.Lerp(
+                                        currentSteerAngle,
+                                        targetSteerAngle,
+                                        steerSmooth * Time.deltaTime
+                                      );
+
+        currentSteerAngle = (float)System.Math.Round(currentSteerAngle, 3);
+
+        f2Tyre.localRotation = Quaternion.Euler(0, currentSteerAngle, 0);
+        f1Tyre.localRotation = Quaternion.Euler(0, currentSteerAngle, 0);
+
         lastYRotation = transform.eulerAngles.y;
 
         //tyres[2].localRotation = Quaternion.Euler(rotation, steerAngle, 0);

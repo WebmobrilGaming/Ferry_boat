@@ -3628,7 +3628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc32daf6b0e31654288be315cb4ce375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: {fileID: 11400000, guid: 717ddedc7861f404f95ffb79abff2a24, type: 2}
+  initialState: {fileID: 11400000, guid: f322e8968b5c97c4d8f14ad4ac80824a, type: 2}
   defaultTransitionDuration: 1
   transitionCurve:
     serializedVersion: 2

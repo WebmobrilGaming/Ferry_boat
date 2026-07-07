@@ -638,6 +638,8 @@ MonoBehaviour:
   - {fileID: 5408542868102172385}
   f1Tyre: {fileID: 4682627324944858901}
   f2Tyre: {fileID: 2623431701585580823}
+  steerSensitivity: 250
+  maxSteerAngle: 180
 --- !u!1 &7705901650787075744
 GameObject:
   m_ObjectHideFlags: 0
