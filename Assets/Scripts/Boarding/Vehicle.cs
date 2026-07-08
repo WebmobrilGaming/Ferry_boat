@@ -36,10 +36,17 @@ public class Vehicle : MonoBehaviour
     [SerializeField] private float maxSteerAngle = 180f;
     [SerializeField] private float steerSmooth = 10f;
 
+
+    [SerializeField]
+
     float currentSteerAngle;
 
     private Vector3 lastPosition;
     private float lastYRotation;
+
+    BoardType boardType;
+
+    Transform parkingArea;
 
     private void OnEnable()
     {
@@ -49,19 +56,21 @@ public class Vehicle : MonoBehaviour
         _cts = new CancellationTokenSource();
     }
 
+    public void BookParkingArea(Transform park) { parkingArea = park; }
+
     private void ReachWayPointAction(int current)
     {
-        Debug.LogWarning($"Reached Waypoint {current}");
-        if(current == 2)
-        {
-            pathFollower._orientToPath = false;
+        //Debug.LogWarning($"Reached Waypoint {current}");
+        //if(current == 2)
+        //{
+        //    pathFollower._orientToPath = false;
 
-            Quaternion targetRotation = CompareTag("Truck")
-                ? Quaternion.Euler(0, 1.60655582f, 0)
-                : Quaternion.Euler(-3.153f, -5.198f, 0.755f);
+        //    Quaternion targetRotation = CompareTag("Truck")
+        //        ? Quaternion.Euler(0, 1.60655582f, 0)
+        //        : Quaternion.Euler(-3.153f, -5.198f, 0.755f);
 
-            StartCoroutine(SmoothRotate(targetRotation));
-        }
+        //    StartCoroutine(SmoothRotate(targetRotation));
+        //}
     }
 
     private IEnumerator SmoothRotate(Quaternion targetRotation)
@@ -139,6 +148,8 @@ public class Vehicle : MonoBehaviour
         //tyres[2].localRotation = Quaternion.Euler(rotation, steerAngle, 0);
     }
 
+    public void SetBoard(BoardType type) { boardType = type; }
+    
     private void OnDestroy()
     {
         pathFollower.OnPathComplete -= PathCompleteAction;

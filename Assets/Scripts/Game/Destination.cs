@@ -58,6 +58,15 @@ public class Destination : MonoBehaviour
 
         bool isStopped = boatController.Speed == 0 && !boatController.IsEningeActive;
 
+        Vector3 boatForward = other.transform.forward;
+        Vector3 dockForward = transform.forward;
+
+        float dot = Vector3.Dot(boatForward.normalized, dockForward.normalized);
+
+        DevDebug.Log($"angle difference at docking : {dot}",DebugColor.Orange);
+
+        //fullyInside = dot > 0.999f;
+
         if (fullyInside && isStopped)
         {
             currentState = DockState.FullyDocked;

@@ -174,10 +174,12 @@ public class UserInterFace : MonoBehaviour
     IEnumerator ReachedDestinationDock()
     {
         yield return new WaitForSecondsRealtime(5f);
-        Score_System.Instance.UploadFinalScore( Data.time, () =>
-            {
-                LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
-            });
+        //Score_System.Instance.UploadFinalScore( Data.time, () =>
+        //    {
+        //        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+        //    });
+
+        Act.OffBoardAction?.Invoke();
     }
 
     public void SetRange(float range)

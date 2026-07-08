@@ -21,6 +21,10 @@ public class NPC : MonoBehaviour
 
     private Vector3 previousPosition;
 
+    [Space]
+    [SerializeField] BoardType boardType;
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -34,7 +38,10 @@ public class NPC : MonoBehaviour
 
         pathFollower.OnAnimationSpeedChanged += AnimationSpeedChange;
 
-        animator.Play("running");
+        if(boardType == BoardType.offBoard)
+         animator.Play("walking");
+        else
+         animator.Play("running");
 
         _cts = new CancellationTokenSource();
     }
@@ -64,20 +71,50 @@ public class NPC : MonoBehaviour
         animator.speed = Mathf.Clamp(speed / 2f, 1.5f, 1f);
     }
 
+    public void SetBoard(BoardType type) { boardType = type; }
+
     private void ReachWayPointAction(int wayPoint)
     {
         DevDebug.Log($"ReachedPoint : {wayPoint}", DebugColor.Teal);
 
-        if (wayPoint == 1)
+        switch(boardType)
         {
-            animator.CrossFadeInFixedTime("walking", 0.8f);
-        }
+            case BoardType.onBoard:
+
+                if (wayPoint == 1)
+                {
+                    animator.CrossFadeInFixedTime("walking", 0.8f);
+                }
 
 
-        if (wayPoint == 2)
-        {
-            animator.CrossFadeInFixedTime("Crouched", 0.8f);
+                if (wayPoint == 2)
+                {
+                    animator.CrossFadeInFixedTime("Crouched", 0.8f);
+                }
+
+                break;
+
+            case BoardType.offBoard:
+
+                if(wayPoint == 1)
+                {
+                    animator.CrossFadeInFixedTime("Crouched", 0.8f);
+                }
+
+                if (wayPoint == 2)
+                {
+                    animator.CrossFadeInFixedTime("walking", 0.8f);
+                }
+
+                if (wayPoint == 3)
+                {
+                    animator.CrossFadeInFixedTime("walking", 0.8f);
+                }
+
+                break;
         }
+        
+       
 
         //animator.Play("walking");
     }
