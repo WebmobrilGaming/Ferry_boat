@@ -24,6 +24,10 @@ public class NPC : MonoBehaviour
     [Space]
     [SerializeField] BoardType boardType;
 
+    [Space]
+    [SerializeField] PathData onBoardingPath;
+    [SerializeField] PathData offBoardingPath;
+
 
     private void Awake()
     {
@@ -38,7 +42,15 @@ public class NPC : MonoBehaviour
 
         pathFollower.OnAnimationSpeedChanged += AnimationSpeedChange;
 
+        switch(boardType)
+        {
+            case BoardType.onBoard:
+                animator.Play("walking");
+                break;
+        }
+
         if(boardType == BoardType.offBoard)
+
          animator.Play("walking");
         else
          animator.Play("running");

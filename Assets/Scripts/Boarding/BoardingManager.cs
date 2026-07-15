@@ -1,5 +1,6 @@
 
 
+using Cysharp.Threading.Tasks;
 using DebugUtils;
 using FerryBoat.Actions;
 using FerryBoat.Store;
@@ -30,15 +31,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     [Header("NPC")]
     [SerializeField] NPCStore mNPCStore;
 
-    [Header("Timer:")]
-    [SerializeField] Timer mTimer;
-
-    [Header("Barge:")]
+    [Header("OFFBoarding")]
     [SerializeField] BoardPlace boardPlace;
-    
-    //[SerializeField] Transform mBarge;
-    //[SerializeField] Transform onBoardBarge;
-    //[SerializeField] Transform offBoardBarge;
+    [SerializeField] List<NPCPlace> npcPlaces = new List<NPCPlace>();
 
     int score = 0;
     int time = 0;
@@ -71,8 +66,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         mBoardingStartBtn.interactable = false;
 
-        mTimer.DisplayTimer += DisplayTimerAction;
-        mTimer.OnCompleteAct += TimerEndAction;
+        //mTimer.DisplayTimer += DisplayTimerAction;
+        //mTimer.OnCompleteAct += TimerEndAction;
+
         Act.OffBoardAction += () =>
         {
             SetBoard(BoardType.offBoard);
@@ -92,8 +88,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         _cts?.Dispose();
         _cts = null;
 
-        mTimer.DisplayTimer -= DisplayTimerAction;
-        mTimer.OnCompleteAct -= TimerEndAction;
+        //mTimer.DisplayTimer -= DisplayTimerAction;
+        //mTimer.OnCompleteAct -= TimerEndAction;
     }
 
     private void DisplayTimerAction(string obj)
@@ -105,9 +101,10 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     {
         mTime.text = "00:00 mins";
         GameStarted = true;
-        Act.EnableScore();
+        //Act.EnableScore();
+
         GameCamController.Instance.SetCam(CamType.driver);
-        mEnginePanel.SetActive(true);
+        //mEnginePanel.SetActive(true);
         GamePopUp.Instance.PopStat("Please Press the <color=yellow>[Space Bar]</color> to start the engine", 3.0f);
         mBargeObj.SetActive(false);
         try
@@ -132,14 +129,13 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 Data.passengerCount = passengerCount;
                 Data.carCount = carCount;
                 Data.truckCount = truckCount;
-
-               
+    
                 mBoardingPanel.SetActive(false);
 
-                score = 0;
+                //mTimer.Begin(120); // main game logic ,enable after final build
+                //mTime.text = mTimer.Display;
 
-                mTimer.Begin(120); // main game logic ,enable after final build
-                mTime.text = mTimer.Display;
+                GameTimer.Instance.EnableTime();
 
                 PassengerBoarding(passengerCount, () =>
                 {
@@ -148,6 +144,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                         TruckBoarding(truckCount, () =>
                         {
                             Score_System.Instance.Set(score);
+                            Act.EnableUser(true);
+
+                            TimerEndAction();
                         });
                     });
                 });
@@ -160,6 +159,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
                 mBargeObj.transform.SetPositionAndRotation(boardPlace.offBoardBarge.position, boardPlace.offBoardBarge.rotation);
                 mBargeObj.transform.localScale = boardPlace.offBoardBarge.transform.localScale;
+
+                boardPlace.boatObj.transform.SetLocalPositionAndRotation(boardPlace.offBoat.position, boardPlace.offBoat.rotation);
+                boardPlace.boatObj.localScale = boardPlace.offBoat.transform.localScale;
 
                 PassengerOffBoarding(currentboardData.passengerData, () =>
                 {
@@ -184,11 +186,11 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         // Data.boardData.passengerData.Clear();
 
-        GameCamController.Instance.SetCam(CamType.passengers);
+        GameCamController.Instance.SetCam(CamType.passengerOnBoard);
 
         for (int i = 0;  i < count; i++)
         {
-            mTimer.Resume();
+            GameTimer.Instance.Resume();
             var npcPrefab = mNPCStore.GetRandomNPC();
             if(npcPrefab == null)
             {
@@ -215,13 +217,13 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             _cts?.Dispose();
             _cts = null;
 
-            mTimer.Pause();
+            GameTimer.Instance.Pause();
 
-            Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
+            go.SetActive(false);
 
-            score += 2;
-            DisplayScore();
+           // score += 2;
+           // DisplayScore();
 
             currentboardData.passengerData.Add(npc);
 
@@ -254,11 +256,11 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         currentboardData.vehicleDatas = new List<Vehicle>();
 
-        GameCamController.Instance.SetCam(CamType.vechicle);
+        GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
 
         for (int i = 0; i < count; i++)
         {
-            mTimer.Resume();
+            GameTimer.Instance.Resume();
 
             GameObject go = Instantiate(mNPCStore.GetRandomCar().gameObject);
 
@@ -295,14 +297,14 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             _cts?.Dispose();
             _cts = null;
 
-            mTimer.Pause();
+            GameTimer.Instance.Pause();
             //Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"Car:{i} is reached ", DebugColor.Orange);
             no_VehiclesParked += 1;
             Debug.LogWarning($"Vehicles Parked {no_VehiclesParked}");
 
-            score += 10;
-            DisplayScore();
+           // score += 10;
+            //DisplayScore();
 
             currentboardData.vehicleDatas.Add(vehicle);
 
@@ -321,11 +323,11 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             return;
         }
 
-        GameCamController.Instance.SetCam(CamType.vechicle);
+        GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
 
         for (int i = 0; i < count; i++)
         {
-            mTimer.Resume();
+            GameTimer.Instance.Resume();
 
             GameObject go = Instantiate(mNPCStore.GetRandomTruck().gameObject);
 
@@ -336,24 +338,21 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             tvehicle_loc.FixedWayPoints();
             vehicle.SetPathDuration(60);
 
-            go.SetActive(true);
-            try
-            {
-                await vehicle.WaitForPathComplete(_cts.Token);
-            }
-            catch
-            {
-                return;
-            }
-           
+            _cts = new CancellationTokenSource();
 
-            mTimer.Pause();
+            await vehicle.WaitForPathComplete(_cts.Token);
+
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+
+            GameTimer.Instance.Pause();
 
             //Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"Truck:{i} is reached ", DebugColor.Orange);
 
-            score += 25;
-            DisplayScore();
+            //score += 25;
+            //DisplayScore();
             //tvehicle_loc.RemoveWayPoint();
         }
 
@@ -387,15 +386,16 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         if (score <= 0)
             score = 0;
 
-        //mScore.text = $"Score:{score}";
+        DisplayScore();
 
-        if(time <=0)
+        if (time <=0)
             time = 0;
 
         if (time > 120)
         {
             StartCoroutine(OverTwoMinuteLimit());
         }
+
         int m = Mathf.FloorToInt(time / 60f);
         int s = Mathf.FloorToInt(time % 60f);
         mTime.text = string.Format($"Boarding time: {m:00}:{s:00} mins");
@@ -416,15 +416,30 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             return;
         }
 
-        //foreach(NPC nPC in nPCs)
+        for(int i=0;i<nPCs.Count;i++)
+        {
+            nPCs[i].Path.Stop();
 
-        
+            npcPlaces[i].passenger = nPCs[i];
+            npcPlaces[i].isBooked = true;
+
+            nPCs[i].transform.SetLocalPositionAndRotation(npcPlaces[i].place.position, npcPlaces[i].place.rotation);
+        }
+
+        GameCamController.Instance.SetCam(CamType.passengerOffBoard);
+
+        for(int i=0;i<npcPlaces.Count;++i)
+        {
+            NPCPlace place = npcPlaces[i];
+
+          //  place.passenger
+        }
     }
 
 
     #endregion
 
-    public void DisplayScore() { mScore.text = $"Score:{score}"; }
+    public void DisplayScore() { mScore.text = $"{score}"; }
 
     IEnumerator OverTwoMinuteLimit()
     {
@@ -442,8 +457,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         _cts?.Dispose();
         _cts = null;
 
-        mTimer.DisplayTimer -= DisplayTimerAction;
-        mTimer.OnCompleteAct -= TimerEndAction;
+        //mTimer.DisplayTimer -= DisplayTimerAction;
+        //mTimer.OnCompleteAct -= TimerEndAction;
     }
 
 }
@@ -454,9 +469,21 @@ public class BoardPlace
     public Transform onBoardBarge;
     public Transform offBoardBarge;
 
+    [Space]
+    public Transform boatObj;
+
     public Transform onBoat;
     public Transform offBoat;
 }
+
+[Serializable]
+public class NPCPlace
+{
+    public NPC passenger;
+    public bool isBooked;
+    public Transform place;
+}
+
 
 public enum BoardType { onBoard,offBoard}
 

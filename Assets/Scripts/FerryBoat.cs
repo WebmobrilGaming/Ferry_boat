@@ -18,8 +18,9 @@ namespace  FerryBoat
             public static Action MainMenuAction;
             public static Action EnableScore; //<bool>EnableScore;
             public static Action EndPointReached;
-
             public static Action OffBoardAction;
+
+            public static Action<bool> EnableUser;
         }
     }
 

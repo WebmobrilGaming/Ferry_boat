@@ -18,6 +18,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] HelmController helmController;
     [SerializeField] Gear mGear;
     [SerializeField] Material mIndicator;
+
     [Header("Settings:")]
     [Range(0, 1f)]
     [SerializeField] float rotationMultiplier = 0.3f;
@@ -196,19 +197,18 @@ public class BoatController : MonoBehaviour, IHelem, IGear
                 helmController.StopRotation();
         }
 
-        if (Timer.gameStarted)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (!isInitialized)
             {
-                if (!isInitialized)
-                {
-                    isInitialized = true;
-                    OnBoatStartEvent?.Invoke();
-                }
-                GearAction();
-                isEngineStarted = !isEngineStarted;
+                isInitialized = true;
+                OnBoatStartEvent?.Invoke();
             }
+
+            GearAction();
+            isEngineStarted = !isEngineStarted;
         }
+
         bool isReversing = (Keyboard.current.sKey.isPressed ||
                             Keyboard.current.downArrowKey.isPressed) && mGear.Stat;
 
@@ -233,7 +233,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             DifficultyLevel.medium => 0.75f,
             DifficultyLevel.hard => 0.5f  
         }; 
-        float resistanceMin = Mathf.Lerp(1f, resistance, Mathf.Max(0f, -windAlignment));
+
+        float resistanceMin = /*Mathf.Lerp(1f, resistance, Mathf.Max(0f, -windAlignment))*/ 1f;
+
+
         float effectiveSpeed = mCurrentSpeed * resistanceMin;
         var forward = transform.forward * effectiveSpeed * Time.deltaTime;
         var currentTransform = transform.position;
@@ -254,10 +257,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
                 transform.localRotation =
                     startRotation *
                     Quaternion.Euler(0, currentRotation, 0);
-            }
-           
+            } 
         }
-
 
         float actualSpeed = Vector3.Distance(transform.position, mLastPosition) / Time.deltaTime;
         //speedInKnots = actualSpeed * MPS_TO_KNOTS * 0.095f;

@@ -34,5 +34,5 @@ public class GameCamController : MonoBehaviour
 
 public enum  CamType
 {
-   driver,passengers,vechicle
+   driver,passengerOnBoard,vehicleOnBoard,passengerOffBoard,vehicleOffBoard
 }

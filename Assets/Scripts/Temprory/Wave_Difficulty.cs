@@ -3,6 +3,7 @@ using Ferry.Loading;
 using Ferry.Motion;
 using Ferry.Screens;
 using Ferry_boat.Assets.Scripts.Web;
+using FerryBoat.Actions;
 using FerryBoat.Store;
 using GF;
 using Netconfig;
@@ -18,16 +19,10 @@ public class Wave_Difficulty : MonoBehaviour
 
     [Header("Enivorment Settings:")]
     [SerializeField] WeatherManager weatherManager;
+    [SerializeField] WindManager windManager;
+   
 
-    [Space]
-    [SerializeField] WeatherStateData calmWeather;
-    [SerializeField] WeatherStateData rainWeather;
-    [SerializeField] WeatherStateData stormWeather;
 
-    [Space]
-    [SerializeField] GameObject mCalmWater;
-    [SerializeField] GameObject mRainyWater;
-    [SerializeField] GameObject mStormWater;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,8 +30,18 @@ public class Wave_Difficulty : MonoBehaviour
     {
         APIManager.GetAPI<WaveDifficultyResponse>(new RequestData(Netconfig.RequestType.Wave_Diffiulty, null), OnRecieveWaveDifficulty);
         currentdifficulty = PlayerPrefs.GetString(GamePrefs.difficulty_Level,DifficultyLevel.easy.ToString());
-        
 
+        Act.EnableUser += EnableWeatherAction;
+    }
+
+    private void OnDisable()
+    {
+        Act.EnableUser -= EnableWeatherAction;
+    }
+
+    private void EnableWeatherAction(bool enable)
+    {
+        windManager.isON = enable;
     }
 
     private void OnRecieveWaveDifficulty(WaveDifficultyResponse data, Response response)
@@ -53,65 +58,8 @@ public class Wave_Difficulty : MonoBehaviour
             return;
         }
 
-
-        if (response.status)
-        {
-            WeatherStateData stateData = calmWeather;
-
-            switch(currentdifficulty)
-            {
-                case nameof(DifficultyLevel.easy):
-
-                    windspeed = data.data.windSpeedByDifficulty.easy;
-                    wavelevel = data.data.waveLevelByDifficulty.easy;
-                    stateData = calmWeather;
-
-                    mCalmWater.SetActive(true);
-                    mRainyWater.SetActive(false);
-                    mStormWater.SetActive(false);
-                    WaveMotion.wave_MaxValue = 1f;
-
-                    break;
-
-                case nameof(DifficultyLevel.medium):
-
-                    windspeed = data.data.windSpeedByDifficulty.medium;
-                    wavelevel = data.data.waveLevelByDifficulty.medium;
-                    stateData = rainWeather;
-
-                    mCalmWater.SetActive(false);
-                    mRainyWater.SetActive(true);
-                    mStormWater.SetActive(false);
-                    WaveMotion.wave_MaxValue = 1.5f;
-
-                    break;
-
-
-                case nameof(DifficultyLevel.hard):
-
-                    windspeed = data.data.windSpeedByDifficulty.hard;
-                    wavelevel = data.data.waveLevelByDifficulty.hard;
-                    stateData = stormWeather;
-                    WaveMotion.wave_MaxValue = 6f;
-
-                    mCalmWater.SetActive(false);
-                    mRainyWater.SetActive(false);
-                    mStormWater.SetActive(true);
-                    break;
-
-                default:
-                    windspeed = data.data.windSpeedByDifficulty.easy;
-                    wavelevel = data.data.waveLevelByDifficulty.easy;
-                    stateData = calmWeather;
-                    WaveMotion.wave_MaxValue = 1f;
-
-                    mCalmWater.SetActive(true);
-                    mRainyWater.SetActive(false);
-                    mStormWater.SetActive(false);
-
-                    break;
-
-            }
+        DifficultyLevel difficultyLevel = Enum.Parse<DifficultyLevel>(currentdifficulty);
+        windManager.SetDifficulty(difficultyLevel);
 
             //if (currentdifficulty == DifficultyLevel.easy.ToString())
             //{
@@ -138,10 +86,10 @@ public class Wave_Difficulty : MonoBehaviour
             //    mWater.materials[0] = mStormWater;
             //}
 
-            weatherManager.SetWeather(stateData);
+            //weatherManager.SetWeather(stateData);
 
-            Debug.LogWarning($"current level : {currentdifficulty} \n windspeed : {windspeed} \n wavelevel : {wavelevel}");
+           // Debug.LogWarning($"current level : {currentdifficulty} \n windspeed : {windspeed} \n wavelevel : {wavelevel}");
             
-        }
+        
     }
 }

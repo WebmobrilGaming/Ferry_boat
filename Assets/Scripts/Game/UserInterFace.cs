@@ -128,7 +128,6 @@ public class UserInterFace : MonoBehaviour
         Act.EndPointReached-=EndPointReached;
         backBtn.onClick.RemoveListener(GoHome);
     }
-
     private void BoatDestroyed()
     {
         GamePopUp.Instance.FinalPopUp("Boat destroyed !!");

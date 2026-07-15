@@ -6,6 +6,7 @@ public class PathFollower : MonoBehaviour
 {
     [Header("Path")]
     [SerializeField] private PathData _path;
+    
     [SerializeField] private int no_FixedWayPoints;
 
     [Header("Movement")]
@@ -48,23 +49,23 @@ public class PathFollower : MonoBehaviour
 #if UNITY_EDITOR
     private void Reset()
     {
-        string dir = "Assets/Paths";
-        if (!UnityEditor.AssetDatabase.IsValidFolder(dir))
-            UnityEditor.AssetDatabase.CreateFolder("Assets", "Paths");
+        //string dir = "Assets/Paths";
+        //if (!UnityEditor.AssetDatabase.IsValidFolder(dir))
+        //    UnityEditor.AssetDatabase.CreateFolder("Assets", "Paths");
 
-        string path = $"{dir}/{gameObject.name}_Path.asset";
-        PathData existing = UnityEditor.AssetDatabase.LoadAssetAtPath<PathData>(path);
-        if (existing != null) { _path = existing; return; }
+        //string path = $"{dir}/{gameObject.name}_Path.asset";
+        //PathData existing = UnityEditor.AssetDatabase.LoadAssetAtPath<PathData>(path);
+        //if (existing != null) { _path = existing; return; }
 
-        PathData data = ScriptableObject.CreateInstance<PathData>();
-        Vector3 pos = transform.position;
-        data.SetWaypoints(new Vector3[] { pos, pos + transform.forward * 3f });
+        //PathData data = ScriptableObject.CreateInstance<PathData>();
+        //Vector3 pos = transform.position;
+        //data.SetWaypoints(new Vector3[] { pos, pos + transform.forward * 3f });
 
-        UnityEditor.AssetDatabase.CreateAsset(data, path);
-        UnityEditor.AssetDatabase.SaveAssets();
-        _path = data;
-        UnityEditor.EditorUtility.SetDirty(this);
-        Debug.Log($"[PathFollower] Created path asset at {path}");
+        //UnityEditor.AssetDatabase.CreateAsset(data, path);
+        //UnityEditor.AssetDatabase.SaveAssets();
+        //_path = data;
+        //UnityEditor.EditorUtility.SetDirty(this);
+        //Debug.Log($"[PathFollower] Created path asset at {path}");
     }
 #endif
 
@@ -178,6 +179,19 @@ public class PathFollower : MonoBehaviour
             _lastWaypointIndex = current;
             OnReachWaypoint?.Invoke(current);
         }
+    }
+
+    public void Restart()
+    {
+        if (_path == null) return;
+
+        _t = 0f;
+        _lastWaypointIndex = -1;
+
+        transform.position = _path.Evaluate(0f);
+        OrientToPath(0f);
+
+        Play();
     }
 
     private float ComputeLength() => ComputeSegmentLength(0f, 1f);

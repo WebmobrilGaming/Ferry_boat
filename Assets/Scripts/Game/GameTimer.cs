@@ -11,14 +11,12 @@ using FerryBoat.Store;
 using UnityEngine.SceneManagement;
 using Ferry.Loading;
 
-public class TimerAndScore : MonoBehaviour
+public class GameTimer : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TMP_Text timerText;
 
     public float timer = 0f;
-
 
     private int lastSecond = 0;
 
@@ -35,11 +33,22 @@ public class TimerAndScore : MonoBehaviour
 
     int timeLimit;
 
+    bool _running  = false;
+
+    static GameTimer instance;
+    public static GameTimer Instance { get { return instance; }  }
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     private void OnEnable()
     {
         enableScore = false;
         timerAlreadyStarted = false;
-        Act.EnableScore += EnableScore;
+       // Act.EnableScore += EnableTime;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
         Act.BoatDestroyedAction += ToHomeScreen;
@@ -55,6 +64,7 @@ public class TimerAndScore : MonoBehaviour
         {
             difficultyLevel = DifficultyLevel.easy;
         }
+
         maxTime = difficultyLevel switch
         {
             DifficultyLevel.easy => easyMaxTime,
@@ -62,6 +72,14 @@ public class TimerAndScore : MonoBehaviour
             DifficultyLevel.hard => hardMaxTime,
             _ => easyMaxTime
         };
+    }
+
+    private void OnDisable()
+    {
+        //Act.EnableScore -= EnableTime;
+        Act.ReachedDestination -= LevelFinish;
+        Act.BoatDestroyedAction -= LevelFinish;
+        Act.BoatDestroyedAction -= ToHomeScreen;
     }
 
     private void ToHomeScreen()
@@ -74,7 +92,6 @@ public class TimerAndScore : MonoBehaviour
         yield return new WaitForSecondsRealtime(10f);
         Debug.LogWarning("!!!!!!to home screen comment here !!!!");
         LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
-        
     }
 
     private void SetTimeLimit(int time)
@@ -87,39 +104,32 @@ public class TimerAndScore : MonoBehaviour
         isLevelFinished=true;
     }
 
-    private void OnDisable()
-    {
-        Act.EnableScore -= EnableScore;
-        Act.ReachedDestination -= LevelFinish;
-        Act.BoatDestroyedAction -= LevelFinish;
-        Act.BoatDestroyedAction -= ToHomeScreen;
-    }
-
-    private void EnableScore()
+    public void EnableTime()
     {
         enableScore = true;  // = enable;
         IsInitialized = true;
 
-         if (!timerAlreadyStarted)
+        if (!timerAlreadyStarted)
         {
-            //if (enable)
-                timer = maxTime;
-                lastSecond = Mathf.FloorToInt(timer);
+            timer = maxTime;
+            lastSecond = Mathf.FloorToInt(timer);
 
             Data.time = timer;
             timerAlreadyStarted = true;
+
+            _running = true;
+
             Debug.LogWarning("Timer Started");
         }
-        
     }
 
     private void Update()
     {
-        if (!IsInitialized && !enableScore)
-        {
-            return;
-        }
+        if (!IsInitialized && !enableScore) return;
+
         if (isLevelFinished) return;
+
+        if(!_running) return;
 
         timer -= Time.deltaTime;
         timer = Mathf.Clamp(timer,0,660);
@@ -133,9 +143,13 @@ public class TimerAndScore : MonoBehaviour
                 Utils.ShowInGamePopup("Opps...! Time out");
             }
         }
+
         UpdateTimerUI();
         CheckMinutePassed();
     }
+
+    public void Pause() => _running = false;
+    public void Resume() => _running = true;
 
     private void CheckMinutePassed()
     {
@@ -150,13 +164,7 @@ public class TimerAndScore : MonoBehaviour
     private void AddScore(int amount)
     {
         if (timer >= maxTime) return;
-        //score += amount;
-        // scoreText.text = $"{score}";
-        // if(timer<=0)
-        // {
-        //     // Debug.LogWarning("Behind scheduled time");
-        //     // return;
-        // }
+      
         Score_System.Instance.Set(amount,Data.time);
     }
 
