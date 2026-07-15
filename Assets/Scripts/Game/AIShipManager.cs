@@ -5,27 +5,39 @@ using Ferry.Ship;
 using Newtonsoft.Json;
 using UnityEngine;
 
+using System.Collections.Generic;
+using System.Linq;
+
 public class AIShipManager : MonoBehaviour
 {
-    public Transform shipParent;
     private DifficultyLevel level;
-    private ShipLevel shipLevelData;
+
+    public List<GameObject> mShips = new List<GameObject>();
+
     void Awake()
     {
         this.level=GetDifficultyLevel();
-        shipLevelData =ShipsLevelConfig.Instance.shipLevels[(int)level];
+        
+    }
+
+    private void OnEnable()
+    {
         SpawnShips();
     }
 
     private void SpawnShips()
     {
-        foreach (var s in shipLevelData.ships)
+        mShips.ForEach(sh => sh.SetActive(false));
+
+        int count = level switch
         {
-            var ship=Instantiate(s.ship,shipParent);
-            AIController aIController=ship.GetComponent<AIController>();
-            aIController.SetPath(s.start,s.end);
-        }
-        LoadingScreen.Instance.StopLoading();
+            DifficultyLevel.easy => 1,
+            DifficultyLevel.medium => 2,
+            DifficultyLevel.hard =>3
+        };
+
+        List<GameObject> ships = mShips.Take(count).ToList();
+        ships.ForEach(sh => sh.SetActive(true));
     }
 
     private DifficultyLevel GetDifficultyLevel()

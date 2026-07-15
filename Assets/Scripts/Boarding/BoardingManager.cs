@@ -186,7 +186,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         // Data.boardData.passengerData.Clear();
 
-        GameCamController.Instance.SetCam(CamType.passengerOnBoard);
+        await GameCamController.Instance.SetCam(CamType.passengerOnBoard);
 
         for (int i = 0;  i < count; i++)
         {

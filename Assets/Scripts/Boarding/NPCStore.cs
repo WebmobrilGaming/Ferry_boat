@@ -14,7 +14,14 @@ public class NPCStore : ScriptableObject
     [Header("Vehicles")]
     [SerializeField] List<Vehicle> vehicles = new List<Vehicle>();
 
-    public NPC GetRandomNPC() { return NPCs.Random();}
+    public NPC GetRandomNPC()
+    {
+        var distinctNPCs = NPCs.Distinct().ToList();
+        if (distinctNPCs.Count == 0)
+            return null;
+
+        return distinctNPCs[Random.Range(0, distinctNPCs.Count)];
+    }
 
     public Vehicle GetRandomCar() 
     {

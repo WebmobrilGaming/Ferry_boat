@@ -18,7 +18,7 @@ public class WindManager : MonoBehaviour
     [Range(0, 10f)]
     [SerializeField] private float damping = 2f;       // Lower = more momentum
 
-    [Range(0,100f)]
+    [Range(0,10f)]
     [SerializeField] private float attractionRange = 10f;
 
     private Vector3 velocity;
@@ -35,7 +35,7 @@ public class WindManager : MonoBehaviour
             DifficultyLevel.easy => 15f,
             DifficultyLevel.medium => 25f,
             DifficultyLevel.hard => 35f,
-           _ => 15f
+           _ => 5f
         };
     }
 
@@ -52,7 +52,7 @@ public class WindManager : MonoBehaviour
         Vector3 direction =  region.position - target.position;
         float distance = direction.magnitude;
 
-        attractionRange = attractionForce * 100f;
+        attractionRange = attractionRange * 100f;
 
         if (distance > attractionRange)
         {

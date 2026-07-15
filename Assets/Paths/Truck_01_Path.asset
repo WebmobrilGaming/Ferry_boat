@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Truck_01_Path
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: 1311.9202, y: -0.00002, z: -174.39098}
-  - {x: 1311.9202, y: -0.00002, z: -171.39098}
+  - {x: 548.35864, y: -0.00002, z: -1940.0643}
+  - {x: -261.2257, y: -0.00002, z: 2836.8896}
   _loop: 0
   _useCatmullRom: 1

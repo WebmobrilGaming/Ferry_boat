@@ -33,7 +33,7 @@ public class GameTimer : MonoBehaviour
 
     int timeLimit;
 
-    bool _running  = false;
+    [SerializeField] bool _running  = false;
 
     static GameTimer instance;
     public static GameTimer Instance { get { return instance; }  }

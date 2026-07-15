@@ -1,6 +1,11 @@
 using UnityEngine;
 
 using System.Collections.Generic;
+using System;
+using Unity.Cinemachine;
+using UnityEngine.Events;
+
+using Cysharp.Threading.Tasks;
 
 public class GameCamController : MonoBehaviour
 {
@@ -14,6 +19,11 @@ public class GameCamController : MonoBehaviour
     [Header("Cams")] 
     [SerializeField] List<Cam> cams = new List<Cam>();
 
+    [Space]
+    [SerializeField] CinemachineBrain brain;
+
+    bool isBlended = false;
+
     private void Awake()
     {
         if(instance == null)
@@ -22,13 +32,26 @@ public class GameCamController : MonoBehaviour
 
     private void OnEnable()
     {
-        SetCam(CamType.driver);
+       SetCam(CamType.driver);
     }
 
-    public void SetCam(CamType camType)
+    public async UniTask SetCam(CamType camType)
     {
+        isBlended = false;
+
         cams.ForEach(x => x.SetPriority(false));
         cams.Find(x => x.Type == camType).SetPriority(true);
+
+        await UniTask.WaitUntil(() => isBlended);
+    }
+
+    private void LateUpdate()
+    {
+        // Wait until blending is finished
+        if (!brain.IsBlending )
+        {
+           isBlended = true;
+        }
     }
 }
 

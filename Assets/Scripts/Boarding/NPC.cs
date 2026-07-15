@@ -6,11 +6,10 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent (typeof(Animator))]
 [RequireComponent(typeof(PathFollower))]
 public class NPC : MonoBehaviour
 {
-    Animator animator;
+    [SerializeField]Animator animator;
 
     [SerializeField] PathFollower pathFollower;
     public PathFollower Path => pathFollower;
@@ -31,7 +30,7 @@ public class NPC : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+       
     }
 
     private void OnEnable()

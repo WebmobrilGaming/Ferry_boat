@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc734eadc54077043a710cf5f5da9e09, type: 3}
+  m_Name: Ship_03
+  m_EditorClassIdentifier: Assembly-CSharp::PathData
+  _waypoints:
+  - {x: -4.9451904, y: -110, z: 3990.2717}
+  - {x: -399.6429, y: -110, z: 2125.7524}
+  _loop: 1
+  _useCatmullRom: 1
