@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
   - {x: -4.9451904, y: -110, z: 3990.2717}
-  - {x: -399.6429, y: -110, z: 2125.7524}
+  - {x: -764.7596, y: -110, z: 1874.632}
+  - {x: 1425.104, y: -110, z: 2694.114}
   _loop: 1
   _useCatmullRom: 1

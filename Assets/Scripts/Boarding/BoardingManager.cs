@@ -97,13 +97,16 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         mTime.text = obj;
     }
 
-    private void TimerEndAction()
+    private async void TimerEndAction()
     {
         mTime.text = "00:00 mins";
         GameStarted = true;
         //Act.EnableScore();
 
-        GameCamController.Instance.SetCam(CamType.driver);
+        await GameCamController.Instance.SetCam(CamType.driver);
+
+        GameTimer.Instance.Resume();
+
         //mEnginePanel.SetActive(true);
         GamePopUp.Instance.PopStat("Please Press the <color=yellow>[Space Bar]</color> to start the engine", 3.0f);
         mBargeObj.SetActive(false);
@@ -256,7 +259,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         currentboardData.vehicleDatas = new List<Vehicle>();
 
-        GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
+        await GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
 
         for (int i = 0; i < count; i++)
         {
@@ -323,7 +326,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             return;
         }
 
-        GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
+        await GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
 
         for (int i = 0; i < count; i++)
         {

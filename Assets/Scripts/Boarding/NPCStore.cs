@@ -14,13 +14,31 @@ public class NPCStore : ScriptableObject
     [Header("Vehicles")]
     [SerializeField] List<Vehicle> vehicles = new List<Vehicle>();
 
+
+    private List<NPC> _npcBag = new();
+
     public NPC GetRandomNPC()
     {
-        var distinctNPCs = NPCs.Distinct().ToList();
-        if (distinctNPCs.Count == 0)
+        if (NPCs == null || NPCs.Count == 0)
             return null;
 
-        return distinctNPCs[Random.Range(0, distinctNPCs.Count)];
+        // Refill the bag when it's empty
+        if (_npcBag.Count == 0)
+        {
+            _npcBag = new List<NPC>(NPCs);
+
+            // Shuffle the bag
+            for (int i = 0; i < _npcBag.Count; i++)
+            {
+                int randomIndex = Random.Range(i, _npcBag.Count);
+                (_npcBag[i], _npcBag[randomIndex]) = (_npcBag[randomIndex], _npcBag[i]);
+            }
+        }
+
+        NPC npc = _npcBag[0];
+        _npcBag.RemoveAt(0);
+
+        return npc;
     }
 
     public Vehicle GetRandomCar() 

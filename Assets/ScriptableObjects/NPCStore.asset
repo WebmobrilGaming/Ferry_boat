@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: NPCStore
   m_EditorClassIdentifier: Assembly-CSharp::NPCStore
   NPCs:
-  - {fileID: 3098167559866636489, guid: 517427f46807ffb4aab61081dcd9eb5e, type: 3}
-  - {fileID: 9077399412193803957, guid: cd4b8803ba550ea4d9463a7c6a09c628, type: 3}
-  - {fileID: 6516203493643181433, guid: 70a718c0928bb1b4aa3a365c437100e0, type: 3}
-  - {fileID: 4423360885005055521, guid: 42a4f14e6ab891c4b9b674c4b56049c5, type: 3}
   - {fileID: 3590306864252101928, guid: 5292c57e929042c49bd90ad60984d47d, type: 3}
   - {fileID: 3944611261650244967, guid: 7e02eea0a4d4c7644bf472675f6fcd28, type: 3}
   - {fileID: 7277675775618137434, guid: aba82288f99e9104ebd4ecd740717bb4, type: 3}
   - {fileID: 1691056357332156848, guid: 84a9dcdb292ce5d41aee2e12a77ea63b, type: 3}
   - {fileID: 6425496242457421229, guid: 49d350fdd95553341bfab2bc207a97e7, type: 3}
+  - {fileID: 8918949893211430217, guid: cd4b8803ba550ea4d9463a7c6a09c628, type: 3}
   vehicles:
   - {fileID: 4568132318079167482, guid: c5c3b5831953af246a825223520523ce, type: 3}
-  - {fileID: 744590572620175371, guid: 22c3b4e0ab8d6e640997c3eca1d951f4, type: 3}
+  - {fileID: 8416864759206754043, guid: f2eaf7d3582dc4948930c7799fc94371, type: 3}
   - {fileID: 1670913809748987769, guid: fea6c31965f39414ebb8054f1fa37181, type: 3}
   - {fileID: 5715542560020249719, guid: 403b4341b3b13c245b897592a8e29754, type: 3}

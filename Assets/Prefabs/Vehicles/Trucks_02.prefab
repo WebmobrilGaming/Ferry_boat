@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vehicle
   pathFollower: {fileID: 4305073638500741778}
-  rotationSpeed: 90
+  rotationSpeed: 50
   boardCharType: 2
-  wheelRotationMultiplier: 50
+  wheelRotationMultiplier: 25
   tyres:
   - {fileID: 6441405630749687968}
   - {fileID: 4699050233169463696}
@@ -122,6 +122,7 @@ MonoBehaviour:
   steerSensitivity: 300
   maxSteerAngle: 180
   steerSmooth: 10
+  currentSteerAngle: 0
 --- !u!1 &2028457052519337511
 GameObject:
   m_ObjectHideFlags: 0
