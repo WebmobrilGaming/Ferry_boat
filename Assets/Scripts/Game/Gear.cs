@@ -62,6 +62,7 @@ public class Gear : MonoBehaviour
         _animator.Play("GearON", 0, t);
         _animator.speed = 0f;
     }
+
     public void Thrustmaster_GearPositionChange(float normalisedValue) // Thrustmaster Gear Change
     {
         if (mStat)
