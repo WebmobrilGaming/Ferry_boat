@@ -90,6 +90,10 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     [SerializeField] private float maxTurnSpeed = 20f;
     [SerializeField] Vector3 windDirection;
     private float wheelInput;
+
+    [Space]
+    [SerializeField] GameObject mWaveSpider;
+
     private void Awake()
     {
         LoadConfig();
@@ -269,6 +273,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         mLastPosition = transform.position;
         ThresholdCheck();
         #endregion
+
+        mWaveSpider.SetActive(mCurrentSpeed > 0);
 
         #region FUEL_HANDLING
         // if (mGear.Stat && !mFuel.IsEmpty)
