@@ -5,7 +5,7 @@ using UnityEngine;
 public class PathFollower : MonoBehaviour
 {
     [Header("Path")]
-    [SerializeField] private PathData _path;
+    public PathData _path;
     
     [SerializeField] private int no_FixedWayPoints;
 

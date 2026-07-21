@@ -145,7 +145,7 @@ public class GameTimer : MonoBehaviour
         }
 
         UpdateTimerUI();
-        CheckMinutePassed();
+      //  CheckMinutePassed();
     }
 
     public void Pause() => _running = false;

@@ -168,7 +168,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
                 PassengerOffBoarding(currentboardData.passengerData, () =>
                 {
-
+                    DevDebug.Log("All passengers are off boarded !!", DebugColor.Green);
                 });
 
                 break;
@@ -410,7 +410,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     #region OFF_BOARDING
 
-    public void PassengerOffBoarding(List<NPC> nPCs, Action onComplete)
+    public async void PassengerOffBoarding(List<NPC> nPCs, Action onComplete)
     {
         if(nPCs.Count <=0)
         {
@@ -422,6 +422,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         for(int i=0;i<nPCs.Count;i++)
         {
             nPCs[i].Path.Stop();
+            nPCs[i].SetBoard(BoardType.offBoard);
 
             npcPlaces[i].passenger = nPCs[i];
             npcPlaces[i].isBooked = true;
@@ -435,8 +436,26 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         {
             NPCPlace place = npcPlaces[i];
 
-          //  place.passenger
+            place.passenger.Path.Play();
+
+            place.passenger.SetPathDuration(5);
+
+            _cts = new CancellationTokenSource();
+
+            DevDebug.Log($"Passenger:{i} unloading..", DebugColor.Cyan);
+
+            await place.passenger.WaitForPathComplete(_cts.Token);
+
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+
+              
+            //  place.passenger
         }
+
+
+        onComplete?.Invoke();
     }
 
 

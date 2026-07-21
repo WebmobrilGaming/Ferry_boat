@@ -49,7 +49,6 @@ public class NPC : MonoBehaviour
         }
 
         if(boardType == BoardType.offBoard)
-
          animator.Play("walking");
         else
          animator.Play("running");
@@ -82,7 +81,16 @@ public class NPC : MonoBehaviour
         animator.speed = Mathf.Clamp(speed / 2f, 1.5f, 1f);
     }
 
-    public void SetBoard(BoardType type) { boardType = type; }
+    public void SetBoard(BoardType type) 
+    {
+        boardType = type;
+
+        pathFollower._path = type switch 
+        {
+          BoardType.onBoard => onBoardingPath,
+          BoardType.offBoard => offBoardingPath
+        };
+    }
 
     private void ReachWayPointAction(int wayPoint)
     {
