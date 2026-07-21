@@ -321,7 +321,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             mThresholdApplied = true;
 
             //float newHealth = mHealth - mdamage;
-            Utils.ShowInGamePopup($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+            PopUp.Show($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
 
             score_System.Set(-20, Data.time);
         }

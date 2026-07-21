@@ -34,10 +34,10 @@ public class Destination : MonoBehaviour
         hasMissed = false;
 
         boatController.IsEnterDock = true;
-        Utils.ShowInGamePopup("You entered in the dock area");
+        PopUp.Show("You entered in the dock area");
         if(boatController.speedInKnots > 1)
         {
-            Utils.ShowInGamePopup($"You are crossed the Docking speed limit - > 1 mph..");
+            PopUp.Show($"You are crossed the Docking speed limit - > 1 mph..");
             boatController.score_System.Set(-20,Data.time);
         }
         DevDebug.Log("Ferry entered dock area.", DebugColor.Yellow);
@@ -82,7 +82,7 @@ public class Destination : MonoBehaviour
             hasMissed = true;
 
             DevDebug.Log("Ferry missed the dock!", DebugColor.Red);
-            Utils.ShowInGamePopup("You missed the dock");
+            PopUp.Show("You missed the dock");
 
             Score_System.Instance.Set(-20,Data.time);
         }
