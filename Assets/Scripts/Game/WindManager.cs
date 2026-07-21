@@ -32,10 +32,10 @@ public class WindManager : MonoBehaviour
     {
         attractionForce = level switch
         {
-            DifficultyLevel.easy => 8f,
-            DifficultyLevel.medium => 15f,
-            DifficultyLevel.hard => 25f,
-           _ => 8f
+            DifficultyLevel.easy => 6f,
+            DifficultyLevel.medium => 12f,
+            DifficultyLevel.hard => 20f,
+           _ => 6f
         };
     }
 

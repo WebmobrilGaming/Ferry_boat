@@ -38,6 +38,8 @@ public class GameTimer : MonoBehaviour
     static GameTimer instance;
     public static GameTimer Instance { get { return instance; }  }
 
+    public bool isDrive = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -72,6 +74,8 @@ public class GameTimer : MonoBehaviour
             DifficultyLevel.hard => hardMaxTime,
             _ => easyMaxTime
         };
+
+        isDrive = false;
     }
 
     private void OnDisable()
@@ -145,7 +149,9 @@ public class GameTimer : MonoBehaviour
         }
 
         UpdateTimerUI();
-      //  CheckMinutePassed();
+
+        if(isDrive)
+        CheckMinutePassed();
     }
 
     public void Pause() => _running = false;

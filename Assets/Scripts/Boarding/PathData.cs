@@ -69,21 +69,29 @@ public class PathData : ScriptableObject
 #endif
     }
 
-#if UNITY_EDITOR
     // Called from editor to add/remove/move waypoints at runtime
     public void SetWaypoint(int index, Vector3 position) => _waypoints[index] = position;
+
     public void AddWaypoint(Vector3 position)
     {
         System.Array.Resize(ref _waypoints, _waypoints.Length + 1);
         _waypoints[^1] = position;
+
+#if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
     }
+
     public void RemoveWaypoint(int index)
     {
         var list = new System.Collections.Generic.List<Vector3>(_waypoints);
         list.RemoveAt(index);
         _waypoints = list.ToArray();
+
+#if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
-    }
 #endif
+    }
+
 }

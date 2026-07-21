@@ -79,7 +79,7 @@ Material:
     - _QueueOffset: 0
     - _XRMotionVectorsPass: 1
     m_Colors:
-    - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.26633143, g: 0.38893402, b: 0.4245283, a: 0.95686275}
+    - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.2663314, g: 0.388934, b: 0.42452827, a: 0.92156863}
     - Color_93e06cd551a5449091bcde90b46765a0: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
     - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 70, g: 50, b: 0, a: 0}
   m_BuildTextureStacks: []

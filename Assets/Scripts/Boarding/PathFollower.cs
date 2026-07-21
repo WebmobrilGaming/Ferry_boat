@@ -218,6 +218,8 @@ public class PathFollower : MonoBehaviour
 
        // _path.AddWaypoint(target_location.position);
     }
+
+
     public void RemoveWayPoint()
     {
        // _path.RemoveWaypoint(_path.Count - 1);

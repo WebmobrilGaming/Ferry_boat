@@ -207,6 +207,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             {
                 isInitialized = true;
                 OnBoatStartEvent?.Invoke();
+
+                GameTimer.Instance.isDrive = true;
             }
 
             GearAction();
