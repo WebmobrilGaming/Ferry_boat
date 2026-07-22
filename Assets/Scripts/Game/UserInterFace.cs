@@ -51,7 +51,6 @@ public class UserInterFace : MonoBehaviour
         Time.timeScale = 0;
         GamePopUp.Instance.PopControl("Are you sure you wanna quit?", () =>
         {
-            
             Score_System.Instance.Set(Score_System.Instance.Score,Data.time, () =>
             {
                 LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);

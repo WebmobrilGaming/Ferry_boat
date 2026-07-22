@@ -56,7 +56,7 @@ public class Destination : MonoBehaviour
 
         bool fullyInside = dockBounds.Contains(boatBounds.min) && dockBounds.Contains(boatBounds.max);
 
-        bool isStopped = boatController.Speed == 0 && !boatController.IsEningeActive;
+        bool isStopped = boatController.Speed == 0 || !boatController.IsEningeActive;
 
         Vector3 boatForward = other.transform.forward;
         Vector3 dockForward = transform.forward;
@@ -66,6 +66,8 @@ public class Destination : MonoBehaviour
         DevDebug.Log($"angle difference at docking : {dot}",DebugColor.Orange);
 
         //fullyInside = dot > 0.999f;
+
+        fullyInside = true;
 
         if (fullyInside && isStopped)
         {

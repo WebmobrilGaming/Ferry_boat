@@ -29,7 +29,7 @@ public class BoatControllerUsingSteeringWheel : MonoBehaviour
         // No wheel connected
         if (Gamepad.current == null)
             return;
-        if (!boatController.isEngineStarted)
+        if (!boatController.IsEningeActive)
             return;
             
         // Read steering wheel axis

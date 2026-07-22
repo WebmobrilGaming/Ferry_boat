@@ -33,7 +33,6 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     [Header("OFFBoarding")]
     [SerializeField] BoardPlace boardPlace;
-    [SerializeField] List<NPCPlace> npcPlaces = new List<NPCPlace>();
 
     int score = 0;
     int time = 0;
@@ -112,7 +111,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         mBargeObj.SetActive(false);
         try
         {
-            this.gameObject.SetActive(false);
+           // this.gameObject.SetActive(false);
 
         }
         catch(NullReferenceException ex)
@@ -158,6 +157,10 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
 
             case BoardType.offBoard:
+
+                GameStarted = false;
+                Act.EnableUser(false);
+
                 mBargeObj.SetActive(true);
 
                 mBargeObj.transform.SetPositionAndRotation(boardPlace.offBoardBarge.position, boardPlace.offBoardBarge.rotation);
@@ -412,48 +415,47 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     public async void PassengerOffBoarding(List<NPC> nPCs, Action onComplete)
     {
-        if(nPCs.Count <=0)
+        if (nPCs.Count <= 0)
         {
             Debug.LogError("Passeingers cant be found or set");
             onComplete?.Invoke();
             return;
         }
 
-        for(int i=0;i<nPCs.Count;i++)
+        await GameCamController.Instance.SetCam(CamType.passengerOffBoard);
+
+        for (int i = 0; i < nPCs.Count; i++)
         {
             nPCs[i].Path.Stop();
             nPCs[i].SetBoard(BoardType.offBoard);
 
-            npcPlaces[i].passenger = nPCs[i];
-            npcPlaces[i].isBooked = true;
+            //npcPlaces[i].passenger = nPCs[i];
+            //npcPlaces[i].isBooked = true;
 
-            nPCs[i].transform.SetLocalPositionAndRotation(npcPlaces[i].place.position, npcPlaces[i].place.rotation);
+           // nPCs[i].transform.SetLocalPositionAndRotation(npcPlaces[i].place.position, npcPlaces[i].place.rotation);
         }
 
-        GameCamController.Instance.SetCam(CamType.passengerOffBoard);
-
-        for(int i=0;i<npcPlaces.Count;++i)
+        for (int i = 0; i < nPCs.Count; i++)
         {
-            NPCPlace place = npcPlaces[i];
+            NPC npc = nPCs[i];
 
-            place.passenger.Path.Play();
+            npc.gameObject.SetActive(true);
 
-            place.passenger.SetPathDuration(5);
+            npc.SetPathDuration(5);
+            npc.Path.Play();
 
             _cts = new CancellationTokenSource();
 
-            DevDebug.Log($"Passenger:{i} unloading..", DebugColor.Cyan);
+            DevDebug.Log($"Passenger:{i} unloading..", DebugColor.Green);
 
-            await place.passenger.WaitForPathComplete(_cts.Token);
+            await npc.WaitForPathComplete(_cts.Token);
 
             _cts?.Cancel();
             _cts?.Dispose();
             _cts = null;
 
-              
             //  place.passenger
         }
-
 
         onComplete?.Invoke();
     }

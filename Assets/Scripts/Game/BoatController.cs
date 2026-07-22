@@ -69,7 +69,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     public float currentRotation = 0f;
     private float lastHelmZ = 0f;
     private bool isFirstUpdate = true;
-    public bool isEngineStarted = false;
+    [SerializeField] bool isEngineStarted = false;
     public bool IsEningeActive => isEngineStarted;
     public bool IsInDock { get; set; }
     public bool IsEnterDock { get; set; }
