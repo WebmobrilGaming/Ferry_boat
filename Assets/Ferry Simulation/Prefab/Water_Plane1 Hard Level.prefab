@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalScale.x
-      value: 294.0793
+      value: 723.2587
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalScale.y
-      value: 421.68008
+      value: 1037.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalScale.z
-      value: 491.8929
+      value: 1209.7615
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -232.3801
+      value: 640.8556
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14
+      value: 26.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -171.8291
+      value: -1824.2832
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_LocalRotation.w
@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d62e32135ae9b28409c05ff3822f50b2, type: 2}
+      objectReference: {fileID: 2100000, guid: 09d3df63222d21e4a9ec02158c5ea29e, type: 2}
     - target: {fileID: 919132149155446097, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
       propertyPath: m_Name
       value: Water_Plane1 Hard Level
@@ -79,5 +79,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4170462670678469829}
   m_SourcePrefab: {fileID: 100100000, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
+--- !u!1 &7191720095839341117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c19e394d40c3f3c47a11e9ca6c795391, type: 3}
+  m_PrefabInstance: {fileID: 8002745367882364780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4170462670678469829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191720095839341117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
