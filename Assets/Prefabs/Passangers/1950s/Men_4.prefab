@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9988832, z: -0, w: -0.04724914}
   m_LocalPosition: {x: -7.41, y: 33.36, z: -75.034225}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4608978525528704327}
@@ -168,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 2f0ede7eddb95dd4e98ddf84388e585c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 3b02501b56a78374daa28ba44ab98c4a, type: 2}
+      objectReference: {fileID: 9100000, guid: e7f3d757d340f64439df2af56fc05b9b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

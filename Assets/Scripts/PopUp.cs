@@ -1,3 +1,4 @@
+using DebugUtils;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -31,19 +32,14 @@ public class PopUp : MonoBehaviour
         _instance.mSequence = DOTween.Sequence();
 
         _instance.mSequence.AppendCallback(()=> 
-                            { 
-                               _instance.canvasGroup.blocksRaycasts = true;
-                               _instance.canvasGroup.interactable = true;
-                                                   
+                            {                       
                                _instance.canvasGroup.DOFade(1.0f, 0.4f); 
                             })
                            .AppendCallback(() => { _instance.mMessage.text = message; })
-                           .AppendInterval(2000)
+                           .AppendInterval(2)
                            .AppendCallback(() => 
                            {
-                               _instance.canvasGroup.blocksRaycasts = false;
-                               _instance.canvasGroup.interactable = false;
-
+                               DevDebug.Log("Fade off",DebugColor.Grey);
                                _instance.canvasGroup.DOFade(0.0f, 0.4f);
                            });
     }

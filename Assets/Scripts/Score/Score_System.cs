@@ -51,7 +51,9 @@ public class Score_System : MonoBehaviour
     public void Set(int inx,float time = 0, Action onComplete = null)
     {  
         score =  score + inx;
-        // Debug.LogWarning(score);
+
+
+        Debug.LogWarning($"Score:{score}=>{inx}");
         mScore.text =  score.ToString();
         int timedata = (int)time;
         onComplete?.Invoke();

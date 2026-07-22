@@ -40,7 +40,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Female 01@Idle
+  m_Name: Male
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -76,7 +76,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 7f93ae378f8e5f3478ee356044539866, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: cee8a5437ad7ef848826561b710d10b2, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

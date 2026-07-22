@@ -2091,8 +2091,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1390012102}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1390012108
 MonoBehaviour:
@@ -2295,8 +2295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.8852997, y: -1.3164158}
-  m_SizeDelta: {x: 773.043, y: 76.779}
+  m_AnchoredPosition: {x: 1.279396, y: -1.3164158}
+  m_SizeDelta: {x: 1764.47, y: 104.773}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611350127
 MonoBehaviour:
@@ -2318,7 +2318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0a3376ebe45ef14fa5a03ff217bb66f, type: 2}
   m_sharedMaterial: {fileID: 8754460494514617403, guid: b0a3376ebe45ef14fa5a03ff217bb66f, type: 2}
@@ -2348,8 +2348,8 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -2364,7 +2364,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0

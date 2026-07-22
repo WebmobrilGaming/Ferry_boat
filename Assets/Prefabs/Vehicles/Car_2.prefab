@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a0c7296527104c74cb701a8aa6187382, type: 2}
     - target: {fileID: 919132149155446097, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
       propertyPath: m_Name
-      value: Car02
+      value: Car_2
       objectReference: {fileID: 0}
     - target: {fileID: 4679578164524227893, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -180,7 +180,7 @@ MonoBehaviour:
   tyres: []
   f1Tyre: {fileID: 4434106224393831744}
   f2Tyre: {fileID: 6802285725741698919}
-  steerSensitivity: 150
+  steerSensitivity: 250
   maxSteerAngle: 180
   steerSmooth: 10
   currentSteerAngle: 0
