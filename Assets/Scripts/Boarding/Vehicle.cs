@@ -44,7 +44,14 @@ public class Vehicle : MonoBehaviour
     private Vector3 lastPosition;
     private float lastYRotation;
 
-    BoardType boardType;
+    [SerializeField] BoardType boardType;
+
+    public BoardType BoardType => boardType;
+
+
+    [Header("Paths:")]
+    [SerializeField] PathData onBoardPath;
+    [SerializeField] PathData offBoardPath;
 
     Transform parkingArea;
 
@@ -148,8 +155,6 @@ public class Vehicle : MonoBehaviour
         //tyres[2].localRotation = Quaternion.Euler(rotation, steerAngle, 0);
     }
 
-    public void SetBoard(BoardType type) { boardType = type; }
-    
     private void OnDestroy()
     {
         pathFollower.OnPathComplete -= PathCompleteAction;
@@ -160,6 +165,18 @@ public class Vehicle : MonoBehaviour
 
         _pathCompleteTcs?.TrySetCanceled();
         _pathCompleteTcs = null;
+    }
+
+    public void SetBoard(BoardType type)
+    {
+        boardType = type;
+
+        pathFollower._path = type switch
+        {
+            BoardType.onBoard => onBoardPath,
+            BoardType.offBoard => offBoardPath,
+            _=> onBoardPath
+        };
     }
 
     private void PathCompleteAction()

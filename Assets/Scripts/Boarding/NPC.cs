@@ -125,7 +125,10 @@ public class NPC : MonoBehaviour
                     animator.CrossFadeInFixedTime("walking", 0.8f);
                 }
 
-             
+                if (wayPoint == 3)
+                {
+                    animator.CrossFadeInFixedTime("walking", 0.8f);
+                }
 
                 break;
         }

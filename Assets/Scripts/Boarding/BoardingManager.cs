@@ -2,6 +2,7 @@
 
 using Cysharp.Threading.Tasks;
 using DebugUtils;
+using Ferry.Loading;
 using FerryBoat.Actions;
 using FerryBoat.Store;
 using System;
@@ -44,6 +45,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     private CancellationTokenSource _cts;
     BoardData currentboardData;
 
+    [Header("SideCams:")]
+    [SerializeField] List<GameObject> mCamObjs = new List<GameObject>();
 
     private void Awake()
     {
@@ -148,6 +151,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                             Score_System.Instance.Set(score);
                             Act.EnableUser(true);
 
+                            currentboardData.vehicleDatas.ForEach(vehicle => vehicle.gameObject.SetActive(false));
+
                             TimerEndAction();
                         });
                     });
@@ -172,6 +177,17 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 PassengerOffBoarding(currentboardData.passengerData, () =>
                 {
                     DevDebug.Log("All passengers are off boarded !!", DebugColor.Green);
+
+                    VehicleOffBoarding(currentboardData.vehicleDatas, () =>
+                    {
+                        DevDebug.Log("All vehicles are off boarded !!", DebugColor.Green);
+
+                        Score_System.Instance.UploadFinalScore(Data.time, () =>
+                        {
+                            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+                        });
+                    });
+
                 });
 
                 break;
@@ -313,6 +329,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             //DisplayScore();
 
             currentboardData.vehicleDatas.Add(vehicle);
+           // vehicle.gameObject.SetActive(false);
 
             // vehicle_loc.RemoveWayPoint();
 
@@ -356,6 +373,10 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             //Destroy(go.gameObject, 0.2f);
             DevDebug.Log($"Truck:{i} is reached ", DebugColor.Orange);
+
+            currentboardData.vehicleDatas.Add(vehicle);
+            //vehicle.gameObject.SetActive(false);
+
 
             //score += 25;
             //DisplayScore();
@@ -426,6 +447,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         for (int i = 0; i < nPCs.Count; i++)
         {
+            GameTimer.Instance.Resume();
+
             nPCs[i].Path.Stop();
             nPCs[i].SetBoard(BoardType.offBoard);
 
@@ -454,12 +477,47 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             _cts?.Dispose();
             _cts = null;
 
+            GameTimer.Instance.Pause();
+
             //  place.passenger
         }
 
         onComplete?.Invoke();
     }
 
+    public async void VehicleOffBoarding(List<Vehicle> vehicles, Action onComplete)
+    {
+        if (vehicles.Count <= 0)
+        {
+            Debug.LogError("Vehicles cant be found or set");
+            onComplete?.Invoke();
+            return;
+        }
+
+        await GameCamController.Instance.SetCam(CamType.vehicleOffBoard);
+
+        for (int i = 0; i < vehicles.Count; ++i)
+        {
+            GameTimer.Instance.Resume();
+
+            Vehicle vehicle = vehicles[i];
+
+            vehicle.SetBoard(BoardType.offBoard);
+            vehicle.gameObject.SetActive(true);
+
+            _cts = new CancellationTokenSource();
+
+            await vehicle.WaitForPathComplete(_cts.Token);
+
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+
+            GameTimer.Instance.Pause();
+        }
+
+        onComplete?.Invoke();
+    }
 
     #endregion
 

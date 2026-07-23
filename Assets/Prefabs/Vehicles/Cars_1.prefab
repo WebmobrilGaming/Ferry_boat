@@ -638,10 +638,13 @@ MonoBehaviour:
   - {fileID: 5408542868102172385}
   f1Tyre: {fileID: 4682627324944858901}
   f2Tyre: {fileID: 2623431701585580823}
-  steerSensitivity: 100
+  steerSensitivity: 90
   maxSteerAngle: 180
   steerSmooth: 10
   currentSteerAngle: 0
+  boardType: 0
+  onBoardPath: {fileID: 11400000, guid: d6752a550a3ae0148b108edaf217da99, type: 2}
+  offBoardPath: {fileID: 11400000, guid: fbb9f3ff8157de44192950708c05e2a4, type: 2}
 --- !u!1 &7705901650787075744
 GameObject:
   m_ObjectHideFlags: 0

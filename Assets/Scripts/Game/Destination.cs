@@ -63,11 +63,11 @@ public class Destination : MonoBehaviour
 
         float dot = Vector3.Dot(boatForward.normalized, dockForward.normalized);
 
-        DevDebug.Log($"angle difference at docking : {dot}",DebugColor.Orange);
+        DevDebug.Log($"angle difference at docking : {dot} ",DebugColor.Orange);
 
-        //fullyInside = dot > 0.999f;
+        fullyInside = dot > 0.9f;
 
-        fullyInside = true;
+       // fullyInside = true;
 
         if (fullyInside && isStopped)
         {
@@ -75,7 +75,10 @@ public class Destination : MonoBehaviour
             boatController.IsInDock = true;
 
             DevDebug.Log("Boat fully inside dock!", DebugColor.Green);
+
+            Act.EnableUser?.Invoke(false);
             Act.ReachedDestination?.Invoke();
+
             return;
         }
 

@@ -80,6 +80,9 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     bool mThresholdApplied;
     public static event Action OnBoatStartEvent;
     private bool isInitialized = false;
+
+    bool isPlay = false;
+   
     private WaveMotion waveMotion;
     [Header("Steering")]
     [SerializeField] private float steeringSensitivity = 120f;
@@ -167,12 +170,8 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
         mLastPosition = transform.position;
         waveMotion.SetLevel(difficultyLevel);
-    }
 
-    private void StopEngine()
-    {
-        isEngineStarted = false;
-        //mFuel.currentFuel = 0;
+        Act.EnableUser += EnableUserAction;
     }
 
     private void OnDisable()
@@ -181,14 +180,21 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         Act.HitAction -= HitAction;
         UserInterFace.StopEngineEvent -= StopEngine;
         mIndicator.DisableKeyword("_EMISSION");
+
+        Act.EnableUser -= EnableUserAction;
+    }
+
+    private void EnableUserAction(bool obj) { isPlay = obj; }
+
+    private void StopEngine()
+    {
+        isEngineStarted = false;
     }
 
     private void Update()
     {
+        if (!isPlay) return;
 
-
-        // if (mFuel.FuelPercent < 0.1f)
-        //     return;
         if (Is_KeyboardEnabled)
         {
             if (Keyboard.current.leftArrowKey.isPressed && mGear.Stat)

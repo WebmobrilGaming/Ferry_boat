@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc734eadc54077043a710cf5f5da9e09, type: 3}
-  m_Name: Female 02_Path(OFFBoard)
+  m_Name: Car01_Path(OFFBoard)
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: -1465.1733, y: 33.908195, z: 45.74555}
-  - {x: -1471.5651, y: 33.426693, z: 49.869038}
-  - {x: -1494.7578, y: 33.764965, z: 46.074505}
-  - {x: -1521.8607, y: 33.76497, z: 85.532364}
+  - {x: -1468.1459, y: 41.52539, z: -234.1482}
+  - {x: -1506.6743, y: 41.52539, z: -436.27728}
   _loop: 0
   _useCatmullRom: 1

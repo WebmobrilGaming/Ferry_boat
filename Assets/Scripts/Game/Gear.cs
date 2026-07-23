@@ -28,6 +28,8 @@ public class Gear : MonoBehaviour
 
         Act.SpeedChange += SpeedChange;
         Act.SpeedInit += RangeSet;
+
+        _animator.Play("GearOFF");
     }
 
     private void RangeSet(float val)

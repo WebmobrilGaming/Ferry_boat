@@ -180,10 +180,13 @@ MonoBehaviour:
   tyres: []
   f1Tyre: {fileID: 4434106224393831744}
   f2Tyre: {fileID: 6802285725741698919}
-  steerSensitivity: 250
+  steerSensitivity: 90
   maxSteerAngle: 180
   steerSmooth: 10
   currentSteerAngle: 0
+  boardType: 0
+  onBoardPath: {fileID: 11400000, guid: d6752a550a3ae0148b108edaf217da99, type: 2}
+  offBoardPath: {fileID: 11400000, guid: fbb9f3ff8157de44192950708c05e2a4, type: 2}
 --- !u!4 &6802285725741698919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 632005837747300614, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
