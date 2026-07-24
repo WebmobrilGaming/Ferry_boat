@@ -140,9 +140,10 @@ public class UserInterFace : MonoBehaviour
             crashSoundPlayed = true;
             AudioManager.Instance.PlaySFX(AudioState.crash);
         }
-        
 
         StopEngineEvent?.Invoke();
+        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+
     }
     private void EndPointReached()
     {
@@ -169,7 +170,7 @@ public class UserInterFace : MonoBehaviour
     {
         StopEngineEvent?.Invoke();
         //GamePopUp.Instance.FinalPopUp("Destination Reached");
-        PopUp.Show("Destination Reached");
+        Act.ShowWarn?.Invoke("Destination Reached");
 
         StartCoroutine(ReachedDestinationDock());
     }

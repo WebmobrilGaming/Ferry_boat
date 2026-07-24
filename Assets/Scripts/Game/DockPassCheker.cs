@@ -18,7 +18,7 @@ public class DockPassCheker : MonoBehaviour
         if(other.gameObject == ferryBoat)
         {
             passedStartingDock = true;
-            PopUp.Show("You Are Leaving the Starting Dock, Safe Journey!!");
+            Act.ShowWarn?.Invoke("You Are Leaving the Starting Dock, Safe Journey!!");
             Debug.LogWarning("starting dock Passed");
         }
     }

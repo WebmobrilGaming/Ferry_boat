@@ -581,7 +581,7 @@ MonoBehaviour:
   - {fileID: 5643539782383881394}
   f1Tyre: {fileID: 3274274569386437422}
   f2Tyre: {fileID: 6970950539299450177}
-  steerSensitivity: 90
+  steerSensitivity: 100
   maxSteerAngle: 180
   steerSmooth: 10
   currentSteerAngle: 0

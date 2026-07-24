@@ -22,6 +22,9 @@ public class GamePopUp : MonoBehaviour
     [SerializeField] TMP_Text mYesNoText;
     [SerializeField] Button yesBtn;
     [SerializeField] Button noBtn;
+
+    [SerializeField] GameObject panel;
+    [SerializeField] TMP_Text mWarn;
      
 
     bool isPanel = false;
@@ -45,6 +48,24 @@ public class GamePopUp : MonoBehaviour
     public void PopStat(string message,float delay,Action onComplete = null)
     {
         Pop(delay, message);
+    }
+
+    public void Warn(string message)
+    {
+        if (panel == null)
+            return;
+
+        panel.SetActive(true);
+        mWarn.text = message;
+
+       // WarnAction(2.0f);
+    }
+
+    async UniTask WarnAction(float delay)
+    {
+        await UniTask.Delay((int)delay * 1000);
+
+        panel.SetActive(false);
     }
 
     async UniTask Pop(float delay ,string message, Action onComplete = null)
@@ -76,11 +97,10 @@ public class GamePopUp : MonoBehaviour
 
         yesBtn?.onClick.AddListener(() =>
         {
-            yesBtn.interactable = false;
+            panelYesNo.gameObject.SetActive(false);
+
             Time.timeScale=1;
 
-
-            panelYesNo.gameObject.SetActive(false);
             yesAct?.Invoke();
         });
 

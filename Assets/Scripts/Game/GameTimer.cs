@@ -146,7 +146,7 @@ public class GameTimer : MonoBehaviour
             if (!isTimeOut)
             {
                 isTimeOut = true;
-                PopUp.Show("Opps...! Time out");
+                Act.ShowWarn?.Invoke("Opps...! Time out");
             }
         }
 

@@ -130,6 +130,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             case BoardType.onBoard:
 
                 currentboardData = new BoardData();
+                currentboardData.vehicleDatas = new List<Vehicle>();
 
                 Data.passengerCount = passengerCount;
                 Data.carCount = carCount;
@@ -280,7 +281,6 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             return;
         }
 
-        currentboardData.vehicleDatas = new List<Vehicle>();
 
         await GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
 

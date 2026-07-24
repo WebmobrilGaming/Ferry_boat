@@ -1,53 +1,52 @@
 using TMPro;
 using UnityEngine;
-
 using DG.Tweening;
 using System;
 
 [RequireComponent(typeof(TMP_Text))]
 public class TextAnimator : MonoBehaviour
 {
-    TMP_Text mtext;
+    private TMP_Text mtext;
+    private RectTransform rectTransform;
 
-   [SerializeField] Color initC;
-   [SerializeField]Vector3 initPos;
+    [SerializeField] private Color initC;
+    [SerializeField] private Vector2 initPos;
 
     private void Awake()
     {
         mtext = GetComponent<TMP_Text>();
+        rectTransform = GetComponent<RectTransform>();
 
         initC = mtext.color;
+        initPos = rectTransform.anchoredPosition;
     }
 
     public void ResetAction()
     {
-        mtext.transform.position = initPos;
+        rectTransform.anchoredPosition = initPos;
         mtext.color = initC;
     }
 
-    public void Animate(string  text ,Color color,Action onComplete)
+    public void Animate(string text, Color color, Action onComplete)
     {
-        Color c = mtext.color;
-
         mtext.text = text;
-        mtext.color = color;
+
+        // Start from initial state
+        rectTransform.anchoredPosition = initPos;
+        mtext.color = new Color(color.r, color.g, color.b, 0f);
 
         Sequence sequence = DOTween.Sequence();
-      
-        Vector3 pos = mtext.transform.position;
 
-
-        mtext.transform.position = pos;
-        mtext.color = c;
-
-        sequence.Append(mtext.DOColor(new Color(c.r, c.g, c.b, 1f), 1.0f))
-                .Join(mtext.transform.DOMove(new Vector3(pos.x, pos.y + 20f, pos.z), 1.0f))
-                .Append(mtext.DOColor(new Color(c.r, c.g, c.b, 0f), 0.5f))
+        sequence.Append(
+                    mtext.DOColor(new Color(color.r, color.g, color.b, 1f), 1f))
+                .Join(
+                    rectTransform.DOAnchorPos(initPos + Vector2.up * 20f, 1f))
+                .Append(
+                    mtext.DOColor(new Color(color.r, color.g, color.b, 0f), 0.5f))
                 .OnComplete(() =>
                 {
-                    mtext.transform.position = pos;
-                    mtext.color = c;
-
+                    rectTransform.anchoredPosition = initPos;
+                    mtext.color = initC;
                     onComplete?.Invoke();
                 });
     }

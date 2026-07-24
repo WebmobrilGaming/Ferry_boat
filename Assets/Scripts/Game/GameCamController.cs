@@ -50,7 +50,24 @@ public class GameCamController : MonoBehaviour
 
     public void EnableSecondCams(bool enable)
     {
-        secondCams.ForEach(cam => cam.enabled = enable);
+        secondCams.ForEach(cam =>
+        {
+            if (enable)
+            {
+                cam.enabled = true;
+                // Restore these if needed
+                cam.clearFlags = CameraClearFlags.Skybox; // or your original value
+                cam.cullingMask = ~0; // Render all layers
+            }
+            else
+            {
+                cam.enabled = true; // Keep camera active so it renders black
+                cam.clearFlags = CameraClearFlags.SolidColor;
+                cam.backgroundColor = Color.black;
+                cam.cullingMask = 0; // Render nothing
+            }
+        });
+
     }
 
     private void LateUpdate()

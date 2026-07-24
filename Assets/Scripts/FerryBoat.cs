@@ -21,6 +21,8 @@ namespace  FerryBoat
             public static Action OffBoardAction;
 
             public static Action<bool> EnableUser;
+
+            public static Action<string> ShowWarn;
         }
     }
 

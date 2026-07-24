@@ -55,12 +55,12 @@ public class WindManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Wind ON");
+       // Debug.Log("Wind ON");
 
         Vector3 direction = region.position - target.position;
         float distance = direction.magnitude;
 
-        Debug.Log($"Distance: {distance}");
+       // Debug.Log($"Distance: {distance}");
 
         attractionRange = attractionRange * 1000f;
 
@@ -70,7 +70,7 @@ public class WindManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Inside Range >>> FORCE: {attractionForce}");
+       // Debug.Log($"Inside Range >>> FORCE: {attractionForce}");
 
         target.position = Vector3.MoveTowards(
                                     target.position,

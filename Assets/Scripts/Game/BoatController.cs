@@ -1,3 +1,4 @@
+using DebugUtils;
 using DG.Tweening;
 using Ferry.Config;
 using Ferry.Motion;
@@ -120,6 +121,7 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     private void OnEnable()
     {
+
         helmController.callback = this;
         windDirection = Vector3.right;  // wind direction 
         mGear.callback = this;
@@ -327,7 +329,12 @@ public class BoatController : MonoBehaviour, IHelem, IGear
             mThresholdApplied = true;
 
             //float newHealth = mHealth - mdamage;
-            PopUp.Show($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+
+            Debug.LogError("Speed under control !!!");
+
+
+            Act.ShowWarn?.Invoke($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+           // PopUp.Instance.Show($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
 
             score_System.Set(-20, Data.time);
         }
