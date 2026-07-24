@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 public class GamePopUp : MonoBehaviour
 {
@@ -39,10 +40,14 @@ public class GamePopUp : MonoBehaviour
         yesBtn.interactable = true;
         noBtn.interactable = true;
     }
-    public void FinalPopUp(string message)
+    public async Task FinalPopUp(string message, Action onComplete = null)
     {
         panelFinal.SetActive(true);
         mFinalText.text = message;
+
+        await ClosePop();
+
+        onComplete?.Invoke();
     }
 
     public void PopStat(string message,float delay,Action onComplete = null)
@@ -52,7 +57,7 @@ public class GamePopUp : MonoBehaviour
 
     public void Warn(string message)
     {
-        if (panel == null)
+        if(panel == null)
             return;
 
         panel.SetActive(true);
@@ -111,6 +116,12 @@ public class GamePopUp : MonoBehaviour
             Time.timeScale = 1;
             noAct?.Invoke();
         });
+    }
+
+    async UniTask ClosePop()
+    {
+        await UniTask.Delay((int)2 * 1000);
+        panelFinal.SetActive(false);
     }
 
     public void ClosePanel()

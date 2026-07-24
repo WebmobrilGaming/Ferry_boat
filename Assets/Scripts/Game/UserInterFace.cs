@@ -132,9 +132,8 @@ public class UserInterFace : MonoBehaviour
     }
     private void BoatDestroyed()
     {
-        GamePopUp.Instance.FinalPopUp("Boat destroyed !!");
-        int SfxOn = PlayerPrefs.GetInt(GamePrefs.isSFXOn,1);
-       
+        int SfxOn = PlayerPrefs.GetInt(GamePrefs.isSFXOn, 1);
+
         if (SfxOn == 1 && crashSoundPlayed == false)
         {
             crashSoundPlayed = true;
@@ -142,9 +141,13 @@ public class UserInterFace : MonoBehaviour
         }
 
         StopEngineEvent?.Invoke();
-        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
 
+        GamePopUp.Instance.FinalPopUp("Boat destroyed !!", () =>
+        {
+            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+        });
     }
+
     private void EndPointReached()
     {
         GamePopUp.Instance.FinalPopUp("EndPoint Reached");

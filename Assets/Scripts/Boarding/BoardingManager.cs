@@ -550,7 +550,6 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         GamePopUp.Instance.FinalPopUp("Warning \n You have crossed the 2 min limit");
         yield return new WaitForSecondsRealtime(5f);
         GamePopUp.Instance.ClosePanel();
-
     }
 
     private void OnDestroy()
