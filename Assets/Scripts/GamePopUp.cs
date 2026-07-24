@@ -78,6 +78,9 @@ public class GamePopUp : MonoBehaviour
         {
             yesBtn.interactable = false;
             Time.timeScale=1;
+
+
+            panelYesNo.gameObject.SetActive(false);
             yesAct?.Invoke();
         });
 

@@ -34,6 +34,8 @@ public class BoardingCal : MonoBehaviour
         UpdateText(count);
         mPlusBtn?.onClick.AddListener(() =>
         {
+            textAnimator.ResetAction();
+
             mPlusBtn.interactable = false;
 
             count++;
@@ -56,6 +58,8 @@ public class BoardingCal : MonoBehaviour
 
         mMinusBtn?.onClick.AddListener(() =>
         {
+            textAnimator.ResetAction();
+
             mMinusBtn.interactable = false;
             count--;
             if(maximumBoardTimeReached == true)
@@ -78,6 +82,7 @@ public class BoardingCal : MonoBehaviour
                 }
                 
             });
+
             callback?.UpdateBoarding(boardCharType, false);
             
         });

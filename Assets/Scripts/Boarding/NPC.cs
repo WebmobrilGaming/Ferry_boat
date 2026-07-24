@@ -44,7 +44,7 @@ public class NPC : MonoBehaviour
         switch(boardType)
         {
             case BoardType.onBoard:
-                animator.Play("walking");
+                animator.Play("running");
                 break;
         }
 

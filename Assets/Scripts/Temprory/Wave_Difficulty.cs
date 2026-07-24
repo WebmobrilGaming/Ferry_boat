@@ -18,7 +18,6 @@ public class Wave_Difficulty : MonoBehaviour
     public string currentdifficulty;
 
     [Header("Enivorment Settings:")]
-    [SerializeField] WeatherManager weatherManager;
     [SerializeField] WindManager windManager;
    
 

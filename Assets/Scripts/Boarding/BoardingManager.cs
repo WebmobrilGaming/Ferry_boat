@@ -151,6 +151,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                             Score_System.Instance.Set(score);
                             Act.EnableUser(true);
 
+                            GameCamController.Instance.EnableSecondCams(true);
+
                             currentboardData.vehicleDatas.ForEach(vehicle => vehicle.gameObject.SetActive(false));
 
                             TimerEndAction();
@@ -162,6 +164,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
 
             case BoardType.offBoard:
+
+                GameCamController.Instance.EnableSecondCams(false);
 
                 GameStarted = false;
                 Act.EnableUser(false);
@@ -460,6 +464,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         for (int i = 0; i < nPCs.Count; i++)
         {
+            GameTimer.Instance.Resume();
+
             NPC npc = nPCs[i];
 
             npc.gameObject.SetActive(true);
@@ -472,6 +478,10 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             DevDebug.Log($"Passenger:{i} unloading..", DebugColor.Green);
 
             await npc.WaitForPathComplete(_cts.Token);
+
+            int val = 2;
+
+            Score_System.Instance.Set(val, Data.time);
 
             _cts?.Cancel();
             _cts?.Dispose();
@@ -502,8 +512,11 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             Vehicle vehicle = vehicles[i];
 
+            vehicle.Path.Stop();
             vehicle.SetBoard(BoardType.offBoard);
             vehicle.gameObject.SetActive(true);
+
+            vehicle.Path.Play();
 
             _cts = new CancellationTokenSource();
 
@@ -512,6 +525,15 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             _cts?.Cancel();
             _cts?.Dispose();
             _cts = null;
+
+            int val = vehicle.Type switch
+            { 
+                BoardCharType.passenger => 2,
+                BoardCharType.car => 10,
+                BoardCharType.truck => 25
+             };
+
+            Score_System.Instance.Set(val, Data.time);
 
             GameTimer.Instance.Pause();
         }

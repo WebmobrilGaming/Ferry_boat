@@ -18,7 +18,7 @@ public class WindManager : MonoBehaviour
     [Range(0, 10f)]
     [SerializeField] private float damping = 2f;       // Lower = more momentum
 
-    [Range(0,10f)]
+    [Range(0,100f)]
     [SerializeField] private float attractionRange = 10f;
 
     private Vector3 velocity;
@@ -43,38 +43,39 @@ public class WindManager : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.LogError("[WIND] target is null !!");
+            Debug.LogError("Target is NULL");
             return;
         }
 
-        if (!isON) return;
+        Debug.Log("Target OK");
 
-        Vector3 direction =  region.position - target.position;
+        if (!isON)
+        {
+            Debug.Log("Wind OFF");
+            return;
+        }
+
+        Debug.Log("Wind ON");
+
+        Vector3 direction = region.position - target.position;
         float distance = direction.magnitude;
 
-        attractionRange = attractionRange * 100f;
+        Debug.Log($"Distance: {distance}");
+
+        attractionRange = attractionRange * 1000f;
 
         if (distance > attractionRange)
         {
-            Debug.LogError("[WIND] out of range");
+            Debug.Log("Out of Range");
             return;
         }
 
-        // Simulate force
-        Vector3 acceleration = direction.normalized * attractionForce;
+        Debug.Log($"Inside Range >>> FORCE: {attractionForce}");
 
-        // Apply acceleration
-        velocity += acceleration * Time.deltaTime;
-
-        // Clamp max speed
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-
-        // Apply damping (friction)
-        velocity *= Mathf.Exp(-damping * Time.deltaTime);
-
-        Vector3 newPosition = target.position + velocity * Time.deltaTime;
-        newPosition.y = target.position.y;
-
-        target.position = newPosition;
+        target.position = Vector3.MoveTowards(
+                                    target.position,
+                                    region.position,
+                                    attractionForce * Time.deltaTime
+                                             );
     }
 }

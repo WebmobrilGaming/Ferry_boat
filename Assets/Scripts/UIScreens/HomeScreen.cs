@@ -55,7 +55,7 @@ namespace Ferry.Screens
 
         private void Logout()
         {
-            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to Logout", () =>
+            GamePopUp.Instance.PopControl("Are you sure you want to Logout", () =>
             {
                 PlayerPrefs.DeleteAll();
                 SwitchScreen(ScreenType.Login);
@@ -63,7 +63,7 @@ namespace Ferry.Screens
         }
         private void ExitGame()
         {
-            Utils.ShowYesNoPopup("Warning!", "Are you sure you want to Exit to Desktop", () =>
+            GamePopUp.Instance.PopControl("Are you sure you want to Exit to Desktop", () =>
             {
                 Application.Quit();
             }, null);

@@ -1,4 +1,6 @@
 using DG.Tweening;
+using FerryBoat.Actions;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,6 +20,19 @@ public class HelmController : MonoBehaviour
     [SerializeField] bool isRotate = false;
 
     public IHelem callback;
+
+    private void OnEnable()
+    {
+        Act.EnableUser += EnableRoatation;
+    }
+
+    private void EnableRoatation(bool enable)
+    {
+        if (enable)
+            return;
+
+        StopRotation();
+    }
 
     public void Direct (HelmDirection direction)
     {

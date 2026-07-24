@@ -22,6 +22,9 @@ public class GameCamController : MonoBehaviour
     [Space]
     [SerializeField] CinemachineBrain brain;
 
+    [Header("SecondCams:")]
+    [SerializeField] List<Camera> secondCams = new List<Camera>();
+
     bool isBlended = false;
 
     private void Awake()
@@ -43,6 +46,11 @@ public class GameCamController : MonoBehaviour
         cams.Find(x => x.Type == camType).SetPriority(true);
 
         await UniTask.WaitUntil(() => isBlended);
+    }
+
+    public void EnableSecondCams(bool enable)
+    {
+        secondCams.ForEach(cam => cam.enabled = enable);
     }
 
     private void LateUpdate()

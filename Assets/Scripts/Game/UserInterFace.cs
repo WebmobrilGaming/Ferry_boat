@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using TMPro;
+using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -51,6 +52,8 @@ public class UserInterFace : MonoBehaviour
         Time.timeScale = 0;
         GamePopUp.Instance.PopControl("Are you sure you wanna quit?", () =>
         {
+            GameCamController.Instance.EnableSecondCams(false);
+
             Score_System.Instance.Set(Score_System.Instance.Score,Data.time, () =>
             {
                 LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
@@ -165,7 +168,9 @@ public class UserInterFace : MonoBehaviour
     private void LevelFinish()
     {
         StopEngineEvent?.Invoke();
-        GamePopUp.Instance.FinalPopUp("Destination Reached");
+        //GamePopUp.Instance.FinalPopUp("Destination Reached");
+        PopUp.Show("Destination Reached");
+
         StartCoroutine(ReachedDestinationDock());
     }
 

@@ -28,7 +28,7 @@ public class GameTimer : MonoBehaviour
     private int maxTime;
     private bool isTimeOut = false;
     private bool IsInitialized = false;
-    private bool isLevelFinished=false;
+    [SerializeField] private bool isLevelFinished=false;
     private bool timerAlreadyStarted;
 
     int timeLimit;
@@ -105,7 +105,9 @@ public class GameTimer : MonoBehaviour
 
     private void LevelFinish()
     {
-        isLevelFinished=true;
+       // isLevelFinished=true;
+
+        isDrive = false;
     }
 
     public void EnableTime()

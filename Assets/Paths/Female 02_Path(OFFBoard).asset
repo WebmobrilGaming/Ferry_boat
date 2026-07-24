@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Female 02_Path(OFFBoard)
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: -1465.1733, y: 33.908195, z: 45.74555}
-  - {x: -1471.5651, y: 33.426693, z: 49.869038}
-  - {x: -1494.7578, y: 33.764965, z: 46.074505}
-  - {x: -1521.8607, y: 33.76497, z: 85.532364}
+  - {x: -1475, y: 33.5, z: 46}
+  - {x: -1528, y: 33.5, z: 43}
   _loop: 0
   _useCatmullRom: 1
