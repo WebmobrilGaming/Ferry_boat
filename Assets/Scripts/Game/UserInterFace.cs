@@ -175,19 +175,19 @@ public class UserInterFace : MonoBehaviour
         //GamePopUp.Instance.FinalPopUp("Destination Reached");
         Act.ShowWarn?.Invoke("Destination Reached");
 
-        StartCoroutine(ReachedDestinationDock());
-    }
-
-    IEnumerator ReachedDestinationDock()
-    {
-        yield return new WaitForSecondsRealtime(5f);
-        //Score_System.Instance.UploadFinalScore( Data.time, () =>
-        //    {
-        //        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
-        //    });
-
         Act.OffBoardAction?.Invoke();
     }
+
+    //IEnumerator ReachedDestinationDock()
+    //{
+    //    yield return new w(5f);
+    //    //Score_System.Instance.UploadFinalScore( Data.time, () =>
+    //    //    {
+    //    //        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+    //    //    });
+
+       
+    //}
 
     public void SetRange(float range)
     {

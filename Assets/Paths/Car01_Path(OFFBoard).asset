@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Car01_Path(OFFBoard)
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: -1468.1459, y: 40, z: -173.1482}
-  - {x: -1497.6743, y: 40, z: -377.27728}
+  - {x: -1468.1459, y: 39.5, z: -173.1482}
+  - {x: -1497.6743, y: 39.5, z: -377.27728}
   _loop: 0
   _useCatmullRom: 1

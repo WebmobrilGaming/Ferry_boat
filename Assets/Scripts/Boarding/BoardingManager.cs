@@ -166,6 +166,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             case BoardType.offBoard:
 
+                Time.timeScale = 1.0f;
                 GameCamController.Instance.EnableSecondCams(false);
 
                 GameStarted = false;
@@ -176,8 +177,12 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 mBargeObj.transform.SetPositionAndRotation(boardPlace.offBoardBarge.position, boardPlace.offBoardBarge.rotation);
                 mBargeObj.transform.localScale = boardPlace.offBoardBarge.transform.localScale;
 
-                boardPlace.boatObj.transform.SetLocalPositionAndRotation(boardPlace.offBoat.position, boardPlace.offBoat.rotation);
-                boardPlace.boatObj.localScale = boardPlace.offBoat.transform.localScale;
+                //boardPlace.boatObj.transform.position = boardPlace.offBoat.position;
+                //boardPlace.boatObj.transform.rotation = boardPlace.offBoat.rotation;
+                //boardPlace.boatObj.localScale = boardPlace.offBoat.transform.localScale;
+
+                boardPlace.boatObj.SetActive(false);
+                boardPlace.boatObjOFF.SetActive(true);
 
                 PassengerOffBoarding(currentboardData.passengerData, () =>
                 {
@@ -213,7 +218,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         // Data.boardData.passengerData.Clear();
 
-        await GameCamController.Instance.SetCam(CamType.passengerOnBoard);
+       GameCamController.Instance.SetCam(CamType.passengerOnBoard);
 
         for (int i = 0;  i < count; i++)
         {
@@ -282,7 +287,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         }
 
 
-        await GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
+       GameCamController.Instance.SetCam(CamType.vehicleOnBoard);
 
         for (int i = 0; i < count; i++)
         {
@@ -440,7 +445,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     public async void PassengerOffBoarding(List<NPC> nPCs, Action onComplete)
     {
-        if (nPCs.Count <= 0)
+        if ( nPCs == null || nPCs.Count <=0)
         {
             Debug.LogError("Passeingers cant be found or set");
             onComplete?.Invoke();
@@ -497,7 +502,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     public async void VehicleOffBoarding(List<Vehicle> vehicles, Action onComplete)
     {
-        if (vehicles.Count <= 0)
+        if (vehicles == null || vehicles.Count <= 0)
         {
             Debug.LogError("Vehicles cant be found or set");
             onComplete?.Invoke();
@@ -573,7 +578,8 @@ public class BoardPlace
     public Transform offBoardBarge;
 
     [Space]
-    public Transform boatObj;
+    public GameObject boatObj;
+    public GameObject boatObjOFF;
 
     public Transform onBoat;
     public Transform offBoat;

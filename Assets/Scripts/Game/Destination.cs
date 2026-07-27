@@ -80,6 +80,8 @@ public class Destination : MonoBehaviour
             Act.EnableUser?.Invoke(false);
             Act.ReachedDestination?.Invoke();
 
+            Act.OffBoardAction?.Invoke();
+
             return;
         }
 
