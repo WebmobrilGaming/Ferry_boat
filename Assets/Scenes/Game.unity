@@ -24325,7 +24325,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _flattenY: 0
-  _orientToPath: 1
+  _orientToPath: 0
   _rotationSpeed: 10
 --- !u!4 &1864828876
 Transform:
@@ -24335,8 +24335,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864828873}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1147, y: -107, z: -1934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1238, y: -107, z: -2949}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -24344,7 +24344,7 @@ Transform:
   - {fileID: 576029846}
   - {fileID: 1273888946}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897578606
 GameObject:
   m_ObjectHideFlags: 0
@@ -24852,7 +24852,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _flattenY: 0
-  _orientToPath: 1
+  _orientToPath: 0
   _rotationSpeed: 10
 --- !u!1 &1936687423
 GameObject:
@@ -34855,7 +34855,7 @@ Transform:
   m_GameObject: {fileID: 6065957413454100944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59, y: -0.000037214457, z: 4262}
+  m_LocalPosition: {x: 59, y: -0.000037214457, z: 1433}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -37237,8 +37237,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6925610373848589837}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 550, y: -61, z: -1934}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
+  m_LocalPosition: {x: 550, y: -61, z: -2447}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -37246,7 +37246,7 @@ Transform:
   - {fileID: 4587448467530858962}
   - {fileID: 187446150}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!224 &6522097370726106505
 RectTransform:
   m_ObjectHideFlags: 0
