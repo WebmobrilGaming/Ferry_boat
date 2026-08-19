@@ -330,13 +330,13 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
             //float newHealth = mHealth - mdamage;
 
-            Debug.LogError("Speed under control !!!");
+            //Debug.LogError("Speed under control !!!");
 
 
-            Act.ShowWarn?.Invoke($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
+           // Act.ShowWarn?.Invoke($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
            // PopUp.Instance.Show($"You are crossing the speed limit, It will deduct your points..! Keep it under {thresholdSpeed}/mph");
 
-            score_System.Set(-20, Data.time);
+            //score_System.Set(-20, Data.time);
         }
             
         

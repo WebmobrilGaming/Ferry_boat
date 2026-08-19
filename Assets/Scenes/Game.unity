@@ -2063,8 +2063,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110854424}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13525999, y: -0.06149815, z: 0.026394777, w: 0.98854744}
-  m_LocalPosition: {x: 922.2682, y: 53.1, z: -163.18423}
+  m_LocalRotation: {x: 0.10594458, y: 0.5791131, z: -0.07624155, w: 0.8047304}
+  m_LocalPosition: {x: -1542.1184, y: 63.863705, z: -318.47055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14864,7 +14864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6500967143172430198, guid: 7772900b6542cb44e982274f87b6503b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6500967143172430198, guid: 7772900b6542cb44e982274f87b6503b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -14872,7 +14872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6500967143172430198, guid: 7772900b6542cb44e982274f87b6503b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6500967143172430198, guid: 7772900b6542cb44e982274f87b6503b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -14884,7 +14884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6500967143172430198, guid: 7772900b6542cb44e982274f87b6503b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6500967143172430198, guid: 7772900b6542cb44e982274f87b6503b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -24778,7 +24778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: a8dfdd0f40f244e498b51b8f09fc0bd6, type: 2}
   no_FixedWayPoints: 0
-  _speed: 1
+  _speed: 450
   _playOnAwake: 1
   _targetDuration: 300
   _easingCurve:
@@ -25307,7 +25307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: ce82488b684b5fa44887d82330243dbb, type: 2}
   no_FixedWayPoints: 0
-  _speed: 5
+  _speed: 450
   _playOnAwake: 1
   _targetDuration: 250
   _easingCurve:
@@ -28929,7 +28929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &380696805326639139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36975,7 +36975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: ca9e9e4209012de489064a1f99515afd, type: 2}
   no_FixedWayPoints: 0
-  _speed: 1
+  _speed: 450
   _playOnAwake: 1
   _targetDuration: 300
   _easingCurve:
