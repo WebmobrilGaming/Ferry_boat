@@ -401,7 +401,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         {
             BoardCharType.passenger => onBoard? score + 2 : score -2,
             BoardCharType.car => onBoard? score + 10 : score -10,
-            BoardCharType.truck => onBoard ? score + 25 : score - 25
+            BoardCharType.truck => onBoard ? score + 20 : score - 20
         };
 
         time = boardCharType switch

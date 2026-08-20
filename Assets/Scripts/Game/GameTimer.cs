@@ -27,6 +27,7 @@ public class GameTimer : MonoBehaviour
     public int hardMaxTime;
     private int maxTime;
     private bool isTimeOut = false;
+    public bool IsTimeOut => isTimeOut;
     private bool IsInitialized = false;
     [SerializeField] private bool isLevelFinished=false;
     private bool timerAlreadyStarted;
@@ -39,6 +40,9 @@ public class GameTimer : MonoBehaviour
     public static GameTimer Instance { get { return instance; }  }
 
     public bool isDrive = false;
+
+    private float timeoutElapsed;
+    private int lastCheckedSecond;
 
     private void Awake()
     {
@@ -132,28 +136,48 @@ public class GameTimer : MonoBehaviour
     private void Update()
     {
         if (!IsInitialized && !enableScore) return;
-
         if (isLevelFinished) return;
-
-        if(!_running) return;
+        if (!_running) return;
 
         timer -= Time.deltaTime;
-        timer = Mathf.Clamp(timer,0,660);
+        timer = Mathf.Clamp(timer, 0, 660);
         Data.time = timer;
 
-        if (timer <=0 )
+        if (timer <= 0)
         {
             if (!isTimeOut)
             {
                 isTimeOut = true;
-                Act.ShowWarn?.Invoke("Opps...! Time out");
+                timeoutElapsed = 0f;
+                lastCheckedSecond = 0;
+
+                Act.ShowWarn?.Invoke("Oops...! Time out");
+            }
+
+            timeoutElapsed += Time.deltaTime;
+
+            int currentSecond = Mathf.FloorToInt(timeoutElapsed);
+
+            if (currentSecond > lastCheckedSecond)
+            {
+                lastCheckedSecond = currentSecond;
+
+                Debug.Log($"Timeout: {currentSecond} seconds");
+
+                // Your code here
+                CheckSomethingAfterTimeout();
             }
         }
 
         UpdateTimerUI();
 
-        if(isDrive)
-        CheckMinutePassed();
+        if (isDrive)
+            CheckMinutePassed();
+    }
+
+    void CheckSomethingAfterTimeout()
+    {
+        Score_System.Instance.Set(-20, Data.time);
     }
 
     public void Pause() => _running = false;

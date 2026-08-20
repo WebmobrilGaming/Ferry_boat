@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Ship_01
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: 643, y: -100, z: 6719}
-  - {x: 546, y: -100, z: -1927}
-  - {x: -1065, y: -100, z: -8438}
-  _loop: 0
+  - {x: 486, y: -100, z: 4345}
+  - {x: 94, y: -100, z: -2621}
+  - {x: -3596, y: -100, z: -7662}
+  - {x: -7866, y: -100, z: 2639}
+  - {x: -2557, y: -100, z: 7561}
+  _loop: 1
   _useCatmullRom: 1
