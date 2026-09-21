@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 904.23
       objectReference: {fileID: 0}
@@ -90,6 +102,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8416864759206754043}
   m_SourcePrefab: {fileID: 100100000, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
+--- !u!4 &536571899550211207 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5895649975610145510, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
+  m_PrefabInstance: {fileID: 6243052475183392353}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2242880910097946039 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5297244075866026966, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
+  m_PrefabInstance: {fileID: 6243052475183392353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4434106224393831744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7722225546393428769, guid: 81c78d88fe36058458e19b73b688986c, type: 3}
@@ -173,11 +195,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0256cd9264e70a40b0de07b2d1c5b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vehicle
-  pathFollower: {fileID: 0}
+  pathFollower: {fileID: 64067169960201672}
   rotationSpeed: 90
-  boardCharType: 0
+  boardCharType: 1
   wheelRotationMultiplier: 300
-  tyres: []
+  tyres:
+  - {fileID: 2242880910097946039}
+  - {fileID: 536571899550211207}
+  - {fileID: 4434106224393831744}
+  - {fileID: 6802285725741698919}
   f1Tyre: {fileID: 4434106224393831744}
   f2Tyre: {fileID: 6802285725741698919}
   steerSensitivity: 90

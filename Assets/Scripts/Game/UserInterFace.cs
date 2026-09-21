@@ -175,7 +175,7 @@ public class UserInterFace : MonoBehaviour
         //GamePopUp.Instance.FinalPopUp("Destination Reached");
         Act.ShowWarn?.Invoke("Destination Reached");
 
-        Act.OffBoardAction?.Invoke();
+       // Act.OffBoardAction?.Invoke();
     }
 
     //IEnumerator ReachedDestinationDock()

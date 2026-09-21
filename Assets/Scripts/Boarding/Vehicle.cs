@@ -128,12 +128,6 @@ public class Vehicle : MonoBehaviour
         float speed = Vector3.Distance(this.transform.position, lastPosition) / Time.deltaTime;
         lastPosition = this.transform.position;
 
-        float rotation = -speed * wheelRotationMultiplier * Time.deltaTime;
-        foreach (Transform t in tyres)
-        {
-            t.Rotate(rotation, 0f, 0f, Space.Self);
-        }
-
         float delta = Mathf.DeltaAngle(lastYRotation, transform.eulerAngles.y);
 
         float targetSteerAngle = Mathf.Clamp( delta * steerSensitivity,
@@ -151,6 +145,12 @@ public class Vehicle : MonoBehaviour
         f1Tyre.localRotation = Quaternion.Euler(0, currentSteerAngle, 0);
 
         lastYRotation = transform.eulerAngles.y;
+
+        float rotation = -speed * wheelRotationMultiplier * Time.deltaTime;
+        foreach (Transform t in tyres)
+        {
+            t.Rotate(rotation, 0f, 0f, Space.Self);
+        }
 
         //tyres[2].localRotation = Quaternion.Euler(rotation, steerAngle, 0);
     }

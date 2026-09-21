@@ -172,11 +172,14 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 GameStarted = false;
                 Act.EnableUser(false);
 
-                mBargeObj.SetActive(true);
 
-                mBargeObj.transform.SetPositionAndRotation(boardPlace.offBoardBarge.position, boardPlace.offBoardBarge.rotation);
-                mBargeObj.transform.localScale = boardPlace.offBoardBarge.transform.localScale;
+                if (mBargeObj != null)
+                {
+                    mBargeObj.SetActive(true);
 
+                    mBargeObj.transform.SetPositionAndRotation(boardPlace.offBoardBarge.position, boardPlace.offBoardBarge.rotation);
+                    mBargeObj.transform.localScale = boardPlace.offBoardBarge.transform.localScale;
+                }
                 //boardPlace.boatObj.transform.position = boardPlace.offBoat.position;
                 //boardPlace.boatObj.transform.rotation = boardPlace.offBoat.rotation;
                 //boardPlace.boatObj.localScale = boardPlace.offBoat.transform.localScale;

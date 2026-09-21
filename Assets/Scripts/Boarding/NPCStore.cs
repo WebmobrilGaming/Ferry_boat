@@ -1,9 +1,9 @@
 
-using System.Collections.Generic;
-using UnityEngine;
 using AppUtils;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "NPCStore", menuName = "Store/NPC")]
 public class NPCStore : ScriptableObject
@@ -41,16 +41,52 @@ public class NPCStore : ScriptableObject
         return npc;
     }
 
+    private int lastCarIndex;
+
     public Vehicle GetRandomCar() 
     {
-        List<Vehicle> cars=  vehicles.Where(x => x.Type == BoardCharType.car).ToList();
-        return cars.Random(); 
+        List<Vehicle> cars = vehicles
+         .Where(x => x.Type == BoardCharType.car)
+         .ToList();
+
+        if (cars.Count == 0)
+            return null;
+
+        Debug.Log($"Car index: {lastCarIndex}");
+
+        if (lastCarIndex >= cars.Count)
+            lastCarIndex = 0;
+
+        Vehicle randomCar = cars[lastCarIndex];
+
+       lastCarIndex ++;
+
+        return randomCar;
     }
 
+    private Vehicle lastTruck;
     public Vehicle GetRandomTruck()
     {
-        List<Vehicle> trucks = vehicles.Where(x => x.Type == BoardCharType.truck).ToList();
-        return trucks.Random();
+        List<Vehicle> trucks = vehicles
+         .Where(x => x.Type == BoardCharType.truck)
+         .ToList();
+
+        if (trucks.Count == 0)
+            return null;
+
+        // If only one car exists, return it
+        if (trucks.Count == 1)
+            return trucks[0];
+
+        // Remove the previously selected car
+        if (lastTruck != null)
+            trucks.Remove(lastTruck);
+
+        Vehicle randomCar = trucks.Random();
+
+        lastTruck = randomCar;
+
+        return randomCar;
     }
 
 }

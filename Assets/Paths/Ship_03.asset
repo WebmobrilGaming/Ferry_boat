@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
   - {x: -1001, y: -110, z: 6299}
-  - {x: -1012, y: 52, z: -3172}
+  - {x: -1012, y: -110, z: -3172}
   - {x: -2417, y: -110, z: -7883}
   - {x: -6681, y: -110, z: -592}
   _loop: 1

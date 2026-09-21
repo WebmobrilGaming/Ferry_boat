@@ -68,7 +68,7 @@ public class Destination : MonoBehaviour
 
         fullyInside = dot > 0.9f;
 
-       // fullyInside = true;
+        //fullyInside = true;
 
         if (fullyInside && isStopped)
         {
