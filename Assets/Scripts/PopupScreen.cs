@@ -105,9 +105,9 @@ namespace Ferry.Popup
 
         void OnDisable()
         {
-            yesBtn.RemoveListener();
-            noBtn.RemoveListener();
-            okBtn.RemoveListener();
+            yesBtn.onClick.RemoveAllListeners();
+            noBtn.onClick.RemoveAllListeners();
+            okBtn.onClick.RemoveAllListeners();
             EventManager.Instance.RemoveListener<YesNoPopupEvent>(OnYesNoPopup);
             EventManager.Instance.RemoveListener<OkPopupEvent>(OnOkPopup);
         }

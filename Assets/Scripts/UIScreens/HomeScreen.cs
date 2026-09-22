@@ -30,7 +30,7 @@ namespace Ferry.Screens
         public GameObject GroupBtn;
         public Button exitGameBtn;
         protected override void OnEnable()
-        {
+        {   AudioManager.Instance.Stop();
             Debug.LogWarning(UserDataManager.Instance.UserDetails.data.username);
             playerNameTxt1.text = $"Player : {UserDataManager.Instance.UserDetails.data.username}";
             gameObjectivePanel.gameObject.SetActive(false);

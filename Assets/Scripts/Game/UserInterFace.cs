@@ -56,6 +56,7 @@ public class UserInterFace : MonoBehaviour
 
             Score_System.Instance.Set(Score_System.Instance.Score,Data.time, () =>
             {
+                AudioManager.Instance.Stop();
                 LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
             }); 
         }, 

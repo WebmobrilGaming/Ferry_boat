@@ -62,6 +62,13 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
     [Header("Score Settings")]
     [SerializeField] public Score_System score_System;
+    
+    [Header("Boat Engine Sound")]
+    [SerializeField] private float minEngineVolume = 0.2f;
+    [SerializeField] private float maxEngineVolume = 1.0f;
+
+    [SerializeField] private float audioSmoothSpeed = 5f;
+    private float targetEngineVolume = 0f;
 
 
     bool isHit = false;
@@ -196,6 +203,14 @@ public class BoatController : MonoBehaviour, IHelem, IGear
     private void Update()
     {
         if (!isPlay) return;
+        if (AudioManager.Instance != null && AudioManager.Instance.boatEngine != null) // boat sound volume management
+        {
+            AudioManager.Instance.boatEngine.volume = Mathf.Lerp(
+                AudioManager.Instance.boatEngine.volume,
+                targetEngineVolume,
+                Time.deltaTime * audioSmoothSpeed
+            );
+        }
 
         if (Is_KeyboardEnabled)
         {
@@ -221,6 +236,15 @@ public class BoatController : MonoBehaviour, IHelem, IGear
 
             GearAction();
             isEngineStarted = !isEngineStarted;
+            if (isEngineStarted)  // boat engine sound start and stop 
+            {
+                AudioManager.Instance.PlayBoatStartBg(AudioState.Boat_Start);
+                AudioManager.Instance.PlayBoatBg(AudioState.Boat_Running);
+            }
+            else
+            {
+                AudioManager.Instance.BoatEngineSoundStop(); 
+            }
         }
 
         bool isReversing = (Keyboard.current.sKey.isPressed ||
@@ -343,17 +367,44 @@ public class BoatController : MonoBehaviour, IHelem, IGear
         
     }
 
+    // public void SpeedChange(float val)
+    // {
+    //     mBoatSpeed = Mathf.Clamp(val, 0f, ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed);
+    //     mBoatSpeed = val;
+
+    //     if (!mGear.Stat)
+    //         return;
+
+    //     trottleSlider.DOValue(val, 0.65f);
+
+    // }
     public void SpeedChange(float val)
     {
-        mBoatSpeed = Mathf.Clamp(val, 0f, ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed);
-        mBoatSpeed = val;
+        float maxSpeed =
+            ferryConfig.velocitiesLevels[(int)difficultyLevel].shipSpeed;
+
+        // Clamp boat speed
+        mBoatSpeed = Mathf.Clamp(val, 0f, maxSpeed);
 
         if (!mGear.Stat)
             return;
 
-        trottleSlider.DOValue(val, 0.65f);
+        // Update throttle slider
+        trottleSlider.DOValue(mBoatSpeed, 0.65f);
 
+        // Normalize speed from 0 to 1
+        float intensity = Mathf.InverseLerp(
+            0f,
+            maxSpeed,
+            mBoatSpeed
+        );
 
+        // Calculate target volume
+        targetEngineVolume = Mathf.Lerp(
+            minEngineVolume,
+            maxEngineVolume,
+            intensity
+        );
     }
 
     void GearAction()

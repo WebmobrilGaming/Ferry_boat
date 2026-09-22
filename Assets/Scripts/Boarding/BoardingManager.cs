@@ -61,6 +61,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     private void OnEnable()
     {
+        AudioManager.Instance.PlayBg(AudioState.River);
+
         mBoardingStartBtn.onClick.AddListener(() =>
         {
             SetBoard(BoardType.onBoard);
@@ -156,7 +158,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
                             currentboardData.vehicleDatas.ForEach(vehicle => vehicle.gameObject.SetActive(false));
 
-                            TimerEndAction();
+                            TimerEndAction(); 
                         });
                     });
                 });
@@ -238,6 +240,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             //GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
             GameObject go = Instantiate(npcPrefab.gameObject);
+            AudioManager.Instance.PlayVehicleBg(AudioState.Passengers_Boarding);
 
             NPC npc = go.GetComponent<NPC>();
             npc.SetBoard(BoardType.onBoard);
@@ -255,6 +258,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Pause();
 
             DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
+            AudioManager.Instance.VehicleEngineSoundStop();
+
             go.SetActive(false);
 
            // score += 2;
@@ -297,7 +302,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Resume();
 
             GameObject go = Instantiate(mNPCStore.GetRandomCar().gameObject);
-
+            AudioManager.Instance.PlayVehicleBg(AudioState.Car_Moving);
 
             Transform target_location = VehicleDockLoadingLocations.instance.vehicle_Loc[i];
 
@@ -333,6 +338,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             GameTimer.Instance.Pause();
             //Destroy(go.gameObject, 0.2f);
+            AudioManager.Instance.VehicleEngineSoundStop();
             DevDebug.Log($"Car:{i} is reached ", DebugColor.Orange);
             no_VehiclesParked += 1;
             Debug.LogWarning($"Vehicles Parked {no_VehiclesParked}");
@@ -365,7 +371,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Resume();
 
             GameObject go = Instantiate(mNPCStore.GetRandomTruck().gameObject);
-
+            AudioManager.Instance.PlayVehicleBg(AudioState.Truck_Engine);
             Vehicle vehicle = go.GetComponent<Vehicle>();
             PathFollower tvehicle_loc = go.GetComponent<PathFollower>();
         // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 
@@ -384,6 +390,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Pause();
 
             //Destroy(go.gameObject, 0.2f);
+            AudioManager.Instance.VehicleEngineSoundStop();
             DevDebug.Log($"Truck:{i} is reached ", DebugColor.Orange);
 
             currentboardData.vehicleDatas.Add(vehicle);
