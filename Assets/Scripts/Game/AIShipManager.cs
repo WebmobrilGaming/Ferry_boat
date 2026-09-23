@@ -1,12 +1,12 @@
-using System;
 using Ferry.Config;
 using Ferry.Loading;
 using Ferry.Ship;
+using FerryBoat.Actions;
 using Newtonsoft.Json;
-using UnityEngine;
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class AIShipManager : MonoBehaviour
 {
@@ -22,14 +22,27 @@ public class AIShipManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SpawnShips();
+        Act.EnableUser += EnableShipAction;
     }
 
-    private void SpawnShips()
+    private void OnDisable()
+    {
+        Act.EnableUser -= EnableShipAction;
+    }
+
+    private void EnableShipAction(bool enable)
+    {
+        if (!enable)
+            return;
+
+        SpawnShips();      
+    }
+
+    public void SpawnShips()
     {
         mShips.ForEach(sh => sh.SetActive(false));
 
-        int count = level switch
+        int count = DifficultyLevel.hard switch
         {
             DifficultyLevel.easy => 1,
             DifficultyLevel.medium => 2,
