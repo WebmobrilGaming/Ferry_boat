@@ -61,7 +61,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
     private void OnEnable()
     {
-        AudioManager.Instance.PlayBg(AudioState.River);
+        //AudioManager.Instance.PlayBg(AudioState.River);
 
         mBoardingStartBtn.onClick.AddListener(() =>
         {
@@ -240,7 +240,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             //GameObject go = Instantiate(mNPCStore.GetRandomNPC().gameObject);
             GameObject go = Instantiate(npcPrefab.gameObject);
-            AudioManager.Instance.PlayVehicleBg(AudioState.Passengers_Boarding);
+            //AudioManager.Instance.PlayVehicleBg(AudioState.Passengers_Boarding);
 
             NPC npc = go.GetComponent<NPC>();
             npc.SetBoard(BoardType.onBoard);
@@ -258,8 +258,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Pause();
 
             DevDebug.Log($"NPC:{i} is reached ", DebugColor.Orange);
-            AudioManager.Instance.VehicleEngineSoundStop();
-
+            AudioManager.Instance.PlaySFX(AudioState.Passengers_Boarding);
             go.SetActive(false);
 
            // score += 2;
@@ -302,7 +301,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Resume();
 
             GameObject go = Instantiate(mNPCStore.GetRandomCar().gameObject);
-            AudioManager.Instance.PlayVehicleBg(AudioState.Car_Moving);
+            //AudioManager.Instance.PlayVehicleBg(AudioState.Car_Moving);
 
             Transform target_location = VehicleDockLoadingLocations.instance.vehicle_Loc[i];
 
@@ -371,7 +370,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             GameTimer.Instance.Resume();
 
             GameObject go = Instantiate(mNPCStore.GetRandomTruck().gameObject);
-            AudioManager.Instance.PlayVehicleBg(AudioState.Truck_Engine);
+            //AudioManager.Instance.PlayVehicleBg(AudioState.Truck_Engine);
             Vehicle vehicle = go.GetComponent<Vehicle>();
             PathFollower tvehicle_loc = go.GetComponent<PathFollower>();
         // this is for total number of pre-fixed waypoints , excluding the ones that gets added during gameplay for each vehicle 

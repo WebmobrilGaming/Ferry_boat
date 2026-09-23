@@ -55,12 +55,18 @@ public class Vehicle : MonoBehaviour
 
     Transform parkingArea;
 
+
+    [Space]
+    [SerializeField] AudioSource audio;
+
     private void OnEnable()
     {
         pathFollower.OnPathComplete += PathCompleteAction;
         pathFollower.OnReachWaypoint+=ReachWayPointAction;
 
         _cts = new CancellationTokenSource();
+
+        audio.Play();
     }
 
     public void BookParkingArea(Transform park) { parkingArea = park; }
@@ -181,6 +187,7 @@ public class Vehicle : MonoBehaviour
 
     private void PathCompleteAction()
     {
+        audio.Stop();
         _pathCompleteTcs?.TrySetResult(true);
     }
 

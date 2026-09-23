@@ -25,5 +25,16 @@ public class AudioData
 }
 
 
-public enum AudioState { crash,boat,River,Boat_Start,Boat_Running,Car_Moving,Truck_Engine,Passengers_Boarding,Button_Highlight,Button_Click};
+public enum AudioState { crash,
+                         boat,
+                         River,
+                         Boat_Start,
+                         Boat_Running,
+                         Car_Moving,
+                         Truck_Engine,
+                         Passengers_Boarding,
+                         Button_Highlight,
+                         Button_Click,
+                         Passenger_boarding,
+};
 public enum AudioType { sfx,bg }

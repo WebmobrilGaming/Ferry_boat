@@ -35,6 +35,12 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip clip = audioStore.GetAudioClip(state,AudioType.sfx);
 
+        if(clip == null)
+        {
+            Debug.LogError("AudioClip is null for state: " + state);
+            return;
+        }
+
         audioSource.PlayOneShot(clip,1.0f);
     }
 
@@ -53,7 +59,6 @@ public class AudioManager : MonoBehaviour
         BoatStart.Play();
         BoatStart.loop = true;
     }
-
 
     public void PlayBoatBg(AudioState state)
     {
@@ -76,12 +81,13 @@ public class AudioManager : MonoBehaviour
         boatEngine.Stop();
         BoatStart.Stop();
     }
-    
+
     public void BoatEngineSoundStop()
     {
         boatEngine.Stop();
         BoatStart.Stop();
     }
+
     public void VehicleEngineSoundStop()
     {
         vehicleEngine.Stop();
