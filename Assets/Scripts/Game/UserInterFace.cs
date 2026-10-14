@@ -127,7 +127,7 @@ public class UserInterFace : MonoBehaviour
         scrollAction.Disable();
         Act.SpeedInit -= SetRange;
         Act.ReachedDestination -= LevelFinish;
-        Act.BoatDestroyedAction-=BoatDestroyed;
+        //Act.BoatDestroyedAction-=BoatDestroyed;
         Act.EndPointReached-=EndPointReached;
         backBtn.onClick.RemoveListener(GoHome);
     }

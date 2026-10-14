@@ -266,6 +266,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8148152205771513581}
     m_Modifications:
+    - target: {fileID: 4371469605591930222, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_Size
+      value: 0.7646961
+      objectReference: {fileID: 0}
     - target: {fileID: 5107605132932577023, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -298,11 +302,76 @@ PrefabInstance:
       propertyPath: gameLogo
       value: 
       objectReference: {fileID: 743670476183385418}
+    - target: {fileID: 6847385694834305734, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_text
+      value: "<align=center><b><size=130%>GAME OBJECTIVE</size></b></align>\r\n\r\n<b>Score
+        Points By:</b>\r\n1. <b>LOADING</b> the best combination of passengers, cars,
+        and trucks onto the scow within the <color=#FFD700>two-minute</color> time
+        limit.\n\r\n2. <b>DRIVING</b> the Marilyn M ferry pulling the scow across
+        the St. Clair river without hitting another boat, freighter, or running aground.\n\r\n3.
+        <b>DOCKING AND UNLOADING</b> the ferry and scow within the time limits for
+        each difficulty level.\n\r\n   <color=#00FF00>EASY: 11 minutes</color>,\r\n  
+        <color=#FFA500>MEDIUM: 9 minutes</color>,\r\n   <color=#FF5555>HARD: 7 minutes</color><i>).</i>\r\n\r\n<b>Challenges:</b>\r\n\u2022
+        Total <color=#FFD700>2-minute</color> limit to load and unload.\r\n\u2022
+        Each passenger \u2013 <color=#00FFAA><b>2 points</b></color> <i>(5 sec load
+        time).</i>\r\n\u2022 Each car \u2013 <color=#00FFAA><b>10 points</b></color>
+        <i>(30 sec load time).</i>\r\n\u2022 Each truck \u2013 <color=#00FFAA><b>20
+        points</b></color> <i>(60 sec load time).</i>\r\n\r\n<color=#FF0000><b>GAME
+        OVER:</b></color>\r\n\u2022 Hitting or being hit by a freighter or another
+        boat.\r\n\u2022 Running aground on the sand bar (in the middle of the river
+        left of the red buoy with the flashing light).\n\u2022 Once the designated
+        level time limit expires, the player receives a 1-point deduction for every
+        second spent in overtime.\n\\t\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856239873482185362, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856239873482185362, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6856239873482185362, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.23530388
+      objectReference: {fileID: 0}
     - target: {fileID: 8124291823812013233, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
       propertyPath: m_Name
       value: HomeScreen
       objectReference: {fileID: 0}
     - target: {fileID: 8124291823812013233, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282078816332759309, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282078816332759309, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282078816332759309, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1213.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282078816332759309, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 691.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282078816332759309, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -606.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 8588887208225742288, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8746121958317439732, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1213.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153549874901026529, guid: 5ced750a3d290d744b141735784b8a4f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

@@ -728,7 +728,7 @@ MonoBehaviour:
   pathFollower: {fileID: 3144280244192026618}
   rotationSpeed: 90
   boardCharType: 1
-  wheelRotationMultiplier: 43
+  wheelRotationMultiplier: 33
   tyres:
   - {fileID: 741338615679554609}
   - {fileID: 1304876804889976065}

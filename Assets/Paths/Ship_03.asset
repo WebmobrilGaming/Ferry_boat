@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ship_03
   m_EditorClassIdentifier: Assembly-CSharp::PathData
   _waypoints:
-  - {x: -1490, y: -110, z: -7805}
-  - {x: 219, y: -110, z: -2882}
+  - {x: -1665, y: -110, z: -6539}
+  - {x: 255, y: -110, z: -2855}
   - {x: 24, y: -110, z: 7280}
   - {x: -7263, y: -110, z: -1708}
   _loop: 1

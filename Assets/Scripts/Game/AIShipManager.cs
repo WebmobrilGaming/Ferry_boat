@@ -42,7 +42,7 @@ public class AIShipManager : MonoBehaviour
     {
         mShips.ForEach(sh => sh.SetActive(false));
 
-        int count = DifficultyLevel.hard switch
+        int count = level switch
         {
             DifficultyLevel.easy => 1,
             DifficultyLevel.medium => 2,

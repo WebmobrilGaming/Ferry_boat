@@ -509,7 +509,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1378.83}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5633347214524167801
 MonoBehaviour:
@@ -1530,8 +1530,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 425433626998752854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.32713968}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1942,8 +1942,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 691.5, y: -689.415}
-  m_SizeDelta: {x: 1383, y: 1378.83}
+  m_AnchoredPosition: {x: 691.5, y: -668.715}
+  m_SizeDelta: {x: 1383, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4083748790122794011
 CanvasRenderer:
@@ -1979,18 +1979,18 @@ MonoBehaviour:
     <b>DRIVING</b> the Marilyn M ferry pulling the scow across the St. Clair river
     without hitting another boat, freighter, or running aground.\n\r\n3. <b>DOCKING
     AND UNLOADING</b> the ferry and scow within the time limits for each difficulty
-    level.\r\n   <i>(Score 1 point for each second under:</i>\r\n   <color=#00FF00>EASY:
-    11 minutes</color>,\r\n   <color=#FFA500>MEDIUM: 9 minutes</color>,\r\n   <color=#FF5555>HARD:
-    7 minutes</color><i>).</i>\r\n\r\n<color=#FF4444><b>20 Points Deducted For:</b></color>\r\n\u2022
-    Leaving the Courtright, Canada dock faster than <b>5 mph.</b>\r\n\u2022 Landing
-    at the St. Clair, USA dock faster than <b>1 mph.</b>\r\n\r\n<b>Challenges:</b>\r\n\u2022
-    Total <color=#FFD700>2-minute</color> limit to load and unload.\r\n\u2022 Each
-    passenger \u2013 <color=#00FFAA><b>2 points</b></color> <i>(5 sec load time).</i>\r\n\u2022
-    Each car \u2013 <color=#00FFAA><b>10 points</b></color> <i>(30 sec load time).</i>\r\n\u2022
-    Each truck \u2013 <color=#00FFAA><b>25 points</b></color> <i>(60 sec load time).</i>\r\n\r\n<color=#FF0000><b>GAME
-    OVER:</b></color>\r\n\u2022 Hitting or being hit by a freighter or another boat.\r\n\u2022
-    Running aground on the sand bar (in the middle of the river left of the red buoy
-    with the flashing light).\n\\t\n"
+    level.\n\r\n   <color=#00FF00>EASY: 11 minutes</color>,\r\n   <color=#FFA500>MEDIUM:
+    9 minutes</color>,\r\n   <color=#FF5555>HARD: 7 minutes</color><i>).</i>\r\n\r\n<color=#FF4444><b>20
+    Points Deducted For:</b></color>\r\n\u2022 Leaving the Courtright, Canada dock
+    faster than <b>5 mph.</b>\r\n\u2022 Landing at the St. Clair, USA dock faster
+    than <b>1 mph.</b>\r\n\r\n<b>Challenges:</b>\r\n\u2022 Total <color=#FFD700>2-minute</color>
+    limit to load and unload.\r\n\u2022 Each passenger \u2013 <color=#00FFAA><b>2
+    points</b></color> <i>(5 sec load time).</i>\r\n\u2022 Each car \u2013 <color=#00FFAA><b>10
+    points</b></color> <i>(30 sec load time).</i>\r\n\u2022 Each truck \u2013 <color=#00FFAA><b>20
+    points</b></color> <i>(60 sec load time).</i>\r\n\r\n<color=#FF0000><b>GAME OVER:</b></color>\r\n\u2022
+    Hitting or being hit by a freighter or another boat.\r\n\u2022 Running aground
+    on the sand bar (in the middle of the river left of the red buoy with the flashing
+    light).\n\\t\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3106,7 +3106,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6856239873482185362}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6728603
+  m_Size: 0.69368863
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3389,7 +3389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3876295192651010000
 RectTransform:
   m_ObjectHideFlags: 0

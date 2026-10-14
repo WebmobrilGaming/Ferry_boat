@@ -57,7 +57,7 @@ public class GameTimer : MonoBehaviour
        // Act.EnableScore += EnableTime;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
-        Act.BoatDestroyedAction += ToHomeScreen;
+        //Act.BoatDestroyedAction += ToHomeScreen;
         Act.EndPointReached += OnEndPointReached;
 
         if (PlayerPrefs.HasKey("Settings"))
@@ -97,7 +97,7 @@ public class GameTimer : MonoBehaviour
 
     IEnumerator EndGame()
     {
-        yield return new WaitForSecondsRealtime(10f);
+        yield return new WaitForSeconds(3.0f);
         Debug.LogWarning("!!!!!!to home screen comment here !!!!");
         LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
     }
@@ -143,6 +143,7 @@ public class GameTimer : MonoBehaviour
         timer = Mathf.Clamp(timer, 0, 660);
         Data.time = timer;
 
+
         if (timer <= 0)
         {
             if (!isTimeOut)
@@ -171,13 +172,11 @@ public class GameTimer : MonoBehaviour
 
         UpdateTimerUI();
 
-        if (isDrive)
-            CheckMinutePassed();
     }
 
     void CheckSomethingAfterTimeout()
     {
-        Score_System.Instance.Set(-20, Data.time);
+        Score_System.Instance.Set(-1, Data.time);
     }
 
     public void Pause() => _running = false;
@@ -189,7 +188,7 @@ public class GameTimer : MonoBehaviour
         if (currentSecond < lastSecond)
         {
             lastSecond = currentSecond;
-            AddScore(1);
+            //AddScore(1);
         }
     }
 

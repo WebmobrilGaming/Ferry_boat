@@ -16,10 +16,17 @@ public class Destination : MonoBehaviour
     private bool hasMissed = false; // prevents spam
 
 
+    bool isScored = false;
+
     private void Awake()
     {
         dockCollider = GetComponent<Collider>();
 
+    }
+
+    private void OnEnable()
+    {
+        isScored = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,11 +41,11 @@ public class Destination : MonoBehaviour
         hasMissed = false;
 
         boatController.IsEnterDock = true;
-        Act.ShowWarn?.Invoke("You entered in the dock area");
+        Act.ShowWarn?.Invoke("You entered in the dock area.Please use space key to start offBoarding");
 
         if(boatController.speedInKnots > 1)
         {
-            Act.ShowWarn?.Invoke($"You are crossed the Docking speed limit - > 1 mph..");
+           // Act.ShowWarn?.Invoke($"You are crossed the Docking speed limit - > 1 mph..");
             boatController.score_System.Set(-20,Data.time);
         }
         DevDebug.Log("Ferry entered dock area.", DebugColor.Yellow);
@@ -51,6 +58,12 @@ public class Destination : MonoBehaviour
 
         var boatController = other.GetComponentInParent<BoatController>();
         if (boatController == null) return;
+
+        if(!isScored)
+        {
+            Score_System.Instance.Set(10, Data.time);
+            isScored = true;
+        }
 
         Bounds dockBounds = dockCollider.bounds;
         Bounds boatBounds = other.bounds;
@@ -92,7 +105,7 @@ public class Destination : MonoBehaviour
             DevDebug.Log("Ferry missed the dock!", DebugColor.Red);
             Act.ShowWarn?.Invoke("You missed the dock");
 
-            Score_System.Instance.Set(-20,Data.time);
+            //Score_System.Instance.Set(-20,Data.time);
         }
 
         if (!isStopped)

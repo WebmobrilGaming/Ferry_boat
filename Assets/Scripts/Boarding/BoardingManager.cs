@@ -175,6 +175,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 Act.EnableUser(false);
 
 
+                GameTimer.Instance.Pause();
+
                 if (mBargeObj != null)
                 {
                     mBargeObj.SetActive(true);
@@ -465,7 +467,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         for (int i = 0; i < nPCs.Count; i++)
         {
-            GameTimer.Instance.Resume();
+           // GameTimer.Instance.Resume();
+
 
             nPCs[i].Path.Stop();
             nPCs[i].SetBoard(BoardType.offBoard);
@@ -478,7 +481,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         for (int i = 0; i < nPCs.Count; i++)
         {
-            GameTimer.Instance.Resume();
+            //GameTimer.Instance.Resume();
 
             NPC npc = nPCs[i];
 
@@ -489,7 +492,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             _cts = new CancellationTokenSource();
 
+            AudioManager.Instance.PlaySFX(AudioState.Passengers_Boarding);
             DevDebug.Log($"Passenger:{i} unloading..", DebugColor.Green);
+
 
             await npc.WaitForPathComplete(_cts.Token);
 
@@ -522,7 +527,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
         for (int i = 0; i < vehicles.Count; ++i)
         {
-            GameTimer.Instance.Resume();
+            //GameTimer.Instance.Resume();
 
             Vehicle vehicle = vehicles[i];
 

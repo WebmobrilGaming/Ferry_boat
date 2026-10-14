@@ -8,24 +8,25 @@ public class GameCam : MonoBehaviour
     private void OnEnable()
     {
         isHit = false;
-        Act.HitAction += Hit;
+       // Act.HitAction += Hit;
     }
 
     private void OnDisable()
     {
-        Act.HitAction -= Hit;
+       // Act.HitAction -= Hit;
     }
 
     void Hit()
     {
         Debug.LogWarning("Playing Vibration Functionality");
-        int vib = PlayerPrefs.GetInt(GamePrefs.isVibrationOn,1);
-        if(vib == 1)
+        int vib = PlayerPrefs.GetInt(GamePrefs.isVibrationOn, 1);
+        if (vib == 1)
         {
             StartCoroutine(Shake(0.2f, 0.1f));
             isHit = true;
         }
     }
+
     public IEnumerator Shake(float duration, float magnitude)
     {
         if (!isHit)
