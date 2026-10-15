@@ -217,8 +217,12 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     }
     IEnumerator OffBoardingCompleteAction()
     {
-    
-        GamePopUp.Instance.OffBoardingCompletePopUp($"Congratulations!,docking complete\nyour time:{Data.time}\nscore{Score_System.Instance.Score}");
+        int totalSeconds = Mathf.FloorToInt(Mathf.Abs(Data.time));
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        string sign = Data.time < 0 ? "-" : "";
+        string finaltime = $"{sign}{minutes:00}:{seconds:00}";
+        GamePopUp.Instance.OffBoardingCompletePopUp($"Congratulations!,docking complete\nyour time:{finaltime}\nscore{Score_System.Instance.Score}");
         yield return new WaitForSecondsRealtime(15f);
         GamePopUp.Instance.ClosePanel();
         LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
