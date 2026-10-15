@@ -20,9 +20,9 @@ public class ScoreObj : MonoBehaviour
             return;
         }
 
-        DevDebug.Log("Scored 50 !!!", DebugColor.Green);
+        DevDebug.Log("Scored 100 !!!", DebugColor.Green);
 
-        Score_System.Instance.Set(50, Data.time);
+        Score_System.Instance.Set(100, Data.time);
 
         Act.ShowWarn?.Invoke("You have crossed the barrier! Congratulations!");
 

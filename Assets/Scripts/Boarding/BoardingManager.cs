@@ -25,6 +25,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     [SerializeField] int no_VehiclesParked;
     [SerializeField] GameObject mBargeObj;
     public static bool GameStarted;
+    public static bool isOffBoardingComplete;
+    public static bool isOffBoardingStarted;
 
     [Header("Boardings")]
     [SerializeField] List<BoardingCal> boardings = new List<BoardingCal>();
@@ -62,7 +64,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     private void OnEnable()
     {
         //AudioManager.Instance.PlayBg(AudioState.River);
-
+        isOffBoardingStarted=false;
+        isOffBoardingComplete = false;
         mBoardingStartBtn.onClick.AddListener(() =>
         {
             SetBoard(BoardType.onBoard);
@@ -167,7 +170,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
 
             case BoardType.offBoard:
-
+                isOffBoardingStarted = true;
                 Time.timeScale = 1.0f;
                 GameCamController.Instance.EnableSecondCams(false);
 
@@ -175,7 +178,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                 Act.EnableUser(false);
 
 
-                GameTimer.Instance.Pause();
+                //GameTimer.Instance.Pause();
 
                 if (mBargeObj != null)
                 {
@@ -198,10 +201,12 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                     VehicleOffBoarding(currentboardData.vehicleDatas, () =>
                     {
                         DevDebug.Log("All vehicles are off boarded !!", DebugColor.Green);
-
+                        isOffBoardingComplete = true;
+                        isOffBoardingStarted = false;
                         Score_System.Instance.UploadFinalScore(Data.time, () =>
                         {
-                            LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
+                            
+                            StartCoroutine(OffBoardingCompleteAction());
                         });
                     });
 
@@ -209,6 +214,14 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
                 break;
         }
+    }
+    IEnumerator OffBoardingCompleteAction()
+    {
+    
+        GamePopUp.Instance.OffBoardingCompletePopUp($"Congratulations!,docking complete\nyour time:{Data.time}\nscore{Score_System.Instance.Score}");
+        yield return new WaitForSecondsRealtime(15f);
+        GamePopUp.Instance.ClosePanel();
+        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home, SceneEnum.Game);
     }
 
 
@@ -506,7 +519,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
             _cts?.Dispose();
             _cts = null;
 
-            GameTimer.Instance.Pause();
+            //GameTimer.Instance.Pause();
 
             //  place.passenger
         }
@@ -554,7 +567,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             Score_System.Instance.Set(val, Data.time);
 
-            GameTimer.Instance.Pause();
+            //GameTimer.Instance.Pause();
         }
 
         onComplete?.Invoke();

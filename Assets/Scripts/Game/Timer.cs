@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private float _remaining;
     [SerializeField] private bool _running;
+   
 
     public bool IsRunning => _running;
     public float Remaining => _remaining;

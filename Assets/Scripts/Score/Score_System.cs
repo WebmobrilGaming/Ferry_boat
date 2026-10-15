@@ -65,7 +65,9 @@ public class Score_System : MonoBehaviour
     }
     public void UploadFinalScore( float time, Action onComplete = null)
     {
-        
+
+        Debug.LogWarning($"Final Timer:{time}");
+        score=score-GameTimer.negativePoints;
         int timedata = (int)time;
         if(score > previousHighestScore)
         {

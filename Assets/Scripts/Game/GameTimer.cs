@@ -29,8 +29,11 @@ public class GameTimer : MonoBehaviour
     private bool isTimeOut = false;
     public bool IsTimeOut => isTimeOut;
     private bool IsInitialized = false;
+    public static int negativePoints;
     [SerializeField] private bool isLevelFinished=false;
     private bool timerAlreadyStarted;
+    private float TimeElapsedOffBoarding;
+    private float lastsecondOffBoarding;
 
     int timeLimit;
 
@@ -52,8 +55,11 @@ public class GameTimer : MonoBehaviour
 
     private void OnEnable()
     {
+        TimeElapsedOffBoarding=0;
         enableScore = false;
         timerAlreadyStarted = false;
+        negativePoints=0;
+        lastsecondOffBoarding=0;
        // Act.EnableScore += EnableTime;
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
@@ -87,20 +93,20 @@ public class GameTimer : MonoBehaviour
         //Act.EnableScore -= EnableTime;
         Act.ReachedDestination -= LevelFinish;
         Act.BoatDestroyedAction -= LevelFinish;
-        Act.BoatDestroyedAction -= ToHomeScreen;
+        //Act.BoatDestroyedAction -= ToHomeScreen;
     }
 
-    private void ToHomeScreen()
-    {
-        StartCoroutine(EndGame());
-    }
+    // private void ToHomeScreen()
+    // {
+    //     StartCoroutine(EndGame());
+    // }
 
-    IEnumerator EndGame()
-    {
-        yield return new WaitForSeconds(3.0f);
-        Debug.LogWarning("!!!!!!to home screen comment here !!!!");
-        LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
-    }
+    // IEnumerator EndGame()
+    // {
+    //     yield return new WaitForSeconds(3.0f);
+    //     Debug.LogWarning("!!!!!!to home screen comment here !!!!");
+    //     LoadingScreen.Instance.LoadSceneAsync(SceneEnum.Home,SceneEnum.Game);
+    // }
 
     private void SetTimeLimit(int time)
     {
@@ -135,14 +141,28 @@ public class GameTimer : MonoBehaviour
 
     private void Update()
     {
+       
         if (!IsInitialized && !enableScore) return;
         if (isLevelFinished) return;
         if (!_running) return;
+        if (BoardingManager.isOffBoardingComplete) return;
 
         timer -= Time.deltaTime;
-        timer = Mathf.Clamp(timer, 0, 660);
+        //timer = Mathf.Clamp(timer, 0, 660);
         Data.time = timer;
-
+        
+        if (BoardingManager.isOffBoardingStarted)
+        {  
+            TimeElapsedOffBoarding += Time.deltaTime;
+            int currentTime = Mathf.FloorToInt(TimeElapsedOffBoarding);
+            if (currentTime > lastsecondOffBoarding)
+            {
+                addScorePositive();
+                lastsecondOffBoarding = currentTime;
+            }
+            
+           
+        }
 
         if (timer <= 0)
         {
@@ -166,7 +186,7 @@ public class GameTimer : MonoBehaviour
                 Debug.Log($"Timeout: {currentSecond} seconds");
 
                 // Your code here
-                CheckSomethingAfterTimeout();
+                CheckSomethingAfterTimeout(timer);
             }
         }
 
@@ -174,9 +194,22 @@ public class GameTimer : MonoBehaviour
 
     }
 
-    void CheckSomethingAfterTimeout()
+    private void addScorePositive()
     {
-        Score_System.Instance.Set(-1, Data.time);
+        if (timer > 0)
+        {
+            AddScore(1);
+        }
+    }
+
+    void CheckSomethingAfterTimeout(float time)
+    {
+        if (time < 0)
+        {
+            if(BoardingManager.isOffBoardingComplete) return;
+            negativePoints++;
+        }
+        //Score_System.Instance.Set(-1, Data.time);
     }
 
     public void Pause() => _running = false;
@@ -206,9 +239,11 @@ public class GameTimer : MonoBehaviour
 
     private void UpdateTimerUI()
     {
-        int minutes = Mathf.FloorToInt(timer / 60f);
-        int seconds = Mathf.FloorToInt(timer % 60f);
-        timerText.text = $"{minutes:00} : {seconds:00}";
+        int totalSeconds = Mathf.FloorToInt(Mathf.Abs(timer));
+        int minutes = totalSeconds/60;
+        int seconds = totalSeconds%60;
+        string sign = timer < 0 ? "-":"";
+        timerText.text = $"{sign}{minutes:00}:{seconds:00}";
         
     }
     private void OnEndPointReached()

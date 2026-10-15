@@ -49,6 +49,11 @@ public class GamePopUp : MonoBehaviour
 
         onComplete?.Invoke();
     }
+    public void OffBoardingCompletePopUp(string message)
+    {
+        panelFinal.SetActive(true);
+        mFinalText.text = message;
+    }
 
     public void PopStat(string message,float delay,Action onComplete = null)
     {
