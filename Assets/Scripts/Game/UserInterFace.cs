@@ -130,6 +130,7 @@ public class UserInterFace : MonoBehaviour
         //Act.BoatDestroyedAction-=BoatDestroyed;
         Act.EndPointReached-=EndPointReached;
         backBtn.onClick.RemoveListener(GoHome);
+        Act.BoatDestroyedAction -= BoatDestroyed;
     }
     private void BoatDestroyed()
     {
