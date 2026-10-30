@@ -147,8 +147,7 @@ public class Vehicle : MonoBehaviour
 
         currentSteerAngle = (float)System.Math.Round(currentSteerAngle, 3);
 
-        f2Tyre.localRotation = Quaternion.Euler(0, currentSteerAngle, 0);
-        f1Tyre.localRotation = Quaternion.Euler(0, currentSteerAngle, 0);
+       
 
         lastYRotation = transform.eulerAngles.y;
 
@@ -157,6 +156,9 @@ public class Vehicle : MonoBehaviour
         {
             t.Rotate(rotation, 0f, 0f, Space.Self);
         }
+
+        f2Tyre.localRotation = Quaternion.Euler(rotation, currentSteerAngle, 0);
+        f1Tyre.localRotation = Quaternion.Euler(rotation, currentSteerAngle, 0);
 
         //tyres[2].localRotation = Quaternion.Euler(rotation, steerAngle, 0);
     }

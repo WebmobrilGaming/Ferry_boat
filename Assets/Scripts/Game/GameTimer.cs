@@ -47,6 +47,8 @@ public class GameTimer : MonoBehaviour
     private float timeoutElapsed;
     private int lastCheckedSecond;
 
+    public bool IsScore = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -60,7 +62,10 @@ public class GameTimer : MonoBehaviour
         timerAlreadyStarted = false;
         negativePoints=0;
         lastsecondOffBoarding=0;
-       // Act.EnableScore += EnableTime;
+
+        IsScore = false;
+
+        Act.EnableScore -= () => { IsScore = true; };
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
         //Act.BoatDestroyedAction += ToHomeScreen;
@@ -90,7 +95,7 @@ public class GameTimer : MonoBehaviour
 
     private void OnDisable()
     {
-        //Act.EnableScore -= EnableTime;
+        Act.EnableScore -= ()=> { IsScore = true; };
         Act.ReachedDestination -= LevelFinish;
         Act.BoatDestroyedAction -= LevelFinish;
         //Act.BoatDestroyedAction -= ToHomeScreen;
@@ -151,13 +156,14 @@ public class GameTimer : MonoBehaviour
         //timer = Mathf.Clamp(timer, 0, 660);
         Data.time = timer;
         
-        if (BoardingManager.isOffBoardingStarted)
+        if (IsScore)
         {  
             TimeElapsedOffBoarding += Time.deltaTime;
             int currentTime = Mathf.FloorToInt(TimeElapsedOffBoarding);
             if (currentTime > lastsecondOffBoarding)
             {
                 //addScorePositive();
+                Score_System.Instance.Set(1, Data.time);
                 lastsecondOffBoarding = currentTime;
             }
             
@@ -194,7 +200,7 @@ public class GameTimer : MonoBehaviour
             return; 
         }
 
-        Score_System.Instance.Set(1, Data.time);
+       
     }
 
     private void addScorePositive()

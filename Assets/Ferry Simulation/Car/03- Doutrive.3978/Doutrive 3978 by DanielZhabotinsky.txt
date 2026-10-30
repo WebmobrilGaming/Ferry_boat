@@ -1,0 +1,34 @@
+Title: Doutrive 3978
+URL: http://sketchfab.com/3d-models/doutrive-78-low-poly-model-30700a84311c4bea9ef722f0773ce92a
+Author: https://sketchfab.com/DanielZhabotinsky
+
+Vertices: 14745
+Polygons: 24585
+Animations: 0
+
+Download Date: 28-09-2026
+Download Format: FBX
+Download Path: C:\Users\Gaurav Paliwal\Downloads\3d_Ripper_Pro_v109\Downloads\DanielZhabotinsky\03- Doutrive.3978\
+Download File: 30700a84311c4bea9ef722f0773ce92a.fbx
+
+Textures: 20
+#1: 086fb1e898ad4a668cf1568b9d721003_R_UCB_Interiors_1_Met.jpeg
+#2: 0d2ba02a04c7403bb574ab1e16ebf338_RGB_UCB_Interiors_1_Dif.jpeg
+#3: 18680944ca5046dd9c127c5d0d5b9026_R_Generic_bodymat_dif.jpeg
+#4: 1a230f5d96c347a9bf92c9c2d15bf252_R_UCB_Interiors_1_Rough.jpeg
+#5: 396744991cb0441bbbe66c5574878b08_R_RB1c_Tire_1k_Height.jpeg
+#6: 43b50701a60c429ab8345ccf61594383_R_UCB_BOTTOM_rough.jpeg
+#7: 4744c4840667490d852f6d9cf6d0727a_A_Numberplates_Misk_U_Dif.png
+#8: 47b3bc67605c44f293e37898a5e681c9_R_Carpaint_Gen_tile20_Spec.png
+#9: 49cc20d94c674476bb81fff7d05f486e_RGB_UCB_Lights_and_Glass_Dif.jpeg
+#10: 527aaf8790a2464f9503359ec7c4eb6b_R_Carbadges_misc_U_height.jpeg
+#11: 780fe97c1a19477399cc0e3c92d6038c_R_Numberplates_Misk_U_Height.png
+#12: 8214be731e43471d9bb9eb1f51da331b_RGB_UCB_BOTTOM_DIF.jpeg
+#13: 90c2b3fe80a644b78a3121aad2d58c32_R_Carpaint_Gen_tile20_Met.png
+#14: 91f2473c166b4f4d8b4aebef7b11c197_R_UCB_Interiors_1_Height.jpeg
+#15: 92177cedef3a4de984bc912a10f97439_A_Carbadges_misc_U_dif.png
+#16: 99d00c3e23cc41ba9d60d0eea4bf617e_R_UCB_BOTTOM_Height.jpeg
+#17: a159404ac95c44498326a2b85f16aec6_R_RB1c_Tire_1k_Met.jpeg
+#18: b056e9e2c37245e397f4b1d877f4b717_R_RB1c_Tire_1k_Rough.jpeg
+#19: b70ec684151942c6a370f49363cd591e_RGB_RB1c_Tire_1k_Dif.jpeg
+#20: d709e98df465485cb941320c37ecb030_R_UCB_BOTTOM_met.jpeg

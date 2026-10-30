@@ -1,0 +1,34 @@
+Title: Phoenix 455 3971
+URL: http://sketchfab.com/3d-models/phoenix-455-71-low-poly-model-955edc733c6d44fabc0ad7c246a15896
+Author: https://sketchfab.com/DanielZhabotinsky
+
+Vertices: 15656
+Polygons: 25947
+Animations: 0
+
+Download Date: 28-09-2026
+Download Format: FBX
+Download Path: C:\Users\Gaurav Paliwal\Downloads\3d_Ripper_Pro_v109\Downloads\DanielZhabotinsky\02- Phoenix.455.3971\
+Download File: 955edc733c6d44fabc0ad7c246a15896.fbx
+
+Textures: 20
+#1: 0019664efaca4b248dc5b776a1b038ff_RGB_UCB_BOTTOM_DIF.jpeg
+#2: 055caabbabca45e0bd5c81833eedc48f_A_Numberplates_Misk_U_Dif.png
+#3: 0c522ee3813f49bba75b0e86bb0c980d_A_Carbadges_misc_U_dif.png
+#4: 108279baaf874635b391cbe4e43b2fd4_R_RB1c_Tire_1k_Rough.jpeg
+#5: 162dbd0151c94da1b59363be7555d1c5_RGB_UCB_Lights_and_Glass_Dif.jpeg
+#6: 1a9bf20893564940a29a0941a94c6796_R_UCB_Interiors_2_Rough.jpeg
+#7: 223c115d4e754ccfa6682921dd066a5e_R_UCB_Interiors_2_Height.jpeg
+#8: 30c91885a10d4d0388bb307a7c081caf_R_UCB_BOTTOM_met.jpeg
+#9: 47380eb8994f45bda7e718e1e02a26d4_R_UCB_BOTTOM_Height.jpeg
+#10: 50d33544d47d41c285feda4b535d5be9_RGB_UCB_Interiors_2_Dif.jpeg
+#11: 9286ae0b3c9341c5b5572d1122c6a37f_R_Carpaint_Gen_tile20_Met.png
+#12: 9641491bdbd5405091926df5c74f3587_R_Generic_bodymat_dif.jpeg
+#13: 9698620e7d574b2fb448e73e06fd69cd_R_UCB_Interiors_2_Met.jpeg
+#14: a528be20c3904a27b9838c92fe521677_R_UCB_BOTTOM_rough.jpeg
+#15: a80cc3fa5b2c471fa199c157acfab5a2_R_RB1c_Tire_1k_Height.jpeg
+#16: e1b4e58ba3764e6697a3e94cc024438b_R_Numberplates_Misk_U_Height.png
+#17: f4277e958b764b00b96b907a70aac170_R_Carbadges_misc_U_height.jpeg
+#18: f4b122539e5342bd8745410ad7e04b12_RGB_RB1c_Tire_1k_Dif.jpeg
+#19: f4fc38c9aecb438b9cf152da3b403a33_R_RB1c_Tire_1k_Met.jpeg
+#20: fef7f49525b3414d820b529478387dc5_R_Carpaint_Gen_tile20_Spec.png

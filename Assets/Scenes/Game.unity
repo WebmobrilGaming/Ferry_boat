@@ -17177,6 +17177,7 @@ MonoBehaviour:
   isLevelFinished: 0
   _running: 0
   isDrive: 0
+  IsScore: 0
 --- !u!1 &1281115739
 GameObject:
   m_ObjectHideFlags: 0
@@ -25269,7 +25270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1864828874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37987,7 +37988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6065957413454100945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39480,7 +39481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &6925610373848589838
 AudioSource:
   m_ObjectHideFlags: 0
