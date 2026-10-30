@@ -76,21 +76,25 @@ public class BoardingManager : MonoBehaviour,IBoardCal
         //mTimer.DisplayTimer += DisplayTimerAction;
         //mTimer.OnCompleteAct += TimerEndAction;
 
-        Act.OffBoardAction += () =>
-        {
-            SetBoard(BoardType.offBoard);
-        };
-
-
+        // Act.OffBoardAction += () =>
+        // {
+        //     SetBoard(BoardType.offBoard);
+        // };
+        Act.OffBoardAction+=InvokeOffBoardingAction;
         GameStarted = false;
         mBargeObj.SetActive(true);
         no_VehiclesParked = 0;
     }
 
+    private void InvokeOffBoardingAction()
+    {
+        SetBoard(BoardType.offBoard);
+    }
+
     private void OnDisable()
     {
         mBoardingStartBtn.onClick.RemoveAllListeners();
-
+        Act.OffBoardAction -= InvokeOffBoardingAction;
         _cts?.Cancel();
         _cts?.Dispose();
         _cts = null;
