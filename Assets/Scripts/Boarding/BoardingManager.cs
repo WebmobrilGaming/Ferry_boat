@@ -431,9 +431,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     {
         score = boardCharType switch
         {
-            BoardCharType.passenger => onBoard? score + 2 : score -2,
-            BoardCharType.car => onBoard? score + 10 : score -10,
-            BoardCharType.truck => onBoard ? score + 20 : score - 20
+            BoardCharType.passenger => onBoard? score + 3 : score - 3,
+            BoardCharType.car => onBoard? score + 15 : score - 15,
+            BoardCharType.truck => onBoard ? score + 30 : score - 30
         };
 
         time = boardCharType switch
@@ -519,7 +519,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             await npc.WaitForPathComplete(_cts.Token);
 
-            int val = 2;
+            int val = 3;
 
             Score_System.Instance.Set(val, Data.time);
 
@@ -568,9 +568,9 @@ public class BoardingManager : MonoBehaviour,IBoardCal
 
             int val = vehicle.Type switch
             { 
-                BoardCharType.passenger => 2,
-                BoardCharType.car => 10,
-                BoardCharType.truck => 25
+                BoardCharType.passenger => 3,
+                BoardCharType.car => 15,
+                BoardCharType.truck => 30
              };
 
             Score_System.Instance.Set(val, Data.time);

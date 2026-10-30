@@ -85,7 +85,7 @@ namespace Ferry.Screens
             yield return new WaitForSeconds(0.1f);
             LeaderboardRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
-            SettingsRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
+            SettingsRect.DOAnchorPosX(-150, 0.5f).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(0.1f);
             CloseRect.DOAnchorPosX(800, 0.5f).SetEase(Ease.OutBack);
         }

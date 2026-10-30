@@ -157,12 +157,14 @@ public class GameTimer : MonoBehaviour
             int currentTime = Mathf.FloorToInt(TimeElapsedOffBoarding);
             if (currentTime > lastsecondOffBoarding)
             {
-                addScorePositive();
+                //addScorePositive();
                 lastsecondOffBoarding = currentTime;
             }
             
            
         }
+
+        UpdateTimerUI();
 
         if (timer <= 0)
         {
@@ -188,10 +190,11 @@ public class GameTimer : MonoBehaviour
                 // Your code here
                 CheckSomethingAfterTimeout(timer);
             }
+
+            return; 
         }
 
-        UpdateTimerUI();
-
+        Score_System.Instance.Set(1, Data.time);
     }
 
     private void addScorePositive()
@@ -204,12 +207,14 @@ public class GameTimer : MonoBehaviour
 
     void CheckSomethingAfterTimeout(float time)
     {
+        Score_System.Instance.Set(-1, Data.time);
+
         if (time < 0)
         {
             if(BoardingManager.isOffBoardingComplete) return;
-            negativePoints++;
+            //negativePoints++;
         }
-        //Score_System.Instance.Set(-1, Data.time);
+      
     }
 
     public void Pause() => _running = false;

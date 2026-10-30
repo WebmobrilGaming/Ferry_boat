@@ -67,7 +67,7 @@ public class Score_System : MonoBehaviour
     {
 
         Debug.LogWarning($"Final Timer:{time}");
-        score=score-GameTimer.negativePoints;
+        //score=score-GameTimer.negativePoints;
         int timedata = (int)time;
         if(score > previousHighestScore)
         {
