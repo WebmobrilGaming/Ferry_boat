@@ -112,7 +112,7 @@ public class BoardingManager : MonoBehaviour,IBoardCal
     {
         mTime.text = "00:00 mins";
         GameStarted = true;
-        //Act.EnableScore();
+        Act.EnableScore?.Invoke();
 
         await GameCamController.Instance.SetCam(CamType.driver);
 
@@ -160,6 +160,8 @@ public class BoardingManager : MonoBehaviour,IBoardCal
                         {
                             Score_System.Instance.Set(score);
                             Act.EnableUser(true);
+
+
 
                             GameCamController.Instance.EnableSecondCams(true);
 

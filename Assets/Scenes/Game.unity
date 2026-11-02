@@ -8889,7 +8889,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -17074,7 +17074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6844188587734186326, guid: 294f62f251a3c3942b2b736ed20381ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 6844188587734186326, guid: 294f62f251a3c3942b2b736ed20381ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17519,7 +17519,7 @@ Transform:
   m_GameObject: {fileID: 1324712273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.03555}
+  m_LocalPosition: {x: 0.015013211, y: 0, z: 0.03555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17565,8 +17565,8 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 100000
-  m_Range: 1000
+  m_Intensity: 120599
+  m_Range: 9676
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -24170,7 +24170,7 @@ Transform:
   m_GameObject: {fileID: 1817731253}
   serializedVersion: 2
   m_LocalRotation: {x: -0.06489594, y: -0.76149845, z: 0.0064320317, w: -0.6448777}
-  m_LocalPosition: {x: 2.5466244, y: 4.122452, z: -8.803432}
+  m_LocalPosition: {x: 23.68157, y: 4.167663, z: -4.645695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24199,7 +24199,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -25302,9 +25302,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathFollower
   _path: {fileID: 11400000, guid: a8dfdd0f40f244e498b51b8f09fc0bd6, type: 2}
   no_FixedWayPoints: 0
-  _speed: 100
+  _speed: 75
   _playOnAwake: 1
-  _targetDuration: 450
+  _targetDuration: 650
   _easingCurve:
     serializedVersion: 2
     m_Curve:

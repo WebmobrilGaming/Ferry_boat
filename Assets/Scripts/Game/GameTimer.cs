@@ -65,7 +65,7 @@ public class GameTimer : MonoBehaviour
 
         IsScore = false;
 
-        Act.EnableScore -= () => { IsScore = true; };
+        Act.EnableScore += () => { IsScore = true; };
         Act.ReachedDestination += LevelFinish;
         Act.BoatDestroyedAction += LevelFinish;
         //Act.BoatDestroyedAction += ToHomeScreen;

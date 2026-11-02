@@ -40,8 +40,6 @@ public class Destination : MonoBehaviour
         currentState = DockState.Entered;
         hasMissed = false;
 
-        boatController.IsEnterDock = true;
-        Act.ShowWarn?.Invoke("You entered in the dock area.Please use space key to start offBoarding");
 
         if(boatController.speedInKnots > 1)
         {
@@ -79,9 +77,15 @@ public class Destination : MonoBehaviour
 
         DevDebug.Log($"angle difference at docking : {dot} ",DebugColor.Orange);
 
-        fullyInside = dot > 0.9f;
+        fullyInside = IsBoatFullyInsideDock(boatController);
 
         //fullyInside = true;
+
+        if (fullyInside)
+        {
+            boatController.IsEnterDock = true;
+            Act.ShowWarn?.Invoke("You entered in the dock area.Please use space key to start offBoarding");
+        }
 
         if (fullyInside && isStopped)
         {
@@ -130,6 +134,90 @@ public class Destination : MonoBehaviour
 
         DevDebug.Log("Ferry left dock area.", DebugColor.Yellow);
     }
+
+
+    private bool IsBoatFullyInsideDock(BoatController boatController)
+    {
+        BoxCollider dockBox = dockCollider as BoxCollider;
+
+        if (dockBox == null)
+        {
+            Debug.LogError("Dock must have a BoxCollider.");
+            return false;
+        }
+
+        Vector3 halfSize = dockBox.size * 0.5f;
+        Vector3 min = dockBox.center - halfSize;
+        Vector3 max = dockBox.center + halfSize;
+
+        Collider[] boatColliders =
+            boatController.GetComponentsInChildren<Collider>();
+
+        bool foundCollider = false;
+
+        foreach (Collider boatCol in boatColliders)
+        {
+            if (!boatCol.enabled || boatCol.isTrigger)
+                continue;
+
+            foundCollider = true;
+
+            // Check all 8 corners of each boat collider.
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 2; y++)
+                {
+                    for (int z = 0; z < 2; z++)
+                    {
+                        Vector3 worldPoint;
+
+                        if (boatCol is BoxCollider box)
+                        {
+                            Vector3 localPoint =
+                                box.center + Vector3.Scale(
+                                    box.size * 0.5f,
+                                    new Vector3(
+                                        x == 0 ? -1 : 1,
+                                        y == 0 ? -1 : 1,
+                                        z == 0 ? -1 : 1
+                                    )
+                                );
+
+                            worldPoint =
+                                box.transform.TransformPoint(localPoint);
+                        }
+                        else
+                        {
+                            // Conservative fallback for other collider types.
+                            Bounds bounds = boatCol.bounds;
+
+                            worldPoint = new Vector3(
+                                x == 0 ? bounds.min.x : bounds.max.x,
+                                y == 0 ? bounds.min.y : bounds.max.y,
+                                z == 0 ? bounds.min.z : bounds.max.z
+                            );
+                        }
+
+                        Vector3 localPointInDock =
+                            dockBox.transform.InverseTransformPoint(worldPoint);
+
+                        if (localPointInDock.x < min.x ||
+                            localPointInDock.x > max.x ||
+                            localPointInDock.y < min.y ||
+                            localPointInDock.y > max.y ||
+                            localPointInDock.z < min.z ||
+                            localPointInDock.z > max.z)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return foundCollider;
+    }
+
 
     private bool IsTargetLayer(Collider other)
     {
